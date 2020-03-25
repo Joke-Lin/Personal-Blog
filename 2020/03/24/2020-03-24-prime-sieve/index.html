@@ -24,17 +24,20 @@
     var CONFIG = {"hostname":"joke-lin.github.io","root":"/","scheme":"Gemini","version":"7.7.2","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Learing and Using">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Joke-Lin | BLOG">
-<meta property="og:url" content="http://joke-lin.github.io/archives/2020/03/index.html">
+  <meta name="description" content="素数的定义：指在大于1的自然数中，除了1和该数自身外，无法被其他自然数整除的数。大于1的自然数若不是素数，则称之为合数。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="埃氏筛 &amp; 欧拉筛">
+<meta property="og:url" content="http://joke-lin.github.io/2020/03/24/2020-03-24-prime-sieve/index.html">
 <meta property="og:site_name" content="Joke-Lin | BLOG">
-<meta property="og:description" content="Learing and Using">
+<meta property="og:description" content="素数的定义：指在大于1的自然数中，除了1和该数自身外，无法被其他自然数整除的数。大于1的自然数若不是素数，则称之为合数。">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-23T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-03-25T10:59:49.547Z">
 <meta property="article:author" content="Joke-Lin">
+<meta property="article:tag" content="C&#x2F;C++">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://joke-lin.github.io/archives/2020/03/">
+<link rel="canonical" href="http://joke-lin.github.io/2020/03/24/2020-03-24-prime-sieve/">
 
 
 <script id="page-configurations">
@@ -42,11 +45,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false
+    isPost : true
   };
 </script>
 
-  <title>Archive | Joke-Lin | BLOG</title>
+  <title>埃氏筛 & 欧拉筛 | Joke-Lin | BLOG</title>
   
 
 
@@ -195,173 +198,164 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">Um..! 24 posts in total. Keep on posting.</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://joke-lin.github.io/2020/03/24/2020-03-24-prime-sieve/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Joke-Lin">
+      <meta itemprop="description" content="Learing and Using">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joke-Lin | BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          埃氏筛 & 欧拉筛
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-24 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-24T00:00:00+08:00">2020-03-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-25 18:59:49" itemprop="dateModified" datetime="2020-03-25T18:59:49+08:00">2020-03-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DSAA/" itemprop="url" rel="index"><span itemprop="name">DSAA</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/24/2020-03-24-prime-sieve/" class="post-meta-item leancloud_visitors" data-flag-title="埃氏筛 & 欧拉筛" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>1.5k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h2 class="collection-header">2020</h2>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-24T00:00:00+08:00"
-              content="2020-03-24">
-          03-24
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/2020/03/24/2020-03-24-prime-sieve/" itemprop="url">
-            <span itemprop="name">埃氏筛 & 欧拉筛</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-21T00:00:00+08:00"
-              content="2020-03-21">
-          03-21
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/2020/03/21/2020-03-21-PAT-Advanced-1012/" itemprop="url">
-            <span itemprop="name">PAT Advanced 1012 The Best Rank（排序）</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-21T00:00:00+08:00"
-              content="2020-03-21">
-          03-21
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/2020/03/21/2020-03-24-PAT-Advanced-1014/" itemprop="url">
-            <span itemprop="name">PAT Advanced 1014 Waiting in Line（优先队列）</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-19T00:00:00+08:00"
-              content="2020-03-19">
-          03-19
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/2020/03/19/2020-03-19-PAT-Advanced-1010/" itemprop="url">
-            <span itemprop="name">PAT Advanced 1010 Radix（二分法）</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-12T00:00:00+08:00"
-              content="2020-03-12">
-          03-12
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/2020/03/12/2020-03-12-Matplotlib-DirectlyOutput-Img/" itemprop="url">
-            <span itemprop="name">Matplotlib 图像直接导出为 ndarray</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-02T00:00:00+08:00"
-              content="2020-03-02">
-          03-02
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/2020/03/02/2020-03-02-Compute-Networking-A-Top-Down-Approach-6th/" itemprop="url">
-            <span itemprop="name">计算机网络自顶向下 第6版 阅读笔记</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-01T00:00:00+08:00"
-              content="2020-03-01">
-          03-01
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/2020/03/01/2020-02-29-Leetcode84/" itemprop="url">
-            <span itemprop="name">Leetcode84 柱状图中最大的矩形</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
+        <blockquote>
+<p>素数的定义：指在大于1的自然数中，除了1和该数自身外，无法被其他自然数整除的数。大于1的自然数若不是素数，则称之为合数。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="试除法">试除法</h2>
+<p>直接使用定义解决的方案。</p>
+<!-- more -->
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isPrime</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>;i &lt; <span class="built_in">sqrt</span>(n);i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(n % i == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里从2遍历到<span class="math inline">\(\sqrt n\)</span> 因为之后的就没有必要了，一个和数拆分成两个因子必定是在<span class="math inline">\(\sqrt n\)</span>的两侧，是对称的，所以只需要遍历一边就可以了。</p>
+<h2 id="埃氏筛">埃氏筛</h2>
+<p>上面的算法是判断一个数是否是素数，但是对获取某个范围的素数开销非常大。埃氏筛（素数筛）就是求某个范围素数的算法。</p>
+<p>原理很简单，合数必定可以拆分为一系列素数的积，即<strong>某个素数的任意倍数都是合数</strong>。</p>
+<p>代码也很简单：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// maxn 为范围的上届</span></span><br><span class="line"><span class="keyword">bool</span> is_prime[maxn] = &#123;<span class="literal">true</span>&#125;; <span class="comment">// 初始化为全部 true</span></span><br><span class="line">is_prime[<span class="number">0</span>] = is_prime[<span class="number">1</span>] = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">int</span> prime_numbers[maxn];</span><br><span class="line"><span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>;i &lt; maxn;i++) &#123;</span><br><span class="line">    <span class="keyword">if</span>(is_prime[i]) &#123;</span><br><span class="line">        prime_numbers[cnt++] = i;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i*i;j &lt; maxn;j += i) &#123;</span><br><span class="line">            is_prime[j] = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>复杂度为：<span class="math inline">\(n\log \log n\)</span></p>
+<h2 id="欧拉筛">欧拉筛</h2>
+<p>埃氏筛很明显的一个缺点就是一个合数会被重复筛掉（被每一个素数因子筛一次），增加复杂度。欧拉筛就是在其上的改进，使每一个合数只被它的最小因子筛掉。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> is_prime[maxn] = &#123;<span class="literal">true</span>&#125;; <span class="comment">// 初始化为全部 true</span></span><br><span class="line">is_prime[<span class="number">0</span>] = is_prime[<span class="number">1</span>] = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">int</span> prime_numbers[maxn];</span><br><span class="line"><span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>;i &lt; maxn;i++) &#123;</span><br><span class="line">    <span class="keyword">if</span>(is_prime[i]) &#123;</span><br><span class="line">        prime_numbers[cnt++] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;i*prime_numbers[j] &lt; maxn;j++) &#123;</span><br><span class="line">        is_prime[i*prime_numbers[j]] = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(i % prime_numbers[j] == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>欧拉筛复杂度为n（将空循环不视作开销），每个合数仅被筛一次。</p>
+<p>核心就在于<code>i % prime_numbers[j] == 0</code>，当这个条件成立的时候跳出循环，不继续往下筛，下面的都是已经或者未来要被筛掉的。</p>
+<p>条件成立时意味着 <span class="math inline">\(i = prime\_numbers[j] \times K\)</span>，而继续循环下去回得到<span class="math inline">\(i*prime\_numbers[j+1]\)</span>也就是,<span class="math inline">\(prime\_numbers[j]\times prime\_numbers[j+1] \times K = prime\_numbers[j] \times Q\)</span>，也就是说它会被<span class="math inline">\(prime\_numbers[j]\)</span>乘以另外一个数给筛掉，之后的循环也就没必要进行了。也保证了，每个合数都只被它的最小因子筛掉。</p>
+<p>令<span class="math inline">\(N = K \times Q \times ...\)</span> K Q为两个素数且<span class="math inline">\(Q \gt K\)</span>，假设N可以被Q筛掉，也就是$N = Q M， M= K... $这里的M就是上面循环中的i，它是不可能使用QM筛掉的，因为<code>M%K == 0</code>，就跳出循环之外了。</p>
 
     </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2018\09\15\2018-09-15-Retro-Snake\" rel="bookmark">Retro Snake Easyx版本</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2018\11\02\2018-11-02-BinaryFileReader\" rel="bookmark">简单的二进制阅读器</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2019\02\24\2019-02-24-stb_image\" rel="bookmark">图像库stb_image & stb_image_write</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\02\24\2020-02-24-PAT-Advanced-1003\" rel="bookmark">PAT Advanced 1003 Emergency（最短路）</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\03\01\2020-02-29-Leetcode84\" rel="bookmark">Leetcode84 柱状图中最大的矩形</a></div>
+    </li>
+  </ul>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/C-C/" rel="tag"><i class="fa fa-tag"></i> C/C++</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/21/2020-03-21-PAT-Advanced-1012/" rel="prev" title="PAT Advanced 1012 The Best Rank（排序）">
+      <i class="fa fa-chevron-left"></i> PAT Advanced 1012 The Best Rank（排序）
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
   </div>
-  
-  
-  
-
-  
-
 
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -408,6 +402,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#试除法"><span class="nav-text">试除法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#埃氏筛"><span class="nav-text">埃氏筛</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#欧拉筛"><span class="nav-text">欧拉筛</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -741,6 +736,25 @@
 
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '64f708c73ee01327eaff',
+      clientSecret: 'fe1991c81ffd1b32cc8aec2ab7e1e7a1f79957ab',
+      repo        : 'Joke-Lin.github.io',
+      owner       : 'Joke-Lin',
+      admin       : ['Joke-Lin'],
+      id          : '44f5509bbded1c365ac14a8d8f2818ad',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
 </body>
 </html>
