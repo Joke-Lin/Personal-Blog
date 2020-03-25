@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="bAeF0gkeMw">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Python urllib 使用实例 爬虫原理  Attention: Python3 将urlib2 urlib3 结合为urlib   Urlib:Python3中urllib详细使用方法(header,代理,超时,认证,异常处理) urlib2 :python urllib2详解及实例(从底层说起)  基本原理  通过给网页提供一个数据，然后获取其反馈 使用到的模块">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 爬取有道翻译">
+<meta property="og:url" content="http://yoursite.com/2018/09/18/2018-09-18-youdao/index.html">
+<meta property="og:site_name" content="Joke-Lin | BLOG">
+<meta property="og:description" content="Python urllib 使用实例 爬虫原理  Attention: Python3 将urlib2 urlib3 结合为urlib   Urlib:Python3中urllib详细使用方法(header,代理,超时,认证,异常处理) urlib2 :python urllib2详解及实例(从底层说起)  基本原理  通过给网页提供一个数据，然后获取其反馈 使用到的模块">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/assets/ArticleImg/2018/Youdao1.png">
+<meta property="og:image" content="http://yoursite.com/assets/ArticleImg/2018/Youdao2.png">
+<meta property="og:image" content="http://yoursite.com/assets/ArticleImg/2018/Youdao3.png">
+<meta property="og:image" content="http://yoursite.com/assets/ArticleImg/2018/Youdao4.png">
+<meta property="article:published_time" content="2018-09-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-01-20T14:52:11.331Z">
+<meta property="article:author" content="Joke-Lin">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/assets/ArticleImg/2018/Youdao1.png">
+
+<link rel="canonical" href="http://yoursite.com/2018/09/18/2018-09-18-youdao/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>Python 爬取有道翻译 | Joke-Lin | BLOG</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?bbba27c18f6952433b5568d3b127959f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Joke-Lin | BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL2pva2UtbGlu" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/18/2018-09-18-youdao/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Joke-Lin">
+      <meta itemprop="description" content="Learing and Using">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joke-Lin | BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          Python 爬取有道翻译
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-09-18 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-18T00:00:00+08:00">2018-09-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-01-20 22:52:11" itemprop="dateModified" datetime="2020-01-20T22:52:11+08:00">2020-01-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%88%AC%E8%99%AB/" itemprop="url" rel="index"><span itemprop="name">爬虫</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%88%AC%E8%99%AB/Tool/" itemprop="url" rel="index"><span itemprop="name">Tool</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>2.1k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>2 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="python-urllib-使用实例">Python urllib 使用实例</h1>
+<p><a href="https://www.cnblogs.com/sss4/p/7809821.html" target="_blank" rel="noopener"><strong>爬虫原理</strong></a></p>
+<blockquote>
+<p>Attention: Python3 将urlib2 urlib3 结合为urlib</p>
+</blockquote>
+<ul>
+<li><strong>Urlib</strong>:<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20veGlhby1hcHBsZTM2L3AvODQzMzQwMC5odG1s" title="https://www.cnblogs.com/xiao-apple36/p/8433400.html">Python3中urllib详细使用方法(header,代理,超时,认证,异常处理)<i class="fa fa-external-link"></i></span></li>
+<li><strong>urlib2</strong> :<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTA0MDk0NDUvYXJ0aWNsZS9kZXRhaWxzLzczNDM4ODE2" title="https://blog.csdn.net/u010409445/article/details/73438816">python urllib2详解及实例(从底层说起)<i class="fa fa-external-link"></i></span></li>
+</ul>
+<h2 id="基本原理">基本原理</h2>
+<ul>
+<li><p>通过给网页提供一个数据，然后获取其反馈</p></li>
+<li>使用到的模块
+<ul>
+<li><strong>urllib.request:</strong> 访问网站，提出请求，获取反馈</li>
+<li><strong>urllib.parse:</strong> 格式化请求数据</li>
+<li><strong>json:</strong> 格式化反馈信息，使其格式化为字典</li>
+</ul></li>
+<li><p>新版有道翻译爬取实现比较复杂 这里是对老的版本的爬取</p></li>
+</ul>
+<h2 id="实现过程及代码">实现过程及代码</h2>
+<h3 id="分步解释">分步解释</h3>
+<p><strong>1.</strong> 获取处理翻译信息的网页（这里采用的是谷歌浏览器）<br />
+打开有道翻译网页 进入开发者模式<br />
+选择Network <img src="/assets/ArticleImg/2018/Youdao1.png" alt="Youdao1" /><br />
+然后在左边的输入框随便输入一个单词 会发现多了很多文件 <img src="/assets/ArticleImg/2018/Youdao2.png" alt="Youdao2" /> <strong>Headers</strong> 里面就是我们需要发送给他的信息<br />
+其中 <strong>Request Url</strong> 就是真正处理翻译的网页<br />
+由于我们采用旧版所以将url里的 <strong>&quot;translate_o&quot;</strong> 改为 <strong>&quot;translate&quot;</strong></p>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 真正翻译的网址 Request Url</span></span><br><span class="line">url = <span class="string">'http://fanyi.youdao.com/translate?smartresult=dict&amp;smartresult=rule'</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>2.</strong> 发送信息包 如下 <img src="/assets/ArticleImg/2018/Youdao3.png" alt="Youdao3" /> 将其包装成字典 并且格式化为网页可以识别的格式</p>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建列表 模拟传入数据</span></span><br><span class="line">data = &#123;&#125;</span><br><span class="line">data[<span class="string">'i'</span>] = String</span><br><span class="line">data[<span class="string">'from'</span>] = <span class="string">'AUTO'</span></span><br><span class="line">data[<span class="string">'to'</span>] = <span class="string">'AUTO'</span></span><br><span class="line">data[<span class="string">'smartresult'</span>] = <span class="string">'dict'</span></span><br><span class="line">data[<span class="string">'client'</span>] = <span class="string">'fanyideskweb'</span></span><br><span class="line">data[<span class="string">'doctype'</span>] = <span class="string">'json'</span></span><br><span class="line">data[<span class="string">'version'</span>] = <span class="string">'2.1'</span></span><br><span class="line">data[<span class="string">'keyfrom'</span>] = <span class="string">'fanyi.web'</span></span><br><span class="line">data[<span class="string">'action'</span>] = <span class="string">'FY_BY_REALTIME'</span></span><br><span class="line">data[<span class="string">'typoResult'</span>] = <span class="string">'false'</span></span><br><span class="line"><span class="comment">#该变格式</span></span><br><span class="line">data = urllib.parse.urlencode(data).encode(<span class="string">'utf-8'</span>)</span><br></pre></td></tr></table></figure></p>
+<p><strong>3.</strong> 获取反馈并处理<br />
+<img src="/assets/ArticleImg/2018/Youdao4.png" alt="Youdao4" /></p>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">response = urllib.request.urlopen(url, data)  <span class="comment"># 得到回复</span></span><br><span class="line">html = response.read().decode(<span class="string">'utf-8'</span>)  <span class="comment"># 重新编码</span></span><br><span class="line">result = json.loads(html)  <span class="comment"># json 字典化</span></span><br><span class="line"><span class="comment"># return result["translateResult"][0][0]["tgt"] 返回结果</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="全部代码如下">全部代码如下</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">    Author: Joke-R</span></span><br><span class="line"><span class="string">    IDE: python3.6</span></span><br><span class="line"><span class="string">    Purpose: translate words by youdao</span></span><br><span class="line"><span class="string">    Time: 2018-09-18</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line"><span class="keyword">import</span> urllib.parse</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Translate</span><span class="params">(String)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">        String: str</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="comment"># 真正翻译的网址 Request Url</span></span><br><span class="line">    url = <span class="string">'http://fanyi.youdao.com/translate?smartresult=dict&amp;smartresult=rule'</span></span><br><span class="line">    <span class="comment"># 新建列表 模拟传入数据</span></span><br><span class="line">    data = &#123;&#125;</span><br><span class="line">    data[<span class="string">'i'</span>] = String</span><br><span class="line">    data[<span class="string">'from'</span>] = <span class="string">'AUTO'</span></span><br><span class="line">    data[<span class="string">'to'</span>] = <span class="string">'AUTO'</span></span><br><span class="line">    data[<span class="string">'smartresult'</span>] = <span class="string">'dict'</span></span><br><span class="line">    data[<span class="string">'client'</span>] = <span class="string">'fanyideskweb'</span></span><br><span class="line">    data[<span class="string">'doctype'</span>] = <span class="string">'json'</span></span><br><span class="line">    data[<span class="string">'version'</span>] = <span class="string">'2.1'</span></span><br><span class="line">    data[<span class="string">'keyfrom'</span>] = <span class="string">'fanyi.web'</span></span><br><span class="line">    data[<span class="string">'action'</span>] = <span class="string">'FY_BY_REALTIME'</span></span><br><span class="line">    data[<span class="string">'typoResult'</span>] = <span class="string">'false'</span></span><br><span class="line"></span><br><span class="line">    data = urllib.parse.urlencode(data).encode(<span class="string">'utf-8'</span>)</span><br><span class="line">    response = urllib.request.urlopen(url, data)  <span class="comment"># 得到回复</span></span><br><span class="line">    html = response.read().decode(<span class="string">'utf-8'</span>)  <span class="comment"># 重新编码</span></span><br><span class="line">    result = json.loads(html)  <span class="comment"># json 字典化</span></span><br><span class="line">    <span class="keyword">return</span> result[<span class="string">"translateResult"</span>][<span class="number">0</span>][<span class="number">0</span>][<span class="string">"tgt"</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    print(__doc__)</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            String = input(<span class="string">"please input a string:\n"</span>)</span><br><span class="line">            print(<span class="string">"result:"</span>, Translate(String))</span><br><span class="line">        <span class="keyword">except</span> BaseException <span class="keyword">as</span> reason:</span><br><span class="line">            print(reason + <span class="string">'\n'</span>)</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+      
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/09/15/2018-09-15-Retro-Snake/" rel="prev" title="Retro Snake Easyx版本">
+      <i class="fa fa-chevron-left"></i> Retro Snake Easyx版本
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/24/2020-03-24-prime-sieve%20/" rel="next" title="埃氏筛 & 欧拉筛">
+      埃氏筛 & 欧拉筛 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python-urllib-使用实例"><span class="nav-text">Python urllib 使用实例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本原理"><span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现过程及代码"><span class="nav-text">实现过程及代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分步解释"><span class="nav-text">分步解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全部代码如下"><span class="nav-text">全部代码如下</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Joke-Lin"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Joke-Lin</p>
+  <div class="site-description" itemprop="description">Learing and Using</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2pva2UtbGlu" title="Github → https:&#x2F;&#x2F;github.com&#x2F;joke-lin"><i class="fa fa-fw fa-github"></i>Github</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3Blb3BsZS9qb2tlci04OC02Mi01Ny9hY3Rpdml0aWVz" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;joker-88-62-57&#x2F;activities"><i class="fa fa-fw fa-globe"></i>知乎</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwOTUzMjgx" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_40953281"><i class="fa fa-fw fa-globe"></i>CSDN</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOmpva2UtbGluQHFxLmNvbQ==" title="E-Mail → mailto:joke-lin@qq.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</span>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Friends
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9taWxreS13LmdpdGh1Yi5pbw==" title="https:&#x2F;&#x2F;milky-w.github.io">Milky Way</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9sZXN0ZXJ0YW4uaW5r" title="https:&#x2F;&#x2F;lestertan.ink">Lester</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9oZXJpeHRoLnRvcA==" title="https:&#x2F;&#x2F;herixth.top">Herixth</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cDovL2NvbGluLWpheS5jbi8=" title="http:&#x2F;&#x2F;colin-jay.cn&#x2F;">Colin Jay</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cDovL3llei1saXUuZ2l0aHViLmlvLw==" title="http:&#x2F;&#x2F;yez-liu.github.io&#x2F;">yez-liu</span>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Joke-Lin</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">Symbols count total: </span>
+    <span title="Symbols count total">4k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">Reading time total &asymp;</span>
+    <span title="Reading time total">4 mins.</span>
+</div>
+  <div class="powered-by">Powered by <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 24136,
+      el    : 'wpac-rating',
+      color : 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '64f708c73ee01327eaff',
+      clientSecret: 'fe1991c81ffd1b32cc8aec2ab7e1e7a1f79957ab',
+      repo        : 'Joke-Lin.github.io',
+      owner       : 'Joke-Lin',
+      admin       : ['Joke-Lin'],
+      id          : '0808cf2796b8d51f578d7d1e272702ee',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
