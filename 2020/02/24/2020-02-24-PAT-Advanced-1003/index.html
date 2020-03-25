@@ -21,17 +21,17 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"joke-lin.github.io","root":"/","scheme":"Gemini","version":"7.7.2","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"joke-lin.top","root":"/","scheme":"Gemini","version":"7.7.2","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="题目描述 题目地址">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PAT Advanced 1003 Emergency（最短路）">
-<meta property="og:url" content="http://joke-lin.github.io/2020/02/24/2020-02-24-PAT-Advanced-1003/index.html">
+<meta property="og:url" content="http://joke-lin.top/2020/02/24/2020-02-24-PAT-Advanced-1003/index.html">
 <meta property="og:site_name" content="Joke-Lin | BLOG">
 <meta property="og:description" content="题目描述 题目地址">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://joke-lin.github.io/assets/ArticleImg/2020/pat1003_01.jpg">
+<meta property="og:image" content="http://joke-lin.top/assets/ArticleImg/2020/pat1003_01.jpg">
 <meta property="article:published_time" content="2020-02-23T16:00:00.000Z">
 <meta property="article:modified_time" content="2020-03-25T10:57:55.714Z">
 <meta property="article:author" content="Joke-Lin">
@@ -39,9 +39,9 @@
 <meta property="article:tag" content="Graph Theory">
 <meta property="article:tag" content="PAT">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://joke-lin.github.io/assets/ArticleImg/2020/pat1003_01.jpg">
+<meta name="twitter:image" content="http://joke-lin.top/assets/ArticleImg/2020/pat1003_01.jpg">
 
-<link rel="canonical" href="http://joke-lin.github.io/2020/02/24/2020-02-24-PAT-Advanced-1003/">
+<link rel="canonical" href="http://joke-lin.top/2020/02/24/2020-02-24-PAT-Advanced-1003/">
 
 
 <script id="page-configurations">
@@ -207,7 +207,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
-    <link itemprop="mainEntityOfPage" href="http://joke-lin.github.io/2020/02/24/2020-02-24-PAT-Advanced-1003/">
+    <link itemprop="mainEntityOfPage" href="http://joke-lin.top/2020/02/24/2020-02-24-PAT-Advanced-1003/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -294,7 +294,7 @@
 <h3 id="sample-output">Sample Output:</h3>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2 4</span><br></pre></td></tr></table></figure>
 <h2 id="基本思路">基本思路</h2>
-<p>开始以为是简单的最短路模板题，结果发现还是有点意思的，在简单的最短路的基础上更进一步，基础图论起手就是 Dijkstra。<span class="exturl" data-url="aHR0cHM6Ly9qb2tlLWxpbi50b3AvZHNhYS8yMDE4LzEyLzA3L1Nob3J0ZXN0UGF0aC8=" title="https://joke-lin.top/dsaa/2018/12/07/ShortestPath/">最短路基础算法 原地TP<i class="fa fa-external-link"></i></span></p>
+<p>开始以为是简单的最短路模板题，结果发现还是有点意思的，在简单的最短路的基础上更进一步，基础图论起手就是 Dijkstra。<a href="https://joke-lin.top/dsaa/2018/12/07/ShortestPath/">最短路基础算法 原地TP</a></p>
 <p>和基础最短路不同的是，这里我们需要计算的是<strong>最短路的条数</strong>，以及这些最短路中<strong>节点权重和最大的值</strong>。可以作为其他类似题目的解题思路。</p>
 <p>在基础的 Dijkstra 算法中我们每次更新对应点最短路当<strong>到此点距离</strong>小于<strong>到其相邻点距离</strong>与<strong>对应边权和</strong>，这样就保证每次都是“最短”了，显然最短路不只一条，那么何时可以判断有重复最短路。</p>
 <p><img src="/assets/ArticleImg/2020/pat1003_01.jpg" style="zoom:50%;" /></p>
@@ -347,12 +347,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/02/09/2020-02-09-30OSMakeNote05-08/" rel="prev" title="《30天自制操作系统》 05-08部分 从字符显示到中断处理">
-      <i class="fa fa-chevron-left"></i> 《30天自制操作系统》 05-08部分 从字符显示到中断处理
+    <a href="/2020/02/28/2020-02-28-Operating-System-Internals-and-Design-Principles-8th-Note/" rel="prev" title="操作系统精髓与设计原理 第8版 阅读笔记">
+      <i class="fa fa-chevron-left"></i> 操作系统精髓与设计原理 第8版 阅读笔记
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/02/28/2020-02-28-Operating-System-Internals-and-Design-Principles-8th-Note/" rel="next" title="操作系统精髓与设计原理 第8版 阅读笔记">
-      操作系统精髓与设计原理 第8版 阅读笔记 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/02/09/2020-02-09-30OSMakeNote05-08/" rel="next" title="《30天自制操作系统》 05-08部分 从字符显示到中断处理">
+      《30天自制操作系统》 05-08部分 从字符显示到中断处理 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>

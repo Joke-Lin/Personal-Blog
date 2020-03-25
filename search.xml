@@ -2364,7 +2364,7 @@ T_s 为平均寻道时间，b表示传输的字节数，N表示一个磁道的�
 <h3 id="sample-output">Sample Output:</h3>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2 4</span><br></pre></td></tr></table></figure>
 <h2 id="基本思路">基本思路</h2>
-<p>开始以为是简单的最短路模板题，结果发现还是有点意思的，在简单的最短路的基础上更进一步，基础图论起手就是 Dijkstra。<span class="exturl" data-url="aHR0cHM6Ly9qb2tlLWxpbi50b3AvZHNhYS8yMDE4LzEyLzA3L1Nob3J0ZXN0UGF0aC8=" title="https://joke-lin.top/dsaa/2018/12/07/ShortestPath/">最短路基础算法 原地TP<i class="fa fa-external-link"></i></span></p>
+<p>开始以为是简单的最短路模板题，结果发现还是有点意思的，在简单的最短路的基础上更进一步，基础图论起手就是 Dijkstra。<a href="https://joke-lin.top/dsaa/2018/12/07/ShortestPath/">最短路基础算法 原地TP</a></p>
 <p>和基础最短路不同的是，这里我们需要计算的是<strong>最短路的条数</strong>，以及这些最短路中<strong>节点权重和最大的值</strong>。可以作为其他类似题目的解题思路。</p>
 <p>在基础的 Dijkstra 算法中我们每次更新对应点最短路当<strong>到此点距离</strong>小于<strong>到其相邻点距离</strong>与<strong>对应边权和</strong>，这样就保证每次都是“最短”了，显然最短路不只一条，那么何时可以判断有重复最短路。</p>
 <p><img src="/assets/ArticleImg/2020/pat1003_01.jpg" style="zoom:50%;" /></p>
@@ -2544,8 +2544,8 @@ T_s 为平均寻道时间，b表示传输的字节数，N表示一个磁道的�
 </blockquote>
 <h2 id="笔记目录">笔记目录</h2>
 <ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9qb2tlLWxpbi50b3Avb3MvdHV0b3JpYWwvMjAyMC8wMS8yNC8zME9TTWFrZU5vdGUxLTMv" title="https://joke-lin.top/os/tutorial/2020/01/24/30OSMakeNote1-3/">第一天到第三天——从汇编到C语言<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9qb2tlLWxpbi50b3Avb3MvdHV0b3JpYWwvMjAyMC8wMS8yNi8zME9TTWFrZU5vdGUwNC8=" title="https://joke-lin.top/os/tutorial/2020/01/26/30OSMakeNote04/">第四天——C语言和画面显示的练习<i class="fa fa-external-link"></i></span></li>
+<li><a href="https://joke-lin.top/os/tutorial/2020/01/24/30OSMakeNote1-3/">第一天到第三天——从汇编到C语言</a></li>
+<li><a href="https://joke-lin.top/os/tutorial/2020/01/26/30OSMakeNote04/">第四天——C语言和画面显示的练习</a></li>
 </ul>
 <hr />
 <a id="more"></a>
