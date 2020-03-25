@@ -254,11 +254,11 @@
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tutorial-Note/" itemprop="url" rel="index"><span itemprop="name">Tutorial & Note</span></a>
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                  <a href="/categories/Tutorial-Note/" itemprop="url" rel="index"><span itemprop="name">Tutorial & Note</span></a>
                 </span>
             </span>
 
@@ -575,11 +575,9 @@
         .then(({ results }) => {
           if (results.length > 0) {
             var counter = results[0];
+              leancloudSelector(url).innerText = counter.time + 1;
             Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
               .then(response => response.json())
-              .then(() => {
-                leancloudSelector(url).innerText = counter.time + 1;
-              })
               .catch(error => {
                 console.error('Failed to save visitor count', error);
               })

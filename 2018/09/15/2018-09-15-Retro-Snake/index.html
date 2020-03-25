@@ -345,7 +345,7 @@
       <div class="popular-posts-title"><a href="\2020\03\01\2020-02-29-Leetcode84\" rel="bookmark">Leetcode84 柱状图中最大的矩形</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2020\03\21\2020-03-21-PAT-Advanced-1012\" rel="bookmark">PAT Advanced 1012 The Best Rank（排序）</a></div>
+      <div class="popular-posts-title"><a href="\2020\03\19\2020-03-19-PAT-Advanced-1010\" rel="bookmark">PAT Advanced 1010 Radix（二分法）</a></div>
     </li>
   </ul>
 
@@ -568,11 +568,9 @@
         .then(({ results }) => {
           if (results.length > 0) {
             var counter = results[0];
+              leancloudSelector(url).innerText = counter.time + 1;
             Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
               .then(response => response.json())
-              .then(() => {
-                leancloudSelector(url).innerText = counter.time + 1;
-              })
               .catch(error => {
                 console.error('Failed to save visitor count', error);
               })
