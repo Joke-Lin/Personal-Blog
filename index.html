@@ -15,25 +15,26 @@
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
   <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
   <script src="/lib/pace/pace.min.js"></script>
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"joke-lin.github.io","root":"/","scheme":"Gemini","version":"7.7.2","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="Learing and Using">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Joke-Lin | BLOG">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://joke-lin.github.io/index.html">
 <meta property="og:site_name" content="Joke-Lin | BLOG">
 <meta property="og:description" content="Learing and Using">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Joke-Lin">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/">
+<link rel="canonical" href="http://joke-lin.github.io/">
 
 
 <script id="page-configurations">
@@ -199,7 +200,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/24/2020-03-24-prime-sieve%20/">
+    <link itemprop="mainEntityOfPage" href="http://joke-lin.github.io/2020/03/24/2020-03-24-prime-sieve%20/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -230,7 +231,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-25 17:04:45" itemprop="dateModified" datetime="2020-03-25T17:04:45+08:00">2020-03-25</time>
+                <time title="Modified: 2020-03-25 18:59:49" itemprop="dateModified" datetime="2020-03-25T18:59:49+08:00">2020-03-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -270,10 +271,6 @@
           <blockquote>
 <p>素数的定义：指在大于1的自然数中，除了1和该数自身外，无法被其他自然数整除的数。大于1的自然数若不是素数，则称之为合数。</p>
 </blockquote>
-<h2 id="试除法">试除法</h2>
-<p>直接使用定义解决的方案。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isPrime</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>;i &lt; <span class="built_in">sqrt</span>(n);i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(n % i == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里从2遍历到<span class="math inline">\(\sqrt n\)</span> 因为之后的就没有必要了，一个和数拆分成两个因子必定是在<span class="math inline">\(\sqrt n\)</span>的两侧，是对称的，所以只需要遍历一边就可以了。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/03/24/2020-03-24-prime-sieve%20/#more" rel="contents">
@@ -302,7 +299,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/18/2018-09-18-youdao/">
+    <link itemprop="mainEntityOfPage" href="http://joke-lin.github.io/2020/03/21/2020-03-24-PAT-Advanced-1014/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -316,7 +313,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2018/09/18/2018-09-18-youdao/" class="post-title-link" itemprop="url">Python 爬取有道翻译</a>
+            <a href="/2020/03/21/2020-03-24-PAT-Advanced-1014/" class="post-title-link" itemprop="url">PAT Advanced 1014 Waiting in Line（优先队列）</a>
         </h2>
 
         <div class="post-meta">
@@ -326,14 +323,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2018-09-18 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-18T00:00:00+08:00">2018-09-18</time>
+              <time title="Created: 2020-03-21 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-21T00:00:00+08:00">2020-03-21</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-20 22:52:11" itemprop="dateModified" datetime="2020-01-20T22:52:11+08:00">2020-01-20</time>
+                <time title="Modified: 2020-03-25 18:59:39" itemprop="dateModified" datetime="2020-03-25T18:59:39+08:00">2020-03-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -341,11 +338,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%88%AC%E8%99%AB/" itemprop="url" rel="index"><span itemprop="name">爬虫</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%88%AC%E8%99%AB/Tool/" itemprop="url" rel="index"><span itemprop="name">Tool</span></a>
+                  <a href="/categories/DSAA/" itemprop="url" rel="index"><span itemprop="name">DSAA</span></a>
                 </span>
             </span>
 
@@ -355,7 +348,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>2.1k</span>
+              <span>1.9k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -374,43 +367,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="python-urllib-使用实例">Python urllib 使用实例</h1>
-<p><a href="https://www.cnblogs.com/sss4/p/7809821.html" target="_blank" rel="noopener"><strong>爬虫原理</strong></a></p>
-<blockquote>
-<p>Attention: Python3 将urlib2 urlib3 结合为urlib</p>
-</blockquote>
-<ul>
-<li><strong>Urlib</strong>:<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20veGlhby1hcHBsZTM2L3AvODQzMzQwMC5odG1s" title="https://www.cnblogs.com/xiao-apple36/p/8433400.html">Python3中urllib详细使用方法(header,代理,超时,认证,异常处理)<i class="fa fa-external-link"></i></span></li>
-<li><strong>urlib2</strong> :<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTA0MDk0NDUvYXJ0aWNsZS9kZXRhaWxzLzczNDM4ODE2" title="https://blog.csdn.net/u010409445/article/details/73438816">python urllib2详解及实例(从底层说起)<i class="fa fa-external-link"></i></span></li>
-</ul>
-<h2 id="基本原理">基本原理</h2>
-<ul>
-<li><p>通过给网页提供一个数据，然后获取其反馈</p></li>
-<li>使用到的模块
-<ul>
-<li><strong>urllib.request:</strong> 访问网站，提出请求，获取反馈</li>
-<li><strong>urllib.parse:</strong> 格式化请求数据</li>
-<li><strong>json:</strong> 格式化反馈信息，使其格式化为字典</li>
-</ul></li>
-<li><p>新版有道翻译爬取实现比较复杂 这里是对老的版本的爬取</p></li>
-</ul>
-<h2 id="实现过程及代码">实现过程及代码</h2>
-<h3 id="分步解释">分步解释</h3>
-<p><strong>1.</strong> 获取处理翻译信息的网页（这里采用的是谷歌浏览器）<br />
-打开有道翻译网页 进入开发者模式<br />
-选择Network <img src="/assets/ArticleImg/2018/Youdao1.png" alt="Youdao1" /><br />
-然后在左边的输入框随便输入一个单词 会发现多了很多文件 <img src="/assets/ArticleImg/2018/Youdao2.png" alt="Youdao2" /> <strong>Headers</strong> 里面就是我们需要发送给他的信息<br />
-其中 <strong>Request Url</strong> 就是真正处理翻译的网页<br />
-由于我们采用旧版所以将url里的 <strong>&quot;translate_o&quot;</strong> 改为 <strong>&quot;translate&quot;</strong></p>
-<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 真正翻译的网址 Request Url</span></span><br><span class="line">url = <span class="string">'http://fanyi.youdao.com/translate?smartresult=dict&amp;smartresult=rule'</span></span><br></pre></td></tr></table></figure></p>
-<p><strong>2.</strong> 发送信息包 如下 <img src="/assets/ArticleImg/2018/Youdao3.png" alt="Youdao3" /> 将其包装成字典 并且格式化为网页可以识别的格式</p>
-<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建列表 模拟传入数据</span></span><br><span class="line">data = &#123;&#125;</span><br><span class="line">data[<span class="string">'i'</span>] = String</span><br><span class="line">data[<span class="string">'from'</span>] = <span class="string">'AUTO'</span></span><br><span class="line">data[<span class="string">'to'</span>] = <span class="string">'AUTO'</span></span><br><span class="line">data[<span class="string">'smartresult'</span>] = <span class="string">'dict'</span></span><br><span class="line">data[<span class="string">'client'</span>] = <span class="string">'fanyideskweb'</span></span><br><span class="line">data[<span class="string">'doctype'</span>] = <span class="string">'json'</span></span><br><span class="line">data[<span class="string">'version'</span>] = <span class="string">'2.1'</span></span><br><span class="line">data[<span class="string">'keyfrom'</span>] = <span class="string">'fanyi.web'</span></span><br><span class="line">data[<span class="string">'action'</span>] = <span class="string">'FY_BY_REALTIME'</span></span><br><span class="line">data[<span class="string">'typoResult'</span>] = <span class="string">'false'</span></span><br><span class="line"><span class="comment">#该变格式</span></span><br><span class="line">data = urllib.parse.urlencode(data).encode(<span class="string">'utf-8'</span>)</span><br></pre></td></tr></table></figure></p>
-<p><strong>3.</strong> 获取反馈并处理<br />
-<img src="/assets/ArticleImg/2018/Youdao4.png" alt="Youdao4" /></p>
-<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">response = urllib.request.urlopen(url, data)  <span class="comment"># 得到回复</span></span><br><span class="line">html = response.read().decode(<span class="string">'utf-8'</span>)  <span class="comment"># 重新编码</span></span><br><span class="line">result = json.loads(html)  <span class="comment"># json 字典化</span></span><br><span class="line"><span class="comment"># return result["translateResult"][0][0]["tgt"] 返回结果</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="全部代码如下">全部代码如下</h3>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">    Author: Joke-R</span></span><br><span class="line"><span class="string">    IDE: python3.6</span></span><br><span class="line"><span class="string">    Purpose: translate words by youdao</span></span><br><span class="line"><span class="string">    Time: 2018-09-18</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line"><span class="keyword">import</span> urllib.parse</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Translate</span><span class="params">(String)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">        String: str</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="comment"># 真正翻译的网址 Request Url</span></span><br><span class="line">    url = <span class="string">'http://fanyi.youdao.com/translate?smartresult=dict&amp;smartresult=rule'</span></span><br><span class="line">    <span class="comment"># 新建列表 模拟传入数据</span></span><br><span class="line">    data = &#123;&#125;</span><br><span class="line">    data[<span class="string">'i'</span>] = String</span><br><span class="line">    data[<span class="string">'from'</span>] = <span class="string">'AUTO'</span></span><br><span class="line">    data[<span class="string">'to'</span>] = <span class="string">'AUTO'</span></span><br><span class="line">    data[<span class="string">'smartresult'</span>] = <span class="string">'dict'</span></span><br><span class="line">    data[<span class="string">'client'</span>] = <span class="string">'fanyideskweb'</span></span><br><span class="line">    data[<span class="string">'doctype'</span>] = <span class="string">'json'</span></span><br><span class="line">    data[<span class="string">'version'</span>] = <span class="string">'2.1'</span></span><br><span class="line">    data[<span class="string">'keyfrom'</span>] = <span class="string">'fanyi.web'</span></span><br><span class="line">    data[<span class="string">'action'</span>] = <span class="string">'FY_BY_REALTIME'</span></span><br><span class="line">    data[<span class="string">'typoResult'</span>] = <span class="string">'false'</span></span><br><span class="line"></span><br><span class="line">    data = urllib.parse.urlencode(data).encode(<span class="string">'utf-8'</span>)</span><br><span class="line">    response = urllib.request.urlopen(url, data)  <span class="comment"># 得到回复</span></span><br><span class="line">    html = response.read().decode(<span class="string">'utf-8'</span>)  <span class="comment"># 重新编码</span></span><br><span class="line">    result = json.loads(html)  <span class="comment"># json 字典化</span></span><br><span class="line">    <span class="keyword">return</span> result[<span class="string">"translateResult"</span>][<span class="number">0</span>][<span class="number">0</span>][<span class="string">"tgt"</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    print(__doc__)</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            String = input(<span class="string">"please input a string:\n"</span>)</span><br><span class="line">            print(<span class="string">"result:"</span>, Translate(String))</span><br><span class="line">        <span class="keyword">except</span> BaseException <span class="keyword">as</span> reason:</span><br><span class="line">            print(reason + <span class="string">'\n'</span>)</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
-
+          <h2 id="题目描述">题目描述</h2>
+<p><a href="https://pintia.cn/problem-sets/994805342720868352/problems/994805498207911936" target="_blank" rel="noopener">题目地址</a></p>
+<p>之前一直错还是题目看错，英文题目还是要注意啊。</p>
+<p>17：00后的不予服务，只要在17：00之前接受服务的都可以，不用管截止时间。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/03/21/2020-03-24-PAT-Advanced-1014/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -431,7 +399,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/15/2018-09-15-Retro-Snake/">
+    <link itemprop="mainEntityOfPage" href="http://joke-lin.github.io/2020/03/21/2020-03-21-PAT-Advanced-1012/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -445,7 +413,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2018/09/15/2018-09-15-Retro-Snake/" class="post-title-link" itemprop="url">Retro Snake Easyx版本</a>
+            <a href="/2020/03/21/2020-03-21-PAT-Advanced-1012/" class="post-title-link" itemprop="url">PAT Advanced 1012 The Best Rank（排序）</a>
         </h2>
 
         <div class="post-meta">
@@ -455,14 +423,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2018-09-15 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-15T00:00:00+08:00">2018-09-15</time>
+              <time title="Created: 2020-03-21 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-21T00:00:00+08:00">2020-03-21</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-25 09:34:49" itemprop="dateModified" datetime="2020-02-25T09:34:49+08:00">2020-02-25</time>
+                <time title="Modified: 2020-03-25 18:59:30" itemprop="dateModified" datetime="2020-03-25T18:59:30+08:00">2020-03-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -470,7 +438,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Game/" itemprop="url" rel="index"><span itemprop="name">Game</span></a>
+                  <a href="/categories/DSAA/" itemprop="url" rel="index"><span itemprop="name">DSAA</span></a>
                 </span>
             </span>
 
@@ -480,7 +448,203 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>691</span>
+              <span>3.5k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>3 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="题目描述">题目描述</h2>
+<p><a href="https://pintia.cn/problem-sets/994805342720868352/problems/994805502658068480" target="_blank" rel="noopener">题目地址</a></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/03/21/2020-03-21-PAT-Advanced-1012/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://joke-lin.github.io/2020/03/19/2020-03-19-PAT-Advanced-1010/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Joke-Lin">
+      <meta itemprop="description" content="Learing and Using">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joke-Lin | BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/19/2020-03-19-PAT-Advanced-1010/" class="post-title-link" itemprop="url">PAT Advanced 1010 Radix（二分法）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-19 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-19T00:00:00+08:00">2020-03-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-25 18:59:25" itemprop="dateModified" datetime="2020-03-25T18:59:25+08:00">2020-03-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DSAA/" itemprop="url" rel="index"><span itemprop="name">DSAA</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>3.1k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>3 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="题目描述">题目描述</h2>
+<p><a href="https://pintia.cn/problem-sets/994805342720868352/problems/994805507225665536" target="_blank" rel="noopener">题目地址</a></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/03/19/2020-03-19-PAT-Advanced-1010/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://joke-lin.github.io/2020/03/12/2020-03-12-Matplotlib-DirectlyOutput-Img/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Joke-Lin">
+      <meta itemprop="description" content="Learing and Using">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joke-Lin | BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/12/2020-03-12-Matplotlib-DirectlyOutput-Img/" class="post-title-link" itemprop="url">Matplotlib 图像直接导出为 ndarray</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-12 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-12T00:00:00+08:00">2020-03-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-14 00:00:00" itemprop="dateModified" datetime="2020-03-14T00:00:00+08:00">2020-03-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tool/" itemprop="url" rel="index"><span itemprop="name">Tool</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>1.3k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -499,48 +663,331 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="部分文件说明">部分文件说明</h2>
-<h3 id="snakeprev.h"><strong>Snakeprev.h</strong></h3>
-<ol type="1">
-<li>蛇节点声明 <code>struct snake;</code></li>
-<li>蛇存储结构链表 <code>snake * snakelist(int,int*);</code></li>
-<li>增加节点方法 <code>void addsnake(snake *);</code></li>
-<li>绘画蛇身 <code>void drawsnake(snake *,char);</code></li>
-<li>清空蛇 <code>void clearsnake(snake *);</code></li>
-</ol>
-<h3 id="mapgraph.h"><strong>mapgraph.h</strong></h3>
-<p>主要是页面布局 背景（box map)的制作 布局</p>
-<h3 id="main.cpp"><strong>main.cpp</strong></h3>
-<p>主要方法如下</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">welcomegraph</span><span class="params">()</span></span>;<span class="comment">//欢迎界面</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Finish</span><span class="params">()</span></span>;<span class="comment">//结束界面</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">clickcontrol</span><span class="params">()</span></span>;<span class="comment">//鼠标控制</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Movingsnake</span><span class="params">(<span class="keyword">char</span>)</span></span>;<span class="comment">//蛇身移动控制</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Changesnakebody</span><span class="params">(<span class="keyword">int</span> ,<span class="keyword">int</span> )</span></span>;<span class="comment">//蛇身改变控制</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Eating</span><span class="params">()</span></span>;<span class="comment">//吃到食物的操作</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Deadjudge</span><span class="params">()</span></span>;<span class="comment">//死亡判断</span></span><br></pre></td></tr></table></figure>
-<h3 id="运行截图">运行截图</h3>
-<ul>
-<li><strong>Start</strong></li>
-</ul>
-<figure>
-<img src="https://github.com/LWJ9527/Retro-Snake/blob/master/%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA/start.png?raw=true" alt="Start" /><figcaption>Start</figcaption>
-</figure>
-<ul>
-<li><strong>Run</strong></li>
-</ul>
-<figure>
-<img src="https://github.com/LWJ9527/Retro-Snake/blob/master/%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA/run.png?raw=true" alt="Run" /><figcaption>Run</figcaption>
-</figure>
-<ul>
-<li><strong>Over</strong></li>
-</ul>
-<figure>
-<img src="https://github.com/LWJ9527/Retro-Snake/blob/master/%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA/over.png?raw=true" alt="Over" /><figcaption>Over</figcaption>
-</figure>
-<h3 id="注意事项及运行说明">注意事项及运行说明</h3>
-<p><strong>WASD：</strong>　来操控蛇的上下左右移动 注意打开英文输入<br />
-<strong>初始界面：</strong> 用户名及密码只是模拟 回车键确定输入<br />
-<strong>EXE目录：</strong> exe文件在debug目录下 release发布因为其优化运行出错<br />
-<strong>源代码下载：</strong> <code>https://github.com/LWJ9527/Retro-Snake.git</code><br />
-<strong>C控制台源代码：</strong> <code>https://blog.csdn.net/qq_40953281/article/details/79315254</code><br />
-<strong>To Be Continue...</strong> &gt; Easyx 下载地址 <code>https://www.easyx.cn/downloads/</code><br />
-&gt; 更新 2018-9-10</p>
+          <h2 id="导出为ndarray格式图片">导出为ndarray格式图片</h2>
+<p><em>matplotlib</em> 绘制的图线有自己的显示窗口，有时候希望在其他的<em>UI</em>设计中使用其绘制的图，比如<em>PyQt</em>，官方有一个支持QT的显示窗口类，但配置很麻烦，在这里记录一种简便的导出方式</p>
+<p>主要思路为使用<em>matplotlib</em>的<code>print_png</code>函数将其图片数据导出到二进制流中，然后<em>numpy</em>从此二进制流中取出数据即可</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/03/12/2020-03-12-Matplotlib-DirectlyOutput-Img/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
 
+    
+    
+    
+      
+
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://joke-lin.github.io/2020/03/02/2020-03-02-Compute-Networking-A-Top-Down-Approach-6th/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Joke-Lin">
+      <meta itemprop="description" content="Learing and Using">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joke-Lin | BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/02/2020-03-02-Compute-Networking-A-Top-Down-Approach-6th/" class="post-title-link" itemprop="url">计算机网络自顶向下 第6版 阅读笔记</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-02 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-02T00:00:00+08:00">2020-03-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-25 18:59:02" itemprop="dateModified" datetime="2020-03-25T18:59:02+08:00">2020-03-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tutorial-Note/" itemprop="url" rel="index"><span itemprop="name">Tutorial & Note</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Network/" itemprop="url" rel="index"><span itemprop="name">Computer Network</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>32k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>29 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="https://github.com/Troy922/Computer-Network/blob/master/计算机网络自顶向下方法答案(英文第六版).pdf" target="_blank" rel="noopener">书本配套答案</a></p>
+<blockquote>
+<p>2020-01-07 Joke-Lin</p>
+</blockquote>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/03/02/2020-03-02-Compute-Networking-A-Top-Down-Approach-6th/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://joke-lin.github.io/2020/03/01/2020-02-29-Leetcode84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Joke-Lin">
+      <meta itemprop="description" content="Learing and Using">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joke-Lin | BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/01/2020-02-29-Leetcode84/" class="post-title-link" itemprop="url">Leetcode84 柱状图中最大的矩形</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-01 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-01T00:00:00+08:00">2020-03-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-25 18:58:37" itemprop="dateModified" datetime="2020-03-25T18:58:37+08:00">2020-03-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DSAA/" itemprop="url" rel="index"><span itemprop="name">DSAA</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>2.7k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>2 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="题目描述"><a href="https://leetcode-cn.com/problems/largest-rectangle-in-histogram/" target="_blank" rel="noopener">题目描述</a></h2>
+<blockquote>
+<p>题目图片会403。。</p>
+</blockquote>
+<p>给定 n 个非负整数，用来表示柱状图中各个柱子的高度。每个柱子彼此相邻，且宽度为 1 。</p>
+<p>求在该柱状图中，能够勾勒出来的矩形的最大面积。</p>
+<p>以上是柱状图的示例，其中每个柱子的宽度为 1，给定的高度为 [2,1,5,6,2,3]。</p>
+<p>图中阴影部分为所能勾勒出的最大矩形面积，其面积为 10 个单位。</p>
+<p>示例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [2,1,5,6,2,3]</span><br><span class="line">输出: 10</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/03/01/2020-02-29-Leetcode84/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      
+
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://joke-lin.github.io/2020/02/28/2020-02-28-Operating-System-Internals-and-Design-Principles-8th-Note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Joke-Lin">
+      <meta itemprop="description" content="Learing and Using">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joke-Lin | BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/28/2020-02-28-Operating-System-Internals-and-Design-Principles-8th-Note/" class="post-title-link" itemprop="url">操作系统精髓与设计原理 第8版 阅读笔记</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-28 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-28T00:00:00+08:00">2020-02-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-25 18:58:21" itemprop="dateModified" datetime="2020-03-25T18:58:21+08:00">2020-03-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tutorial-Note/" itemprop="url" rel="index"><span itemprop="name">Tutorial & Note</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index"><span itemprop="name">OS</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>30k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>27 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>操作系统是管理计算机硬件与软件资源的系统软件，同时也是计算机系统的内核与基石。操作系统需要处理如管理与配置内存、决定系统资源供需的优先次序、控制输入与输出设备、操作网络与管理文件系统等基本事务。操作系统也提供一个让用户与系统交互的操作界面。—— 维基百科</p>
+<blockquote>
+<p>前几章为引言部分 略</p>
+</blockquote>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/02/28/2020-02-28-Operating-System-Internals-and-Design-Principles-8th-Note/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -560,6 +1007,9 @@
   </div>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
 
 
 
@@ -626,20 +1076,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -715,13 +1165,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">4k</span>
+    <span title="Symbols count total">135k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">4 mins.</span>
+    <span title="Reading time total">2:03</span>
 </div>
   <div class="powered-by">Powered by <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> v4.2.0
   </div>
@@ -744,6 +1194,8 @@
 
   
   <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 

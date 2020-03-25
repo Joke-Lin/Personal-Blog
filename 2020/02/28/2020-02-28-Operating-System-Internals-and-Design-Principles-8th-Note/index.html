@@ -1,0 +1,1951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="bAeF0gkeMw">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"joke-lin.github.io","root":"/","scheme":"Gemini","version":"7.7.2","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="操作系统是管理计算机硬件与软件资源的系统软件，同时也是计算机系统的内核与基石。操作系统需要处理如管理与配置内存、决定系统资源供需的优先次序、控制输入与输出设备、操作网络与管理文件系统等基本事务。操作系统也提供一个让用户与系统交互的操作界面。—— 维基百科  前几章为引言部分 略">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统精髓与设计原理 第8版 阅读笔记">
+<meta property="og:url" content="http://joke-lin.github.io/2020/02/28/2020-02-28-Operating-System-Internals-and-Design-Principles-8th-Note/index.html">
+<meta property="og:site_name" content="Joke-Lin | BLOG">
+<meta property="og:description" content="操作系统是管理计算机硬件与软件资源的系统软件，同时也是计算机系统的内核与基石。操作系统需要处理如管理与配置内存、决定系统资源供需的优先次序、控制输入与输出设备、操作网络与管理文件系统等基本事务。操作系统也提供一个让用户与系统交互的操作界面。—— 维基百科  前几章为引言部分 略">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_3/5_states_module.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_3/suspended_state.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_3/suspended_reason.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_3/creat_process_reason.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_3/end_process_reason.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_3/PCB.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_3/OS_kernel_function.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_3/process_change.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_3/OS_and_userprocess.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_4/thread_module.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_4/thread_type.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_4/Amdahl.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_5/interfaceOfProcess.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_5/demandOfMutex.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_5/mutexInHardware.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_5/concurrencyWays.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_5/semaphoreExample.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_5/explainAboutMutexInSemaphore.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_5/wrongInProducer_Consumer.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_5/implementOfSemaphore.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_5/tubePassStruct.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_5/messageForm.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_5/pcMessage.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_6/01.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_6/02.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_6/03.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_6/04.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_6/05.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_6/06.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_7/01.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_7/02.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_7/03.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_7/04.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_7/05.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_7/06.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/01.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/02.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/03.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/04.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/05.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/06.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/07.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/08.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/09.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/10.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/11.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/12.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/13.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/14.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/15.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/16.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/17.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/18.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_4/c_9/01.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_4/c_9/02.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_4/c_9/03.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_4/c_9/04.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_4/c_9/05.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_4/c_9/06.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_4/c_9/07.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_4/c_9/08.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_4/c_9/09.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_4/c_9/10.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_11/01.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_11/02.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_11/03.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_11/04.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_11/05.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_11/06.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_12/01.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_12/02.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_12/03.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_12/04.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_12/05.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_12/06.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_12/07.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_12/08.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_12/09.jpg">
+<meta property="article:published_time" content="2020-02-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-03-25T10:58:21.689Z">
+<meta property="article:author" content="Joke-Lin">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_3/5_states_module.jpg">
+
+<link rel="canonical" href="http://joke-lin.github.io/2020/02/28/2020-02-28-Operating-System-Internals-and-Design-Principles-8th-Note/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>操作系统精髓与设计原理 第8版 阅读笔记 | Joke-Lin | BLOG</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?bbba27c18f6952433b5568d3b127959f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Joke-Lin | BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL2pva2UtbGlu" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://joke-lin.github.io/2020/02/28/2020-02-28-Operating-System-Internals-and-Design-Principles-8th-Note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Joke-Lin">
+      <meta itemprop="description" content="Learing and Using">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joke-Lin | BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          操作系统精髓与设计原理 第8版 阅读笔记
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-28 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-28T00:00:00+08:00">2020-02-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-25 18:58:21" itemprop="dateModified" datetime="2020-03-25T18:58:21+08:00">2020-03-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tutorial-Note/" itemprop="url" rel="index"><span itemprop="name">Tutorial & Note</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index"><span itemprop="name">OS</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>30k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>27 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>操作系统是管理计算机硬件与软件资源的系统软件，同时也是计算机系统的内核与基石。操作系统需要处理如管理与配置内存、决定系统资源供需的优先次序、控制输入与输出设备、操作网络与管理文件系统等基本事务。操作系统也提供一个让用户与系统交互的操作界面。—— 维基百科</p>
+<blockquote>
+<p>前几章为引言部分 略</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="第二部分-进程">第二部分 进程</h2>
+<h3 id="第三章-进程描述和控制">第三章 进程描述和控制</h3>
+<hr />
+<h4 id="进程的几个定义">1. 进程的几个定义</h4>
+<ul>
+<li>一个正在执行的<strong>程序</strong></li>
+<li>一个正在<strong>计算机</strong>上执行的程序实例</li>
+<li>能分配给<strong>处理器</strong>并由处理器执行的实体</li>
+<li>由一组执行的<strong>指令</strong>，一个<strong>当前状态</strong>和一组相关的<strong>系统资源</strong>表征的活动单元</li>
+</ul>
+<h4 id="基本元素">2. 基本元素</h4>
+<p>程序代码 + 数据集</p>
+<h4 id="进程控制块-pcb">3. 进程控制块 （PCB）</h4>
+<ul>
+<li>标识符</li>
+<li>状态：新建，运行，就绪，挂起，阻塞，退出</li>
+<li>优先级</li>
+<li>程序计数器： 保存下一条指令的地址</li>
+<li>内存指针：代码 / 数据 / 其它进程的指针</li>
+<li>上下文数据：处理器执行时寄存器里的值</li>
+<li>I/O 状态信息：I/O 请求； I/O 设备； 文件列表</li>
+<li>记账信息：处理器时间，记账号</li>
+</ul>
+<h4 id="进程状态">4. 进程状态</h4>
+<p><strong>轨迹</strong>：进程执行的指令序列</p>
+<h5 id="两状态模型">两状态模型</h5>
+<p>非运行态 <span class="math inline">\(\Leftrightarrow\)</span> 运行态</p>
+<h5 id="五状态模型">五状态模型</h5>
+<ul>
+<li>运行态：进程正在执行，假设为一个计算机，那么一次最多只有一个进程处于此状态</li>
+<li>就绪态：进程做好了准备，随时可以处于运行态</li>
+<li>阻塞态：在发生某些事件前不能执行，如I/O</li>
+<li>新建态：已创建PCB但还未加载到内存中的进程</li>
+<li>退出态：操作系统从可执行进程组释放出的进程</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_3/5_states_module.jpg" /></p>
+<h4 id="进程的挂起">5. 进程的挂起</h4>
+<p><strong>原因</strong>：当所有进程都处于阻塞态时，处理器处于休闲状态。此时将某个进程的一部分或者全部移入磁盘，然后从挂起队列加载一个新进程，放入内存中运行</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_3/suspended_state.jpg" /></p>
+<h5 id="进程挂起的原因">进程挂起的原因</h5>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_3/suspended_reason.jpg" /></p>
+<h4 id="进程创建和终止">6. 进程创建和终止</h4>
+<ul>
+<li><p>进程创建的原因：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_3/creat_process_reason.jpg" /></p></li>
+<li><p>进程终止的原因：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_3/end_process_reason.jpg" /></p></li>
+</ul>
+<h4 id="操作系统控制结构">7. 操作系统控制结构</h4>
+<ul>
+<li>内存表：跟踪内存和外（虚）存（交换机制）
+<ul>
+<li>分配给进程的内存</li>
+<li>分配给进程的外存</li>
+<li>内存块或虚存块的任何保护属性</li>
+<li>管理虚存所需要的任何信息</li>
+</ul></li>
+<li>I/O 表：管理I/O 设备和通道</li>
+<li>文件表：文件管理：是否存在，位置等信息</li>
+<li>进程表：内存，I/O， 文件是代表进程而被管理的</li>
+</ul>
+<h4 id="进程控制结构">8. 进程控制结构</h4>
+<p>进程映像：程序 + 数据 + 栈 + 属性</p>
+<h5 id="pcb-进程控制块">PCB 进程控制块</h5>
+<ul>
+<li><p>进程标识信息：存储在PCB中的数字标识符,包括: 进程ID，父进程ID，用户ID</p></li>
+<li>进程状态信息（处理器状态信息）：存储所有的程序状态字（PSW）</li>
+<li><p>进程控制信息：操作系统协调各种活动进程的额外信息</p></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_3/PCB.jpg" /></p>
+<h5 id="pcb-的作用">PCB 的作用</h5>
+<blockquote>
+<p>PCB 是操作系统中最重要的数据结构，包含操作系统所需进程的全部信息</p>
+<p>PCB 集合定义了OS的状态</p>
+</blockquote>
+<p>如何在发生错误和变化时，保护PCB，具体表现为两个问题：</p>
+<ul>
+<li>一个例程（如中断处理程序）中的错误可能会破坏进程控制块，进而破坏系统对受影响进程的管理能力</li>
+<li>进程控制块结构或语义中的设计变化可能会影响到操作系统中的许多模块</li>
+</ul>
+<h4 id="进程控制">9. 进程控制</h4>
+<h5 id="执行模式">执行模式</h5>
+<p>特权模式称为系统模式，控制模式或者<strong>内核模式</strong>，非特权模式又称为用户模式</p>
+<p><strong>原因</strong>：保护操作系统和重要的操作系统表 不受用户程序的干扰</p>
+<p><strong>ELSE</strong>：PCB 中有指示执行模式的位，因事件变化而变化，当用户调用OS服务或中断触发系统例程时，执行模式变为内核模式，返回到用户进程时变为用户模式</p>
+<h5 id="内核的典型功能">内核的典型功能</h5>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_3/OS_kernel_function.jpg" /></p>
+<h4 id="进程创建-具体过程">10. 进程创建 具体过程</h4>
+<ol type="1">
+<li>为新进程分配一个唯一的进程标识符</li>
+<li>为进程分配空间</li>
+<li>初始化PCB</li>
+<li>设置正确的链接：放入新建/就绪挂起 链表中</li>
+<li>创建或扩充其他数据结构：记账文件</li>
+</ol>
+<h4 id="进程切换">11. 进程切换</h4>
+<h5 id="何时切换进程">何时切换进程</h5>
+<blockquote>
+<p>可在OS从当前正在运行的进程获得控制器的任何时刻发生</p>
+</blockquote>
+<ul>
+<li>系统中断： 时钟中断（超过运行时间片）；I/O 中断；内存失效</li>
+<li>陷阱：处理一个错误和一个异常条件</li>
+<li>系统调用：显示请求，调用操作系统函数</li>
+</ul>
+<h5 id="模式切换">模式切换</h5>
+<p>出现中断时，处理器将：</p>
+<ul>
+<li>将从程序计数器置为中断处理程序的开始地址</li>
+<li>从用户模式切换到内核模式，以便中断处理代码包含特权指令</li>
+<li>保存已中断例程的上下文</li>
+</ul>
+<h5 id="进程切换-1">进程切换</h5>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_3/process_change.jpg" /></p>
+<h4 id="操作系统的执行">12. 操作系统的执行</h4>
+<blockquote>
+<p>第二章指出操作系统的两个特殊事实：</p>
+<ul>
+<li>OS 和普通软件以相同的方式运行，也是一个程序</li>
+<li>OS 会频繁的释放控制权，并依赖于处理器来恢复控制权</li>
+</ul>
+</blockquote>
+<h5 id="无进程内核">无进程内核</h5>
+<p>在所有进程外部执行操作系统内核，进程概念只适用于用户程序，操作系统则是则是在特权模式下单独运行的实体</p>
+<h5 id="在用户进程内运行">在用户进程内运行</h5>
+<p>操作系统是用户调用的一组例程，在用户进程的环境中执行并实现各种功能。进程映像不仅包括自己的程序，数据，栈还包括<strong>内核程序</strong>的程序，数据，和栈区域。操作系统代码和数据位于共享地址空间中，并被所有用户进程所共享。只需要在同一进程中切换模式，而不需要切换进程</p>
+<h5 id="基于进程的操作系统">基于进程的操作系统</h5>
+<p>把操作系统作为一组系统进程来实现</p>
+<p>优点：</p>
+<ol type="1">
+<li>鼓励模块化操作系统设计原理，使模块间接口最小且最简单</li>
+<li>有些非关键系统功能可简单的用独立的进程来实现（例如监视各种资源和状态的程序）</li>
+<li>在多处理器和多机环境中很有用</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_3/OS_and_userprocess.jpg" /></p>
+<h3 id="第四章-线程">第四章 线程</h3>
+<hr />
+<h4 id="进程和线程">1. 进程和线程</h4>
+<h5 id="进程特点">进程特点</h5>
+<ul>
+<li>资源所有权：进程包括存放进程映像的虚拟地址空间</li>
+<li>调度/执行：进程具有执行态和优先级，是可被OS调度和执行的实体</li>
+</ul>
+<blockquote>
+<p>这两个特点是独立的，为了区分这两个特点，通常将分派的单位称为线程（轻量级进程LWP）</p>
+<p>而将资源所有权的单位称为进程（任务）</p>
+</blockquote>
+<h5 id="多线程">多线程</h5>
+<blockquote>
+<p>指OS在单个进程内支持多个并发执行路径的能力</p>
+</blockquote>
+<p>在多线程环境中，进程定义为资源分配单元和一个保护单元，与进程相关联的有：</p>
+<ul>
+<li>容纳进程映像的虚拟地址空间</li>
+<li>对处理器，其他进程，文件，I/O 的受保护访问</li>
+</ul>
+<p>每个线程都有：</p>
+<ul>
+<li>一个线程的执行状态</li>
+<li>线程上下文，线程可视为进程内运行的一个独立程序计数器</li>
+<li>一个执行栈</li>
+<li>局部变量的静态存储空间</li>
+<li>与其他线程共享的内存和资源的访问</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_4/thread_module.jpg" /></p>
+<p>使用线程的几个例子：</p>
+<ul>
+<li>前台和后台工作</li>
+<li>异步处理</li>
+<li>执行速度</li>
+<li>模块化程序结构</li>
+</ul>
+<p><strong>线程的优点</strong></p>
+<blockquote>
+<p><strong>Why</strong>: 因为线程共享一个地址，内存，文件空间，ULT中不用切换到内核</p>
+</blockquote>
+<ul>
+<li>创建线程的时间少于创建进程的时间</li>
+<li>终止线程的时间少于终止进程的时间</li>
+<li>同一个内线程切换时间少于进程间切换的时间</li>
+<li>线程提高了不同执行程序间通信的效率</li>
+</ul>
+<h5 id="线程的功能">线程的功能</h5>
+<p>线程状态：就绪态，运行态，阻塞态</p>
+<p>基本操作：派生，阻塞，解除阻塞，结束</p>
+<p>线程同步：同步线程的活动是它们互不干扰且不破坏数据结构，如两个线程向一个链表加入元素，则可能会丢失</p>
+<h4 id="线程分类">2. 线程分类</h4>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_4/thread_type.jpg" /></p>
+<h5 id="用户级ult">用户级（ULT）</h5>
+<p>管理线程的所有工作都由应用程序完成，内核意识不到线程的存在。任何应用程序都可以设计成多线程程序。线程库提供了所有关于线程的操作</p>
+<p><strong>ULT相较于KLT的优点</strong>：</p>
+<ul>
+<li>所有线程都在一个进程的用户地址空间中，线程切换不需要内核模式特权，因此不需要切换到内核状态，节省了两次状态转换</li>
+<li>调度因程序的不同而不同</li>
+<li>ULT 可以在任何操作系统中运行</li>
+</ul>
+<p><strong>ULT相较于KLT的缺点</strong>：</p>
+<ul>
+<li>ULT 执行一个系统调用的话，不仅阻塞当前线程，也会阻塞进程内的所有线程</li>
+<li>多线程应用程序不能利用多处理技术，这里线程对操作系统是不可见的，内核一次把一个进程分配给处理器，这样一个进程内只能运行一次一个线程，相当于在一个进程内实现了多道程序设计</li>
+</ul>
+<h5 id="内核级线程klt">内核级线程（KLT）</h5>
+<p>管理线程的所有操作由内核完成，应用级只有一个到内核线程实施的应用编程接口（API）</p>
+<p><strong>KLT 的优点：</strong></p>
+<ul>
+<li>内核可以把进程中的多个线程调度到多个处理器中</li>
+<li>进程的一个线程阻塞时，不影响其他线程的调度</li>
+<li>内核例程也可以是多线程的</li>
+</ul>
+<p><strong>KLT 的缺点：</strong></p>
+<ul>
+<li>线程转换时 需要切换到内核状态</li>
+</ul>
+<h5 id="混合">混合</h5>
+<blockquote>
+<p>结合两者优点</p>
+</blockquote>
+<h4 id="多核和多线程">3、多核和多线程</h4>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_4/Amdahl.jpg" /></p>
+<blockquote>
+<p>并不是核越多越好，管理起来越麻烦，会有更多多余的开销</p>
+</blockquote>
+<p><strong>影响多核系统上软件性能的因素</strong></p>
+<ul>
+<li>核的数量</li>
+<li>串行代码比例</li>
+<li>多处理器任务调度和通信以及高速缓存一致性带来的额外开销</li>
+</ul>
+<h3 id="第五章-并发性互斥和同步">第五章 并发性：互斥和同步</h3>
+<hr />
+<p>操作系统的核心问题是进程和线程的管理：</p>
+<ul>
+<li>多道程序设计技术：管理单处理器中的多个进程</li>
+<li>多处理器技术：管理多处理器中的多个进程</li>
+<li>分布式处理器技术：管理多台分布式计算机中多个进程的执行（集群）</li>
+</ul>
+<p><strong><em>并发是所有问题的基础，也是操作系统设计的基础（设计问题：进程通信，资源共享和竞争）</em></strong></p>
+<p>出现的环境：</p>
+<ul>
+<li>多应用程序：程序间动态共享处理器时间</li>
+<li>结构化应用程序：。。。</li>
+<li>操作系统结构：。。。</li>
+</ul>
+<h4 id="并发的原理">1、并发的原理</h4>
+<h5 id="并发处理的问题难点">并发处理的问题（难点)</h5>
+<ul>
+<li>全局资源的共享充满了危险</li>
+<li>OS很难对资源进行最优化分配</li>
+<li>定位程序设计错误非常困难</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">zvoid <span class="title">echo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    chin = getchar();</span><br><span class="line">    chout = chin;</span><br><span class="line">    <span class="built_in">putchar</span>(chout);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个打印字符的程序很容易发生数据的丢失，出现这种问题的原因是中断可能在进程的任何地方发生，解决方案是控制对共享资源的访问</p>
+<h5 id="竞争条件">竞争条件</h5>
+<p>竞争条件发生在多个进程或线程读写数据时，其最终结果取决于进程的指令执行顺序</p>
+<h5 id="进程的交互">进程的交互</h5>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_5/interfaceOfProcess.jpg" /></p>
+<p>有几个基本概念：</p>
+<p><strong><em>临界资源</em></strong> ：就是上面谈到的一个不可分享的资源</p>
+<p><strong><em>临界区</em></strong>：使用这一部分资源的程序称为程序的临界区</p>
+<p><strong><em>死锁</em></strong>：两个进程互相控制两个资源，但又还需要对方持有的资源才可以继续工作，这样就产生了死锁（两个进程都不能继续工作）</p>
+<p><strong><em>饥饿</em></strong>：有三个进程ABC，每个进程都需要访问资源R，资源被AC交替访问，却始终没有分配给B这样B就处于饥饿状态</p>
+<h5 id="互斥的要求">互斥的要求</h5>
+<blockquote>
+<p>互斥：简单来说，就是两个或多个进程需要访问一个不可分享的资源的保护机制</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_5/demandOfMutex.jpg" /></p>
+<h4 id="互斥硬件的支持">2、互斥：硬件的支持</h4>
+<h5 id="中断禁用">中断禁用</h5>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="comment">/* 禁用中断 */</span></span><br><span class="line">    <span class="comment">/* 临界区 */</span></span><br><span class="line">    <span class="comment">/* 启用中断 */</span></span><br><span class="line">    <span class="comment">/* 其余部分 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>临界区不能被中断，所以可以保证互斥，为了保证互斥只需要保证一个进程在访问资源的时候不被中断。</p>
+<p>但是，这种方法的代价非常高。由于处理器被限制得只能交替执行程序，因此执行的效率会明显降低。而且它不能用于多处理器体系结构。当一个计算机系统含有多个处理器时，通常可能有多个进程同时执行。这种情况下，中断不能保证互斥。因为在多处理器配置中，<strong><em>几个处理器对内存的访问不存在主从关系，处理器之间的行为是无关的，表现出一种对等的关系，处理器之间没有支持互斥的中断机制。</em></strong></p>
+<h5 id="专用机器指令">专用机器指令</h5>
+<p>在硬件级别上，对存储单元的访问排斥对相同单元的其他访问，因此处理器的设计人员提出了一些机器指令，用与保证两个动作的原子性（不能被中断的指令），<strong>在这个指令执行的过程中，任何其他指令访问内存都将被总之，而且这些动作在一个指令周期中完成</strong></p>
+<ul>
+<li><strong>比较和交换指令：</strong></li>
+</ul>
+<p>定义如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">compare_and_swap</span><span class="params">(<span class="keyword">int</span> *<span class="keyword">word</span>, <span class="keyword">int</span> testval, <span class="keyword">int</span> newval)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> oldval;</span><br><span class="line">    oldval = *<span class="keyword">word</span>;</span><br><span class="line">    <span class="keyword">if</span>(oldval == testval) *<span class="keyword">word</span> = newval;</span><br><span class="line">    <span class="keyword">return</span> oldval;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用一个测试值检查一个内存单元，如果内存单元的当前值是<code>testval</code>，就使用<code>newval</code>取代该值，否则保持不变，并返回旧内存值。因此如果返回值和测试值相同，表示内存单元已经被更新，整个过程按原子操作执行，不接受中断。这个过程的另一个版本为返回<code>bool</code>值，判断是否完成交换</p>
+<ul>
+<li><strong>exchange指令</strong></li>
+</ul>
+<p>定义如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exchange</span><span class="params">(<span class="keyword">int</span> *<span class="keyword">register</span>, <span class="keyword">int</span> *memory)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> temp;</span><br><span class="line">    temp = *memory;</span><br><span class="line">    *memory = *<span class="keyword">register</span>;</span><br><span class="line">    *<span class="keyword">register</span> = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_5/mutexInHardware.jpg" /></p>
+<p><strong>忙等待（自旋等待）</strong>：进程在得到临界区访问权之前，它只能继续执行测试变量的指令来得到访问权，除此之外不能做任何事情</p>
+<p>对于上图 <strong>a</strong> ,唯一可以进入临界区的进程是发现bolt为0的那个进程，并把bolt置为1在它访问临界区的时候，此时其他的进程都处于忙等待中，访问结束后继续讲bolt置为0，此时下一个可以进入临界区的进程就是在这之后最早执行<code>compare&amp;swap</code>指令的进程</p>
+<p>对于上图<strong>b</strong> ,工作原理和 <strong>a</strong> 几乎一致。由于变量初始化的方式和交换算法的本质，下面的表达式恒成立：</p>
+<p><span class="math display">\[ bolt + \sum_ikey_i = n \]</span></p>
+<p>若<code>bolt = 0</code>，则没有任何一个进程在他的临界区中，若<code>bolt = 1</code>，则只有一个进程在临界区中，且为 <strong><em>key为 0</em></strong> 的那个进程</p>
+<h5 id="机器指令方法的特点">机器指令方法的特点</h5>
+<p>有如下的优点：</p>
+<ul>
+<li>适用于单处理器或共享内存的多处理器上的任意数量的进程</li>
+<li>简单且易于证明</li>
+<li>可以用支持多个临界区，每个临界区可以用它自己的变量定义</li>
+</ul>
+<p>但也有一些严重的缺点：</p>
+<ul>
+<li>使用了忙等待：在一个进程在等待进入临界区时，它依然在消耗处理器时间</li>
+<li>可能饥饿：选择哪个等待进程时任意的，因此有些进程会被无限拒绝进入</li>
+<li>可能死锁：考虑单处理器下的情况：进程P1执行专用指令（上面的两个）并进入临界区，然后P1被中断并交给更高优先级的P2执行，P2由于互斥机制讲被拒绝访问，但是由于P1优先级低，它也永远不会被调度执行</li>
+</ul>
+<h4 id="信号量">3、信号量</h4>
+<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vamhjZWx1ZS9wLzcwODAxNDYuaHRtbA==" title="https://www.cnblogs.com/jhcelue/p/7080146.html">https://www.cnblogs.com/jhcelue/p/7080146.html<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+<p>讨论的是提供并发性的操作系统和设计语言的机制</p>
+<p>常用的并发机制：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_5/concurrencyWays.jpg" /></p>
+<p>基本原理如下：</p>
+<p>两个或多个进程可以通过简单的信号进行合作。强迫一个进程在某个位置停止，知道它接受到一个特定的信号，其中使用了一个称为<strong>信号量</strong>的特殊变量。通过信号量 s 传送信号，进程须执行原语<code>semSignal(s)</code>;要通过信号量 s接受信号需要执行原语<code>semWait(s)</code>;若相应信号未发送则阻塞进程，知道发送完为止</p>
+<p>为达到预期效果，可把信号量视为一个值为整数的变量，定义了三个操作：</p>
+<ul>
+<li>一个信号量可以初始化为非负数</li>
+<li><code>semWait</code> 使信号量减1，若值变成负数，则阻塞执行<code>semWait</code>的进程，否则继续执行</li>
+<li><code>semSignal</code>操作使信号量加1，若值小于等于0，则被<code>semWait</code>操作阻塞的进程解除阻塞</li>
+</ul>
+<p>信号量为正数时代表发出<code>semWait</code>后可以继续执行的进程数量，信号量为负数时，每个<code>semSignal</code>操作都会将等待进程中的一个进程接触阻塞</p>
+<p>对于信号量有三个重要结论：</p>
+<ul>
+<li>通常，在进程对信号量-1之前，无法提前知道该信号量是否会被阻塞</li>
+<li>当进程对信号量+1后，会唤醒另一个进程，两个进程继续并发运行。而在一个单处理器系统中，无法知道哪一个进程会继续运行</li>
+<li>向信号量发出信号后，不需要知道是否有另外一个进程在等待，被接触的进程数要么没有，要么为1</li>
+</ul>
+<p>信号量原语的定义：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">semaphore</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> count;</span><br><span class="line">    queueType <span class="built_in">queue</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">semWait</span><span class="params">(semaphore s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    s.count--;</span><br><span class="line">    <span class="keyword">if</span> (s.count &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// 把当前进程插入队列</span></span><br><span class="line">        <span class="comment">// 阻塞当前进程</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">semSignal</span><span class="params">(semaphore s)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    s.count++;</span><br><span class="line">    <span class="keyword">if</span> (s.count &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// 把进程P从队列移除</span></span><br><span class="line">        <span class="comment">// 把进程P插入就绪队列</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>二元信号量的定义：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">binary_semaphore</span> &#123;</span></span><br><span class="line">    <span class="keyword">enum</span> &#123;zero, one&#125; value;</span><br><span class="line">    queueType <span class="built_in">queue</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">semWaitB</span><span class="params">(binary_semaphore)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(s.value == one) s.value = zero;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 插入阻塞队列</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">void</span> semSignalB(semaphore s)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(s.<span class="built_in">queue</span> is empty()) s.value = one;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 将进程P解除阻塞</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>理论上二元信号量更易于实现，且可以证明与普通信号具有同样的表达能力，非二元信号量也称作<strong>计数信号量</strong>或<strong>一般信号量</strong></p>
+</blockquote>
+<p>与二元信号量有关的还有<strong><em>互斥锁（Mutex）</em></strong>。互斥是一个编程标志位，用来获取和释放一个对象。可以对一个资源进行<strong>加锁</strong>和<strong>解锁</strong>操作，即为置0和置1，可以由互斥量和二元信号量实现，二者区别在于，<strong>互斥量解锁和加锁的进程必须是同一个进程，二元信号量进行加锁操作，而由另一个进程解锁</strong></p>
+<ul>
+<li>强信号量：进程按照FIFO策略将进程从队列溢移除的信号量</li>
+<li>弱信号量：没有规定队列移除顺序的信号量</li>
+</ul>
+<p>可以理解强信号量不会导致饥饿，而弱信号量可能导致饥饿</p>
+<p><strong>信号量机制示例</strong></p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_5/semaphoreExample.jpg" /></p>
+<h5 id="互斥">互斥</h5>
+<p>使用信号量的互斥：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> n = <span class="comment">/*进程数*/</span>;</span><br><span class="line">semaphore s = <span class="number">1</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">P</span><span class="params">(<span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">        semWait(s);</span><br><span class="line">        <span class="comment">//临界区</span></span><br><span class="line">        semSignal(s);</span><br><span class="line">        <span class="comment">//Else</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    parbegin(P(<span class="number">1</span>), P(<span class="number">2</span>), ..., P(n));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_5/explainAboutMutexInSemaphore.jpg" /></p>
+<h5 id="生产者消费者问题">生产者消费者问题</h5>
+<p><strong><em>问题描述</em></strong>：有一个或多个生产者生产某种类型的数据，并防止在缓冲区中；有一个消费者从缓冲区中取数据，每次取一项，任何时候只有一个主体访问缓冲区。问题是要确保：当缓存已满时，生产者不会继续向其中添加数据，当缓存为空时，消费者不会从中移走数据</p>
+<p>首先假设缓冲区是无限的，且是一个线性数组，可以使用二元信号量和计数信号量实现</p>
+<p><strong>二元信号量错误的方法</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n;	<span class="comment">// 缓冲区剩余生产量</span></span><br><span class="line"><span class="comment">// delay：用于解决空的时候消费者不移走数据</span></span><br><span class="line"><span class="comment">// s：用于互斥,控制资源访问</span></span><br><span class="line">binary_semaphore s = <span class="number">1</span>, <span class="built_in">delay</span> = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">producer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">        produce();</span><br><span class="line">        semWait(S);</span><br><span class="line">        append(); <span class="comment">// 正式将数据加入缓冲区</span></span><br><span class="line">        n++;</span><br><span class="line">        <span class="comment">// 告诉消费者缓冲区已经有数据了</span></span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">1</span>) semSignal(<span class="built_in">delay</span>);</span><br><span class="line">        semSignal(S);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">consumer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    semWait(<span class="built_in">delay</span>);</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">        semWiat(s);</span><br><span class="line">        take();</span><br><span class="line">        n--;</span><br><span class="line">        semSignal(s);</span><br><span class="line">        consume();</span><br><span class="line">        <span class="comment">// 消费完之后阻塞当前进程 因为在此循环中delay不会为1</span></span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>) semWait(<span class="built_in">delay</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    n = <span class="number">0</span>;</span><br><span class="line">    parbegin(producer,consumer);	<span class="comment">//创建线程/进程</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>为什么是错误的，可能造成消费完之后继续取</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_5/wrongInProducer_Consumer.jpg" /></p>
+<p>也就是在消费者消费之后已经不属于互斥资源保护区，发生中断之后不能保护原有变量的值，正如上图第10行，本来应该阻塞消费者进程，但是由于中断使n++，并且有重新将delay置1，而后恢复消费者进程消费完缓冲区之后delay信号仍然为1所以，此时缓冲区为空但是并不会阻塞进程，所以还会继续从已经为空的缓冲区拿东西（也就是delay信号并不能匹配了）</p>
+<p><strong>二元信号量正确的方法</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n;	<span class="comment">// 缓冲区剩余生产量</span></span><br><span class="line"><span class="comment">// delay：用于解决空的时候消费者不移走数据</span></span><br><span class="line"><span class="comment">// s：用于互斥,控制资源访问</span></span><br><span class="line">binary_semaphore s = <span class="number">1</span>, <span class="built_in">delay</span> = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">producer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">        produce();</span><br><span class="line">        semWait(S);</span><br><span class="line">        append(); <span class="comment">// 正式将数据加入缓冲区</span></span><br><span class="line">        n++;</span><br><span class="line">        <span class="comment">// 告诉消费者缓冲区已经有数据了</span></span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">1</span>) semSignal(<span class="built_in">delay</span>);</span><br><span class="line">        semSignal(S);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">consumer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m;</span><br><span class="line">    semWait(<span class="built_in">delay</span>);</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">        semWiat(s);</span><br><span class="line">        take();</span><br><span class="line">        n--;</span><br><span class="line">        <span class="comment">// 保护变量m这样就不怕之前的n被修改</span></span><br><span class="line">        m = n;</span><br><span class="line">        semSignal(s);</span><br><span class="line">        consume();</span><br><span class="line">        <span class="comment">// 消费完之后阻塞当前进程 因为在此循环中delay不会为1</span></span><br><span class="line">        <span class="keyword">if</span> (m == <span class="number">0</span>) semWait(<span class="built_in">delay</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    n = <span class="number">0</span>;</span><br><span class="line">    parbegin(producer,consumer);	<span class="comment">//创建线程/进程</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用一般信号量（计数信号量），可得到一种更好的解决方法，如下</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">semephore n = <span class="number">0</span>, s = <span class="number">1</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">producer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">        produce();</span><br><span class="line">        semWiat(s);</span><br><span class="line">        append();</span><br><span class="line">        semSignal(s);</span><br><span class="line">        semSignal(n);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">consumer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">        semWiat(n);</span><br><span class="line">        semWait(s);</span><br><span class="line">        take();</span><br><span class="line">        semSignal(s);</span><br><span class="line">        consume();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">void main()....</span><br></pre></td></tr></table></figure>
+<p>如果是有限缓冲区的话，只需要对缓冲区大小也设置信号量保护即可</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> sizeofBuffer = <span class="comment">//缓冲区大小</span></span><br><span class="line">semephore n = <span class="number">0</span>, s = <span class="number">1</span>, e = <span class="built_in">size</span></span><br><span class="line"><span class="keyword">void</span> producer() &#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">        produce();</span><br><span class="line">        semwait(e);	<span class="comment">// e表示缓冲区中空的个数</span></span><br><span class="line">        semWiat(s);</span><br><span class="line">        append();</span><br><span class="line">        semSignal(s);</span><br><span class="line">        semSignal(n);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">consumer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">        semWiat(n);</span><br><span class="line">        semWait(s);</span><br><span class="line">        take();</span><br><span class="line">        semSignal(s);</span><br><span class="line">        semSignal(e);	<span class="comment">// 已经消耗一个 有空位了</span></span><br><span class="line">        consume();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">void main()....</span><br></pre></td></tr></table></figure>
+<h5 id="信号量的实现">信号量的实现</h5>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_5/implementOfSemaphore.jpg" /></p>
+<h4 id="管程">4、管程</h4>
+<blockquote>
+<p>管程是一种程序设计语言结构（C/C++语言没有JAVA支持）</p>
+<p>它提供的功能与信号量相同但是更易于控制</p>
+</blockquote>
+<h5 id="管程的特点">管程的特点</h5>
+<ol type="1">
+<li>局部数据变量只能被管程的过程访问，任何外部过程都不能访问</li>
+<li>一个进程通过调用管程的一个过程进入管程</li>
+<li>在任何时候，只能有一个进程在管程中执行，调用管程的任何其他进程都被阻塞以等待管程可用</li>
+</ol>
+<h5 id="函数">函数</h5>
+<p>管程通过使用<strong>条件变量</strong>来支持同步，这些条件变量包含在管程中，并且只有在管程中才能被访问</p>
+<p>有两个函数可以操作条件变量：</p>
+<ul>
+<li>cwait(c): 使当前进程阻塞在条件c上</li>
+<li>csignal(c): 使阻塞在c条件上的一个进程就绪</li>
+</ul>
+<h5 id="管程的结构">管程的结构</h5>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_5/tubePassStruct.jpg" /></p>
+<h5 id="例子重写消费者生产者问题">例子：重写消费者生产者问题</h5>
+<blockquote>
+<p>暂略</p>
+</blockquote>
+<p>这个例子表明，与信号量相比，管程担负的责任不同。对于管程，它有自己的互斥机制：两个进程不能同时访问缓冲区，但是<strong><em>cwait csignal</em></strong> 原语的位置需要注意。管程优于信号量之处在于，所有的同步机制都被限制在管程内部，因此不但易于验证同步的正确性，而且易于检测出错误。此外若一个管程被正确的编写，则所有进程对受保护资源的访问都是正确的，而对于信号量，只有当所有资源的进程都被正确编写时，资源访问才是正确的。</p>
+<h5 id="管程的通知和广播">管程的通知和广播</h5>
+<p>上述方法有两个缺陷</p>
+<ul>
+<li>产生 <code>csignal</code> 的进程在管程内还未结束，则需要两次额外的进程切换：阻塞进程需要一次切换，管程可用时又需要一次切换</li>
+<li>与信号有关的进程调度必须非常可靠</li>
+</ul>
+<p>在新的管程规则（Mesa）中，<code>csignal</code>原语被<code>cnotify</code>代替，</p>
+<p><code>cnotify</code>可以解释如下：当一个正在管程中的进程执行<code>cnotify(x)</code>中，会使得x 条件队列得到通知，但发信号的进程还在继续执行。但是由于不能保证在他之前没有其他进程进入管程，因而这个等待进程必须重新检查条件。</p>
+<p><code>cbroadcast</code>原语：广播可以使所有在该条件上等待的进程置于就绪态，当一个进程不知道有多少进程被激活时，这种方法非常方便</p>
+<h4 id="消息传递">5、消息传递</h4>
+<blockquote>
+<p>进程交互式必须满足两个基本要求：<strong>同步和通信</strong>，为实施互斥，进程间需要同步；为实现合作，进程需要交换信息，提供这一方法之一就是消息传递</p>
+</blockquote>
+<p><strong><em>注</em></strong>：互斥和同步的联系：——摘自<span class="exturl" data-url="aHR0cHM6Ly96aGlkYW8uYmFpZHUuY29tL3F1ZXN0aW9uLzQxNDU5MzU2MC5odG1s" title="https://zhidao.baidu.com/question/414593560.html">百度知道<i class="fa fa-external-link"></i></span>：</p>
+<p>​ 相交进程之间的关系主要有两种，同步与互斥。所谓互斥，是指散步在不同进程之间的若干程序片断，当某个进程运行其中一个程序片段时，其它进程就不能运行它 们之中的任一程序片段，只能等到该进程运行完这个程序片段后才可以运行。所谓同步，是指散步在不同进程之间的若干程序片断，它们的运行必须严格按照规定的 某种先后次序来运行，这种先后次序依赖于要完成的特定的任务。 　　显然，同步是一种更为复杂的互斥，而互斥是一种特殊的同步。 　　也就是说互斥是两个线程之间不可以同时运行，他们会相互排斥，必须等待一个线程运行完毕，另一个才能运行，而同步也是不能同时运行，但他是必须要安照某种次序来运行相应的线程（也是一种互斥）！ 　　<strong>总结</strong>：互斥：是指某一资源同时只允许一个访问者对其进行访问，具有唯一性和排它性。但互斥无法限制访问者对资源的访问顺序，即访问是无序的。 　　<strong>同步</strong>：是指在互斥的基础上（大多数情况），通过其它机制实现访问者对资源的有序访问。在大多数情况下，同步已经实现了互斥，特别是所有写入资源的情况必定是互斥的。少数情况是指可以允许多个访问者同时访问资源。</p>
+<p><strong>特点（优点）</strong>：可以在分布式系统、共享内存的多处理器系统和单处理器系统中实现</p>
+<p><strong><em>消息传递原语</em></strong>：</p>
+<ul>
+<li><code>send(destination, message)</code></li>
+<li><code>receive(source, message)</code></li>
+</ul>
+<h5 id="同步">同步</h5>
+<blockquote>
+<p>两个进程之间的消息通信隐含着某种同步的信息：只有当一个进程发送消息后，接受者才能接受消息</p>
+</blockquote>
+<p>一个进程发出<code>send</code>或者<code>receive原语</code>后，我们需要确定会发生什么：有三种组合：</p>
+<ul>
+<li><p>阻塞<code>send</code>，阻塞<code>receive</code>：</p>
+<p>发送者和接收者都被阻塞，直到完成信息的投递，也叫做会合，考虑进程间 的紧密同步</p></li>
+<li><p>无阻塞<code>send</code>，阻塞<code>receive：</code></p>
+<p>发送者可以继续，但接收者会被阻塞直到请求的消息到达，适用于服务器给其他的进程提供服务和资源</p></li>
+<li><p>无阻塞<code>send</code>，无阻塞<code>receive：</code></p>
+<p>不要求任何一方等待</p></li>
+</ul>
+<h5 id="寻址">寻址</h5>
+<blockquote>
+<p>两个原语的中确定源进程或目标的方案有两类：<strong>直接和间接寻址</strong></p>
+</blockquote>
+<p><strong>直接寻址：</strong></p>
+<p><code>send</code>原语包含目标进程的标识号，而<code>receive</code>有两种处理方式，一种是显示的指定源进程，该进程需要事先直到希望接受来自哪一个进程的消息。另一种是不指定所期望的源进程，例如打印机接受其他进程的打印请求。</p>
+<p><strong>间接寻址：</strong></p>
+<p>消息不直接从发送者发送到接收者，而是发送到一个共享数据结构，由临时保存消息的队列组成，称为<strong>信箱</strong>，具有一对一，多对一，一对多，多对多三种形式。其中<strong>多对一</strong>的信箱又叫做<strong>端口</strong>。</p>
+<p>进程和信箱的关联可以是静态的，也可以是动态的。</p>
+<p>还有就是所有权问题。对于端口来说，信箱的所有几乎都是接受进程（多对一），由接受进程创建，对于通用信箱，可以视信箱为创建它的进程所有和该进程一起终止，或是为操作系统所有，这时销毁信箱需要一个显示命令</p>
+<h5 id="消息格式">消息格式</h5>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_5/messageForm.jpg" /></p>
+<h5 id="排队原则">排队原则</h5>
+<p>最简单的排队原则是先进先出，还有优先级原则，以及允许接收者检查消息队列并选择下一次接受哪个消息</p>
+<h5 id="互斥-1">互斥</h5>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> n = <span class="comment">/* 进程数 */</span></span><br><span class="line"><span class="keyword">void</span> P(<span class="keyword">int</span> i)</span><br><span class="line">&#123;</span><br><span class="line">    message msg;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">        receive(box, msg);</span><br><span class="line">        <span class="comment">/* 临界区 */</span></span><br><span class="line">        send(box, msg);</span><br><span class="line">        <span class="comment">/* Else */</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">create <span class="title">mailbox</span><span class="params">(box)</span></span>;</span><br><span class="line">    send(box, null)</span><br><span class="line">    parbegin(P(<span class="number">1</span>), P(<span class="number">2</span>)...)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用无阻塞<code>send</code>和阻塞<code>receive</code>实现互斥</p>
+<p><strong>生产者消费者问题：</strong></p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_5/pcMessage.jpg" /></p>
+<h4 id="读者写者问题">6、<strong>读者写者问题</strong></h4>
+<p>暂略</p>
+<h3 id="第六章-并发死锁和饥饿">第六章 并发：死锁和饥饿</h3>
+<hr />
+<h4 id="死锁原理">6.1 死锁原理</h4>
+<p>死锁定义为一组相互竞争系统资源或进行通信的进程间的<strong>“永久”</strong>阻塞，所有死锁都涉及两个或者多个进程之间对资源需求的冲突。</p>
+<p>简单来说两个进程都希望获得已经掌握的资源才能继续执行，就产生了死锁。</p>
+<h5 id="资源的分类">资源的分类：</h5>
+<ul>
+<li>可重用资源：一次仅供一个进程安全使用且不因使用而耗尽的资源。包括处理器、I/O通道，内存和外存等</li>
+<li>可消耗资源：可被创建和销毁的资源。包括中断、信号、消息和I/O缓冲取中的消息</li>
+</ul>
+<p>操作系统中死锁检测、预防和避免方法小结：</p>
+<figure>
+<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_6/01.jpg" alt="操作系统中死锁检测、预防和避免方法小结" /><figcaption>操作系统中死锁检测、预防和避免方法小结</figcaption>
+</figure>
+<h5 id="资源分配图">资源分配图</h5>
+<p>表征进程资源分配的有效工具是Holt引入的<strong>资源分配图</strong>，如下：</p>
+<p>其中原点表示资源的一个实例，边表示请求资源和占有资源</p>
+<figure>
+<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_6/02.jpg" alt="操作系统中死锁检测、预防和避免方法小结" /><figcaption>操作系统中死锁检测、预防和避免方法小结</figcaption>
+</figure>
+<p>如果资源分配图中出现环，并且环中存在资源实例个数小于环中进程的个数，则可能导致死锁</p>
+<h5 id="死锁的条件">死锁的条件</h5>
+<p>死锁有三个必要条件：</p>
+<ul>
+<li>互斥：一次只有一个进程可以使用资源</li>
+<li>占有且等待：当一个进程等待其他进程时，继续占有已分配的资源</li>
+<li>不可抢占：不能强行抢占已占有的资源</li>
+</ul>
+<p><strong>这三个为必要条件并非充分条件</strong>，要产生死锁还需要第四个条件：</p>
+<p><strong>循环等待</strong>：存在一个闭合的进程链，每个进程至少占有此链中下一个进程所需的一个资源</p>
+<p>第四个条件是前三个条件的潜在结果，满足前三个条件，然后在特定顺序的进程调度下就有可能产生死锁。</p>
+<h4 id="死锁预防">6.2 死锁预防</h4>
+<p>死锁预防策略是设计一种系统来排除发生死锁的可能性，死锁预防分为两类</p>
+<ul>
+<li>间接死锁预防方法，即阻止前面必要条件中的一个即可</li>
+<li>直接死锁预防方法：防止循环等待的发生</li>
+</ul>
+<h5 id="互斥-2">互斥</h5>
+<p>此条件不可能禁止，对于多进程的并发执行调度中，互斥是必须满足的条件</p>
+<h5 id="占有且等待">占有且等待</h5>
+<p>预防此条件，可以要求进程一次性地请求所有需要的资源，并阻塞这个进程直到所有请求都同时满足，显然，这个方法是低效的</p>
+<ol type="1">
+<li>一个进程可能被阻塞很长时间来等待所有的请求被满足，而实际上只要有一部分资源它就可以继续执行</li>
+<li>一个进程可能实现并不知道它所需要的所有资源</li>
+</ol>
+<h5 id="不可抢占">不可抢占</h5>
+<ol type="1">
+<li>占有某些资源的一个进程进一步申请资源时若被拒绝，则该进程必须释放最初占有的资源，必要时可再次申请这些资源和其他资源</li>
+<li>一个进程请求被其他进程占有的资源时，可以抢占另一个进程，要求它释放资源</li>
+</ol>
+<h5 id="循环等待">循环等待</h5>
+<p>循环等待条件可通过定义资源类型的线行顺序来预防，若一个进程分配了R类型的资源，则接下来请求的资源只能是排在R类型之后的资源</p>
+<p>类似占有且等待的预防方法，循环等待的预防方法是低效的，会使进程执行速度变慢，且在没必要的情况下拒绝资源访问</p>
+<h4 id="死锁避免">6.3 死锁避免</h4>
+<p>死锁避免允许三个必要条件，但通过特定的选择，确保永远不会到达死锁点，死锁避免可允许更多的并发，死锁避免通过当前的资源分配采取措施，所以需要直到未来进程资源请求的情况</p>
+<p>书本给出两种死锁避免方法：</p>
+<ul>
+<li>若一个进程的请求会导致死锁，则不启动该进程</li>
+<li>若一个进程增加的资源请求会导致死锁，则不允许这一资源分配</li>
+</ul>
+<h5 id="进程启动拒绝">进程启动拒绝</h5>
+<p>考虑 n 个进程和 m 种不同类型资源的系统，有以下定义：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_6/03.jpg" /></p>
+<p>从中可以得知：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_6/04.jpg" /></p>
+<h5 id="资源分配拒绝">资源分配拒绝</h5>
+<p>资源分配拒绝策略，即<strong>银行家算法</strong>，定义了安全状态和不安全状态，进程请求一组资源时，查看同意此请求之后的状态，若还为安全状态，则分配资源，否则拒绝</p>
+<ul>
+<li>安全状态：至少有一个资源分配序列不会导致死锁</li>
+<li>不安全状态：非安全的一个状态</li>
+</ul>
+<p>但在此处，不可能真的对所有资源分配序列进行探查，判断是否存在此分配序列，所以通常根据下面的关系式判断是否是安全序列：</p>
+<p><span class="math inline">\(C_{ij} - A_{ij} \le V_j , 对所有的j\)</span></p>
+<p>一个安全状态的例子：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_6/05.jpg" /></p>
+<p><strong>死锁避免的优点</strong>：无须死锁预防的抢占和回滚进程，且与死锁预防相比限制较少</p>
+<p><strong>死锁避免的限制</strong>：</p>
+<ul>
+<li>必须实现声明每个进程请求的最大资源</li>
+<li>所讨论的进程必须是无关的，即它们的执行顺序必须没有同步要求的限制</li>
+<li>分配的资源数量必须是固定的</li>
+<li>在占有资源时，进程不能退出</li>
+</ul>
+<h4 id="死锁检测">6.4 死锁检测</h4>
+<h5 id="死锁检测算法">死锁检测算法</h5>
+<p>死锁预防策略非常保守，它们通过限制访问资源和进程上强加约束来解决死锁问题，而死锁检测不限制资源访问或约束进程行为，只要有可能就会给进程分配其所需要的资源，操作系统周期性的执行一个算法来检测前面的条件（4）（循环等待条件）</p>
+<p>书本中死锁检测的算法，在之前定义的基础上还存在一个请求矩阵<span class="math inline">\(Q\)</span>，其中<span class="math inline">\(Q_{ij}\)</span>表示进程 <span class="math inline">\(i\)</span> 请求资源 <span class="math inline">\(j\)</span> 的数量，此算法主要是一个标记未死锁进程的过程，最初所有进程都是未标记的，然后执行以下步骤：</p>
+<ol type="1">
+<li>标记 Allocation 矩阵中一行全为零的进程</li>
+<li>初始化一个临时向量 W，令 W等于 Available 向量</li>
+<li>查找下标 i，使得对所有的<span class="math inline">\(1 \le k \le m, Q_{ik} \le W_k\)</span>，若找不到 i，终止</li>
+<li>若找到这样的行，标记进程 i，并把 Allocation 矩阵中的相应行加到 W 中，即对所有的 <span class="math inline">\(1\le k \le m, 令 W_k += A_{ik}\)</span>，返回步骤3</li>
+</ol>
+<h5 id="死锁恢复">死锁恢复</h5>
+<p>检测到死锁后就需要某种策略来恢复死锁，下面为按复杂度递增的顺序列出可能的方法：</p>
+<ol type="1">
+<li>取消所有的死锁进程，操作系统最常采用的方法</li>
+<li>把每个死锁进程回滚到前面定义的某些检查点，并重新启动</li>
+<li>连续取消死锁进程直到不存在死锁，所选取消进程的顺序基于某种最小代价原则，每次取消后重新检测是否存在死锁</li>
+<li>连续抢占资源直到不存在死锁，和 3 一样依赖某种最小代价原则，一个资源被抢占的进程必须回滚到获得这个资源之前的某一状态</li>
+</ol>
+<p>对于（3）（4）可参考以下原则：</p>
+<ul>
+<li>目前为止小号的处理器时间最小</li>
+<li>目前为止产生的输出最少</li>
+<li>预计剩下的时间最长</li>
+<li>目前位置分配的资源总量最少</li>
+<li>优先级最低</li>
+</ul>
+<h4 id="一种综合的死锁策略">6.5 一种综合的死锁策略</h4>
+<p>以上解决死锁的策略都各有优缺点，所以操作系统可以在不同的情况下使用不同的策略</p>
+<ul>
+<li>把资源分成几组不同的资源类</li>
+<li>为预防在资源类之间由于循环等待产生死锁，采用前面的线性排序策略</li>
+<li>在一个资源类中，使用该类资源最适合的算法</li>
+</ul>
+<p>其中资源可分为：</p>
+<ul>
+<li><strong>可交换空间</strong>：进程交换所用外存中的存储块</li>
+<li><strong>进程资源</strong>：可分配的设备、如磁带设备和文件</li>
+<li><strong>内存</strong>：可按页或段分配给进程</li>
+<li><strong>内部资源</strong>：诸如 I/O 通道</li>
+</ul>
+<p>在每一类资源中，可采取一下策略确定次序：</p>
+<ul>
+<li><strong>可交换空间</strong>：要求一次性分配所有请求资源预防死锁</li>
+<li><strong>进程资源</strong>：死锁避免通常是有效的，因为进程可以实现声明所需要的资源，采用资源排序的预防策略也是可能的</li>
+<li><strong>内存</strong>：对于内存。基于抢占的预防是最适合的策略，当一个进程被抢占后，它被换到外村，释放空间可以解决死锁</li>
+<li><strong>内部资源</strong>：可以使用基于资源排序的预防策略</li>
+</ul>
+<h4 id="哲学家就餐问题">6.6 哲学家就餐问题</h4>
+<p>有五位哲学家，他们的就餐在一张圆桌上，圆桌上有5个盘子，盘子之间有一把叉子，每位想吃饭的哲学家就餐时使用盘子两侧的叉</p>
+<p>为避免死锁的风险，可再买5把叉子，另一种方法是只允许四位哲学家同时进入餐厅，由于最多有4位哲学家就座，因而至少有一位哲学家可以拿到两把叉子</p>
+<p>两种方案的解决代码如下：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_6/06.jpg" /></p>
+<h2 id="第三部分-内存">第三部分 内存</h2>
+<h3 id="第七章-内存管理">第七章 内存管理</h3>
+<hr />
+<p>在单道程序设计系统中（本书主要讨论单道），内存划分为两部分</p>
+<ul>
+<li>操作系统专用</li>
+<li>提供“用户”进程使用</li>
+</ul>
+<p>简单的内存管理术语：</p>
+<ul>
+<li>页框：<strong>内存</strong>中固定长度的块</li>
+<li>页：<strong>固定长度的数据块</strong>，存储在二级存储中，可以临时复制到内存的页框中</li>
+<li>段：<strong>变长数据块</strong>，存储在二级存储中，整个段临时复制到内存中（分段），或将段变为页，然后单独将每页复制到内存中（分段、分页相结合）</li>
+</ul>
+<h4 id="内存管理的需求">7.1 内存管理的需求</h4>
+<h5 id="重定位">重定位</h5>
+<p>为了使处理器利用率最大化，程序换出到磁盘后，下次换入到换出之前的内存区域很困难，相反，我们需要把进程重定位到内存的不同区域。这样就会带来寻址的问题。处理器<strong>硬件</strong>和<strong>操作系统软件</strong>必须能以某种方式把程序代码中的内存访问转换为实际的物理内存地址，并反映程序在内存中的当前位置。</p>
+<h5 id="保护">保护</h5>
+<p>每个进程都应受到保护，以免其他进程有意或无意地干扰。</p>
+<p>通常用户进程不能访问操作系统的任何部分，无论是程序还是数据。此外，一个进程中的程序通常不能跳转到另一个进程中的指令，若无特别许可，一个进程的程序不能访问其他进程的数据区。</p>
+<p>内存保护需求必须由<strong>处理器（硬件）</strong>而非操作需要（软件）来满足，因为操作系统不能预测程序可能产生的所有内存访问，即使可以预测检查也非常费时。</p>
+<h5 id="共享">共享</h5>
+<p>任何保护机制都必须具有一定的灵活性，以允许多个进程访问内存的同一部分。内存管理系统在不损害基本保护的前提下，必须允许对内存共享区域进行受控访问。</p>
+<h5 id="逻辑组织">逻辑组织</h5>
+<p>计算机系统的内存和外存总是被组织成<strong>线性的地址空间</strong>。大多数程序被组织成模块，某些模块是不可修改的，若操作系统和计算机硬件能够有效地处理以某种模块形式组织的用户程序与数据，则会带来许多好处：</p>
+<ol type="1">
+<li>可以独立地编写和编译模块</li>
+<li>通过适度的额外开销，可以为不同的模块提供不同的保护级别</li>
+<li>可以引入某种机制，使得模块被多个进程共享</li>
+</ol>
+<p>最易于满足这些需求的根据是<strong>分段</strong></p>
+<h5 id="物理组织">物理组织</h5>
+<p>计算机系统分为两级，内存和外存，内存提供快速的访问，成本高，易失性；外存较慢且便宜，非易失性。</p>
+<p>在这种两级方案中，系统主要关注的是内存和外存之间信息流的组织，组织这一信息流是由系统负责的，而不能由程序员负责。</p>
+<h4 id="内存分区">7.2 内存分区</h4>
+<p>内存管理的主要操作是处理器把程序装入内存中执行，内存管理技术由以下几种：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_7/01.jpg" /></p>
+<h5 id="固定分区">固定分区</h5>
+<p>管理用户内存空间的最简方案就是对它分区，以形成若干边界固定的区域</p>
+<p>分区大小：</p>
+<ul>
+<li>大小相等的分区</li>
+<li>大小不等的分区</li>
+</ul>
+<p><strong>内部碎片</strong>：装入的数据块小于分区大小，因而导致分区内部存在空间浪费，这种现象称为内部碎片</p>
+<p><strong>放置算法</strong>：</p>
+<p>对于大小相等的分区，只需要把每个进程分配到能够容纳它的最小分区中，每个分区都需要维护一个调度队列，用于保存从这个分区换出的进程</p>
+<p>对于大小不等的分区，也可以采取上面这种方式，对于单个分区来说是最优的，可以达到最小的内部碎片，但是从整个系统看不是最佳的，小内存的进程可能被阻塞即使有大的空闲分区，所以一种更可取的方式是为所有的进程只提供一个队列。如果所有都被占据，则必须进行交换，一般优先考虑一些诸如优先级之类的其他因素，或者优先选择换出阻塞的进程而非就绪进程</p>
+<p>固定分区方案简单，但存在以下缺点：</p>
+<ul>
+<li>分区的数量在系统生成阶段已经确定，因而限制了系统中活动进程的数量</li>
+<li>分区的大小是在系统生成阶段实现设置的，因而小作业不能有效地利用分区空间</li>
+</ul>
+<h5 id="动态分区">动态分区</h5>
+<p>对于动态分区，分区长度和数量是可变的，进程装入内存时，系统会给他分配一块与其所需容量完全相等的内存空间，动态分区方法会在内存中形成许多小空洞（外部碎片），内存利用率随之下降</p>
+<p>克服外部碎片的一种方法是<strong>压缩</strong>，操作系统不时地移动进程，使得进程占用的空间连续，使得所有空闲空间连成一片。</p>
+<p>压缩是一个非常耗时的过程，另外，压缩需要动态重定位的能力，能够把程序从内存的一块区域移动到另一块区域，且不会使程序中的内存访问无效</p>
+<p><strong>放置算法</strong>：</p>
+<p>可供考虑的放置算法有三种：</p>
+<ul>
+<li><strong>最佳适配：</strong>选择大小最接近的块，性能较差</li>
+<li><strong>首次适配：</strong>从头开始扫描，选择大小足够的第一个可用块，通常是最简单有效的</li>
+<li><strong>下次适配：</strong>从上一次放置的位置开始，选择下一个可用块，较首次适配差，常常会在内存的末尾分配空间，导致末尾的 最大空闲存储块很快分裂为小碎片，因此可能会需要更多的压缩</li>
+</ul>
+<h5 id="伙伴系统">伙伴系统</h5>
+<p>伙伴系统中内存块大小为 <span class="math inline">\(2^K\)</span> 个字，<span class="math inline">\(L \le K \le U\)</span>，<span class="math inline">\(2^L\)</span> 表示分配的最小快尺寸，<span class="math inline">\(2^U\)</span> 表示分配的整个内存的大小，伙伴系统简单来说就是，给定大小为 <span class="math inline">\(2^i\)</span> （i为不小于此进程大小的最小整数），然后寻找一个大小为 <span class="math inline">\(2^i\)</span> 的空闲块，每个大小为 <span class="math inline">\(2^i\)</span> 的块都有维护列表，空闲块可以由对半分裂从大小为 <span class="math inline">\(2^{i+1}\)</span> 的列表移出，并在 <span class="math inline">\(2^i\)</span> 列表中产生两个伙伴，当 <span class="math inline">\(2^i\)</span> 列表一对伙伴都未分配时，则合并移入到 <span class="math inline">\(2^{i+1}\)</span> 中，可以由下面算法找到一个 <span class="math inline">\(2^i\)</span> 大小的空闲块</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">get_hole</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(i == U+<span class="number">1</span>) &lt;failure&gt;;</span><br><span class="line">    <span class="keyword">if</span>(&lt;i_list empty&gt;) &#123;</span><br><span class="line">        get_hole(i+<span class="number">1</span>);</span><br><span class="line">        &lt;split hole into buddies&gt;;</span><br><span class="line">        &lt;<span class="built_in">put</span> buddies on i_list&gt;;</span><br><span class="line">    &#125;</span><br><span class="line">    &lt;take first hole on i_list&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>例子：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_7/02.jpg" /></p>
+<p>释放B后的二叉树：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_7/03.jpg" /></p>
+<h5 id="重定位-1">重定位</h5>
+<p>在内存中放置进程需要的一种技术。进程在重新换入到内存后其地址是不确定的，所以需要<strong>逻辑地址</strong>和<strong>物理地址</strong>的转换</p>
+<ul>
+<li>逻辑地址：与物理分配地址无关的地址</li>
+<li>相对地址：逻辑地址的特例，相对已知点的存储单元</li>
+<li>物理地址：在内存中的实际位置</li>
+</ul>
+<p>重定位的硬件支持如下：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_7/04.jpg" /></p>
+<h4 id="分页">7.3 分页</h4>
+<p>将内存和进程都划分为大小固定，相等且比较小的块，在进程中的称为页，在内存中的称为页框。使用分页技术，每个进程在内存中浪费的空间，仅是基础最后一页一小部分形成的内部碎片，没有外部碎片。</p>
+<p>他和固定分区不同的是：<strong>采用分页技术的分区相当小，一个程序可以占据多个分区，并且这些分区不需要是连续的</strong>。</p>
+<p>实现上述的方法之一是，每个进程维护一个<strong>页表</strong>，页表给出了该进程每页对应页框的位置。在程序中，每个逻辑地址包括一个页号和该页中的偏移量。</p>
+<p>为了使分页方案更加方便，<strong>规定页和页框的大小必须是2的幂，以便容易地表示出相对地址</strong>，有以下两个好处：</p>
+<ol type="1">
+<li>逻辑地址方案对编程者、汇编器和链接是透明的，程序每个逻辑地址与其相对地址是一致的</li>
+<li>用硬件实现允许时动态地址转换比较容易。考虑一个 n+m 位地址，最左边的 n 位是页号，最右边的 m 位是偏移量，地址转换经过以下步骤：
+<ul>
+<li>提取页号，即逻辑地址左侧 n 位</li>
+<li>以这个页号为索引，查找进程页表中对应的页框号 k</li>
+<li>页框的起始物理地址为 <span class="math inline">\(k\times 2^m\)</span>，被访问字节的物理地址是这个数加上偏移量。可以简单地把偏移量附加到页框号后面来构建物理地址。</li>
+</ul></li>
+</ol>
+<p>简单分页的图形表示如下：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_7/05.jpg" /></p>
+<h4 id="分段">7.4 分段</h4>
+<p>采用分段技术，可以把程序和与其相关的数据划分到几个段，尽管段的最大长度有限制的，但不要求长度都相等，和分页一样，其逻辑地址由段号和偏移量组成。</p>
+<p>同样会产生外部碎片，但是由于块可以设置的很小所以外部碎片也很小，分段也不要求分区是连续的。</p>
+<p>分页对程序员是透明的，<strong>分段则是可见的</strong>。为实现模块化设计，程序或数据分段或进一步分段。</p>
+<p>采用大小不等的段的另一个结果是，逻辑地址和物理地址不再是简单的对应关系，在简单的分段方案中，每一个进程都有一个<strong>段表</strong>，系统也会维护一个内存中的空闲块列表，段表项必须给出相应段在内存中的起始地址，还必须指明段的长度，以确保不会使用无效地址。</p>
+<p>考虑一个 n+m 位的地址，左侧n位是段号，右侧m位是偏移量，进行地址转换有以下步骤：</p>
+<ol type="1">
+<li>提取段号，即左侧n位</li>
+<li>以这个段号为索引，查找进程段表中该段的起始物理地址</li>
+<li>最右侧m位，表示偏移量，若偏移量大于段长度则该地址无效</li>
+<li>物理地址为该段起始物理地址与偏移量之和</li>
+</ol>
+<p>简单分段的图形表示：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_7/06.jpg" /></p>
+<p>这里讨论的还是<strong>简单分页和简单分段，进程必须把所有全部加载到内存中</strong>，如果采用了覆盖或者虚存技术，则可以部分加载内存中，这部分在下一章讨论。</p>
+<p><a href="https://blog.csdn.net/dongyanxia1000/article/details/51425141" target="_blank" rel="noopener"><strong>覆盖：</strong></a>所谓<strong><em>覆盖</em></strong>，就是把一个大的程序划分为<strong>一系列覆盖</strong>，每个覆盖就是一个相对独立的程序单位，<strong>把程序执行时并不要求同时装入内存的覆盖组成一组，称为覆盖段</strong>。<strong><em>一个覆盖段内的覆盖共享同一存储区域</em>，</strong>该区域成为覆盖区，它与覆盖段一一对应。显然，为了使一个覆盖区能为相应覆盖段中的每个覆盖在不同时刻共享，其大小应<strong><em>由覆盖段中的最大覆盖</em></strong>来确定。</p>
+<h3 id="第八章-虚拟内存">第八章 虚拟内存</h3>
+<hr />
+<p>简单的虚拟内存相关定义：</p>
+<ul>
+<li><p><strong>虚拟内存</strong>：</p>
+<p>虚拟内存是计算机系统内存管理的一种技术。它使得应用程序认为它拥有连续的可用的内存（一个连续完整的地址空间），而实际上，它通常是被分隔成多个物理内存碎片，还有部分暂时存储在外部磁盘存储器上，在需要时进行数据交换。目前，大多数操作系统都使用了虚拟内存，如Windows家族的“虚拟内存”；Linux的“交换空间”等。</p></li>
+<li><p><strong>虚拟地址</strong>：</p>
+<p>在虚拟内存中分配给某一位置的地址，使得该位置可被访问，如同内存</p></li>
+<li><p><strong>虚拟地址空间</strong>：分配某进程的虚拟存储</p></li>
+<li><p><strong>地址空间</strong>：用户某进程的内存地址范围</p></li>
+<li><p><strong>实地址</strong>：内存中存储位置的地址</p></li>
+</ul>
+<h4 id="硬件和控制结构">8.1 硬件和控制结构</h4>
+<p>分页和分段存在着这样的特点：</p>
+<ul>
+<li><strong>进程中所有的内存访问都是逻辑地址。</strong>意味着一个进程可被换入或换出内存，因此进程可在执行过程中的不同的时刻占据不同区域</li>
+<li><strong>一个进程可划分为许多块，执行中不需要连续的位于内存中。</strong>页表和段表的使用保证这一特点</li>
+</ul>
+<p>这样的特点可以使得一个进程在执行的过程中，<strong>该进程不需要所有页或段都在内存中</strong>，只需要在内存保存下一条指令所在块，以及将访问的数据块即可。（这里的块都代表页或段）</p>
+<p>进程执行过程中任何时刻都在内存中的部分称为进程的<strong>常驻集（resident set）</strong>，只要所有的内存访问都是常驻集中的单元，执行就可以顺利进行，并且处理器可以判断是否如此。当访问一个不再内存中（驻留集）的逻辑地址，会产生一个中断，操作系统会将此进程置于<strong>阻塞态</strong>，为此操作系统产生一个<strong>磁盘I/O读请求</strong>，在执行此I/O期间，操作系统可以调度另一个进程运行，在读入内存后（按某种置换策略），产生一个I/O中断，操作系统则将原来被阻塞的进程置为<strong>就绪态</strong>。</p>
+<p>内存又称为<strong>实存储器</strong>，简称实存，但程序员或用户感觉到的是一个更大的内存，且通常分配在磁盘上，称为<strong>虚拟内存（virtual memory）</strong>，简称虚存。虚存支持更有效的系统并发度，解除用户与内存之间没有必要的紧密联系。</p>
+<p>分页和分段的特点：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/01.jpg" /></p>
+<h5 id="局部性和虚拟内存">局部性和虚拟内存</h5>
+<hr />
+<p>虚拟内存的开销收到<strong>系统抖动（thrashing）</strong>的影响。在虚存的机制下操作系统读取一块到内存，通常要将另一块换出，如果这块正好在将要用到之前换出，操作系统不得不很快的将他收回，会<strong>导致处理器大部分的时间都用于交换快而非执行指令</strong>。</p>
+<p>避免系统抖动的算法都根据最近的历史来猜测将来最可能用到的块。这类推断基于<strong>局部性原理</strong>（一个进程中程序和数据引用的集簇倾向）</p>
+<p>局部性原理表明虚存方案是可行的，要使虚存比较实用且有效，需要两方面因素：</p>
+<ol type="1">
+<li>必须有对分页或分段方案的硬件支持</li>
+<li>操作系统必须有管理页或段在内存和辅存之间移动的软件</li>
+</ol>
+<h5 id="分页-1">分页</h5>
+<hr />
+<blockquote>
+<p>主要有二级页表、倒排页表、转换检测缓冲区等结构</p>
+</blockquote>
+<p>虚存分页和简单分页一样都有页表，其中<strong>页表项（Page Table Entry，PTE）</strong>相比简单分页也多了一些内容，如下：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/02.jpg" /></p>
+<p>其中的 <strong>P</strong> 表示它所对应的页当前是否在内存中，如果在内存中，则还包括页框号，另一位是<strong>修改位（M）</strong>表示相应的内容装入内存后是否发生变化，若没有改变则无需重新写入辅存，负责需要用该页更新原来的页。</p>
+<p>同简单分页类似，逻辑地址依然由页号和偏移量组成，而物理地址由页框号和偏移量组成，页表的长度基于进程长度的变化而变化，以下给出了一种硬件实现：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/03.jpg" /></p>
+<p>上述页表的简单处理在虚存空间大的时候会导致页表项的也十分大，一种解决方案是在虚存中保存页表，着以为着<strong>页表和其他页一样服从分页管理</strong>，一个进程在运行时，它的页表至少有一部分在内存中，这一部分包括正在运行的页的页表项，有一种<strong>两级层次页表结构</strong>来组织大型页表，典型情况如下：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/04.jpg" /></p>
+<p>以上是32位地址两级方案的例子，假设采用字节级寻址，页尺寸为 <span class="math inline">\(4KB (2^{12})\)</span> ,则<span class="math inline">\(4GB (2^{32})\)</span>虚拟地址空间由<span class="math inline">\(2^{20}\)</span>页组成，若这些页的每一页都由一个4字节的页表项映射，则可创建由<span class="math inline">\(2^{20}\)</span>页表项组成的页表，这时需要<span class="math inline">\(4MB(2^{22})\)</span>的内存空间。这个由<span class="math inline">\(2^{10}\)</span>页组成的巨大用户页表可以保留在虚存中，并由一个包括<span class="math inline">\(2^{10}\)</span>个页表项的根页表映射，根页表占据的内存为<span class="math inline">\(4KB(2^12)\)</span>，二级页表的地址转换如下图：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/05.jpg" /></p>
+<hr />
+<p>即使是二级页表，页表大小与虚拟地址空间的大小成正比，可以使用<strong>倒排页表</strong>替代这种结构，称为“倒排”的原因是，它使用页框号而非虚拟页号来索引页表项，它的大小是固定的，在虚存空间特别大的时候开销比多级页表少。</p>
+<p>在这种方法中，虚拟地址的页号部分使用一个散列函数映射到散列表中。散列表包含指向倒排表的指针，而倒排表中含有页表项，页表项包含以下内容：</p>
+<ul>
+<li><strong>页号</strong>：虚拟地址的页号部分</li>
+<li><strong>进程标识符</strong>：使用该页的进程，页号和标识符确定一个特定进程的一页</li>
+<li><strong>控制位</strong>：包含一些标记，如有效，访问，修改和锁定信息</li>
+<li><strong>链指针</strong>：以为散列函数可能会将多个值散列到一个区域，所以存在链（下一项的索引值）</li>
+</ul>
+<p>下图是一个n位页号m位数索引倒排表的页表结构图：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/06.jpg" /></p>
+<hr />
+<p>每次虚存访问都可能会引起两次物理内存访问：</p>
+<ul>
+<li>取相应的页表项</li>
+<li>取需要的数据</li>
+</ul>
+<p>因此简单的虚拟内存方案会导致内存访问时间加倍，为克服这个问题，可以采用<strong>转换检测缓冲区（Translation Lookaside Buffer，TLB）</strong>（一个特殊的高速缓存，包含最近用过的页表项）。给定一个虚拟地址，处理器首先检查TLB，若需要的页表项在其中，则检索页框号形成实地址，若未找到则使用页号检索检查页表。然后查看其”存在位“状态，若不在内存中，则会产生一次内存访问故障，称为<strong>缺页（page fault）</strong>中断，此时由操作系统负责装入所需要的页，并更新页表。基本机理如下：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/07.jpg" /></p>
+<p>TLB使用流程如下，图中未显示磁盘I/O过程中可以调度另外进程执行。根据局部性原理大多数虚存访问都位于最近使用过的页中，所以此方案可以提高性能。</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/08.jpg" /></p>
+<p>TLB的实际组织还有许多额外细节，由于TLB仅包含整个页表中的部分表项，因此不能简单地把页号编入TLB的索引，所以TLB的项必须包含页号和完整的页表项（和倒排表一样），这两种技术对应直接映射（索引）和关联映射，如下所示：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/09.jpg" /></p>
+<p>虚存机制须与高速缓冲系统（内存高缓）进行交互。首先，内存系统查看TLB是否存在匹配的页表项，若不存在则从页表中读取页表项。产生一个TAG标记和其余部分组成的实地址后，查看高速缓存中是否存在，若有则返回给CPU，若没有，则从内存中检索这个字。若被访问的字在磁盘中，则包含该字的页必须装入内存，且所在的块须装入高速缓存，且其页表项必须更新。</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/10.jpg" /></p>
+<hr />
+<p>页尺寸是一个重要的硬件设计决策，页越小，内部碎片总量越少；另一方面，页越小，每个进程需要的页数量越多，页表也会变得更大。大页表不容易存储(二级页表)会导致产生两次缺页中断（读取页表，读取页），但大页表又利于数据块传送。大体来说，<strong>缺页率</strong>和<strong>页尺寸</strong>和分配的<strong>页框数</strong>有关系。</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/11.jpg" /></p>
+<p>页尺寸的设计问题还与物理内存大小和程序大小有关。</p>
+<h5 id="分段-1">分段</h5>
+<hr />
+<p>分段组织与非段式有许多优点：</p>
+<ol type="1">
+<li>简化了对不断增长的数据结构的处理</li>
+<li>允许程序独立地改变或重新编译</li>
+<li>有助于进程间的共享</li>
+<li>有助于保护</li>
+</ol>
+<p>类似的虚存分段和简单分段一样也为每个进程维护一个段表，段表项包含存在位和修改位，以及该段的起始地址和长度。分段的地址转换如下图：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/12.jpg" /></p>
+<hr />
+<h5 id="段页式">段页式</h5>
+<p>分段和分页各有所长，在段页式系统中，用户地址空间被程序员划分为许多段，每段划分为和内存页框大小相同的页。逻辑地址仍然由段号和偏移量组成，段偏移量可视为指定段中的页号和页偏移量。其地址转换如下图：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/13.jpg" /></p>
+<h4 id="操作系统软件">8.2 操作系统软件</h4>
+<p>操作系统内存管理设计取决于三个基本的选择：</p>
+<ul>
+<li>是否使用虚存技术</li>
+<li>是使用分页还是分段，或同时使用两者</li>
+<li>为各种存储管理特征采用的算法</li>
+</ul>
+<p>前两者取决于所用的硬件平台（当前计算机主流提供了虚存的支持，且纯分段的系统也越来越少，<strong>结合分段分页后操作系统内存管理问题都是面向分页的</strong>）第三个就是操作系统软件领域的问题，也是本节所述。</p>
+<p>虚拟内存的操作系统策略：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/14.jpg" /></p>
+<p>上表不存在一种绝对的最佳策略，<strong>在所有的策略中都要做到通过适当的安排，使得一个进程在执行时，访问一个未命中的页中的字的概率最小</strong>。</p>
+<h5 id="读取策略">读取策略</h5>
+<hr />
+<p>读取策略决定某页何时取入内存，常用的两种方法是请求分页和预先分页</p>
+<ul>
+<li><strong>请求分页（demand paging）</strong>：只有当访问到某页中的一个单元时才将该页取入内存，开始缺页率高由于局部性原理之后缺页率会逐渐减少</li>
+<li><strong>预先分页（prepaging）</strong>：利用大多数辅存设备的寻道时间和合理的延迟，一次读取多个连续的页，如果额外读取的页没有使用到，则低效</li>
+</ul>
+<h5 id="放置策略">放置策略</h5>
+<hr />
+<p>在纯分段系统中，放置策略并不是重要的设计问题（最佳适配、首次适配等均可）<strong>对于分页和段页式系统，如何放置通常无关紧要，以为地址转换硬件和内存访问硬件能以相同的效率为任何页框组合执行相应的功能</strong></p>
+<h5 id="置换策略">置换策略</h5>
+<hr />
+<p>置换策略涉及到的问题有：</p>
+<ul>
+<li>给每个活动进程分配多少页框</li>
+<li>计划置换的页集是局限于哪些产生缺页中断的进程还是所有页框都在内存中的进程</li>
+<li>在计划置换的页集中，选择换出哪一页</li>
+</ul>
+<p>前两个为驻留集管理，之后讨论，置换策略专指第三个概念</p>
+<p><strong>页框锁定</strong>：注意的是对于被锁定的页框，则不能被用于置换，锁定是给每个页框关联一个锁定位实现的，可以包含在页框表和当前的页表中</p>
+<p>基本算法有：</p>
+<ul>
+<li><p><strong>最佳（Optimal，OPT）</strong>：</p>
+<p>选择置换下次访问距当前时间最长的那些页，这种方法是最优的，但是操作系统必须直到将来的事件，因此不可能实现，仅作为一种衡量标准</p></li>
+<li><p><strong>最近最少使用（Least Recently Used，LRU）</strong>：</p>
+<p>置换内存中最长时间未被引用的页，根据局部性原理，这也是最近最不可能访问到的页，其性能接近OPT策略，但较难实现，开销大</p></li>
+<li><p><strong>先进先出（First In First Out，FIFO）</strong>：</p>
+<p>将分配给进程的页框视为一个循环缓冲区，并按循环方式移动页，需要一个指针在页框中循环，这种策略实际是置换驻留在内存时间最长的页，但通常导致频繁的换入换出页</p></li>
+<li><p><strong>时钟（CLock）</strong>：</p>
+<p>最简单的时钟策略给每个页框附加一个使用位，每当该页装入内存，或被访问时使用位置为1，并有一个指针与之相关联，当一页被置换时，该指针指向位下一个页框。需要置换一页时，操作系统扫描缓冲区，查找一个使用位为0的页框，扫描过程中遇到使用位为1时，将其置为0。</p></li>
+</ul>
+<p>四种方法的比较：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/15.jpg" /></p>
+<p>对固定页框数量且为局部页面置换，有如下关系：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/16.jpg" /></p>
+<p>一种更有效的时钟算法采取了<strong>使用位和修改位</strong>，此时每个页框状态有：</p>
+<ul>
+<li>最近未被访问，也未被修改 (u = 0; m = 0)</li>
+<li>最近被访问，但未被修改 (u = 1; m = 0)</li>
+<li>最近未被访问，但被修改 (u = 0; m = 1)</li>
+<li>最近被访问，且被修改 (u = 1; m = 1)</li>
+</ul>
+<p>此时的时钟算法执行过程如下：</p>
+<ol type="1">
+<li>从指针的当前位置开始扫描缓冲区，选择遇到的第一个 (u = 0; m = 0) 用户置换</li>
+<li>若第一步失败，则重新扫描，查找 (u = 0; m = 1) 的页框，选择第一次遇到的用于置换，在这一扫描过程中将每个跳过的页框的使用位置为0</li>
+<li>若第2步失败，则指针回到最初的位置，且集合中所有页框的使用位均为0，重复第1步，并在必要时重复第二步，直到寻找到可用于置换的页框</li>
+</ol>
+<p>此策略查找自被取入至今未被修改且未访问的页，由于未被修改，则不需要写回辅存。</p>
+<p>还有一种称为<strong>页缓冲</strong>的方法允许使用较简单的页面置换策略（FIFO）。这种算法不丢弃置换出的页而是分配到两个表中（不移动页移动对应的页表项）：</p>
+<ol type="1">
+<li>若未被修改，分配到空闲链表中</li>
+<li>若已被修改则分配到修改页链表中</li>
+</ol>
+<p>这种方法的特定是，<strong>被置换的页仍然留在内存中</strong>，若进程访问该页，则可迅速返回该进程的驻留集且代价很小，实际上就是充当了高速缓存的角色</p>
+<h5 id="驻留集管理">驻留集管理</h5>
+<hr />
+<p>对于驻留集（操作系统给进程分配的内存空间）大小，需要考虑以下几个因素：</p>
+<ul>
+<li>分配给一个进程的内存越少，则驻留在内存中的进程数就越多。增加了操作系统至少找到一个就绪进程的可能性，减少了由于交换而消耗的处理器时间</li>
+<li>若一个进程在内存的页数较少，尽管有局部性原理，缺页率仍相对较高</li>
+<li>给特定进程分配的内存空间超过一定大小后，由于局部性原理，改进程的缺页率没有明显的变化</li>
+</ul>
+<p>当代操作系统通常采取两种策略：</p>
+<ul>
+<li><strong>固定分配策略</strong>：为一个进程在内存中分配固定数量的页框</li>
+<li><strong>可变分配策略</strong>：允许分配给一个进程的页框在该进程的生命周期中不断的发生变化</li>
+</ul>
+<p>可变分配策略的难点在于要求操作系统评估活动进程的行为，会增加操作系统的软件开销</p>
+<p>对于<strong>置换范围</strong>有局部和全局两类</p>
+<ul>
+<li><strong>局部置换策略</strong>：仅在产生这次缺页的进程的驻留页中选择</li>
+<li><strong>全局置换策略</strong>：内存中所有未锁定的页都是置换目标</li>
+</ul>
+<p>置换范围和驻留集大小之间的关系：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/17.jpg" /></p>
+<p><strong>工作集策略</strong>：略</p>
+<h5 id="清除策略">清除策略</h5>
+<hr />
+<p>清除策略用于确定何时将已修改的一页写回辅存，通常有两种选择：</p>
+<ul>
+<li><strong>请求式清除</strong>：只有当一页被选择用于置换时写回</li>
+<li><strong>预约式清除</strong>：将已修改的多页在需要使用它们占据的页框之前成批写回</li>
+</ul>
+<p>完全使用一种策略都存在危险，预约式请求可能在写回后又发生更改，这样就没太大的意义，请求式则意味着写回修改页和读入新页，且读入在写回前，会降低处理器的利用率</p>
+<p>一种较好的方法是结合<strong>页缓冲技术</strong>：只清除可用于置换的页，去除了清除和置换操作之间的成对关系，被置换页可放于修改表和未修改表。修改表中的页可以周期性的成批写出，并移到未修改表中。未修改表的一页要么被访问到而回收，要么在其页框分配给另一页时被淘汰。</p>
+<h5 id="加载控制">加载控制</h5>
+<hr />
+<p>加载控制会影响到驻留在内存中的进程数量，着称之为系统并发度。如果驻留进程过少，那么所有进程都处于阻塞态概率就较大，因而许多时间花费在交换上。另一方面，进程过多，那么驻留集大小可能会不够用，会发生频繁的缺页中断，导致系统抖动</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/18.jpg" /></p>
+<p>解决上述冲突，可以使用工作集策略或PFF算法。还有人提出了 L=S 准则，通过调整系统并发度，来使缺页中断之间的平均时间等于处理一次缺页中断所需的平均时间。这样处理器的利用率达到最大。</p>
+<p>也可以采用时钟页面置换算法，监视该算法中扫描页框的指针循环缓冲区的速度。速度低于某个给定的最小阈值时，表明出现了如下的一种或两种情况：</p>
+<ol type="1">
+<li>很少发生缺页中断，因此很少需要请求指针前进</li>
+<li>对每个请求，指针扫描的平均页框数很小，表明有许多驻留页未被访问到，且均易于被置换</li>
+</ol>
+<p>在上述情况下，系统并发度可以安全的增加，另一方面，指针扫描速度超过某个阈值，表明缺页率很高，要么难以找到可置换页，说明系统并发度过高</p>
+<p>系统并发度减小时，一个或多个当前驻留进程须被挂起（换出），可根据以下标准换出进程：</p>
+<ul>
+<li><strong>最低优先级进程</strong>：实现调度策略决策，与性能无关</li>
+<li><strong>缺页中断进程</strong>：原因在于很有可能是中断任务的工作集还未驻留，因而挂起它对性能的影响最小。此外，由于它阻塞了一个一定会被阻塞的进程，并且消除了页面置换和I/On操作的开销，可以立即收到成效</li>
+<li><strong>最后一个被激活的进程</strong>：这个进程的工作集最有可能还未驻留</li>
+<li><strong>驻留集最小的进程</strong>：在将来再次装入时的代价最小，不利于局部性较小的程序</li>
+<li><strong>最大空间的进程</strong>：可在过来使用的内存中得到最多的空闲页框，使它不会很快又处于去活状态</li>
+<li><strong>具有最大剩余执行窗口的进程</strong>：类似最短处理时间优先的调度原则</li>
+</ul>
+<h2 id="第四部分-调度">第四部分 调度</h2>
+<h3 id="第九章-单处理器调度">第九章 单处理器调度</h3>
+<hr />
+<p>多道程序设计系统中，需要提高处理器处理效率，所以需要合理的调度策略以达到效率的最大化。多道程序涉及的关键就是调度，典型的调度类型有四种，处 I/O 调度外其他三种调度类型都属于处理器调度</p>
+<ul>
+<li><strong>长程调度</strong>：决定加入待执行进程池</li>
+<li><strong>中程调度</strong>：决定加入部分或全部位于内存中的进程集合</li>
+<li><strong>短程调度</strong>：决定处理器执行哪个可运行进程</li>
+<li><strong>I/O调度</strong>：决定I/O设备处理哪个进程挂起的I/O请求</li>
+</ul>
+<p>长程调度和中程调度主要由于系统并发度相关的性能驱动，这些在前面的章节就讨论过</p>
+<h4 id="处理器调度的类型">9.1 处理器调度的类型</h4>
+<p>处理器调度的目的是，<strong>以满足系统目标（响应时间、吞吐率、处理器效率）的方式，把进程分配到一个或多个处理器上执行</strong>。</p>
+<p>调度的层次结构以及进程状态和其所属调度种类如下：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_4/c_9/01.jpg" /></p>
+<p>调度决定哪个进程须等待、哪个进程能继续运行，因此会影响系统的性能。本质上说调度属于队列管理，用于在排队环境中减少延迟并优化性能。</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_4/c_9/02.jpg" /></p>
+<h5 id="长程调度">长程调度</h5>
+<hr />
+<p>长程调度决定哪个程序可以进入系统中处理，因此它控制了系统的并发度。调度程序必须决定操作系统<strong>何时</strong>才能接纳一个进程或多个进程；同时，调度程序必须决定接受哪个作业或哪些作业，并将其转变为进程。</p>
+<p>何时创建一个新进程，通常由要求的系统并发度驱动，下次允许哪个作业进入决策可基于简单的先来先服务（FCFS）原则，或者其他基于管理系统性能的根据。</p>
+<h5 id="中程调度">中程调度</h5>
+<hr />
+<p>中程调度是交换功能的一部分。典型情况下，换入决定取决于管理系统并发度的需求，在不使用虚存的系统中，存储管理也是个问题。因此换入决策将考虑换出进程的存储需求。</p>
+<h5 id="短程调度">短程调度</h5>
+<hr />
+<p>长程调度程序执行的频率相对较低。短程调度程序，也称为分派程序（dispatcher）执行最为频繁，精确的决定下次执行哪个进程。</p>
+<p>导致当前进程阻塞或抢占当前运行进程的事件发生时，调用短程调度程序，包括：</p>
+<ul>
+<li>时钟中断</li>
+<li>I/O 中断</li>
+<li>操作系统调用</li>
+<li>信号（如信号量）</li>
+</ul>
+<h4 id="调度算法">9.2 调度算法</h4>
+<h5 id="短程调度规则">短程调度规则</h5>
+<hr />
+<p>短程调度的主要目标是按照优化系统一个或多个方面行为的方式，来分配处理器时间。</p>
+<p>常用的规则可按两个维度来分类</p>
+<ol type="1">
+<li>面向用户的规则和面向系统的规则
+<ul>
+<li>面向用户的规则与单个用户或进程感知到的系统行为相关，例如交互式系统中的响应时间</li>
+<li>面向系统则注重处理器使用的效果和效率，如吞吐量</li>
+</ul></li>
+<li>是否与性能直接相关维度
+<ul>
+<li>与性能直接相关，如响应时间和吞吐量</li>
+<li>与性能无关，不易测量或者定性规则</li>
+</ul></li>
+</ol>
+<p>下表总结了几种重要的调度规则，相互依赖，不可能同时达到最优，比如提供较好的响应时间可能需要调度算法在进程间频繁切换，但也会增加系统开销，降低吞吐量。</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_4/c_9/03.jpg" /></p>
+<h5 id="优先级的使用">优先级的使用</h5>
+<hr />
+<p>可以为每个进程指定一个优先级，调度程序总是优先选择具有较高优先级的进程，纯优先级调度方案可能导致低优先级进程可能会长期处于饥饿状态。可以让一个进程的优先级随时间或执行历史而变化，例如调度算法中的<strong>反馈</strong>法</p>
+<h5 id="选择调度策略">选择调度策略</h5>
+<hr />
+<p>有以下三个参数：</p>
+<ul>
+<li><em>w</em>：目前为止在系统中的停留时间</li>
+<li><em>e</em>：目前位置花费的执行时间</li>
+<li><em>s</em>：进程所需的服务总时间</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_4/c_9/04.jpg" /></p>
+<ul>
+<li><strong>非抢占</strong>：一旦进程处于运行状态，就会不断执行直到终止。进程要么因为等待I/O，要么因为请求某些操作系统服务而阻塞自己</li>
+<li><strong>抢占</strong>：当前正运行进程可能被操作系统中断，并转换为就绪态</li>
+</ul>
+<p>与非抢占策略相比，抢占策略虽然会导致较大的开销，但能为所有进程提供较好的服务，因为它们避免了任何一个进程长时间独占处理器的情形。</p>
+<p><strong>周转时间（turnaround time）</strong>：就是驻留时间 <span class="math inline">\(T_r\)</span> ，或这一项在系统中花费的总时间（等待时间+服务时间），另外有用的是归一化周转时间，为周转时间与服务时间的比值，<strong>表示一个进程的相对延迟情况</strong>。</p>
+<p>下面是一个例子：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_4/c_9/05.jpg" /></p>
+<p>调度策略的比较如下：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_4/c_9/06.jpg" /></p>
+<p>各个策略的效率的简单度量：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_4/c_9/07.jpg" /></p>
+<h5 id="先来先服务-fcfs">先来先服务 FCFS</h5>
+<hr />
+<p>FCFS 是长进程友好的，而且相对于I/O密集进程，更有利于处理器密集型进程，其他进程，FCFS可能导致处理器和I/O设备都未得到充分利用。</p>
+<p>FCFS 自身对于单处理器系统而言并不是很有吸引力的选择，但它与优先级策略结合后通常能提供一种更有效的调度方法，如反馈。</p>
+<h5 id="轮转-round-robin">轮转 Round Robin</h5>
+<hr />
+<p>根据<strong>时间片（time slicing）</strong>周期性的产生时钟中断，出现中断后将进程放置到就绪队列中，然后基于FCFS策略选择下一个就绪作业运行。</p>
+<p>轮转法对处理器密集型进程和I/O密集进程的处理不同。处理器密集型进程在执行过程中通常会使用大部分处理器时间，导致I/O密集型进程性能降低，使用I/O设备低效，响应时间变化较大。</p>
+<p>虚拟轮转法，这种方法可以避免上述不公平性，此方法的不同之处在于，接触了I/O阻塞的进程都会转移到一个FCFS辅助队列中。进行调度决策时，辅助队列中的决策优先于就绪队列中的进程，这种方法在公平性方面确实优于轮转法</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_4/c_9/08.jpg" /></p>
+<h5 id="最短进程优先-shortest-process-next-spn">最短进程优先 （Shortest Process Next， SPN）</h5>
+<hr />
+<p>SPN是非抢占的，短进程友好的，SPN的难点在于需要直到或至少需要估计每个进程所需的处理时间。对于批处理作业，系统要求程序员给出估计值，若执行时间远高于实际运行时间，系统可能终止该作业。实际中操作系统可为每个进程保留一个运行平均值，计算方法如下： <span class="math display">\[
+S_{n+1} = \frac{1}{n}T_n+\frac{n-1}{n}S_n \\
+T_i:第i个实例的处理器执行时间 \\
+S_i:第i个实例的预测值
+\]</span> 这属于<strong>指数平均法</strong>的一种，SPN的风险在于，长进程可能饥饿。</p>
+<h5 id="最短剩余时间shortest-remaining-timesrt">最短剩余时间（Shortest Remaining Time，SRT）</h5>
+<hr />
+<p>相当于是在SPN中增加了抢占机制的策略，和SPN一样，调度程序在执行选择函数的时候，必须具备关于处理时间的估计，并且具有长进程饥饿的风险。</p>
+<p>SRT不像FCFS那样偏向长进程，也不像轮转法那样产生额外的中断，所以降低了开销。但是它必须记录过去的服务时间，又增加了开销，对于SPN，从周转时间上看，SRT性能更好，因为相当于一个正在运行的长作业而言，短作业可以立即选择执行。</p>
+<h5 id="最高响应比优先-highest-response-ratio-nexthrrn">最高响应比优先 （Highest Response Ratio Next，HRRN）</h5>
+<hr />
+<p>调度规则见之前的对比图。HRRN偏向短作业（小分母产生大比值），长进程由于得不到服务等待的时间会不断增加，因此比值变大。所以是比较公平的。</p>
+<h5 id="反馈法">反馈法</h5>
+<hr />
+<p>调度基于抢占原则（按时间片）并使用动态优先级机制。一个进程首次进入系统时，会放在<em>RQ0</em>中当它首次被抢占并返回就绪态时，会放在<em>RQ1</em>中，在随后的时间内，每当它被抢占就降级一次直到最低级。因此，新到的进程和短进程会优于老进程和长进程。这种方法称为<strong>多级反馈（Multilevel Feedback）</strong>。</p>
+<p>但存在一个问题，可能会造成长进程的饥饿。可以按以下办法解决：</p>
+<ol type="1">
+<li>给低优先级的进程更多的时间片，一般而言，从<em>RQi</em>中调度的进程允许执行 <span class="math inline">\(q=2^i\)</span> 时间后被抢占</li>
+<li>当一个进程在其队列等待服务的时间超过一定时间后，就把它提升到优先级高的队列中</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_4/c_9/09.jpg" /></p>
+<h5 id="性能比较">性能比较</h5>
+<hr />
+<p>略</p>
+<h5 id="公平共享调度-fair-share-scheduling">公平共享调度 （Fair-Share Scheduling ）</h5>
+<hr />
+<p>公平共享调度考虑了<strong>进程组</strong>调度的基本原则。每个用户（进程组）被指定了某种类型的权值，此<strong>权值定义了用户对系统资源的共享，而且是作为在所有使用资源中所占的比例来体现的，如处理器资源</strong>。</p>
+<p>调度是根据优先级进行的，它会考虑三方面因素：</p>
+<ol type="1">
+<li>进程的基本优先级</li>
+<li>近期使用处理器的情况</li>
+<li>进程所在组近期使用处理器的情况</li>
+</ol>
+<p>优先级数值越大，所表示的优先级越低，适用于组<em>k</em>中进程<em>j</em>的公式如下：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_4/c_9/10.jpg" /></p>
+<h2 id="第五部分-输入输出和文件">第五部分 输入/输出和文件</h2>
+<h4 id="第十一章-io-管理和磁盘调度">第十一章 I/O 管理和磁盘调度</h4>
+<hr />
+<h4 id="io-设备">11.1 I/O 设备</h4>
+<hr />
+<p>计算机系统中参与I/O的外设可以分为以下三类：</p>
+<ul>
+<li><strong>人可读</strong>：适用于计算机用户间的交互，如打印机和终端</li>
+<li><strong>机器可读</strong>：适用于电子设备通信，如磁盘驱动器</li>
+<li><strong>通信</strong>：适用于远程设备通信，如调制解调器</li>
+</ul>
+<p>其中主要差别包括：</p>
+<ul>
+<li><strong>数据传送速率</strong></li>
+<li><strong>应用</strong></li>
+<li><strong>控制的复杂性</strong></li>
+<li><strong>传送单位</strong>：字节流或者字符流的形式传送，也可按块</li>
+<li><strong>数据表示</strong>：不同的数据编码方式</li>
+<li><strong>错误条件</strong></li>
+</ul>
+<h4 id="io-功能的组织">11.2 I/O 功能的组织</h4>
+<hr />
+<p>执行I/O的三种技术：</p>
+<ul>
+<li><strong>程序控制I/O</strong>：无中断</li>
+<li><strong>中断驱动I/O</strong>：中断</li>
+<li><strong>直接存储器访问</strong>：中断，一个DMA模块控制内存和I/O模块之间的数据交换。传送一块数据，处理器给DMA模块发送请求，当整个模块传送结束后，它才被中断，<strong>只有传送的开始和结束才会使用处理器</strong></li>
+</ul>
+<p>可选的DMA配置如下：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_11/01.jpg" /></p>
+<h4 id="操作系统设计问题">11.3 操作系统设计问题</h4>
+<hr />
+<p>两个最重要的目标：</p>
+<ul>
+<li><strong>效率</strong>：大多数I/O设备的速度非常低，进程交换本身就是I/O操作</li>
+<li><strong>通用性</strong>：需要从两个方面统一：一是处理器看待I/O设备的方式，二是操作系统管理I/O设备和I/O操作的方式</li>
+</ul>
+<h5 id="io-功能的逻辑结构">I/O 功能的逻辑结构</h5>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_11/02.jpg" /></p>
+<h4 id="io-缓冲">11.4 I/O 缓冲</h4>
+<p>为避免多余的开销和低效操作，在输入请求发出前就开始执行输入传送，并且在输出请求发出一段时间后才开始执输出传送，这样的技术称为<strong>缓冲</strong>。</p>
+<p>两类I/O设备：</p>
+<ul>
+<li><strong>面向块</strong>：将信息保存在块中，块的大小通常是固定的</li>
+<li><strong>面向流</strong>：设备以字节流的方式输入输出数据</li>
+</ul>
+<p>I/O缓冲方案：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_11/03.jpg" /></p>
+<p>缓冲的作用：</p>
+<p><strong>缓冲是用来平滑I/O需求的峰值的一种技术</strong>，但在进程的平均需求大于I/O设备的服务能力时，再多的缓冲也无法让I/O设备与进程一直并驾齐驱。</p>
+<p>在多道程序设计中，当存在多种I/O活动和多种进程活动时，<strong>缓冲是提高操作系统效率和单个进程性能的一种方法</strong></p>
+<h4 id="磁盘调度">11.5 磁盘调度</h4>
+<h5 id="磁盘性能参数">磁盘性能参数</h5>
+<hr />
+<p>磁盘驱动器工作时，磁盘以某个恒定的速度旋转，为了读或写，磁头必须定位于指定磁道和该磁道中指定扇区的开始处。磁头定位到磁道所需要的时间称为<strong>寻道时间</strong>，之后，磁盘控制器开始等待直到适当的扇区旋转到磁头处，这段时间称为<strong>旋转延迟</strong>，<strong>寻道时间和旋转延迟的总和为存取时间</strong>，这是达到读或写位置所需要的时间，之后便开始执行读操作或写操作，这段时间就是<strong>传输时间</strong>。</p>
+<p>总平均存取时间包括上面的三个，可用公式表示 <span class="math display">\[
+T_a = T_s + \frac{1}{2r}+\frac{b}{rN} \\
+T_s 为平均寻道时间，b表示传输的字节数，N表示一个磁道的字节数，r表示旋转速度（转/秒）
+\]</span> 时序比较的经典例子：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_11/04.jpg" /></p>
+<h5 id="磁盘调度策略">磁盘调度策略</h5>
+<hr />
+<p>磁盘调度算法及其比较：</p>
+<p>访问的磁道序列为：55、58、39、18、90、160、150、38、184</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_11/05.jpg" /></p>
+<p>除此之外，还有<strong>基于优先级（PRI）</strong>和<strong>后进先出</strong>的算法</p>
+<p><strong>基于优先级</strong>并不会优化磁盘的利用率，但能满足操作系统的其他目标。通常较短的批作业和交互作业的优先级较高，而较长计算时间的长作业优先级较低。对于数据库系统这类策略往往使得性能较差。</p>
+<p><strong>后进先出</strong>在事务处理系统中，由于顺序读取文件，可减少磁壁的运动，可以提高吞吐量并缩短队列长度，但可能会导致饥饿。</p>
+<h4 id="raid">11.6 RAID</h4>
+<p>略</p>
+<h4 id="磁盘高速缓存">11.7 磁盘高速缓存</h4>
+<p>磁盘高速缓存是内存中为磁盘扇区设置的一个缓冲区，包含磁盘中某些扇区的副本</p>
+<p>进程从磁盘高速缓存中获取数据可以采取两种方式</p>
+<ol type="1">
+<li>在内存中把这一块数据缓存传送到用户进程的存储空间中</li>
+<li>简单使用一个共享内存，传送指向磁盘告诉缓冲中响应的指针</li>
+</ol>
+<p>后一种方法节省了内存到内存的传输时间</p>
+<p>对于<strong>置换策略</strong>可以以下两种：</p>
+<ul>
+<li><strong>最近最少使用（LRU）</strong>：置换在高速缓存中未被访问时间最长的块，可用一个栈完成</li>
+<li><strong>最不常使用（LFU）</strong>：置换集合中访问次数最少的块</li>
+</ul>
+<p>简单的LFU不能判断那些整体很少访问但是近期访问频繁的块，可以使用LFU的改进版</p>
+<p>使用分区，新区老区（中间区），对不同区的对应措施不同</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_11/06.jpg" /></p>
+<h3 id="第十二章-文件管理">第十二章 文件管理</h3>
+<p>典型情况下，文件管理系统由系统实用程序组成，它们可以作为具有特权的应用程序来运行。一般来说，整个文件管理系统都被当做操作系统的一部分</p>
+<h4 id="概述">12.1 概述</h4>
+<h5 id="文件和文件系统">文件和文件系统</h5>
+<hr />
+<p>文件有以下理想的属性：</p>
+<ul>
+<li>长期存在</li>
+<li>可在进程间共享</li>
+<li>结构</li>
+</ul>
+<p>文件的操作如下：</p>
+<ul>
+<li>创建</li>
+<li>删除</li>
+<li>打开</li>
+<li>关闭</li>
+<li>读</li>
+<li>写</li>
+</ul>
+<h5 id="文件结构">文件结构</h5>
+<hr />
+<ul>
+<li><strong>域</strong>：基本的数据单元，一个域包含一个值，域的长度是定长或者变长的，取决于文件的设计</li>
+<li><strong>记录</strong>：是一组相关域的集合，可视为应用程序的一个单元</li>
+<li><strong>文件</strong>：一组相似记录的集合，被用户和应用程序视为一个实体，并通过文件名访问</li>
+<li><strong>数据库</strong>：一组相关数据的集合，数据元素间存在着明确的关系，且可供不同应用程序使用，数据库管理系统独立于操作系统</li>
+</ul>
+<p>文件系统架构：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_12/01.jpg" /></p>
+<p>文件管理的要素：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_12/02.jpg" /></p>
+<p>文件管理系统作为一个单独的系统实用程序和操作系统关注的是不同两方面的内容，之间的共同点是记录的处理。</p>
+<h4 id="文件组织和访问">12.2 文件组织和访问</h4>
+<p>在选择文件组织，有以下重要原则：</p>
+<ul>
+<li>快速修改</li>
+<li>易于修改</li>
+<li>节约存储空间</li>
+<li>维护简单</li>
+<li>可靠性</li>
+</ul>
+<p>这些原则的优先级取决于将要使用这些文件的应用程序</p>
+<p>基本文件组织：</p>
+<ul>
+<li><strong>堆</strong>：<strong>是简单的文件组织形式</strong>，数据按它们到达的顺序被收集，每条记录由一串数据组成。堆的目的仅是积累大量的数据并保存，对文件没有结构，使用穷举查找的方式进行，当数据难以组织或在初期前采集数据时会用到。</li>
+<li><strong>顺序文件</strong>：<strong>是最常用的文件组织形式</strong>，每条记录都使用固定的格式，所有记录具有相同的长度，并由相同数量、长度固定的域按特定顺序组成。每条记录的第一个域通常是<strong>关键域</strong>，唯一的标识这条记录，性能很差，也可组织成链表的方式。</li>
+<li><strong>索引顺序文件</strong>：用于克服顺序文件的缺点，增加了两个特征：用于支持随机访问的文件索引和溢出文件。索引顺序文件极大的减少了访问单条记录的时间，同时保留了文件的顺序特性，多级索引可以提供更有效的访问</li>
+<li><strong>索引文件</strong>：索引顺序文件保留了顺序文件的一个限制：基于文件的一个域进行处理。当需要基于其他属性而非关键域查找一条记录时，这两种形式的顺序文件都无法胜任。索引文件采取多索引的结构，摒弃了顺序性和关键字的概念，只能通过索引来访问记录。对记录的位置不再有限制，还可使用长度可变的记录。</li>
+<li><strong>直接或散列文件</strong>：直接访问磁盘中任何一个地址已知块的能力。直接文件使用基于关键字的散列，直接文件常在要求快速访问时使用，且记录的长度是固定的，通常一次访问一条记录。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_12/03.jpg" /></p>
+<h4 id="文件目录">12.4 文件目录</h4>
+<p>目录包含关于文件的信息，如属性、位置、所有权，都由操作系统管理。</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_12/04.jpg" /></p>
+<p>目录的结构通常是树状结构：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_12/05.jpg" /></p>
+<h4 id="文件共享">12.5 文件共享</h4>
+<p>文件共享会产生两个问题：<strong>访问权限</strong>和<strong>同时访问的管理</strong>。</p>
+<p>访问权限有如下：</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_12/06.jpg" /></p>
+<p>话可以按面向用户分组：特定用户，用户组，全部</p>
+<p>对于同时访问，必须解决互斥和死锁问题</p>
+<h4 id="记录组块">12.6 记录组块</h4>
+<p>记录是访问结构化文件的逻辑单元，而块是与辅存进行I/O操作的基本单位，为执行I/O，记录必须组织成块。</p>
+<p>对于给定的块大小，有三种组块方法：</p>
+<ul>
+<li><strong>定长组块</strong>：使用定长的记录，且若干完整的记录保存在一个块中，块末尾可能会有未使用空间，称为内部碎片</li>
+<li><strong>变长跨越式组块</strong>：使用变长的记录，并紧缩到块中，块中不存在未使用的空间，某些记录会跨越两个块，使用指针连接</li>
+<li><strong>变长非跨越式组块</strong>：使用变长的记录，但不采用跨越方式，在大多数块中都会有未使用的空间</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_12/07.jpg" /></p>
+<p>定长组块是记录定产顺序文件最常用的方式，变长跨越式存储效率高，但难以实现。跨越两个块需要两次I/O操作，文件很难修改。变长非跨越式浪费空间，且存在记录大小不能超过块大小的限制。</p>
+<h4 id="辅存管理">12.7 辅存管理</h4>
+<p>在辅存中，文件是由许多块组成。操作系统负责为文件分配块。</p>
+<h5 id="文件分配">文件分配</h5>
+<hr />
+<ul>
+<li><strong>预分配</strong>：在发出创建文件的请求时，声明该文件的最大尺寸</li>
+<li><strong>动态分配</strong>：只有在需要的时候才给文件分配空间</li>
+</ul>
+<p>对于分配给文件的<strong>分区大小</strong>，我们需要考虑下面四项内容：</p>
+<ol type="1">
+<li>邻近空间可以提高性能</li>
+<li>数量较多的小分区会增加</li>
+<li>使用固定大小的分区可以简化空间的再分配</li>
+<li>使用可变大小的分区或固定大小的小分区，可减少超额分配导致未使用存储空间的浪费</li>
+</ol>
+<p>有以下两个选择：</p>
+<ul>
+<li><strong>大小可变的大规模连续分区</strong>：大小可变避免了浪费，且会使文件分配表较小，但着会导致空间很难再次利用</li>
+<li><strong>块</strong>：小的固定分区能提供更大的灵活性，但为了分配，它们可能需要较大的表或更复杂的结构</li>
+</ul>
+<p>选择策略有：</p>
+<ul>
+<li>首次适配</li>
+<li>最佳适配</li>
+<li>最近适配</li>
+</ul>
+<h5 id="文件分配方法">文件分配方法</h5>
+<hr />
+<p><strong>连续分配</strong>：创建文件时，给文件分配一组连续的块。需要在创建文件时声明文件的大小，会出现外部碎片，所以需要紧缩算法</p>
+<p><strong>链式分配</strong>：链式分配基于单个块，使用指针建立联系，不必担心外部碎片的出现，但是局部性原理不再适用，为了克服这个问题，有些系统会周期性的合并文件</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_12/08.jpg" /></p>
+<p><strong>索引分配</strong>：解决了连续分配和链式分配中的许多问题。每个问价在文件分配表中都有一个一级的索引，分配给该文件的每个分区在索引中都有一个表项。</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_12/09.jpg" /></p>
+<h5 id="空闲空间管理">空闲空间管理</h5>
+<p>除了文件分配表外，还需要<strong>磁盘分配表（Disk Allocation Table，DAT）</strong></p>
+<ul>
+<li><strong>位表</strong>：使用一个向量值00111000标识空闲块，通过它能相对容易的找到一个或一组连续的空闲块，而且很小，但其长度仍然很长。</li>
+<li><strong>链接空闲区</strong>：使用指向每个空闲区的指针和它们的长度值，链接在一起，开销很小。使用一段时间后，会出现许多碎片。删除一个由许多碎片组成的文件也非常耗时</li>
+<li><strong>索引</strong>：索引方法把空闲空间视为一个文件，并使用一个索引表，索引基于可变大小的分区而非块</li>
+<li><strong>空闲块列表</strong>：每块都指定一个序号，所有空闲块序号保存在磁盘的一个保留区中。</li>
+</ul>
+<p><strong>卷</strong>：一组分配在可寻址的扇区的集合，操作系统或应用程序用卷来存储数据。卷中的扇区在物理存储设备上不需要连续，只需要对操作系统或应用程序来说连续即可。卷可能由更小的卷合并或组合而成。最简单的情况下，一个单独的磁盘就是一个卷，通常一个磁盘会分为几个分区，每个分区都作为一个单独的卷来工作。</p>
+
+    </div>
+
+    
+    
+    
+      
+
+
+      <footer class="post-footer">
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/24/2020-02-24-PAT-Advanced-1003/" rel="prev" title="PAT Advanced 1003 Emergency（最短路）">
+      <i class="fa fa-chevron-left"></i> PAT Advanced 1003 Emergency（最短路）
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/01/2020-02-29-Leetcode84/" rel="next" title="Leetcode84 柱状图中最大的矩形">
+      Leetcode84 柱状图中最大的矩形 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第二部分-进程"><span class="nav-text">第二部分 进程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第三章-进程描述和控制"><span class="nav-text">第三章 进程描述和控制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#进程的几个定义"><span class="nav-text">1. 进程的几个定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基本元素"><span class="nav-text">2. 基本元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程控制块-pcb"><span class="nav-text">3. 进程控制块 （PCB）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程状态"><span class="nav-text">4. 进程状态</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#两状态模型"><span class="nav-text">两状态模型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#五状态模型"><span class="nav-text">五状态模型</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程的挂起"><span class="nav-text">5. 进程的挂起</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#进程挂起的原因"><span class="nav-text">进程挂起的原因</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程创建和终止"><span class="nav-text">6. 进程创建和终止</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#操作系统控制结构"><span class="nav-text">7. 操作系统控制结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程控制结构"><span class="nav-text">8. 进程控制结构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#pcb-进程控制块"><span class="nav-text">PCB 进程控制块</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#pcb-的作用"><span class="nav-text">PCB 的作用</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程控制"><span class="nav-text">9. 进程控制</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#执行模式"><span class="nav-text">执行模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#内核的典型功能"><span class="nav-text">内核的典型功能</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程创建-具体过程"><span class="nav-text">10. 进程创建 具体过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程切换"><span class="nav-text">11. 进程切换</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#何时切换进程"><span class="nav-text">何时切换进程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#模式切换"><span class="nav-text">模式切换</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#进程切换-1"><span class="nav-text">进程切换</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#操作系统的执行"><span class="nav-text">12. 操作系统的执行</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#无进程内核"><span class="nav-text">无进程内核</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#在用户进程内运行"><span class="nav-text">在用户进程内运行</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#基于进程的操作系统"><span class="nav-text">基于进程的操作系统</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第四章-线程"><span class="nav-text">第四章 线程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#进程和线程"><span class="nav-text">1. 进程和线程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#进程特点"><span class="nav-text">进程特点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#多线程"><span class="nav-text">多线程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#线程的功能"><span class="nav-text">线程的功能</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程分类"><span class="nav-text">2. 线程分类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#用户级ult"><span class="nav-text">用户级（ULT）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#内核级线程klt"><span class="nav-text">内核级线程（KLT）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#混合"><span class="nav-text">混合</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多核和多线程"><span class="nav-text">3、多核和多线程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第五章-并发性互斥和同步"><span class="nav-text">第五章 并发性：互斥和同步</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#并发的原理"><span class="nav-text">1、并发的原理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#并发处理的问题难点"><span class="nav-text">并发处理的问题（难点)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#竞争条件"><span class="nav-text">竞争条件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#进程的交互"><span class="nav-text">进程的交互</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#互斥的要求"><span class="nav-text">互斥的要求</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#互斥硬件的支持"><span class="nav-text">2、互斥：硬件的支持</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#中断禁用"><span class="nav-text">中断禁用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#专用机器指令"><span class="nav-text">专用机器指令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#机器指令方法的特点"><span class="nav-text">机器指令方法的特点</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#信号量"><span class="nav-text">3、信号量</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#互斥"><span class="nav-text">互斥</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#生产者消费者问题"><span class="nav-text">生产者消费者问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#信号量的实现"><span class="nav-text">信号量的实现</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#管程"><span class="nav-text">4、管程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#管程的特点"><span class="nav-text">管程的特点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#函数"><span class="nav-text">函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#管程的结构"><span class="nav-text">管程的结构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#例子重写消费者生产者问题"><span class="nav-text">例子：重写消费者生产者问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#管程的通知和广播"><span class="nav-text">管程的通知和广播</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#消息传递"><span class="nav-text">5、消息传递</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#同步"><span class="nav-text">同步</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#寻址"><span class="nav-text">寻址</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#消息格式"><span class="nav-text">消息格式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#排队原则"><span class="nav-text">排队原则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#互斥-1"><span class="nav-text">互斥</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#读者写者问题"><span class="nav-text">6、读者写者问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第六章-并发死锁和饥饿"><span class="nav-text">第六章 并发：死锁和饥饿</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#死锁原理"><span class="nav-text">6.1 死锁原理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#资源的分类"><span class="nav-text">资源的分类：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#资源分配图"><span class="nav-text">资源分配图</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#死锁的条件"><span class="nav-text">死锁的条件</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#死锁预防"><span class="nav-text">6.2 死锁预防</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#互斥-2"><span class="nav-text">互斥</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#占有且等待"><span class="nav-text">占有且等待</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#不可抢占"><span class="nav-text">不可抢占</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#循环等待"><span class="nav-text">循环等待</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#死锁避免"><span class="nav-text">6.3 死锁避免</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#进程启动拒绝"><span class="nav-text">进程启动拒绝</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#资源分配拒绝"><span class="nav-text">资源分配拒绝</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#死锁检测"><span class="nav-text">6.4 死锁检测</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#死锁检测算法"><span class="nav-text">死锁检测算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#死锁恢复"><span class="nav-text">死锁恢复</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一种综合的死锁策略"><span class="nav-text">6.5 一种综合的死锁策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#哲学家就餐问题"><span class="nav-text">6.6 哲学家就餐问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三部分-内存"><span class="nav-text">第三部分 内存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第七章-内存管理"><span class="nav-text">第七章 内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#内存管理的需求"><span class="nav-text">7.1 内存管理的需求</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#重定位"><span class="nav-text">重定位</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#保护"><span class="nav-text">保护</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#共享"><span class="nav-text">共享</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#逻辑组织"><span class="nav-text">逻辑组织</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#物理组织"><span class="nav-text">物理组织</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内存分区"><span class="nav-text">7.2 内存分区</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#固定分区"><span class="nav-text">固定分区</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#动态分区"><span class="nav-text">动态分区</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#伙伴系统"><span class="nav-text">伙伴系统</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#重定位-1"><span class="nav-text">重定位</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分页"><span class="nav-text">7.3 分页</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分段"><span class="nav-text">7.4 分段</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第八章-虚拟内存"><span class="nav-text">第八章 虚拟内存</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#硬件和控制结构"><span class="nav-text">8.1 硬件和控制结构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#局部性和虚拟内存"><span class="nav-text">局部性和虚拟内存</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#分页-1"><span class="nav-text">分页</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#分段-1"><span class="nav-text">分段</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#段页式"><span class="nav-text">段页式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#操作系统软件"><span class="nav-text">8.2 操作系统软件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#读取策略"><span class="nav-text">读取策略</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#放置策略"><span class="nav-text">放置策略</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#置换策略"><span class="nav-text">置换策略</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#驻留集管理"><span class="nav-text">驻留集管理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#清除策略"><span class="nav-text">清除策略</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#加载控制"><span class="nav-text">加载控制</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第四部分-调度"><span class="nav-text">第四部分 调度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第九章-单处理器调度"><span class="nav-text">第九章 单处理器调度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#处理器调度的类型"><span class="nav-text">9.1 处理器调度的类型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#长程调度"><span class="nav-text">长程调度</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#中程调度"><span class="nav-text">中程调度</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#短程调度"><span class="nav-text">短程调度</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调度算法"><span class="nav-text">9.2 调度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#短程调度规则"><span class="nav-text">短程调度规则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#优先级的使用"><span class="nav-text">优先级的使用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#选择调度策略"><span class="nav-text">选择调度策略</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#先来先服务-fcfs"><span class="nav-text">先来先服务 FCFS</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#轮转-round-robin"><span class="nav-text">轮转 Round Robin</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#最短进程优先-shortest-process-next-spn"><span class="nav-text">最短进程优先 （Shortest Process Next， SPN）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#最短剩余时间shortest-remaining-timesrt"><span class="nav-text">最短剩余时间（Shortest Remaining Time，SRT）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#最高响应比优先-highest-response-ratio-nexthrrn"><span class="nav-text">最高响应比优先 （Highest Response Ratio Next，HRRN）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#反馈法"><span class="nav-text">反馈法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#性能比较"><span class="nav-text">性能比较</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#公平共享调度-fair-share-scheduling"><span class="nav-text">公平共享调度 （Fair-Share Scheduling ）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第五部分-输入输出和文件"><span class="nav-text">第五部分 输入&#x2F;输出和文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第十一章-io-管理和磁盘调度"><span class="nav-text">第十一章 I&#x2F;O 管理和磁盘调度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#io-设备"><span class="nav-text">11.1 I&#x2F;O 设备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#io-功能的组织"><span class="nav-text">11.2 I&#x2F;O 功能的组织</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#操作系统设计问题"><span class="nav-text">11.3 操作系统设计问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#io-功能的逻辑结构"><span class="nav-text">I&#x2F;O 功能的逻辑结构</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#io-缓冲"><span class="nav-text">11.4 I&#x2F;O 缓冲</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#磁盘调度"><span class="nav-text">11.5 磁盘调度</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#磁盘性能参数"><span class="nav-text">磁盘性能参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#磁盘调度策略"><span class="nav-text">磁盘调度策略</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#raid"><span class="nav-text">11.6 RAID</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#磁盘高速缓存"><span class="nav-text">11.7 磁盘高速缓存</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第十二章-文件管理"><span class="nav-text">第十二章 文件管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概述"><span class="nav-text">12.1 概述</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#文件和文件系统"><span class="nav-text">文件和文件系统</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#文件结构"><span class="nav-text">文件结构</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件组织和访问"><span class="nav-text">12.2 文件组织和访问</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件目录"><span class="nav-text">12.4 文件目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件共享"><span class="nav-text">12.5 文件共享</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#记录组块"><span class="nav-text">12.6 记录组块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#辅存管理"><span class="nav-text">12.7 辅存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#文件分配"><span class="nav-text">文件分配</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#文件分配方法"><span class="nav-text">文件分配方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#空闲空间管理"><span class="nav-text">空闲空间管理</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Joke-Lin"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Joke-Lin</p>
+  <div class="site-description" itemprop="description">Learing and Using</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2pva2UtbGlu" title="Github → https:&#x2F;&#x2F;github.com&#x2F;joke-lin"><i class="fa fa-fw fa-github"></i>Github</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3Blb3BsZS9qb2tlci04OC02Mi01Ny9hY3Rpdml0aWVz" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;joker-88-62-57&#x2F;activities"><i class="fa fa-fw fa-globe"></i>知乎</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwOTUzMjgx" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_40953281"><i class="fa fa-fw fa-globe"></i>CSDN</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOmpva2UtbGluQHFxLmNvbQ==" title="E-Mail → mailto:joke-lin@qq.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</span>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Friends
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9taWxreS13LmdpdGh1Yi5pbw==" title="https:&#x2F;&#x2F;milky-w.github.io">Milky Way</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9sZXN0ZXJ0YW4uaW5r" title="https:&#x2F;&#x2F;lestertan.ink">Lester</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9oZXJpeHRoLnRvcA==" title="https:&#x2F;&#x2F;herixth.top">Herixth</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cDovL2NvbGluLWpheS5jbi8=" title="http:&#x2F;&#x2F;colin-jay.cn&#x2F;">Colin Jay</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cDovL3llei1saXUuZ2l0aHViLmlvLw==" title="http:&#x2F;&#x2F;yez-liu.github.io&#x2F;">yez-liu</span>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Joke-Lin</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">Symbols count total: </span>
+    <span title="Symbols count total">135k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">Reading time total &asymp;</span>
+    <span title="Reading time total">2:03</span>
+</div>
+  <div class="powered-by">Powered by <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 24136,
+      el    : 'wpac-rating',
+      color : 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '64f708c73ee01327eaff',
+      clientSecret: 'fe1991c81ffd1b32cc8aec2ab7e1e7a1f79957ab',
+      repo        : 'Joke-Lin.github.io',
+      owner       : 'Joke-Lin',
+      admin       : ['Joke-Lin'],
+      id          : '4455abd6c6285ce501a6037ea91fe73c',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
