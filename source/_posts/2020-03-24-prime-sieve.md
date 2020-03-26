@@ -16,11 +16,9 @@ categories:
 
 直接使用定义解决的方案。
 
-<!-- more -->
-
 ```c++
 bool isPrime(int n) {
-    for(int i = 2;i < sqrt(n);i++) {
+    for(int i = 2;i <= sqrt(n);i++) {
         if(n % i == 0) {
             return false;
         }

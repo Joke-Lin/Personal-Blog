@@ -128,8 +128,9 @@ menu:
   tags: /tags/ || tags
   categories: /categories/ || th
   archives: /archives/ || archive
+  RSS: /atom.xml || rss
   #schedule: /schedule/ || calendar
-  #sitemap: /sitemap.xml || sitemap
+  sitemap: /sitemap.xml || sitemap
   #commonweal: /404/ || heartbeat
 
 # Enable / Disable menu icons / item badges.
@@ -215,8 +216,8 @@ links:
   Milky Way: https://milky-w.github.io
   Lester: https://lestertan.ink
   Herixth: https://herixth.top
-  Colin Jay: http://colin-jay.cn/
-  yez-liu: http://yez-liu.github.io/
+  Colin Jay: https://colin-jay.cn/
+  yez-liu: https://yez-liu.github.io/
 
 # Table of Contents in the Sidebar
 # Front-matter variable (unsupport wrap expand_all).
@@ -299,7 +300,7 @@ follow_me:
 # Related popular posts
 # Dependencies: https://github.com/tea3/hexo-related-popular-posts
 related_posts:
-  enable: true
+  enable: false
   title: # Custom header, leave empty to use the default one
   display_in_home: true
   params:
@@ -491,7 +492,7 @@ exturl: true
 
 # Google Webmaster tools verification.
 # See: https://www.google.com/webmasters
-google_site_verification:
+google_site_verification: google6dc90bbfe80e28c9.html
 
 # Bing Webmaster tools verification.
 # See: https://www.bing.com/webmaster
@@ -503,7 +504,7 @@ yandex_site_verification:
 
 # Baidu Webmaster tools verification.
 # See: https://ziyuan.baidu.com/site
-baidu_site_verification: bAeF0gkeMw
+baidu_site_verification: 1Zn74mB0Mh
 
 # Enable baidu push so that the blog will push the url to baidu automatically which is very helpful for SEO.
 baidu_push: true
@@ -680,7 +681,7 @@ gitalk:
 # Star rating support to each article.
 # To get your ID visit https://widgetpack.com
 rating:
-  enable: false
+  enable: true
   id:     24136 # <app_id>
   color:  fc6423
 
