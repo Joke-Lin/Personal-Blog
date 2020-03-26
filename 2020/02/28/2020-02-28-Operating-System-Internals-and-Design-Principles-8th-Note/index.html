@@ -9,7 +9,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
-  <meta name="baidu-site-verification" content="bAeF0gkeMw">
+  <meta name="baidu-site-verification" content="1Zn74mB0Mh">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -1598,8 +1598,6 @@ T_s 为平均寻道时间，b表示传输的字节数，N表示一个磁道的�
     
     
     
-      
-
         
 
 <div>
@@ -1621,6 +1619,11 @@ T_s 为平均寻道时间，b表示传输的字节数，N表示一个磁道的�
       <footer class="post-footer">
 
         
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
 
 
         
@@ -1883,6 +1886,26 @@ T_s 为平均寻道时间，b表示传输的字节数，N表示一个磁道的�
 
 
 
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 24136,
+      el    : 'wpac-rating',
+      color : 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
 
   
 <script src="/js/local-search.js"></script>

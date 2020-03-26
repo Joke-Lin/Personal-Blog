@@ -9,7 +9,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
-  <meta name="baidu-site-verification" content="bAeF0gkeMw">
+  <meta name="baidu-site-verification" content="1Zn74mB0Mh">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -485,20 +485,6 @@ x &amp; y &amp; 1
     
     
     
-      
-  <div class="popular-posts-header">Related Posts</div>
-  <ul class="popular-posts">
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2018\09\18\2018-09-18-youdao\" rel="bookmark">Python 爬取有道翻译</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2019\05\03\2019-05-03-CYK\" rel="bookmark">CYK Algorithm</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2020\03\12\2020-03-12-Matplotlib-DirectlyOutput-Img\" rel="bookmark">Matplotlib 图像直接导出为 ndarray</a></div>
-    </li>
-  </ul>
-
         
 
 <div>
@@ -524,6 +510,11 @@ x &amp; y &amp; 1
           </div>
 
         
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
 
 
         
@@ -786,6 +777,26 @@ x &amp; y &amp; 1
 
 
 
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 24136,
+      el    : 'wpac-rating',
+      color : 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
 
   
 <script src="/js/local-search.js"></script>
