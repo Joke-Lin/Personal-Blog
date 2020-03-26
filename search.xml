@@ -34,6 +34,29 @@
       </tags>
   </entry>
   <entry>
+    <title>PAT Advanced 1014 Waiting in Line（优先队列）</title>
+    <url>/2020/03/21/2020-03-24-PAT-Advanced-1014/</url>
+    <content><![CDATA[<h2 id="题目描述">题目描述</h2>
+<p><span class="exturl" data-url="aHR0cHM6Ly9waW50aWEuY24vcHJvYmxlbS1zZXRzLzk5NDgwNTM0MjcyMDg2ODM1Mi9wcm9ibGVtcy85OTQ4MDU0OTgyMDc5MTE5MzY=" title="https://pintia.cn/problem-sets/994805342720868352/problems/994805498207911936">题目地址<i class="fa fa-external-link"></i></span></p>
+<p>之前一直错还是题目看错，英文题目还是要注意啊。</p>
+<p>17：00后的不予服务，只要在17：00之前接受服务的都可以，不用管截止时间。</p>
+<a id="more"></a>
+<h2 id="基本思路">基本思路</h2>
+<p>题目本身不难，理清楚过程即可。（他题目有些也迷）</p>
+<p>给出了N个窗口以及最大等待区M，K个顾客。相当于本来就有K个人在排队，然后每个人依次选窗口当等待区有空位的适合。等待区总共可以容纳NM个人，所以最前面的NM个人依次排满等待区即可（按照题目定的规则），当等待区满的时候，只要有一个人结束服务，那在等待区外排队的人就马上可以塞进去一个。</p>
+<p>所以我们需要知道的就是最早结束服务的人，这就可以用到优先队列了，维护结束服务的时间。时间越早优先级越高。每当他进入等待区，就push到优先队列中。</p>
+<p>代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="comment">//#define LOCAL</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1001</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Customer</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> win_index;</span><br><span class="line">    <span class="keyword">int</span> end_time;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> Customer&amp; other) <span class="keyword">const</span> &#123;</span><br><span class="line">        <span class="comment">// 同时离开 选择编号小的</span></span><br><span class="line">        <span class="keyword">return</span> end_time != other.end_time ? end_time &gt; other.end_time : win_index &gt; other.win_index;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;customers[maxn];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> cost_time[maxn];    <span class="comment">// 用户的花费时间</span></span><br><span class="line"><span class="keyword">int</span> end_time[maxn];     <span class="comment">// 每个用户的结束时间</span></span><br><span class="line"><span class="keyword">int</span> win_cur_time[<span class="number">21</span>];   <span class="comment">// 当前窗口等待区清空的最晚时间</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"./in.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="built_in">memset</span>(win_cur_time, <span class="number">0</span>, <span class="keyword">sizeof</span>(win_cur_time));</span><br><span class="line">    <span class="built_in">memset</span>(end_time, <span class="number">0xff</span>, <span class="keyword">sizeof</span>(end_time));</span><br><span class="line">    <span class="keyword">int</span> n, m, k, q; <span class="built_in">scanf</span>(<span class="string">"%d %d %d %d"</span>, &amp;n, &amp;m, &amp;k, &amp;q);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; k;i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, cost_time+i);</span><br><span class="line">    &#125;</span><br><span class="line">    priority_queue&lt;Customer&gt; que;</span><br><span class="line">    <span class="comment">// 前NM个直接加入</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; k &amp;&amp; i &lt; n*m;i++) &#123;</span><br><span class="line">        win_cur_time[i%n] += cost_time[i];</span><br><span class="line">        end_time[i] = win_cur_time[i%n];</span><br><span class="line">        que.push(&#123;i%n, end_time[i]&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = n*m;i &lt; k;i++) &#123;</span><br><span class="line">        Customer temp = que.top(); que.pop();   <span class="comment">// 获取最早离开的</span></span><br><span class="line">        win_cur_time[temp.win_index] += cost_time[i];</span><br><span class="line">        end_time[i] = win_cur_time[temp.win_index];</span><br><span class="line">        temp.end_time = end_time[i];</span><br><span class="line">        que.push(temp);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> tar;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; q;i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;tar);</span><br><span class="line">        <span class="keyword">int</span> mins = end_time[tar<span class="number">-1</span>];</span><br><span class="line">        <span class="comment">// 开始服务的时间不能晚于17:00</span></span><br><span class="line">        <span class="keyword">if</span>(mins - cost_time[tar<span class="number">-1</span>] &gt;= <span class="number">540</span>) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"Sorry\n"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%02d:%02d\n"</span>, <span class="number">8</span>+mins/<span class="number">60</span>, mins%<span class="number">60</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>DSAA</category>
+      </categories>
+      <tags>
+        <tag>C/C++</tag>
+        <tag>PAT</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>PAT Advanced 1012 The Best Rank（排序）</title>
     <url>/2020/03/21/2020-03-21-PAT-Advanced-1012/</url>
     <content><![CDATA[<h2 id="题目描述">题目描述</h2>
@@ -62,29 +85,6 @@
 <p>这题目还可以使用<strong>空间换时间的思路</strong>，稍微加快一点处理，比如判断是否存在学生，因为学生的学号是个整数，所以直接开辟那么大的数组记录即可，对每个学生的分数排名都可以这么处理</p>
 <p><strong>代码如下：</strong></p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="comment">//#define LOCAL</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">2001</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Stu</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">int</span> score[<span class="number">4</span>]; <span class="comment">// A C M E 对应的分数</span></span><br><span class="line">&#125;stu[maxn];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn_ = <span class="number">1e6</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> is_exist[maxn_];   <span class="comment">// 判断是否存在</span></span><br><span class="line"><span class="keyword">int</span> best_rank[maxn_];   <span class="comment">// 记录对应的最好成绩</span></span><br><span class="line"><span class="keyword">int</span> best_rank_type[maxn_];  <span class="comment">// 记录最好成绩对应的学科</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"./in.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="comment">// 初始化</span></span><br><span class="line">    <span class="built_in">memset</span>(is_exist, <span class="number">0</span>, <span class="keyword">sizeof</span>(is_exist));</span><br><span class="line">    <span class="built_in">memset</span>(best_rank, <span class="number">0x3f</span>, <span class="keyword">sizeof</span>(best_rank));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> n, m; <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;n, &amp;m);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n;i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d %d %d %d"</span>,&amp;stu[i].id, &amp;stu[i].score[<span class="number">1</span>], &amp;stu[i].score[<span class="number">2</span>], &amp;stu[i].score[<span class="number">3</span>]);</span><br><span class="line">        stu[i].score[<span class="number">0</span>] = (stu[i].score[<span class="number">1</span>]+stu[i].score[<span class="number">2</span>]+stu[i].score[<span class="number">3</span>])/<span class="number">3</span> + <span class="number">0.5</span>; <span class="comment">// 四舍五入</span></span><br><span class="line">        is_exist[stu[i].id] = <span class="literal">true</span>; <span class="comment">// 标记为存在</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 四个分数排序 按 A C M E 的顺序</span></span><br><span class="line">    <span class="comment">// 相同的情况后不能覆盖前（优先级）</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">4</span>;i++) &#123;</span><br><span class="line">        sort(stu, stu+n, [i](Stu &amp;a, Stu &amp;b)&#123; <span class="keyword">return</span> a.score[i] &gt; b.score[i]; &#125;);</span><br><span class="line">        <span class="keyword">if</span>(best_rank[stu[<span class="number">0</span>].id] != <span class="number">0</span>) &#123;</span><br><span class="line">            best_rank[stu[<span class="number">0</span>].id] = <span class="number">0</span>;</span><br><span class="line">            best_rank_type[stu[<span class="number">0</span>].id] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> last_rank = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 注意处理并列。。</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>;j &lt; n;j++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(stu[j<span class="number">-1</span>].score[i] != stu[j].score[i]) &#123;</span><br><span class="line">                last_rank = j;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(best_rank[stu[j].id] &gt; last_rank) &#123;</span><br><span class="line">                best_rank[stu[j].id] = last_rank;</span><br><span class="line">                best_rank_type[stu[j].id] = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> type[] = &#123;<span class="string">'A'</span>, <span class="string">'C'</span>, <span class="string">'M'</span>, <span class="string">'E'</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; m;i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> id; <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;id);</span><br><span class="line">        <span class="keyword">if</span>(is_exist[id]) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d %c\n"</span>, best_rank[id] + <span class="number">1</span>, type[best_rank_type[id]]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"N/A\n"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>DSAA</category>
-      </categories>
-      <tags>
-        <tag>C/C++</tag>
-        <tag>PAT</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>PAT Advanced 1014 Waiting in Line（优先队列）</title>
-    <url>/2020/03/21/2020-03-24-PAT-Advanced-1014/</url>
-    <content><![CDATA[<h2 id="题目描述">题目描述</h2>
-<p><span class="exturl" data-url="aHR0cHM6Ly9waW50aWEuY24vcHJvYmxlbS1zZXRzLzk5NDgwNTM0MjcyMDg2ODM1Mi9wcm9ibGVtcy85OTQ4MDU0OTgyMDc5MTE5MzY=" title="https://pintia.cn/problem-sets/994805342720868352/problems/994805498207911936">题目地址<i class="fa fa-external-link"></i></span></p>
-<p>之前一直错还是题目看错，英文题目还是要注意啊。</p>
-<p>17：00后的不予服务，只要在17：00之前接受服务的都可以，不用管截止时间。</p>
-<a id="more"></a>
-<h2 id="基本思路">基本思路</h2>
-<p>题目本身不难，理清楚过程即可。（他题目有些也迷）</p>
-<p>给出了N个窗口以及最大等待区M，K个顾客。相当于本来就有K个人在排队，然后每个人依次选窗口当等待区有空位的适合。等待区总共可以容纳NM个人，所以最前面的NM个人依次排满等待区即可（按照题目定的规则），当等待区满的时候，只要有一个人结束服务，那在等待区外排队的人就马上可以塞进去一个。</p>
-<p>所以我们需要知道的就是最早结束服务的人，这就可以用到优先队列了，维护结束服务的时间。时间越早优先级越高。每当他进入等待区，就push到优先队列中。</p>
-<p>代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="comment">//#define LOCAL</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1001</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Customer</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> win_index;</span><br><span class="line">    <span class="keyword">int</span> end_time;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> Customer&amp; other) <span class="keyword">const</span> &#123;</span><br><span class="line">        <span class="comment">// 同时离开 选择编号小的</span></span><br><span class="line">        <span class="keyword">return</span> end_time != other.end_time ? end_time &gt; other.end_time : win_index &gt; other.win_index;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;customers[maxn];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> cost_time[maxn];    <span class="comment">// 用户的花费时间</span></span><br><span class="line"><span class="keyword">int</span> end_time[maxn];     <span class="comment">// 每个用户的结束时间</span></span><br><span class="line"><span class="keyword">int</span> win_cur_time[<span class="number">21</span>];   <span class="comment">// 当前窗口等待区清空的最晚时间</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"./in.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="built_in">memset</span>(win_cur_time, <span class="number">0</span>, <span class="keyword">sizeof</span>(win_cur_time));</span><br><span class="line">    <span class="built_in">memset</span>(end_time, <span class="number">0xff</span>, <span class="keyword">sizeof</span>(end_time));</span><br><span class="line">    <span class="keyword">int</span> n, m, k, q; <span class="built_in">scanf</span>(<span class="string">"%d %d %d %d"</span>, &amp;n, &amp;m, &amp;k, &amp;q);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; k;i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, cost_time+i);</span><br><span class="line">    &#125;</span><br><span class="line">    priority_queue&lt;Customer&gt; que;</span><br><span class="line">    <span class="comment">// 前NM个直接加入</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; k &amp;&amp; i &lt; n*m;i++) &#123;</span><br><span class="line">        win_cur_time[i%n] += cost_time[i];</span><br><span class="line">        end_time[i] = win_cur_time[i%n];</span><br><span class="line">        que.push(&#123;i%n, end_time[i]&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = n*m;i &lt; k;i++) &#123;</span><br><span class="line">        Customer temp = que.top(); que.pop();   <span class="comment">// 获取最早离开的</span></span><br><span class="line">        win_cur_time[temp.win_index] += cost_time[i];</span><br><span class="line">        end_time[i] = win_cur_time[temp.win_index];</span><br><span class="line">        temp.end_time = end_time[i];</span><br><span class="line">        que.push(temp);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> tar;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; q;i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;tar);</span><br><span class="line">        <span class="keyword">int</span> mins = end_time[tar<span class="number">-1</span>];</span><br><span class="line">        <span class="comment">// 开始服务的时间不能晚于17:00</span></span><br><span class="line">        <span class="keyword">if</span>(mins - cost_time[tar<span class="number">-1</span>] &gt;= <span class="number">540</span>) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"Sorry\n"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%02d:%02d\n"</span>, <span class="number">8</span>+mins/<span class="number">60</span>, mins%<span class="number">60</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>DSAA</category>
@@ -2536,40 +2536,6 @@ T_s 为平均寻道时间，b表示传输的字节数，N表示一个磁道的�
       </tags>
   </entry>
   <entry>
-    <title>《30天自制操作系统》 笔记目录</title>
-    <url>/2020/01/24/2020-01-24-30OSMakeNoteAll/</url>
-    <content><![CDATA[<h1 id="daysmakeos-note">30DaysMakeOS-Note</h1>
-<blockquote>
-<p>《30天自制操作系统》（川合秀实）阅读笔记</p>
-</blockquote>
-<h2 id="笔记目录">笔记目录</h2>
-<ul>
-<li><a href="https://joke-lin.top/os/tutorial/2020/01/24/30OSMakeNote1-3/">第一天到第三天——从汇编到C语言</a></li>
-<li><a href="https://joke-lin.top/os/tutorial/2020/01/26/30OSMakeNote04/">第四天——C语言和画面显示的练习</a></li>
-</ul>
-<hr />
-<a id="more"></a>
-<p>书本实现了一个名为OSASK的只有80KB的简单操作系统，效果图如下</p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/30DaysMakeOS-Note/master/Screen.png" style="zoom:50%;" /></p>
-<h2 id="书本各章内容概要摘自原文">书本各章内容概要（摘自原文）</h2>
-<h3 id="第一周第1天-第7天">第一周（第1天 ～ 第7天）</h3>
-<p>一开始首先要考虑怎么来写一个“只要一通电就能运行的程序”。 这部分用C语言写 起来有些困难， 所以主要还是用汇编语言来写。 这步完成之后， 下一步就要写一个从磁盘读取操作系统的程序。 这时即便打开电脑 电源， 它也不会自动地将操作系统全部都读进来， 它只能读取磁盘上最开始的512 字节的内容， 所以我们要编写剩余部分的载入程序。 这个程序也要用汇编语言编 写。 一旦完成了这一步， 以后的程序就可以用C语言来编写了。 我们就尽快使用C语言 来学习开发显示画面的程序。 同时， 我们也能慢慢熟悉C语言语法。 这个时候我们 好像在做自己想做的事， 但事实上我们还没有自由操纵C语言。 接下来， 为了实现“移动鼠标”这一雄心， 我们要对CPU进行细致的设定， 并掌握中 断处理程序的写法。 从全书总体看来， 这一部分是水平相当高的部分， 笔者也觉得 放在这里有些不妥， 但从本书条理上讲， 这些内容必须放在这里， 所以只好请大家 忍耐一下了。 在这里， CPU的规格以及电脑复杂的规格都会给我们带来各种各样的 麻烦。 而且开发语言既有C语言， 又有汇编语言， 这又给我们造成了更大的混乱。 这个时候我们一点儿也不会觉得这是在做自己想做的事， 怎么看都像是在“受人摆 布”。 渡过这个痛苦的时期， 第一周就该结束了。</p>
-<h3 id="第二周第8天-第14天">第二周（第8天 ～ 第14天）</h3>
-<p>一周的苦战还是很有意义的， 回头一看， 我们就会发现自己还是斩获颇丰的。 这时 我们已经基本掌握了C语言的语法， 连汇编语言的水平也能达到本书的要求了。 所以现在我们就可以着手开发像样的操作系统了。 但是这一次我们又要为算法头痛 了。 即使掌握了编程语言的语法， 如果不懂得好的算法的话， 也还是不能开发出来 自己想要的操作系统。 所以这一周我们就边学习算法边慢慢地开发操作系统。 不过 到了这一阶段， 我们就能感觉到基本上不会再受技术问题限制了。</p>
-<h3 id="第三周第15天-第21天">第三周（第15天 ～ 第21天）</h3>
-<p>现在我们的技术已经相当厉害了， 可以随心所欲地开发自己的操作系统了。 首先是 要支持多任务， 然后是开发命令行窗口， 之后就可以着手开发应用程序了。 到本周 结束时， 就算还不够完备， 我们也能拿出一个可以称之为操作系统的软件了。</p>
-<h3 id="第四周第22天-第28天">第四周（第22天 ～ 第28天）</h3>
-<p>在这个阶段， 我们可以尽情地给操作系统增加各种各样的功能， 同时还可以开发出 大量像模像样的应用程序来。 这个阶段我们已经能做得很好了， 这可能也是我们最 高兴的时期。 这部分要讲解的内容很少， 笔者也不用再煞费苦心地去写那些文字说 明了， 可以把精力都集中在编程上（笑） 。 对了， 说起文字才想起来， 正好在这个 时期可以让我们的操作系统显示文字了。</p>
-]]></content>
-      <categories>
-        <category>OS</category>
-        <category>Tutorial &amp; Note</category>
-      </categories>
-      <tags>
-        <tag>30天自制操作系统</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>《30天自制操作系统》 01-03 从汇编到C语言</title>
     <url>/2020/01/24/2020-01-24-30OSMakeNote01-03/</url>
     <content><![CDATA[<h1 id="day-note">01-03-Day-Note</h1>
@@ -2830,6 +2796,40 @@ T_s 为平均寻道时间，b表示传输的字节数，N表示一个磁道的�
 <li>导出的函数需要前加<code>_</code>，这样才能和C语言链接，C语言编译后的函数会加<code>_</code></li>
 </ol>
 <p>可以看看作者的<code>Makefile</code>可以更好的明白整个编译的过程</p>
+]]></content>
+      <categories>
+        <category>OS</category>
+        <category>Tutorial &amp; Note</category>
+      </categories>
+      <tags>
+        <tag>30天自制操作系统</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《30天自制操作系统》 笔记目录</title>
+    <url>/2020/01/24/2020-01-24-30OSMakeNoteAll/</url>
+    <content><![CDATA[<h1 id="daysmakeos-note">30DaysMakeOS-Note</h1>
+<blockquote>
+<p>《30天自制操作系统》（川合秀实）阅读笔记</p>
+</blockquote>
+<h2 id="笔记目录">笔记目录</h2>
+<ul>
+<li><a href="https://joke-lin.top/os/tutorial/2020/01/24/30OSMakeNote1-3/">第一天到第三天——从汇编到C语言</a></li>
+<li><a href="https://joke-lin.top/os/tutorial/2020/01/26/30OSMakeNote04/">第四天——C语言和画面显示的练习</a></li>
+</ul>
+<hr />
+<a id="more"></a>
+<p>书本实现了一个名为OSASK的只有80KB的简单操作系统，效果图如下</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/30DaysMakeOS-Note/master/Screen.png" style="zoom:50%;" /></p>
+<h2 id="书本各章内容概要摘自原文">书本各章内容概要（摘自原文）</h2>
+<h3 id="第一周第1天-第7天">第一周（第1天 ～ 第7天）</h3>
+<p>一开始首先要考虑怎么来写一个“只要一通电就能运行的程序”。 这部分用C语言写 起来有些困难， 所以主要还是用汇编语言来写。 这步完成之后， 下一步就要写一个从磁盘读取操作系统的程序。 这时即便打开电脑 电源， 它也不会自动地将操作系统全部都读进来， 它只能读取磁盘上最开始的512 字节的内容， 所以我们要编写剩余部分的载入程序。 这个程序也要用汇编语言编 写。 一旦完成了这一步， 以后的程序就可以用C语言来编写了。 我们就尽快使用C语言 来学习开发显示画面的程序。 同时， 我们也能慢慢熟悉C语言语法。 这个时候我们 好像在做自己想做的事， 但事实上我们还没有自由操纵C语言。 接下来， 为了实现“移动鼠标”这一雄心， 我们要对CPU进行细致的设定， 并掌握中 断处理程序的写法。 从全书总体看来， 这一部分是水平相当高的部分， 笔者也觉得 放在这里有些不妥， 但从本书条理上讲， 这些内容必须放在这里， 所以只好请大家 忍耐一下了。 在这里， CPU的规格以及电脑复杂的规格都会给我们带来各种各样的 麻烦。 而且开发语言既有C语言， 又有汇编语言， 这又给我们造成了更大的混乱。 这个时候我们一点儿也不会觉得这是在做自己想做的事， 怎么看都像是在“受人摆 布”。 渡过这个痛苦的时期， 第一周就该结束了。</p>
+<h3 id="第二周第8天-第14天">第二周（第8天 ～ 第14天）</h3>
+<p>一周的苦战还是很有意义的， 回头一看， 我们就会发现自己还是斩获颇丰的。 这时 我们已经基本掌握了C语言的语法， 连汇编语言的水平也能达到本书的要求了。 所以现在我们就可以着手开发像样的操作系统了。 但是这一次我们又要为算法头痛 了。 即使掌握了编程语言的语法， 如果不懂得好的算法的话， 也还是不能开发出来 自己想要的操作系统。 所以这一周我们就边学习算法边慢慢地开发操作系统。 不过 到了这一阶段， 我们就能感觉到基本上不会再受技术问题限制了。</p>
+<h3 id="第三周第15天-第21天">第三周（第15天 ～ 第21天）</h3>
+<p>现在我们的技术已经相当厉害了， 可以随心所欲地开发自己的操作系统了。 首先是 要支持多任务， 然后是开发命令行窗口， 之后就可以着手开发应用程序了。 到本周 结束时， 就算还不够完备， 我们也能拿出一个可以称之为操作系统的软件了。</p>
+<h3 id="第四周第22天-第28天">第四周（第22天 ～ 第28天）</h3>
+<p>在这个阶段， 我们可以尽情地给操作系统增加各种各样的功能， 同时还可以开发出 大量像模像样的应用程序来。 这个阶段我们已经能做得很好了， 这可能也是我们最 高兴的时期。 这部分要讲解的内容很少， 笔者也不用再煞费苦心地去写那些文字说 明了， 可以把精力都集中在编程上（笑） 。 对了， 说起文字才想起来， 正好在这个 时期可以让我们的操作系统显示文字了。</p>
 ]]></content>
       <categories>
         <category>OS</category>
@@ -3214,8 +3214,8 @@ x &amp; y &amp; 1
 ]]></content>
       <categories>
         <category>Tool</category>
-        <category>Linux</category>
         <category>Tutorial &amp; Note</category>
+        <category>Linux</category>
       </categories>
   </entry>
   <entry>
