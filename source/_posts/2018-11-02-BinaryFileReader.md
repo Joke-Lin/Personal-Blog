@@ -4,7 +4,7 @@ date: 2018-11-02
 tags: 
 - C/C++
 categories: 
-- Tool
+- ELSE
 ---
 
 > 在学习BMP位图的构成时，对网上的收费16进制查看器很是烦躁，notepad查看时卡到放弃人生
