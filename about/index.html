@@ -23,15 +23,15 @@
     var CONFIG = {"hostname":"joke-lin.top","root":"/","scheme":"Gemini","version":"7.7.2","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="i am lwj">
+  <meta name="description" content="简介 林伟俊，目前就读于四川大学计算机学院，为本科生。 此博客站点旨在记录学习过程以及分享我的一些所学、所想。希望能给您带来些许帮助。 联系方式 邮箱：joke-lin@qq.com QQ：不告诉">
 <meta property="og:type" content="website">
-<meta property="og:title" content="about">
+<meta property="og:title" content="关于我">
 <meta property="og:url" content="https://joke-lin.top/about/index.html">
 <meta property="og:site_name" content="Joke-Lin | BLOG">
-<meta property="og:description" content="i am lwj">
+<meta property="og:description" content="简介 林伟俊，目前就读于四川大学计算机学院，为本科生。 此博客站点旨在记录学习过程以及分享我的一些所学、所想。希望能给您带来些许帮助。 联系方式 邮箱：joke-lin@qq.com QQ：不告诉">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-03-25T05:54:33.000Z">
-<meta property="article:modified_time" content="2020-03-25T14:45:05.629Z">
+<meta property="article:modified_time" content="2020-04-01T13:55:20.344Z">
 <meta property="article:author" content="Joke-Lin">
 <meta name="twitter:card" content="summary">
 
@@ -47,7 +47,7 @@
   };
 </script>
 
-  <title>about | Joke-Lin | BLOG
+  <title>关于我 | Joke-Lin | BLOG
   </title>
   
 
@@ -217,7 +217,7 @@
     <div class="post-block" lang="en">
       <header class="post-header">
 
-<h2 class="post-title" itemprop="name headline">about
+<h2 class="post-title" itemprop="name headline">关于我
 </h2>
 
 <div class="post-meta">
@@ -231,7 +231,12 @@
       
       
       <div class="post-body">
-          <p>i am lwj</p>
+          <h2 id="简介">简介</h2>
+<p>林伟俊，目前就读于四川大学计算机学院，为本科生。</p>
+<p>此博客站点旨在记录学习过程以及分享我的一些所学、所想。希望能给您带来些许帮助。</p>
+<h2 id="联系方式">联系方式</h2>
+<p>邮箱：joke-lin@qq.com</p>
+<p>QQ：不告诉</p>
 
       </div>
       
@@ -248,6 +253,7 @@
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -294,6 +300,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#联系方式"><span class="nav-text">联系方式</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -309,7 +316,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -401,13 +408,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">145k</span>
+    <span title="Symbols count total">147k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">2:12</span>
+    <span title="Reading time total">2:14</span>
 </div>
   <div class="powered-by">Powered by <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> v4.2.0
   </div>
@@ -578,6 +585,25 @@
 
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '64f708c73ee01327eaff',
+      clientSecret: 'fe1991c81ffd1b32cc8aec2ab7e1e7a1f79957ab',
+      repo        : 'Joke-Lin.github.io',
+      owner       : 'Joke-Lin',
+      admin       : ['Joke-Lin'],
+      id          : '3be7aa98d992907175cbd79c194399f2',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
 </body>
 </html>
