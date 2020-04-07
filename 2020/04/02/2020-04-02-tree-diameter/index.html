@@ -23,22 +23,21 @@
     var CONFIG = {"hostname":"joke-lin.top","root":"/","scheme":"Gemini","version":"7.7.2","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="题目描述 题目地址">
+  <meta name="description" content="树的直径，即树中距离最远的两个节点的距离。 求解方法 选取树中的任意一个节点，计算距离它最远的节点（使用DFS或者BFS），然后以这个最远的节点为根计算距离它最远的节点。这段距离即为树的直径，根和此最远的点便是两个端点。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PAT Advanced 1010 Radix（二分法）">
-<meta property="og:url" content="https://joke-lin.top/2020/03/19/2020-03-19-PAT-Advanced-1010/index.html">
+<meta property="og:title" content="树的直径">
+<meta property="og:url" content="https://joke-lin.top/2020/04/02/2020-04-02-tree-diameter/index.html">
 <meta property="og:site_name" content="Joke-Lin | BLOG">
-<meta property="og:description" content="题目描述 题目地址">
+<meta property="og:description" content="树的直径，即树中距离最远的两个节点的距离。 求解方法 选取树中的任意一个节点，计算距离它最远的节点（使用DFS或者BFS），然后以这个最远的节点为根计算距离它最远的节点。这段距离即为树的直径，根和此最远的点便是两个端点。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-03-18T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-03-25T10:59:25.675Z">
+<meta property="article:published_time" content="2020-04-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-04-03T03:08:09.961Z">
 <meta property="article:author" content="Joke-Lin">
 <meta property="article:tag" content="C&#x2F;C++">
-<meta property="article:tag" content="PAT">
-<meta property="article:tag" content="二分">
+<meta property="article:tag" content="Graph Theory">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://joke-lin.top/2020/03/19/2020-03-19-PAT-Advanced-1010/">
+<link rel="canonical" href="https://joke-lin.top/2020/04/02/2020-04-02-tree-diameter/">
 
 
 <script id="page-configurations">
@@ -50,7 +49,7 @@
   };
 </script>
 
-  <title>PAT Advanced 1010 Radix（二分法） | Joke-Lin | BLOG</title>
+  <title>树的直径 | Joke-Lin | BLOG</title>
   
 
 
@@ -215,7 +214,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
-    <link itemprop="mainEntityOfPage" href="https://joke-lin.top/2020/03/19/2020-03-19-PAT-Advanced-1010/">
+    <link itemprop="mainEntityOfPage" href="https://joke-lin.top/2020/04/02/2020-04-02-tree-diameter/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -228,7 +227,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          PAT Advanced 1010 Radix（二分法）
+          树的直径
         </h2>
 
         <div class="post-meta">
@@ -238,14 +237,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-03-19 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-19T00:00:00+08:00">2020-03-19</time>
+              <time title="Created: 2020-04-02 00:00:00" itemprop="dateCreated datePublished" datetime="2020-04-02T00:00:00+08:00">2020-04-02</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-25 18:59:25" itemprop="dateModified" datetime="2020-03-25T18:59:25+08:00">2020-03-25</time>
+                <time title="Modified: 2020-04-03 11:08:09" itemprop="dateModified" datetime="2020-04-03T11:08:09+08:00">2020-04-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -270,14 +269,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>3.1k</span>
+              <span>534</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>3 mins.</span>
+              <span>1 mins.</span>
             </span>
 
         </div>
@@ -289,36 +288,25 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="题目描述">题目描述</h2>
-<p><span class="exturl" data-url="aHR0cHM6Ly9waW50aWEuY24vcHJvYmxlbS1zZXRzLzk5NDgwNTM0MjcyMDg2ODM1Mi9wcm9ibGVtcy85OTQ4MDU1MDcyMjU2NjU1MzY=" title="https://pintia.cn/problem-sets/994805342720868352/problems/994805507225665536">题目地址<i class="fa fa-external-link"></i></span></p>
+        <p>树的直径，即<strong>树中距离最远的两个节点的距离</strong>。</p>
+<h2 id="求解方法">求解方法</h2>
+<p>选取树中的任意一个节点，计算距离它最远的节点（使用DFS或者BFS），然后以这个最远的节点为根计算距离它最远的节点。这段距离即为树的直径，根和此最远的点便是两个端点。</p>
 <a id="more"></a>
-<p>Given a pair of positive integers, for example, 6 and 110, can this equation 6 = 110 be true? The answer is <code>yes</code>, if 6 is a decimal number and 110 is a binary number.</p>
-<p>Now for any pair of positive integers <em>N</em>1 and <em>N</em>2, your task is to find the radix of one number while that of the other is given.</p>
-<h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case. Each case occupies a line which contains 4 positive integers:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">N1 N2 tag radix</span><br></pre></td></tr></table></figure>
-<p>Here <code>N1</code> and <code>N2</code> each has no more than 10 digits. A digit is less than its radix and is chosen from the set { 0-9, <code>a</code>-<code>z</code> } where 0-9 represent the decimal numbers 0-9, and <code>a</code>-<code>z</code> represent the decimal numbers 10-35. The last number <code>radix</code> is the radix of <code>N1</code> if <code>tag</code> is 1, or of <code>N2</code> if <code>tag</code> is 2.</p>
-<h3 id="output-specification">Output Specification:</h3>
-<p>For each test case, print in one line the radix of the other number so that the equation <code>N1</code> = <code>N2</code> is true. If the equation is impossible, print <code>Impossible</code>. If the solution is not unique, output the smallest possible radix.</p>
-<h3 id="sample-input-1">Sample Input 1:</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">6 110 1 10</span><br></pre></td></tr></table></figure>
-<h3 id="sample-output-1">Sample Output 1:</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2</span><br></pre></td></tr></table></figure>
-<h3 id="sample-input-2">Sample Input 2:</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 ab 1 2</span><br></pre></td></tr></table></figure>
-<h3 id="sample-output-2">Sample Output 2:</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Impossible</span><br></pre></td></tr></table></figure>
-<h2 id="基本思路">基本思路</h2>
-<p>PAT题目都很迷，很多地方都不说清楚输入范围。。。</p>
-<p>这道题输入数据不会超过<code>long long</code>，所以可以放心的使用基本思路计算不同进制下的值</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ll <span class="title">getRes</span><span class="params">(<span class="built_in">string</span> &amp;tar, <span class="keyword">int</span> radix)</span> </span>&#123;</span><br><span class="line">    ll res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> len = tar.length();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; tar.length();i++) &#123;</span><br><span class="line">        res = res*radix + getNum(tar[i]);</span><br><span class="line">        <span class="keyword">if</span>(res &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如果每次都从进制2开始递增进制，直到一种不可能的情况出现，但这种方法对大小差距极大的两个数特别耗时，对于这种<strong>在一个序列中寻找一个正确解</strong>的过程，显然是用二分法解决。</p>
-<p>但是二分法需要一个范围，那么这道题的进制范围是在哪一个范围。首先对于R进制的串，对于数串内的数必须小于R，所以获取此串的最小进制（下界）就显而易见了</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getNum</span><span class="params">(<span class="keyword">char</span> tar)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(tar &gt;= <span class="string">'0'</span> &amp;&amp; tar &lt;= <span class="string">'9'</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> tar - <span class="string">'0'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> tar - <span class="string">'a'</span> + <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getMinRadix</span><span class="params">(<span class="built_in">string</span> &amp;tar)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 也可以使用C++的max_element函数</span></span><br><span class="line">    <span class="keyword">char</span> c = <span class="string">'0'</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; tar.length();i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(tar[i] &gt; c) &#123;</span><br><span class="line">            c = tar[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>  <span class="built_in">max</span>(getNum(c) + <span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上界即为<code>max(minRadix,  num)</code> num为已知进制的数的值，因为题目中只涉及到0-35的值，所以num作为上届已经足够，因为个位是不可能达到num值的最高就是35，那么在2位数字的情况下最小也是10，此时10在num进制下就是num，所以num进制的最小值就是num，在往上就会大于num就没有必要了</p>
-<p>所有在上下界进行二分法查找即可</p>
-<p><strong>代码如下：</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="comment">//#define LOCAL</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getNum</span><span class="params">(<span class="keyword">char</span> tar)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(tar &gt;= <span class="string">'0'</span> &amp;&amp; tar &lt;= <span class="string">'9'</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> tar - <span class="string">'0'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> tar - <span class="string">'a'</span> + <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getMinRadix</span><span class="params">(<span class="built_in">string</span> &amp;tar)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> c = <span class="string">'0'</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; tar.length();i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(tar[i] &gt; c) &#123;</span><br><span class="line">            c = tar[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>  <span class="built_in">max</span>(getNum(c) + <span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">getRes</span><span class="params">(<span class="built_in">string</span> &amp;tar, <span class="keyword">int</span> radix)</span> </span>&#123;</span><br><span class="line">    ll res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> len = tar.length();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; tar.length();i++) &#123;</span><br><span class="line">        res = res*radix + getNum(tar[i]);</span><br><span class="line">        <span class="keyword">if</span>(res &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"./in.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="built_in">string</span> A, B;</span><br><span class="line">    <span class="keyword">int</span> tag, radix;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; A &gt;&gt; B &gt;&gt; tag &gt;&gt; radix;</span><br><span class="line">    <span class="keyword">if</span>(tag == <span class="number">2</span>) &#123;</span><br><span class="line">        swap(A, B);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// B 是 要计算的</span></span><br><span class="line">    ll tar = getRes(A, radix);</span><br><span class="line">    <span class="comment">//  二分</span></span><br><span class="line">    ll left = getMinRadix(B);</span><br><span class="line">    ll right = <span class="built_in">max</span>(left, tar);</span><br><span class="line">    <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">        ll mid = (left + right) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        ll temp = getRes(B, mid);</span><br><span class="line">        <span class="keyword">if</span>(temp == tar) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%lld"</span>, mid);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(temp &lt; <span class="number">0</span> || temp &gt; tar) &#123;</span><br><span class="line">            right = mid - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            left = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Impossible"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="简单证明">简单证明</h2>
+<p>其实只要证明：<strong>以任意点为根节点，距离此根节点最远的节点必定是树的直径中的一个端点。</strong></p>
+<p>证明了这个，那么上面提到的算法就很容易证明了，获取第一个端点，然后以此端点为根的最远端点就是另外一个端点。</p>
+<p>首先规定从<em>r</em>开始的最远距离节点为<em>u</em>，证明<em>u</em>为树的直径的一个端点，可以使用反证法证明，假设存在另外两个节点<em>s,t</em>，构成了树的直径。</p>
+<ol type="1">
+<li><p><strong><em>st</em>的路径和<em>ru</em>不相交</strong>：</p>
+<p>在这种情况下，存在<span class="math inline">\(dis(u,s)+dis(s,t) &gt; dis(s,t)\)</span>，所以<em>st</em>并不是最长的，和假设相矛盾，<em>st</em>这种情况下不存在</p></li>
+<li><p><strong><em>st</em>的路径和<em>ru</em>相交于点<em>v</em>：</strong></p>
+<p>此时<em>s,u</em>都是以<em>a</em>为根的子树上的节点，因为u为距离a最远的结点所以可得： <span class="math display">\[
+ dis(a,y)+dis(y,u) &gt; dis(a,y)+dis(y,s) \\
+ 即：dis(u,y) &lt; dis(s,y)
+ \]</span> 同样表示<em>s,t</em>并不是最长的，而是<em>u,t</em></p></li>
+</ol>
+<p>综上，<em>u</em>必定为树的直径的一个端点。</p>
+<p>关于树的直径的更多性质可参考：<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vS2hhZGEtSmhpbi9wLzEwMTk1Mjg3Lmh0bWw=" title="https://www.cnblogs.com/Khada-Jhin/p/10195287.html">博客园 树的直径及其性质与证明<i class="fa fa-external-link"></i></span></p>
 
     </div>
 
@@ -334,7 +322,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="https://joke-lin.top/2020/03/19/2020-03-19-PAT-Advanced-1010/" title="PAT Advanced 1010 Radix（二分法）">https://joke-lin.top/2020/03/19/2020-03-19-PAT-Advanced-1010/</a>
+    <a href="https://joke-lin.top/2020/04/02/2020-04-02-tree-diameter/" title="树的直径">https://joke-lin.top/2020/04/02/2020-04-02-tree-diameter/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.
@@ -347,8 +335,7 @@
           
           <div class="post-tags">
               <a href="/tags/C-C/" rel="tag"><i class="fa fa-tag"></i> C/C++</a>
-              <a href="/tags/PAT/" rel="tag"><i class="fa fa-tag"></i> PAT</a>
-              <a href="/tags/%E4%BA%8C%E5%88%86/" rel="tag"><i class="fa fa-tag"></i> 二分</a>
+              <a href="/tags/Graph-Theory/" rel="tag"><i class="fa fa-tag"></i> Graph Theory</a>
           </div>
 
         
@@ -362,12 +349,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/03/21/2020-03-24-PAT-Advanced-1014/" rel="prev" title="PAT Advanced 1014 Waiting in Line（优先队列）">
-      <i class="fa fa-chevron-left"></i> PAT Advanced 1014 Waiting in Line（优先队列）
+    <a href="/2020/04/03/2020-04-03-PAT-Advanced-1021/" rel="prev" title="PAT Advanced 1021 Deepest Root （连通分量+树的直径）">
+      <i class="fa fa-chevron-left"></i> PAT Advanced 1021 Deepest Root （连通分量+树的直径）
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/03/12/2020-03-12-Matplotlib-DirectlyOutput-Img/" rel="next" title="Matplotlib 图像直接导出为 ndarray">
-      Matplotlib 图像直接导出为 ndarray <i class="fa fa-chevron-right"></i>
+    <a href="/2020/04/01/2020-04-01-PAT-Advanced-1020/" rel="next" title="PAT Advanced 1020 Tree Traversals （二叉树）">
+      PAT Advanced 1020 Tree Traversals （二叉树） <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -429,7 +416,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-text">题目描述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#input-specification"><span class="nav-text">Input Specification:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#output-specification"><span class="nav-text">Output Specification:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sample-input-1"><span class="nav-text">Sample Input 1:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sample-output-1"><span class="nav-text">Sample Output 1:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sample-input-2"><span class="nav-text">Sample Input 2:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sample-output-2"><span class="nav-text">Sample Output 2:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本思路"><span class="nav-text">基本思路</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#求解方法"><span class="nav-text">求解方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单证明"><span class="nav-text">简单证明</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -725,7 +712,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       repo        : 'Joke-Lin.github.io',
       owner       : 'Joke-Lin',
       admin       : ['Joke-Lin'],
-      id          : '472b161b07d2d95cc19abc7add7992ce',
+      id          : 'eba666f0311858e4ad4699f89a6cdbd9',
         language: '',
       distractionFreeMode: true
     });
