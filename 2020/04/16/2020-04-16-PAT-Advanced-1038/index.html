@@ -23,21 +23,22 @@
     var CONFIG = {"hostname":"joke-lin.top","root":"/","scheme":"Gemini","version":"7.7.2","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="题目描述 题目地址 和 1014 很相似的题目，同样使用优先队列解决，容易的一道题。 题目的意思是真的难懂，17：00之后不能被服务，17：00 是到达时间。。不是服务时间，服务时间不能超过1小时是指大于1小时的按一小时处理，而不是不处理">
+  <meta name="description" content="题目描述 题目地址 给定一系列数字串，使用他们组成一个最小的数字">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PAT Advanced 1017 Queueing at Bank（优先队列）">
-<meta property="og:url" content="https://joke-lin.top/2020/03/29/2020-03-29-PAT-Advanced-1017/index.html">
+<meta property="og:title" content="PAT Advanced 1038 Recover the Smallest Number （贪心）">
+<meta property="og:url" content="https://joke-lin.top/2020/04/16/2020-04-16-PAT-Advanced-1038/index.html">
 <meta property="og:site_name" content="Joke-Lin | BLOG">
-<meta property="og:description" content="题目描述 题目地址 和 1014 很相似的题目，同样使用优先队列解决，容易的一道题。 题目的意思是真的难懂，17：00之后不能被服务，17：00 是到达时间。。不是服务时间，服务时间不能超过1小时是指大于1小时的按一小时处理，而不是不处理">
+<meta property="og:description" content="题目描述 题目地址 给定一系列数字串，使用他们组成一个最小的数字">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-03-28T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-04-07T08:53:06.630Z">
+<meta property="article:published_time" content="2020-04-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-04-16T09:20:02.559Z">
 <meta property="article:author" content="Joke-Lin">
 <meta property="article:tag" content="C&#x2F;C++">
 <meta property="article:tag" content="PAT">
+<meta property="article:tag" content="贪心">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://joke-lin.top/2020/03/29/2020-03-29-PAT-Advanced-1017/">
+<link rel="canonical" href="https://joke-lin.top/2020/04/16/2020-04-16-PAT-Advanced-1038/">
 
 
 <script id="page-configurations">
@@ -49,7 +50,7 @@
   };
 </script>
 
-  <title>PAT Advanced 1017 Queueing at Bank（优先队列） | Joke-Lin | BLOG</title>
+  <title>PAT Advanced 1038 Recover the Smallest Number （贪心） | Joke-Lin | BLOG</title>
   
 
 
@@ -214,7 +215,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
-    <link itemprop="mainEntityOfPage" href="https://joke-lin.top/2020/03/29/2020-03-29-PAT-Advanced-1017/">
+    <link itemprop="mainEntityOfPage" href="https://joke-lin.top/2020/04/16/2020-04-16-PAT-Advanced-1038/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -227,7 +228,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          PAT Advanced 1017 Queueing at Bank（优先队列）
+          PAT Advanced 1038 Recover the Smallest Number （贪心）
         </h2>
 
         <div class="post-meta">
@@ -236,16 +237,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2020-03-29 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-29T00:00:00+08:00">2020-03-29</time>
+              <time title="Created: 2020-04-16 00:00:00 / Modified: 17:20:02" itemprop="dateCreated datePublished" datetime="2020-04-16T00:00:00+08:00">2020-04-16</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-07 16:53:06" itemprop="dateModified" datetime="2020-04-07T16:53:06+08:00">2020-04-07</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -269,14 +264,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>1.5k</span>
+              <span>1.9k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
+              <span>2 mins.</span>
             </span>
 
         </div>
@@ -289,12 +284,18 @@
 
       
         <h2 id="题目描述">题目描述</h2>
-<p><span class="exturl" data-url="aHR0cHM6Ly9waW50aWEuY24vcHJvYmxlbS1zZXRzLzk5NDgwNTM0MjcyMDg2ODM1Mi9wcm9ibGVtcy85OTQ4MDU0OTE1MzA1Nzk5Njg=" title="https://pintia.cn/problem-sets/994805342720868352/problems/994805491530579968">题目地址<i class="fa fa-external-link"></i></span></p>
-<p>和 1014 很相似的题目，同样使用优先队列解决，容易的一道题。</p>
-<p>题目的意思是真的难懂，17：00之后不能被服务，17：00 是到达时间。。不是服务时间，服务时间不能超过1小时是指大于1小时的按一小时处理，而不是不处理</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9waW50aWEuY24vcHJvYmxlbS1zZXRzLzk5NDgwNTM0MjcyMDg2ODM1Mi9wcm9ibGVtcy85OTQ4MDU0NDk2MjUyODg3MDQ=" title="https://pintia.cn/problem-sets/994805342720868352/problems/994805449625288704">题目地址<i class="fa fa-external-link"></i></span></p>
+<p>给定一系列数字串，使用他们组成一个最小的数字</p>
 <a id="more"></a>
+<h2 id="基础思路">基础思路</h2>
+<p>似乎或者应该有那么点贪心的思路，重载一个排序函数，每次选取保证可以最小整个数字串的值。</p>
+<p>重载<code>string</code>比较函数：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="built_in">string</span> &amp;a, <span class="built_in">string</span> &amp;b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(i != a.size() &amp;&amp; i != b.size()) &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i] &lt; b[i]) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(a[i] &gt; b[i]) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">string</span> c = a+b, d = b+a;</span><br><span class="line">    i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(i != c.size()) &#123;</span><br><span class="line">        <span class="keyword">if</span>(c[i] &lt; d[i]) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(c[i] &gt; d[i]) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>比较的思路大概就是对于两个串，从开始遍历，优先选择数字小的，如果两个串前缀完全相同比如A：321，B：32，那么就比较，AB和BA的数字大小情况。</p>
+<p>因为无论什么样的顺序，最终的数字位数是确定的，所以确定取那个串作为下一部分，只要选取前缀最小的就可以了。</p>
+<p>注意00000的情况，需要打印一个0</p>
 <p>代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="comment">//#define LOCAL</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Customer</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> arrive;</span><br><span class="line">    <span class="keyword">int</span> leave;</span><br><span class="line">    <span class="keyword">int</span> serve_secs;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> Customer &amp; another) &#123;</span><br><span class="line">        <span class="keyword">return</span> arrive &lt; another.arrive;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;customers[<span class="number">100001</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> clock_8 = <span class="number">8</span>*<span class="number">3600</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> clock_17 = <span class="number">17</span>*<span class="number">3600</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"./in.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="keyword">int</span> whole_wait_sec = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> legal_nums = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> n, m; <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>,&amp;n, &amp;m);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n;i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> h, m, s, t; <span class="built_in">scanf</span>(<span class="string">"%d:%d:%d %d"</span>, &amp;h, &amp;m, &amp;s, &amp;t);</span><br><span class="line">        <span class="keyword">int</span> arrive = h*<span class="number">60</span>*<span class="number">60</span> + m*<span class="number">60</span> + s;</span><br><span class="line">        <span class="keyword">if</span>(arrive &gt; clock_17) &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        customers[legal_nums].arrive = arrive;</span><br><span class="line">        customers[legal_nums++].serve_secs = t &gt; <span class="number">60</span> ? <span class="number">3600</span> : t*<span class="number">60</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(customers, customers + legal_nums);</span><br><span class="line">    priority_queue&lt;<span class="keyword">int</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;, greater&lt;<span class="keyword">int</span>&gt;&gt; leave_que;</span><br><span class="line">    <span class="comment">// 先push M 个 8：00 全在8点离开</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; m;i++) &#123;</span><br><span class="line">        leave_que.push(clock_8);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; legal_nums;i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> serve_time = <span class="built_in">max</span>(leave_que.top(), customers[i].arrive); leave_que.pop();</span><br><span class="line">        leave_que.push(serve_time + customers[i].serve_secs);</span><br><span class="line">        whole_wait_sec += serve_time - customers[i].arrive;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%.1f"</span>, legal_nums == <span class="number">0</span> ? <span class="number">0.0</span> : whole_wait_sec/<span class="number">60.0</span>/legal_nums);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="comment">//#define LOCAL</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="built_in">string</span> &amp;a, <span class="built_in">string</span> &amp;b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(i != a.size() &amp;&amp; i != b.size()) &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i] &lt; b[i]) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(a[i] &gt; b[i]) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">string</span> c = a+b, d = b+a;</span><br><span class="line">    i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(i != c.size()) &#123;</span><br><span class="line">        <span class="keyword">if</span>(c[i] &lt; d[i]) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(c[i] &gt; d[i]) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"./in.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="keyword">int</span> n; <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="built_in">string</span> num_str;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; seq;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n;i++) &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; num_str;</span><br><span class="line">        seq.push_back(num_str);</span><br><span class="line">    &#125;</span><br><span class="line">    sort(seq.begin(), seq.end(), cmp);</span><br><span class="line">    <span class="keyword">bool</span> flag = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> i : seq) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!flag) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; i.length();j++) &#123;</span><br><span class="line">                <span class="keyword">if</span>(i[j] != <span class="string">'0'</span>) &#123;</span><br><span class="line">                    flag = <span class="literal">true</span>;</span><br><span class="line">                    <span class="built_in">cout</span> &lt;&lt; i[j];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">if</span>(flag) &#123;</span><br><span class="line">                        <span class="built_in">cout</span> &lt;&lt; i[j];</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(!flag) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"0"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -310,7 +311,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="https://joke-lin.top/2020/03/29/2020-03-29-PAT-Advanced-1017/" title="PAT Advanced 1017 Queueing at Bank（优先队列）">https://joke-lin.top/2020/03/29/2020-03-29-PAT-Advanced-1017/</a>
+    <a href="https://joke-lin.top/2020/04/16/2020-04-16-PAT-Advanced-1038/" title="PAT Advanced 1038 Recover the Smallest Number （贪心）">https://joke-lin.top/2020/04/16/2020-04-16-PAT-Advanced-1038/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.
@@ -324,6 +325,7 @@
           <div class="post-tags">
               <a href="/tags/C-C/" rel="tag"><i class="fa fa-tag"></i> C/C++</a>
               <a href="/tags/PAT/" rel="tag"><i class="fa fa-tag"></i> PAT</a>
+              <a href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag"><i class="fa fa-tag"></i> 贪心</a>
           </div>
 
         
@@ -336,13 +338,10 @@
 
         
     <div class="post-nav">
+      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2020/03/31/2020-03-31-PAT-Advanced-1018/" rel="prev" title="PAT Advanced 1018 Public Bike Management（Dijkstra + DFS）">
-      <i class="fa fa-chevron-left"></i> PAT Advanced 1018 Public Bike Management（Dijkstra + DFS）
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/03/27/2020-03-27-PAT-Advanced-1016/" rel="next" title="PAT Advanced 1016 Phone Bills（排序）">
-      PAT Advanced 1016 Phone Bills（排序） <i class="fa fa-chevron-right"></i>
+    <a href="/2020/04/11/2020-04-11-PAT-Advanced-1033/" rel="next" title="PAT Advanced 1033 To Fill or Not to Fill （贪心）">
+      PAT Advanced 1033 To Fill or Not to Fill （贪心） <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -404,7 +403,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-text">题目描述</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础思路"><span class="nav-text">基础思路</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -700,7 +699,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       repo        : 'Joke-Lin.github.io',
       owner       : 'Joke-Lin',
       admin       : ['Joke-Lin'],
-      id          : '0daa86c20a82363a29ab02d9701aa360',
+      id          : '986680585128e59a0a0b51c753c9267a',
         language: '',
       distractionFreeMode: true
     });
