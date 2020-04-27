@@ -23,21 +23,22 @@
     var CONFIG = {"hostname":"joke-lin.top","root":"/","scheme":"Gemini","version":"7.7.2","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="树的直径，即树中距离最远的两个节点的距离。 求解方法 选取树中的任意一个节点，计算距离它最远的节点（使用DFS或者BFS），然后以这个最远的节点为根计算距离它最远的节点。这段距离即为树的直径，根和此最远的点便是两个端点。">
+  <meta name="description" content="题目描述 题目地址 简单来说，即给定一串数字序列，以及目标值M，找出一段和为M的子串，若不存在找出大于M的最小子串">
 <meta property="og:type" content="article">
-<meta property="og:title" content="树的直径">
-<meta property="og:url" content="https://joke-lin.top/2020/04/02/2020-04-02-tree-diameter/index.html">
+<meta property="og:title" content="PAT Advanced 1044 Shopping in Mars（二分）">
+<meta property="og:url" content="https://joke-lin.top/2020/04/21/2020-04-25-PAT-Advanced-1044/index.html">
 <meta property="og:site_name" content="Joke-Lin | BLOG">
-<meta property="og:description" content="树的直径，即树中距离最远的两个节点的距离。 求解方法 选取树中的任意一个节点，计算距离它最远的节点（使用DFS或者BFS），然后以这个最远的节点为根计算距离它最远的节点。这段距离即为树的直径，根和此最远的点便是两个端点。">
+<meta property="og:description" content="题目描述 题目地址 简单来说，即给定一串数字序列，以及目标值M，找出一段和为M的子串，若不存在找出大于M的最小子串">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-04-01T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-04-07T02:33:17.439Z">
+<meta property="article:published_time" content="2020-04-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-04-25T14:17:32.300Z">
 <meta property="article:author" content="Joke-Lin">
 <meta property="article:tag" content="C&#x2F;C++">
-<meta property="article:tag" content="Graph Theory">
+<meta property="article:tag" content="PAT">
+<meta property="article:tag" content="二分">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://joke-lin.top/2020/04/02/2020-04-02-tree-diameter/">
+<link rel="canonical" href="https://joke-lin.top/2020/04/21/2020-04-25-PAT-Advanced-1044/">
 
 
 <script id="page-configurations">
@@ -49,7 +50,7 @@
   };
 </script>
 
-  <title>树的直径 | Joke-Lin | BLOG</title>
+  <title>PAT Advanced 1044 Shopping in Mars（二分） | Joke-Lin | BLOG</title>
   
 
 
@@ -214,7 +215,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
-    <link itemprop="mainEntityOfPage" href="https://joke-lin.top/2020/04/02/2020-04-02-tree-diameter/">
+    <link itemprop="mainEntityOfPage" href="https://joke-lin.top/2020/04/21/2020-04-25-PAT-Advanced-1044/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -227,7 +228,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          树的直径
+          PAT Advanced 1044 Shopping in Mars（二分）
         </h2>
 
         <div class="post-meta">
@@ -237,14 +238,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-04-02 00:00:00" itemprop="dateCreated datePublished" datetime="2020-04-02T00:00:00+08:00">2020-04-02</time>
+              <time title="Created: 2020-04-21 00:00:00" itemprop="dateCreated datePublished" datetime="2020-04-21T00:00:00+08:00">2020-04-21</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-07 10:33:17" itemprop="dateModified" datetime="2020-04-07T10:33:17+08:00">2020-04-07</time>
+                <time title="Modified: 2020-04-25 22:17:32" itemprop="dateModified" datetime="2020-04-25T22:17:32+08:00">2020-04-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -252,7 +253,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/DSAA/" itemprop="url" rel="index"><span itemprop="name">DSAA</span></a>
+                  <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
                 </span>
             </span>
 
@@ -269,7 +270,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>534</span>
+              <span>1.4k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -288,25 +289,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>树的直径，即<strong>树中距离最远的两个节点的距离</strong>。</p>
-<h2 id="求解方法">求解方法</h2>
-<p>选取树中的任意一个节点，计算距离它最远的节点（使用DFS或者BFS），然后以这个最远的节点为根计算距离它最远的节点。这段距离即为树的直径，根和此最远的点便是两个端点。</p>
+        <h2 id="题目描述">题目描述</h2>
+<p><span class="exturl" data-url="aHR0cHM6Ly9waW50aWEuY24vcHJvYmxlbS1zZXRzLzk5NDgwNTM0MjcyMDg2ODM1Mi9wcm9ibGVtcy85OTQ4MDU0MzkyMDI0NDMyNjQ=" title="https://pintia.cn/problem-sets/994805342720868352/problems/994805439202443264">题目地址<i class="fa fa-external-link"></i></span></p>
+<p>简单来说，即给定一串数字序列，以及目标值M，找出一段和为M的子串，若不存在找出大于M的最小子串</p>
 <a id="more"></a>
-<h2 id="简单证明">简单证明</h2>
-<p>其实只要证明：<strong>以任意点为根节点，距离此根节点最远的节点必定是树的直径中的一个端点。</strong></p>
-<p>证明了这个，那么上面提到的算法就很容易证明了，获取第一个端点，然后以此端点为根的最远端点就是另外一个端点。</p>
-<p>首先规定从<em>r</em>开始的最远距离节点为<em>u</em>，证明<em>u</em>为树的直径的一个端点，可以使用反证法证明，假设存在另外两个节点<em>s,t</em>，构成了树的直径。</p>
-<ol type="1">
-<li><p><strong><em>st</em>的路径和<em>ru</em>不相交</strong>：</p>
-<p>在这种情况下，存在<span class="math inline">\(dis(u,s)+dis(s,t) &gt; dis(s,t)\)</span>，所以<em>st</em>并不是最长的，和假设相矛盾，<em>st</em>这种情况下不存在</p></li>
-<li><p><strong><em>st</em>的路径和<em>ru</em>相交于点<em>v</em>：</strong></p>
-<p>此时<em>s,u</em>都是以<em>a</em>为根的子树上的节点，因为u为距离a最远的结点所以可得： <span class="math display">\[
- dis(a,y)+dis(y,u) &gt; dis(a,y)+dis(y,s) \\
- 即：dis(u,y) &lt; dis(s,y)
- \]</span> 同样表示<em>s,t</em>并不是最长的，而是<em>u,t</em></p></li>
-</ol>
-<p>综上，<em>u</em>必定为树的直径的一个端点。</p>
-<p>关于树的直径的更多性质可参考：<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vS2hhZGEtSmhpbi9wLzEwMTk1Mjg3Lmh0bWw=" title="https://www.cnblogs.com/Khada-Jhin/p/10195287.html">博客园 树的直径及其性质与证明<i class="fa fa-external-link"></i></span></p>
+<h2 id="简单思路">简单思路</h2>
+<p>这是一道二分法的题目，开始很难看出来，因为二分意味着有序，这里并没有什么有序。唯一可能有序的就是和了，如果让一个数组sums保存从开始到此位置的和，那这个数组就是递增的了，也就可以使用二分法了。</p>
+<p>从位置i开始（左界）寻找符合条件的右界，也就是找前缀和为sums[i-1]+M的下标，这就可以使用二分查找了</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="comment">//#define LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SEE(x) cout &lt;&lt; #x &lt;&lt; <span class="meta-string">":"</span> &lt;&lt; x &lt;&lt; endl;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1e5</span>+<span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"><span class="keyword">int</span> sums[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">divide</span><span class="params">(<span class="keyword">int</span> st)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ed = n, mid, tar = m+sums[st<span class="number">-1</span>];</span><br><span class="line">    <span class="keyword">while</span>(st &lt; ed) &#123;</span><br><span class="line">        mid = (st + ed) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(sums[mid] &gt;= tar) &#123;</span><br><span class="line">            ed = mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            st = mid+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ed;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"./in.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    sums[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;n, &amp;m);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid; <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;mid);</span><br><span class="line">        sums[i] = sums[i<span class="number">-1</span>] + mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> min_m = sums[n];</span><br><span class="line">    <span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; res;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> tar_pos = divide(i);</span><br><span class="line">        <span class="keyword">int</span> temp = sums[tar_pos]-sums[i<span class="number">-1</span>];</span><br><span class="line">        <span class="keyword">if</span>(temp &gt; min_m) &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(temp &gt;= m) &#123;</span><br><span class="line">            <span class="keyword">if</span>(temp &lt; min_m) &#123;</span><br><span class="line">                res.clear();</span><br><span class="line">                min_m = temp;</span><br><span class="line">            &#125;</span><br><span class="line">            res.push_back(&#123;i, tar_pos&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> v : res) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d-%d\n"</span>, v.first, v.second);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -322,7 +313,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="https://joke-lin.top/2020/04/02/2020-04-02-tree-diameter/" title="树的直径">https://joke-lin.top/2020/04/02/2020-04-02-tree-diameter/</a>
+    <a href="https://joke-lin.top/2020/04/21/2020-04-25-PAT-Advanced-1044/" title="PAT Advanced 1044 Shopping in Mars（二分）">https://joke-lin.top/2020/04/21/2020-04-25-PAT-Advanced-1044/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.
@@ -335,7 +326,8 @@
           
           <div class="post-tags">
               <a href="/tags/C-C/" rel="tag"><i class="fa fa-tag"></i> C/C++</a>
-              <a href="/tags/Graph-Theory/" rel="tag"><i class="fa fa-tag"></i> Graph Theory</a>
+              <a href="/tags/PAT/" rel="tag"><i class="fa fa-tag"></i> PAT</a>
+              <a href="/tags/%E4%BA%8C%E5%88%86/" rel="tag"><i class="fa fa-tag"></i> 二分</a>
           </div>
 
         
@@ -349,12 +341,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/04/03/2020-04-03-PAT-Advanced-1021/" rel="prev" title="PAT Advanced 1021 Deepest Root （连通分量+树的直径）">
-      <i class="fa fa-chevron-left"></i> PAT Advanced 1021 Deepest Root （连通分量+树的直径）
+    <a href="/2020/04/21/2020-04-21-PAT-Advanced-1043/" rel="prev" title="PAT Advanced 1043 Is It a Binary Search Tree（树）">
+      <i class="fa fa-chevron-left"></i> PAT Advanced 1043 Is It a Binary Search Tree（树）
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/04/01/2020-04-01-PAT-Advanced-1020/" rel="next" title="PAT Advanced 1020 Tree Traversals （二叉树）">
-      PAT Advanced 1020 Tree Traversals （二叉树） <i class="fa fa-chevron-right"></i>
+    <a href="/2020/04/16/2020-04-16-PAT-Advanced-1040/" rel="next" title="PAT Advanced 1040 Longest Symmetric String（动态规划）">
+      PAT Advanced 1040 Longest Symmetric String（动态规划） <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -416,7 +408,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#求解方法"><span class="nav-text">求解方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单证明"><span class="nav-text">简单证明</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单思路"><span class="nav-text">简单思路</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -712,7 +704,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       repo        : 'Joke-Lin.github.io',
       owner       : 'Joke-Lin',
       admin       : ['Joke-Lin'],
-      id          : 'eba666f0311858e4ad4699f89a6cdbd9',
+      id          : 'b581abe2311a23002c76b85778c06580',
         language: '',
       distractionFreeMode: true
     });
