@@ -23,17 +23,21 @@
     var CONFIG = {"hostname":"joke-lin.top","root":"/","scheme":"Gemini","version":"7.7.2","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Learing and Using">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Joke-Lin | BLOG">
-<meta property="og:url" content="https://joke-lin.top/categories/ELSE/index.html">
+  <meta name="description" content="题目描述 题目地址 给定栈的最大容量，按照1~N的顺序入栈，但可以随时出栈，判断给出的pop序列是否是可能的情况">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PAT Advanced 1051 Pop Sequence（栈）">
+<meta property="og:url" content="https://joke-lin.top/2020/05/06/2020-05-06-PAT-Advanced-1051/index.html">
 <meta property="og:site_name" content="Joke-Lin | BLOG">
-<meta property="og:description" content="Learing and Using">
+<meta property="og:description" content="题目描述 题目地址 给定栈的最大容量，按照1~N的顺序入栈，但可以随时出栈，判断给出的pop序列是否是可能的情况">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-05-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-05-06T08:12:31.291Z">
 <meta property="article:author" content="Joke-Lin">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta property="article:tag" content="PAT">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://joke-lin.top/categories/ELSE/">
+<link rel="canonical" href="https://joke-lin.top/2020/05/06/2020-05-06-PAT-Advanced-1051/">
 
 
 <script id="page-configurations">
@@ -41,11 +45,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false
+    isPost : true
   };
 </script>
 
-  <title>Category: ELSE | Joke-Lin | BLOG</title>
+  <title>PAT Advanced 1051 Pop Sequence（栈） | Joke-Lin | BLOG</title>
   
 
 
@@ -205,97 +209,147 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">ELSE
-          <small>Category</small>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://joke-lin.top/2020/05/06/2020-05-06-PAT-Advanced-1051/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Joke-Lin">
+      <meta itemprop="description" content="Learing and Using">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joke-Lin | BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          PAT Advanced 1051 Pop Sequence（栈）
         </h2>
-      </div>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-05-06 00:00:00 / Modified: 16:12:31" itemprop="dateCreated datePublished" datetime="2020-05-06T00:00:00+08:00">2020-05-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>1.3k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h2 class="collection-header">2020</h2>
+        <h2 id="题目描述">题目描述</h2>
+<p><span class="exturl" data-url="aHR0cHM6Ly9waW50aWEuY24vcHJvYmxlbS1zZXRzLzk5NDgwNTM0MjcyMDg2ODM1Mi9wcm9ibGVtcy85OTQ4MDU0MjczMzI1NjI5NDQ=" title="https://pintia.cn/problem-sets/994805342720868352/problems/994805427332562944">题目地址<i class="fa fa-external-link"></i></span></p>
+<p>给定栈的最大容量，按照1~N的顺序入栈，但可以随时出栈，判断给出的pop序列是否是可能的情况</p>
+<a id="more"></a>
+<h2 id="基本思路">基本思路</h2>
+<p>这里主要是运用栈这种数据结构先进后出的特点，假如当前pop出来的值为a，那么1~a之间的值，必定是被push过了，所以我们从左到右遍历pop序列并且维护一个栈，而且记录当前已pop的最大值maxn，如果当前pop值t大于他，说明有新的值push到栈中，这些值即为a+1~t，如果小于maxn，说明现在的值是已经被push到栈中了的，所以直接查看它与当前栈顶的值是否一致，是的话则将栈pop，否则说明非法序列，在push到栈的过程中要检查栈大小，不能超过限定值</p>
+<p>参考代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="comment">//#define LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SEE(x) cout &lt;&lt; #x &lt;&lt; <span class="meta-string">":"</span> &lt;&lt; x &lt;&lt; endl;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"./in.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="keyword">int</span> m, n, k; <span class="built_in">scanf</span>(<span class="string">"%d %d %d"</span>, &amp;m, &amp;n, &amp;k);</span><br><span class="line">    <span class="keyword">while</span>(k--) &#123;</span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; s;</span><br><span class="line">        <span class="keyword">int</span> maxn = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n;i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> v; <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;v);</span><br><span class="line">            <span class="keyword">if</span>(!flag) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(v &gt; maxn) &#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> j = maxn+<span class="number">1</span>;j &lt;= v;j++) &#123;</span><br><span class="line">                    s.push(j);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(s.size() &gt; m) &#123;</span><br><span class="line">                    flag = <span class="literal">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                maxn = v;</span><br><span class="line">                s.pop();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span>(v != s.top()) &#123;</span><br><span class="line">                    flag = <span class="literal">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    s.pop();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(flag) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"YES\n"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"NO\n"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
+        
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-31T00:00:00+08:00"
-              content="2020-03-31">
-          03-31
-        </time>
-      </div>
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Joke-Lin
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://joke-lin.top/2020/05/06/2020-05-06-PAT-Advanced-1051/" title="PAT Advanced 1051 Pop Sequence（栈）">https://joke-lin.top/2020/05/06/2020-05-06-PAT-Advanced-1051/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
 
-      <h3 class="post-title">
-          <a class="post-title-link" href="/2020/03/31/2020-03-31-Draw-CherryTree/" itemprop="url">
-            <span itemprop="name">画个简陋樱花树（简单递归）</span>
-          </a>
-      </h3>
 
-    </header>
-  </article>
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/C-C/" rel="tag"><i class="fa fa-tag"></i> C/C++</a>
+              <a href="/tags/PAT/" rel="tag"><i class="fa fa-tag"></i> PAT</a>
+          </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-12T00:00:00+08:00"
-              content="2020-03-12">
-          03-12
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/2020/03/12/2020-03-12-Matplotlib-DirectlyOutput-Img/" itemprop="url">
-            <span itemprop="name">Matplotlib 图像直接导出为 ndarray</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-    <div class="collection-year">
-      <h2 class="collection-header">2018</h2>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2018-11-02T00:00:00+08:00"
-              content="2018-11-02">
-          11-02
-        </time>
-      </div>
-
-      <h3 class="post-title">
-          <a class="post-title-link" href="/2018/11/02/2018-11-02-BinaryFileReader/" itemprop="url">
-            <span itemprop="name">简单的二进制阅读器</span>
-          </a>
-      </h3>
-
-    </header>
-  </article>
-
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
     </div>
   </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/02/2020-05-02-PAT-Advanced-1049/" rel="next" title="PAT Advanced 1049 Counting Ones（动态规划？数学问题）">
+      PAT Advanced 1049 Counting Ones（动态规划？数学问题） <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
   
   
   
 
-  
-
+  </div>
 
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -342,6 +396,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本思路"><span class="nav-text">基本思路</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -626,6 +681,25 @@
 
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '64f708c73ee01327eaff',
+      clientSecret: 'fe1991c81ffd1b32cc8aec2ab7e1e7a1f79957ab',
+      repo        : 'Joke-Lin.github.io',
+      owner       : 'Joke-Lin',
+      admin       : ['Joke-Lin'],
+      id          : '2c203b04fd96891daa4c16d62dd14883',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
 </body>
 </html>
