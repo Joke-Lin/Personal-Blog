@@ -23,15 +23,15 @@
     var CONFIG = {"hostname":"joke-lin.top","root":"/","scheme":"Gemini","version":"7.7.2","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="题目描述 题目地址 给定内存中的链表，节点格式为（地址，值，指向下一个节点的地址），并给出开始地址，给出此链表从小到大排序后的链表。 基础思路 这道题只需要排序即可，比较基础，但有几个坑，首先这类题一定要考虑不存在的情况（即给出的开始地址是无效的），再者不要使用stl，map会超时……能够使用数组哈希表代替map就不要使用map，开销大很多。 代码如下： 123456789101112">
+  <meta name="description" content="题目描述 题目地址 给定内存中的链表，节点格式为（地址，值，指向下一个节点的地址），并给出开始地址，给出此链表从小到大排序后的链表。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PAT Advanced 1052 Linked List Sorting（排序）">
 <meta property="og:url" content="https://joke-lin.top/2020/05/11/2020-05-11-PAT-Advanced-1052/index.html">
 <meta property="og:site_name" content="Joke-Lin | BLOG">
-<meta property="og:description" content="题目描述 题目地址 给定内存中的链表，节点格式为（地址，值，指向下一个节点的地址），并给出开始地址，给出此链表从小到大排序后的链表。 基础思路 这道题只需要排序即可，比较基础，但有几个坑，首先这类题一定要考虑不存在的情况（即给出的开始地址是无效的），再者不要使用stl，map会超时……能够使用数组哈希表代替map就不要使用map，开销大很多。 代码如下： 123456789101112">
+<meta property="og:description" content="题目描述 题目地址 给定内存中的链表，节点格式为（地址，值，指向下一个节点的地址），并给出开始地址，给出此链表从小到大排序后的链表。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-05-10T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-05-11T08:09:48.104Z">
+<meta property="article:modified_time" content="2020-05-11T08:12:09.348Z">
 <meta property="article:author" content="Joke-Lin">
 <meta property="article:tag" content="C&#x2F;C++">
 <meta property="article:tag" content="PAT">
@@ -238,7 +238,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-05-11 00:00:00 / Modified: 16:09:48" itemprop="dateCreated datePublished" datetime="2020-05-11T00:00:00+08:00">2020-05-11</time>
+              <time title="Created: 2020-05-11 00:00:00 / Modified: 16:12:09" itemprop="dateCreated datePublished" datetime="2020-05-11T00:00:00+08:00">2020-05-11</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -285,6 +285,7 @@
         <h2 id="题目描述">题目描述</h2>
 <p><span class="exturl" data-url="aHR0cHM6Ly9waW50aWEuY24vcHJvYmxlbS1zZXRzLzk5NDgwNTM0MjcyMDg2ODM1Mi9wcm9ibGVtcy85OTQ4MDU0MjU3ODA2NzA0NjQ=" title="https://pintia.cn/problem-sets/994805342720868352/problems/994805425780670464">题目地址<i class="fa fa-external-link"></i></span></p>
 <p>给定内存中的链表，节点格式为（地址，值，指向下一个节点的地址），并给出开始地址，给出此链表从小到大排序后的链表。</p>
+<a id="more"></a>
 <h2 id="基础思路">基础思路</h2>
 <p>这道题只需要排序即可，比较基础，但有几个坑，首先这类题一定要考虑不存在的情况（即给出的开始地址是无效的），再者不要使用stl，map会超时……能够使用数组哈希表代替map就不要使用map，开销大很多。</p>
 <p>代码如下：</p>
