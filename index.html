@@ -210,6 +210,94 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://joke-lin.top/2020/05/11/2020-05-11-PAT-Advanced-1052/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Joke-Lin">
+      <meta itemprop="description" content="Learing and Using">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joke-Lin | BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/11/2020-05-11-PAT-Advanced-1052/" class="post-title-link" itemprop="url">PAT Advanced 1052 Linked List Sorting（排序）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-05-11 00:00:00 / Modified: 16:09:48" itemprop="dateCreated datePublished" datetime="2020-05-11T00:00:00+08:00">2020-05-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>1.5k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="题目描述">题目描述</h2>
+<p><span class="exturl" data-url="aHR0cHM6Ly9waW50aWEuY24vcHJvYmxlbS1zZXRzLzk5NDgwNTM0MjcyMDg2ODM1Mi9wcm9ibGVtcy85OTQ4MDU0MjU3ODA2NzA0NjQ=" title="https://pintia.cn/problem-sets/994805342720868352/problems/994805425780670464">题目地址<i class="fa fa-external-link"></i></span></p>
+<p>给定内存中的链表，节点格式为（地址，值，指向下一个节点的地址），并给出开始地址，给出此链表从小到大排序后的链表。</p>
+<h2 id="基础思路">基础思路</h2>
+<p>这道题只需要排序即可，比较基础，但有几个坑，首先这类题一定要考虑不存在的情况（即给出的开始地址是无效的），再者不要使用stl，map会超时……能够使用数组哈希表代替map就不要使用map，开销大很多。</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="comment">//#define LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SEE(x) cout &lt;&lt; #x &lt;&lt; <span class="meta-string">":"</span> &lt;&lt; x &lt;&lt; endl;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; Node;</span><br><span class="line">Node G[<span class="number">100010</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"./in.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="keyword">int</span> n, v, addr, next, st;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;n, &amp;st);</span><br><span class="line">    <span class="keyword">bool</span> is_empty = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n;i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d %d %d"</span>, &amp;addr, &amp;v, &amp;next);</span><br><span class="line">        <span class="keyword">if</span>(addr == st) &#123;</span><br><span class="line">            is_empty = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        G[addr] = &#123;v, next&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(is_empty) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"0 -1"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="built_in">list</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">        <span class="built_in">list</span>.push_back(st);</span><br><span class="line">        <span class="keyword">if</span>(G[st].second == <span class="number">-1</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        st = G[st].second;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(<span class="built_in">list</span>.begin(), <span class="built_in">list</span>.end(), [](<span class="keyword">int</span> &amp;a, <span class="keyword">int</span> &amp;b)-&gt;<span class="keyword">bool</span>&#123;<span class="keyword">return</span> G[a].first &lt; G[b].first;&#125;);</span><br><span class="line">    <span class="keyword">int</span> len = <span class="built_in">list</span>.size();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d %05d\n"</span>, len, <span class="built_in">list</span>[<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; len;i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(i != len - <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%05d %d %05d\n"</span>, <span class="built_in">list</span>[i], G[<span class="built_in">list</span>[i]].first, <span class="built_in">list</span>[i+<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%05d %d -1\n"</span>, <span class="built_in">list</span>[i], G[<span class="built_in">list</span>[i]].first);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="https://joke-lin.top/2020/05/06/2020-05-06-PAT-Advanced-1051/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -332,7 +420,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-06 15:17:32" itemprop="dateModified" datetime="2020-05-06T15:17:32+08:00">2020-05-06</time>
+                <time title="Modified: 2020-05-08 17:14:29" itemprop="dateModified" datetime="2020-05-08T17:14:29+08:00">2020-05-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -340,11 +428,11 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
+                  <a href="/categories/DSAA/" itemprop="url" rel="index"><span itemprop="name">DSAA</span></a>
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OJ/DSAA/" itemprop="url" rel="index"><span itemprop="name">DSAA</span></a>
+                  <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
                 </span>
             </span>
 
@@ -1079,109 +1167,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://joke-lin.top/2020/04/09/2020-04-09-PAT-Advanced-1026/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Joke-Lin">
-      <meta itemprop="description" content="Learing and Using">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Joke-Lin | BLOG">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/09/2020-04-09-PAT-Advanced-1026/" class="post-title-link" itemprop="url">PAT Advanced 1026 Table Tennis （模拟）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-04-09 00:00:00" itemprop="dateCreated datePublished" datetime="2020-04-09T00:00:00+08:00">2020-04-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-21 16:34:59" itemprop="dateModified" datetime="2020-04-21T16:34:59+08:00">2020-04-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>5.3k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>5 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="题目描述">题目描述</h2>
-<p><a href="https://pintia.cn/problem-sets/994805342720868352/problems/994805472333250560" target="_blank" rel="noopener">题目地址</a></p>
-<p>给定数量的乒乓球台（8：00~21：00开放）以及顾客访问时间表，确定每个顾客的服务时间（不超过2小时）以及每个球台接待的顾客数量。其中增加了VIP机制，有以下三条规则：</p>
-<ul>
-<li>当一个VIP球台空的时候，排队中的第一个VIP可以优先使用</li>
-<li>如果当前没有VIP用户等待，普通用户也可以使用VIP球台</li>
-<li>如果VIP用户没有VIP球台可以使用，就使用普通球台</li>
-</ul>
-<p>存在多个球台可以选择时，选择可选择的编号最小的。如果被服务的时间超过（包含）21：00则不予服务，不打印。注意等待时间的四舍五入。 题目并没有涉及到很难的算法，只是一个挺复杂的模拟问题。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/04/09/2020-04-09-PAT-Advanced-1026/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1254,14 +1239,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-count">43</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -1346,13 +1331,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">172k</span>
+    <span title="Symbols count total">174k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">2:37</span>
+    <span title="Reading time total">2:38</span>
 </div>
   <div class="powered-by">Powered by <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> v4.2.0
   </div>

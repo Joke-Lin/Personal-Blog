@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>PAT Advanced 1052 Linked List Sorting（排序）</title>
+    <url>/2020/05/11/2020-05-11-PAT-Advanced-1052/</url>
+    <content><![CDATA[<h2 id="题目描述">题目描述</h2>
+<p><span class="exturl" data-url="aHR0cHM6Ly9waW50aWEuY24vcHJvYmxlbS1zZXRzLzk5NDgwNTM0MjcyMDg2ODM1Mi9wcm9ibGVtcy85OTQ4MDU0MjU3ODA2NzA0NjQ=" title="https://pintia.cn/problem-sets/994805342720868352/problems/994805425780670464">题目地址<i class="fa fa-external-link"></i></span></p>
+<p>给定内存中的链表，节点格式为（地址，值，指向下一个节点的地址），并给出开始地址，给出此链表从小到大排序后的链表。</p>
+<h2 id="基础思路">基础思路</h2>
+<p>这道题只需要排序即可，比较基础，但有几个坑，首先这类题一定要考虑不存在的情况（即给出的开始地址是无效的），再者不要使用stl，map会超时……能够使用数组哈希表代替map就不要使用map，开销大很多。</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="comment">//#define LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SEE(x) cout &lt;&lt; #x &lt;&lt; <span class="meta-string">":"</span> &lt;&lt; x &lt;&lt; endl;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; Node;</span><br><span class="line">Node G[<span class="number">100010</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"./in.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="keyword">int</span> n, v, addr, next, st;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;n, &amp;st);</span><br><span class="line">    <span class="keyword">bool</span> is_empty = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n;i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d %d %d"</span>, &amp;addr, &amp;v, &amp;next);</span><br><span class="line">        <span class="keyword">if</span>(addr == st) &#123;</span><br><span class="line">            is_empty = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        G[addr] = &#123;v, next&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(is_empty) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"0 -1"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="built_in">list</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">        <span class="built_in">list</span>.push_back(st);</span><br><span class="line">        <span class="keyword">if</span>(G[st].second == <span class="number">-1</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        st = G[st].second;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(<span class="built_in">list</span>.begin(), <span class="built_in">list</span>.end(), [](<span class="keyword">int</span> &amp;a, <span class="keyword">int</span> &amp;b)-&gt;<span class="keyword">bool</span>&#123;<span class="keyword">return</span> G[a].first &lt; G[b].first;&#125;);</span><br><span class="line">    <span class="keyword">int</span> len = <span class="built_in">list</span>.size();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d %05d\n"</span>, len, <span class="built_in">list</span>[<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; len;i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(i != len - <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%05d %d %05d\n"</span>, <span class="built_in">list</span>[i], G[<span class="built_in">list</span>[i]].first, <span class="built_in">list</span>[i+<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%05d %d -1\n"</span>, <span class="built_in">list</span>[i], G[<span class="built_in">list</span>[i]].first);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>OJ</category>
+      </categories>
+      <tags>
+        <tag>C/C++</tag>
+        <tag>PAT</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>PAT Advanced 1051 Pop Sequence（栈）</title>
     <url>/2020/05/06/2020-05-06-PAT-Advanced-1051/</url>
     <content><![CDATA[<h2 id="题目描述">题目描述</h2>
@@ -90,8 +109,8 @@
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="comment">//#define LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SEE(x) cout &lt;&lt; #x &lt;&lt; <span class="meta-string">":"</span> &lt;&lt; x &lt;&lt; endl;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取某个数1个个数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">calOnes</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(num) &#123;</span><br><span class="line">        <span class="keyword">if</span>(num % <span class="number">10</span> == <span class="number">1</span>) &#123;</span><br><span class="line">            res++;</span><br><span class="line">        &#125;</span><br><span class="line">        num = num/<span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">getOnes</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(num &lt; <span class="number">10</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">char</span> num_str[<span class="number">30</span>];</span><br><span class="line">    <span class="built_in">sprintf</span>(num_str, <span class="string">"%d"</span>, num);</span><br><span class="line">    ll table[<span class="number">30</span>]; <span class="comment">// 存储信息表 位数-数量表</span></span><br><span class="line">    <span class="built_in">memset</span>(table, <span class="number">0</span>, <span class="keyword">sizeof</span>(table));</span><br><span class="line">    <span class="comment">// 初始化1位的情况</span></span><br><span class="line">    table[<span class="number">0</span>] = num_str[<span class="number">0</span>]-<span class="string">'0'</span>, table[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> lens = <span class="built_in">strlen</span>(num_str);</span><br><span class="line">    <span class="keyword">int</span> up_pos = calOnes(table[<span class="number">0</span>]); <span class="comment">// 记录N位的1的个数，以获取其在哪一列</span></span><br><span class="line">    <span class="keyword">int</span> temp_sum = table[<span class="number">0</span>];    <span class="comment">// N位对应的值</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>;i &lt;= lens;i++) &#123;  <span class="comment">// 位数遍历</span></span><br><span class="line">        <span class="keyword">int</span> cur_num = num_str[i<span class="number">-1</span>] - <span class="string">'0'</span>;   <span class="comment">// 当前的对应位的值</span></span><br><span class="line">        temp_sum = temp_sum*<span class="number">10</span> + cur_num;</span><br><span class="line">        <span class="keyword">int</span> temp = <span class="number">0</span>;   <span class="comment">// 保存含有1的数字总和</span></span><br><span class="line">        <span class="comment">// 从后往前压缩数组（滚动数组）</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> cur = i;cur &gt;= <span class="number">1</span>;cur--) &#123;   <span class="comment">// 获取对应1的个数的数量</span></span><br><span class="line">            <span class="keyword">int</span> prev = cur<span class="number">-1</span>;</span><br><span class="line">            <span class="comment">// 对应prev，cur两列的数值</span></span><br><span class="line">            <span class="keyword">int</span> a = up_pos == prev ? table[prev] - (cur_num == <span class="number">0</span>) : table[prev];</span><br><span class="line">            <span class="keyword">int</span> b = up_pos == cur ? (table[cur] - <span class="number">1</span>)*<span class="number">9</span> + (cur_num == <span class="number">0</span> ? <span class="number">1</span> : cur_num) : table[cur]*<span class="number">9</span>;</span><br><span class="line">            table[cur] = a+b;</span><br><span class="line">            temp += table[cur];</span><br><span class="line">        &#125;</span><br><span class="line">        table[<span class="number">0</span>] = temp_sum - temp + <span class="number">1</span>; <span class="comment">// 不包含1 的数量</span></span><br><span class="line">        up_pos = calOnes(temp_sum);</span><br><span class="line">    &#125;</span><br><span class="line">    ll res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= lens;i++) &#123;</span><br><span class="line">        res += i*table[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"./in.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="keyword">int</span> n; </span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>, getOnes(n));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>OJ</category>
         <category>DSAA</category>
+        <category>OJ</category>
       </categories>
       <tags>
         <tag>C/C++</tag>
@@ -3075,6 +3094,40 @@ T_s 为平均寻道时间，b表示传输的字节数，N表示一个磁道的�
       </tags>
   </entry>
   <entry>
+    <title>《30天自制操作系统》 笔记目录</title>
+    <url>/2020/01/24/2020-01-24-30OSMakeNoteAll/</url>
+    <content><![CDATA[<h1 id="daysmakeos-note">30DaysMakeOS-Note</h1>
+<blockquote>
+<p>《30天自制操作系统》（川合秀实）阅读笔记</p>
+</blockquote>
+<h2 id="笔记目录">笔记目录</h2>
+<ul>
+<li><a href="https://joke-lin.top/os/tutorial/2020/01/24/30OSMakeNote1-3/">第一天到第三天——从汇编到C语言</a></li>
+<li><a href="https://joke-lin.top/os/tutorial/2020/01/26/30OSMakeNote04/">第四天——C语言和画面显示的练习</a></li>
+</ul>
+<hr />
+<a id="more"></a>
+<p>书本实现了一个名为OSASK的只有80KB的简单操作系统，效果图如下</p>
+<p><img src="https://raw.githubusercontent.com/Joke-Lin/30DaysMakeOS-Note/master/Screen.png" style="zoom:50%;" /></p>
+<h2 id="书本各章内容概要摘自原文">书本各章内容概要（摘自原文）</h2>
+<h3 id="第一周第1天-第7天">第一周（第1天 ～ 第7天）</h3>
+<p>一开始首先要考虑怎么来写一个“只要一通电就能运行的程序”。 这部分用C语言写 起来有些困难， 所以主要还是用汇编语言来写。 这步完成之后， 下一步就要写一个从磁盘读取操作系统的程序。 这时即便打开电脑 电源， 它也不会自动地将操作系统全部都读进来， 它只能读取磁盘上最开始的512 字节的内容， 所以我们要编写剩余部分的载入程序。 这个程序也要用汇编语言编 写。 一旦完成了这一步， 以后的程序就可以用C语言来编写了。 我们就尽快使用C语言 来学习开发显示画面的程序。 同时， 我们也能慢慢熟悉C语言语法。 这个时候我们 好像在做自己想做的事， 但事实上我们还没有自由操纵C语言。 接下来， 为了实现“移动鼠标”这一雄心， 我们要对CPU进行细致的设定， 并掌握中 断处理程序的写法。 从全书总体看来， 这一部分是水平相当高的部分， 笔者也觉得 放在这里有些不妥， 但从本书条理上讲， 这些内容必须放在这里， 所以只好请大家 忍耐一下了。 在这里， CPU的规格以及电脑复杂的规格都会给我们带来各种各样的 麻烦。 而且开发语言既有C语言， 又有汇编语言， 这又给我们造成了更大的混乱。 这个时候我们一点儿也不会觉得这是在做自己想做的事， 怎么看都像是在“受人摆 布”。 渡过这个痛苦的时期， 第一周就该结束了。</p>
+<h3 id="第二周第8天-第14天">第二周（第8天 ～ 第14天）</h3>
+<p>一周的苦战还是很有意义的， 回头一看， 我们就会发现自己还是斩获颇丰的。 这时 我们已经基本掌握了C语言的语法， 连汇编语言的水平也能达到本书的要求了。 所以现在我们就可以着手开发像样的操作系统了。 但是这一次我们又要为算法头痛 了。 即使掌握了编程语言的语法， 如果不懂得好的算法的话， 也还是不能开发出来 自己想要的操作系统。 所以这一周我们就边学习算法边慢慢地开发操作系统。 不过 到了这一阶段， 我们就能感觉到基本上不会再受技术问题限制了。</p>
+<h3 id="第三周第15天-第21天">第三周（第15天 ～ 第21天）</h3>
+<p>现在我们的技术已经相当厉害了， 可以随心所欲地开发自己的操作系统了。 首先是 要支持多任务， 然后是开发命令行窗口， 之后就可以着手开发应用程序了。 到本周 结束时， 就算还不够完备， 我们也能拿出一个可以称之为操作系统的软件了。</p>
+<h3 id="第四周第22天-第28天">第四周（第22天 ～ 第28天）</h3>
+<p>在这个阶段， 我们可以尽情地给操作系统增加各种各样的功能， 同时还可以开发出 大量像模像样的应用程序来。 这个阶段我们已经能做得很好了， 这可能也是我们最 高兴的时期。 这部分要讲解的内容很少， 笔者也不用再煞费苦心地去写那些文字说 明了， 可以把精力都集中在编程上（笑） 。 对了， 说起文字才想起来， 正好在这个 时期可以让我们的操作系统显示文字了。</p>
+]]></content>
+      <categories>
+        <category>OS</category>
+        <category>Tutorial &amp; Note</category>
+      </categories>
+      <tags>
+        <tag>30天自制操作系统</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>《30天自制操作系统》 01-03 从汇编到C语言</title>
     <url>/2020/01/24/2020-01-24-30OSMakeNote01-03/</url>
     <content><![CDATA[<h1 id="day-note">01-03-Day-Note</h1>
@@ -3335,40 +3388,6 @@ T_s 为平均寻道时间，b表示传输的字节数，N表示一个磁道的�
 <li>导出的函数需要前加<code>_</code>，这样才能和C语言链接，C语言编译后的函数会加<code>_</code></li>
 </ol>
 <p>可以看看作者的<code>Makefile</code>可以更好的明白整个编译的过程</p>
-]]></content>
-      <categories>
-        <category>OS</category>
-        <category>Tutorial &amp; Note</category>
-      </categories>
-      <tags>
-        <tag>30天自制操作系统</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《30天自制操作系统》 笔记目录</title>
-    <url>/2020/01/24/2020-01-24-30OSMakeNoteAll/</url>
-    <content><![CDATA[<h1 id="daysmakeos-note">30DaysMakeOS-Note</h1>
-<blockquote>
-<p>《30天自制操作系统》（川合秀实）阅读笔记</p>
-</blockquote>
-<h2 id="笔记目录">笔记目录</h2>
-<ul>
-<li><a href="https://joke-lin.top/os/tutorial/2020/01/24/30OSMakeNote1-3/">第一天到第三天——从汇编到C语言</a></li>
-<li><a href="https://joke-lin.top/os/tutorial/2020/01/26/30OSMakeNote04/">第四天——C语言和画面显示的练习</a></li>
-</ul>
-<hr />
-<a id="more"></a>
-<p>书本实现了一个名为OSASK的只有80KB的简单操作系统，效果图如下</p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/30DaysMakeOS-Note/master/Screen.png" style="zoom:50%;" /></p>
-<h2 id="书本各章内容概要摘自原文">书本各章内容概要（摘自原文）</h2>
-<h3 id="第一周第1天-第7天">第一周（第1天 ～ 第7天）</h3>
-<p>一开始首先要考虑怎么来写一个“只要一通电就能运行的程序”。 这部分用C语言写 起来有些困难， 所以主要还是用汇编语言来写。 这步完成之后， 下一步就要写一个从磁盘读取操作系统的程序。 这时即便打开电脑 电源， 它也不会自动地将操作系统全部都读进来， 它只能读取磁盘上最开始的512 字节的内容， 所以我们要编写剩余部分的载入程序。 这个程序也要用汇编语言编 写。 一旦完成了这一步， 以后的程序就可以用C语言来编写了。 我们就尽快使用C语言 来学习开发显示画面的程序。 同时， 我们也能慢慢熟悉C语言语法。 这个时候我们 好像在做自己想做的事， 但事实上我们还没有自由操纵C语言。 接下来， 为了实现“移动鼠标”这一雄心， 我们要对CPU进行细致的设定， 并掌握中 断处理程序的写法。 从全书总体看来， 这一部分是水平相当高的部分， 笔者也觉得 放在这里有些不妥， 但从本书条理上讲， 这些内容必须放在这里， 所以只好请大家 忍耐一下了。 在这里， CPU的规格以及电脑复杂的规格都会给我们带来各种各样的 麻烦。 而且开发语言既有C语言， 又有汇编语言， 这又给我们造成了更大的混乱。 这个时候我们一点儿也不会觉得这是在做自己想做的事， 怎么看都像是在“受人摆 布”。 渡过这个痛苦的时期， 第一周就该结束了。</p>
-<h3 id="第二周第8天-第14天">第二周（第8天 ～ 第14天）</h3>
-<p>一周的苦战还是很有意义的， 回头一看， 我们就会发现自己还是斩获颇丰的。 这时 我们已经基本掌握了C语言的语法， 连汇编语言的水平也能达到本书的要求了。 所以现在我们就可以着手开发像样的操作系统了。 但是这一次我们又要为算法头痛 了。 即使掌握了编程语言的语法， 如果不懂得好的算法的话， 也还是不能开发出来 自己想要的操作系统。 所以这一周我们就边学习算法边慢慢地开发操作系统。 不过 到了这一阶段， 我们就能感觉到基本上不会再受技术问题限制了。</p>
-<h3 id="第三周第15天-第21天">第三周（第15天 ～ 第21天）</h3>
-<p>现在我们的技术已经相当厉害了， 可以随心所欲地开发自己的操作系统了。 首先是 要支持多任务， 然后是开发命令行窗口， 之后就可以着手开发应用程序了。 到本周 结束时， 就算还不够完备， 我们也能拿出一个可以称之为操作系统的软件了。</p>
-<h3 id="第四周第22天-第28天">第四周（第22天 ～ 第28天）</h3>
-<p>在这个阶段， 我们可以尽情地给操作系统增加各种各样的功能， 同时还可以开发出 大量像模像样的应用程序来。 这个阶段我们已经能做得很好了， 这可能也是我们最 高兴的时期。 这部分要讲解的内容很少， 笔者也不用再煞费苦心地去写那些文字说 明了， 可以把精力都集中在编程上（笑） 。 对了， 说起文字才想起来， 正好在这个 时期可以让我们的操作系统显示文字了。</p>
 ]]></content>
       <categories>
         <category>OS</category>
