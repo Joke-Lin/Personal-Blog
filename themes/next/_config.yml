@@ -111,14 +111,14 @@ darkmode: false
 # When running the site in a subdirectory (e.g. yoursite.com/blog), remove the leading slash from link value (/archives -> archives).
 # External url should start with http:// or https://
 menu:
-  home: / || home
-  about: /about/ || user
-  tags: /tags/ || tags
-  categories: /categories/ || th
-  archives: /archives/ || archive
-  RSS: /atom.xml || rss
+  home: / || fa fa-home
+  about: /about/ || fa fa-user
+  tags: /tags/ || fa fa-tags
+  categories: /categories/ || fa fa-th
+  archives: /archives/ || fa fa-archive
+  RSS: /atom.xml || fa fa-rss
   #schedule: /schedule/ || calendar
-  sitemap: /sitemap.xml || sitemap
+  sitemap: /sitemap.xml || fa fa-sitemap
   #commonweal: /404/ || heartbeat
 
 # Enable / Disable menu icons / item badges.
@@ -173,11 +173,11 @@ site_state: true
 # Key is the link label showing to end users.
 # Value before `||` delimiter is the target permalink, value after `||` delimiter is the name of Font Awesome icon.
 social:
-  Github: https://github.com/joke-lin || github
-  知乎: https://www.zhihu.com/people/joker-88-62-57/activities || globe
-  CSDN: https://blog.csdn.net/qq_40953281 || globe
+  Github: https://github.com/joke-lin || fab fa-github
+  ZHIHU: https://www.zhihu.com/people/joker-88-62-57/activities || fab fa-zhihu
+  CSDN: https://blog.csdn.net/qq_40953281 || fas fa-globe
   # GitHub: https://github.com/yourname || github
-  E-Mail: mailto:weijun-lin@foxmail.com || envelope
+  E-Mail: mailto:weijun-lin@foxmail.com || fa fa-envelope
   #Weibo: https://weibo.com/yourname || weibo
   #Google: https://plus.google.com/yourname || google
   #Twitter: https://twitter.com/yourname || twitter
@@ -360,7 +360,9 @@ codeblock:
   # Code Highlight theme
   # Available values: normal | night | night eighties | night blue | night bright | solarized | solarized dark | galactic
   # See: https://github.com/chriskempson/tomorrow-theme
-  highlight_theme: normal
+  theme:
+    light: default
+    dark: dark
   # Add copy button on codeblock
   copy_button:
     enable: true
