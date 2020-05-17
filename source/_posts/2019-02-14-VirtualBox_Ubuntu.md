@@ -2,8 +2,10 @@
 title: 'Virtual Box 配置虚拟机 Ubuntu'
 date: 2019-02-14
 categories: 
-- [Linux]
-- [Tutorial & Note]
+- 随笔
+- ELSE
+tags:
+- linux
 ---
 
 ## 虚拟机的简单概念

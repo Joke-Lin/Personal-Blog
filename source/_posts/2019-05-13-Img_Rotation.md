@@ -5,6 +5,7 @@ mathjax: true
 tags:
 - Python
 categories:
+- Coding
 - Image Processing
 ---
 

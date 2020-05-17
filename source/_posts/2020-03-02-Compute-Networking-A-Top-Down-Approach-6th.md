@@ -2,8 +2,10 @@
 title: '计算机网络自顶向下 第6版 阅读笔记'
 date: 2020-03-02
 categories:
-- [Computer Network]
-- [Tutorial & Note]
+- 随笔
+- Note
+tags:
+- Computer Network
 ---
 
 [书本配套答案](https://github.com/Troy922/Computer-Network/blob/master/计算机网络自顶向下方法答案(英文第六版).pdf)

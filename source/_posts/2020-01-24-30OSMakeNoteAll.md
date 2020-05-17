@@ -3,9 +3,10 @@ title: '《30天自制操作系统》 笔记目录'
 date: 2020-01-24
 tags:
 - 30天自制操作系统
+- 操作系统
 categories:
-- [OS]
-- [Tutorial & Note]
+- 随笔
+- Note
 ---
 
 # 30DaysMakeOS-Note
@@ -14,8 +15,8 @@ categories:
 
 ## 笔记目录
 
-- [第一天到第三天——从汇编到C语言](https://joke-lin.top/os/tutorial/2020/01/24/30OSMakeNote1-3/)
-- [第四天——C语言和画面显示的练习](https://joke-lin.top/os/tutorial/2020/01/26/30OSMakeNote04/)
+- [第一天到第三天——从汇编到C语言](https://joke-lin.top/2020/01/24/2020-01-24-30OSMakeNote01-03/)
+- [第四天——C语言和画面显示的练习](https://joke-lin.top/2020/01/26/2020-01-26-30OSMakeNote04/)
 
 ---
 

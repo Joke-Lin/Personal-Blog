@@ -5,6 +5,7 @@ mathjax: true
 tags:
 - C/C++
 categories:
+- Coding
 - ELSE
 ---
 
