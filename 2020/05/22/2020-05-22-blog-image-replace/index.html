@@ -23,24 +23,20 @@
     var CONFIG = {"hostname":"joke-lin.top","root":"/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="部分文件说明 Snakeprev.h  蛇节点声明 struct snake; 蛇存储结构链表 snake * snakelist(int,int*); 增加节点方法 void addsnake(snake *); 绘画蛇身 void drawsnake(snake *,char); 清空蛇 void clearsnake(snake *);">
+  <meta name="description" content="问题描述 在博客网站下直接写文章时,会涉及到图像的路径，但在本地下的路径和最终部署后的路径是不同。对于不是很长的文章，便直接写路径为site.com&#x2F;assert&#x2F;...&#x2F;这样的了。但对于图片过多的情况，这样子渲染起来一堆无效图片，很难受。所以长篇文章就在站点文件夹之外新建一个文件夹写，将图片也存一份到此文件夹下，最后发布的时候，在将所有的图片的路径改成可以显示的。但手动改很麻烦，可以使用正则匹">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Retro Snake Easyx版本">
-<meta property="og:url" content="https://joke-lin.top/2018/09/15/2018-09-15-Retro-Snake/index.html">
+<meta property="og:title" content="Python 正则替换 Markdown 图像路径前缀">
+<meta property="og:url" content="https://joke-lin.top/2020/05/22/2020-05-22-blog-image-replace/index.html">
 <meta property="og:site_name" content="Joke-Lin | BLOG">
-<meta property="og:description" content="部分文件说明 Snakeprev.h  蛇节点声明 struct snake; 蛇存储结构链表 snake * snakelist(int,int*); 增加节点方法 void addsnake(snake *); 绘画蛇身 void drawsnake(snake *,char); 清空蛇 void clearsnake(snake *);">
+<meta property="og:description" content="问题描述 在博客网站下直接写文章时,会涉及到图像的路径，但在本地下的路径和最终部署后的路径是不同。对于不是很长的文章，便直接写路径为site.com&#x2F;assert&#x2F;...&#x2F;这样的了。但对于图片过多的情况，这样子渲染起来一堆无效图片，很难受。所以长篇文章就在站点文件夹之外新建一个文件夹写，将图片也存一份到此文件夹下，最后发布的时候，在将所有的图片的路径改成可以显示的。但手动改很麻烦，可以使用正则匹">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://github.com/LWJ9527/Retro-Snake/blob/master/%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA/start.png?raw=true">
-<meta property="og:image" content="https://github.com/LWJ9527/Retro-Snake/blob/master/%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA/run.png?raw=true">
-<meta property="og:image" content="https://github.com/LWJ9527/Retro-Snake/blob/master/%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA/over.png?raw=true">
-<meta property="article:published_time" content="2018-09-14T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-05-17T08:42:13.187Z">
+<meta property="article:published_time" content="2020-05-21T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-05-22T08:41:31.364Z">
 <meta property="article:author" content="Joke-Lin">
-<meta property="article:tag" content="C&#x2F;C++">
+<meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/LWJ9527/Retro-Snake/blob/master/%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA/start.png?raw=true">
 
-<link rel="canonical" href="https://joke-lin.top/2018/09/15/2018-09-15-Retro-Snake/">
+<link rel="canonical" href="https://joke-lin.top/2020/05/22/2020-05-22-blog-image-replace/">
 
 
 <script id="page-configurations">
@@ -53,7 +49,7 @@
   };
 </script>
 
-  <title>Retro Snake Easyx版本 | Joke-Lin | BLOG</title>
+  <title>Python 正则替换 Markdown 图像路径前缀 | Joke-Lin | BLOG</title>
   
 
 
@@ -220,7 +216,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://joke-lin.top/2018/09/15/2018-09-15-Retro-Snake/">
+    <link itemprop="mainEntityOfPage" href="https://joke-lin.top/2020/05/22/2020-05-22-blog-image-replace/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -233,7 +229,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Retro Snake Easyx版本
+          Python 正则替换 Markdown 图像路径前缀
         </h1>
 
         <div class="post-meta">
@@ -242,16 +238,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2018-09-15 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-15T00:00:00+08:00">2018-09-15</time>
+              <time title="Created: 2020-05-22 00:00:00 / Modified: 16:41:31" itemprop="dateCreated datePublished" datetime="2020-05-22T00:00:00+08:00">2020-05-22</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-17 16:42:13" itemprop="dateModified" datetime="2020-05-17T16:42:13+08:00">2020-05-17</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -262,11 +252,7 @@
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Coding/Game/" itemprop="url" rel="index"><span itemprop="name">Game</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Coding/Game/C-Game/" itemprop="url" rel="index"><span itemprop="name">C++ Game</span></a>
+                  <a href="/categories/Coding/ELSE/" itemprop="url" rel="index"><span itemprop="name">ELSE</span></a>
                 </span>
             </span>
 
@@ -283,7 +269,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>691</span>
+              <span>1k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -302,48 +288,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="部分文件说明">部分文件说明</h2>
-<h3 id="snakeprev.h"><strong>Snakeprev.h</strong></h3>
-<ol type="1">
-<li>蛇节点声明 <code>struct snake;</code></li>
-<li>蛇存储结构链表 <code>snake * snakelist(int,int*);</code></li>
-<li>增加节点方法 <code>void addsnake(snake *);</code></li>
-<li>绘画蛇身 <code>void drawsnake(snake *,char);</code></li>
-<li>清空蛇 <code>void clearsnake(snake *);</code></li>
-</ol>
+        <h2 id="问题描述">问题描述</h2>
+<p>在博客网站下直接写文章时,会涉及到图像的路径，但在本地下的路径和最终部署后的路径是不同。对于不是很长的文章，便直接写路径为<code>site.com/assert/.../</code>这样的了。但对于图片过多的情况，这样子渲染起来一堆无效图片，很难受。所以长篇文章就在站点文件夹之外新建一个文件夹写，将图片也存一份到此文件夹下，最后发布的时候，在将所有的图片的路径改成可以显示的。但手动改很麻烦，可以使用正则匹配解决。</p>
 <a id="more"></a>
-<h3 id="mapgraph.h"><strong>mapgraph.h</strong></h3>
-<p>主要是页面布局 背景（box map)的制作 布局</p>
-<h3 id="main.cpp"><strong>main.cpp</strong></h3>
-<p>主要方法如下</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">welcomegraph</span><span class="params">()</span></span>;<span class="comment">//欢迎界面</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Finish</span><span class="params">()</span></span>;<span class="comment">//结束界面</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">clickcontrol</span><span class="params">()</span></span>;<span class="comment">//鼠标控制</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Movingsnake</span><span class="params">(<span class="keyword">char</span>)</span></span>;<span class="comment">//蛇身移动控制</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Changesnakebody</span><span class="params">(<span class="keyword">int</span> ,<span class="keyword">int</span> )</span></span>;<span class="comment">//蛇身改变控制</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Eating</span><span class="params">()</span></span>;<span class="comment">//吃到食物的操作</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Deadjudge</span><span class="params">()</span></span>;<span class="comment">//死亡判断</span></span><br></pre></td></tr></table></figure>
-<h3 id="运行截图">运行截图</h3>
-<ul>
-<li><strong>Start</strong></li>
-</ul>
-<figure>
-<img src="https://github.com/LWJ9527/Retro-Snake/blob/master/%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA/start.png?raw=true" alt="Start" /><figcaption>Start</figcaption>
-</figure>
-<ul>
-<li><strong>Run</strong></li>
-</ul>
-<figure>
-<img src="https://github.com/LWJ9527/Retro-Snake/blob/master/%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA/run.png?raw=true" alt="Run" /><figcaption>Run</figcaption>
-</figure>
-<ul>
-<li><strong>Over</strong></li>
-</ul>
-<figure>
-<img src="https://github.com/LWJ9527/Retro-Snake/blob/master/%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA/over.png?raw=true" alt="Over" /><figcaption>Over</figcaption>
-</figure>
-<h3 id="注意事项及运行说明">注意事项及运行说明</h3>
-<p><strong>WASD：</strong>　来操控蛇的上下左右移动 注意打开英文输入<br />
-<strong>初始界面：</strong> 用户名及密码只是模拟 回车键确定输入<br />
-<strong>EXE目录：</strong> exe文件在debug目录下 release发布因为其优化运行出错<br />
-<strong>源代码下载：</strong> <code>https://github.com/LWJ9527/Retro-Snake.git</code><br />
-<strong>C控制台源代码：</strong> <code>https://blog.csdn.net/qq_40953281/article/details/79315254</code><br />
-<strong>To Be Continue...</strong> &gt; Easyx 下载地址 <code>https://www.easyx.cn/downloads/</code><br />
-&gt; 更新 2018-9-10</p>
+<h2 id="解决方案">解决方案</h2>
+<p>这里采用的是Python的正则匹配方案。对于路径<code>![text](./img/sub_path)</code>，转换为网站可识别路径只需要将<code>./</code>替换为对应的前缀即可。</p>
+<p>代码如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># python 3.7.3</span></span><br><span class="line"><span class="comment"># 使用：python xx.py 输入文件 需要添加的前缀</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> len(sys.argv) != <span class="number">3</span>:</span><br><span class="line">    print(<span class="string">"amount of parameters must be 3"</span>)</span><br><span class="line">    sys.exit()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 考虑./img/path  img/path 两种种情况</span></span><br><span class="line">patter = <span class="string">'\!\[.*?\]\((?P&lt;tar&gt;(\./)?).*?\)'</span></span><br><span class="line">patter = re.compile((patter))</span><br><span class="line">file_path, prefix =sys.argv[<span class="number">1</span>], sys.argv[<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(file_path, <span class="string">"r"</span>, encoding=<span class="string">'UTF-8'</span>) <span class="keyword">as</span> file_in, open(<span class="string">"out-"</span>+file_path, <span class="string">"w"</span>, encoding=<span class="string">'UTF-8'</span>) <span class="keyword">as</span> file_out:</span><br><span class="line">    line = file_in.readline()</span><br><span class="line">    <span class="keyword">while</span> line:</span><br><span class="line">        matched = patter.finditer(line) <span class="comment"># 获取所有匹配的Match对象</span></span><br><span class="line">        <span class="keyword">if</span> matched != <span class="literal">None</span>:</span><br><span class="line">            matched = list(matched)</span><br><span class="line">            <span class="keyword">for</span> v <span class="keyword">in</span> matched[::<span class="number">-1</span>]: <span class="comment"># 逆序遍历</span></span><br><span class="line">                st, ed = v.start(<span class="string">"tar"</span>), v.end(<span class="string">"tar"</span>)</span><br><span class="line">                <span class="comment"># 替换掉原来的</span></span><br><span class="line">                <span class="keyword">if</span> st == ed:</span><br><span class="line">                    line = line[:st] + prefix + line[st:]</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    line = line[:st] + prefix + line[ed<span class="number">-1</span>:]</span><br><span class="line">        file_out.write(line);</span><br><span class="line">        line = file_in.readline()</span><br></pre></td></tr></table></figure>
+<p>其中一些函数的解释可以参考：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnB5dGhvbi5vcmcvemgtY24vMy9saWJyYXJ5L3JlLmh0bWw=">正则表达式操作<i class="fa fa-external-link-alt"></i></span></p>
 
     </div>
 
@@ -359,7 +311,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="https://joke-lin.top/2018/09/15/2018-09-15-Retro-Snake/" title="Retro Snake Easyx版本">https://joke-lin.top/2018/09/15/2018-09-15-Retro-Snake/</a>
+    <a href="https://joke-lin.top/2020/05/22/2020-05-22-blog-image-replace/" title="Python 正则替换 Markdown 图像路径前缀">https://joke-lin.top/2020/05/22/2020-05-22-blog-image-replace/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.
@@ -370,7 +322,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/C-C/" rel="tag"><i class="fa fa-tag"></i> C/C++</a>
+              <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
           </div>
 
         
@@ -383,11 +335,11 @@
 
         
     <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2018/09/18/2018-09-18-youdao/" rel="prev" title="Python 爬取有道翻译">
-      <i class="fa fa-chevron-left"></i> Python 爬取有道翻译
-    </a></div>
       <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/17/2020-05-17-VERCEL-DNS-EDIT/" rel="next" title="VERCEL（原名为ZEIT）DNS 记录的修改">
+      VERCEL（原名为ZEIT）DNS 记录的修改 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -447,7 +399,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#部分文件说明"><span class="nav-text">部分文件说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#snakeprev.h"><span class="nav-text">Snakeprev.h</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mapgraph.h"><span class="nav-text">mapgraph.h</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#main.cpp"><span class="nav-text">main.cpp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行截图"><span class="nav-text">运行截图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意事项及运行说明"><span class="nav-text">注意事项及运行说明</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案"><span class="nav-text">解决方案</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -741,7 +693,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       repo        : 'Joke-Lin.github.io',
       owner       : 'Joke-Lin',
       admin       : ['Joke-Lin'],
-      id          : 'f877b176e2b897839ccaa3e5e4ae4420',
+      id          : '922cd0ca6647ce818618665b6991bb40',
         language: '',
       distractionFreeMode: true
     });
