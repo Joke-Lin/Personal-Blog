@@ -31,7 +31,7 @@
 <meta property="og:description" content="问题描述 在博客网站下直接写文章时,会涉及到图像的路径，但在本地下的路径和最终部署后的路径是不同。对于不是很长的文章，便直接写路径为site.com&#x2F;assert&#x2F;...&#x2F;这样的了。但对于图片过多的情况，这样子渲染起来一堆无效图片，很难受。所以长篇文章就在站点文件夹之外新建一个文件夹写，将图片也存一份到此文件夹下，最后发布的时候，在将所有的图片的路径改成可以显示的。但手动改很麻烦，可以使用正则匹">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-05-21T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-05-22T08:41:31.364Z">
+<meta property="article:modified_time" content="2020-05-24T01:42:05.701Z">
 <meta property="article:author" content="Joke-Lin">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -238,10 +238,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-05-22 00:00:00 / Modified: 16:41:31" itemprop="dateCreated datePublished" datetime="2020-05-22T00:00:00+08:00">2020-05-22</time>
+              <time title="Created: 2020-05-22 00:00:00" itemprop="dateCreated datePublished" datetime="2020-05-22T00:00:00+08:00">2020-05-22</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-24 09:42:05" itemprop="dateModified" datetime="2020-05-24T09:42:05+08:00">2020-05-24</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -269,14 +275,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>1k</span>
+              <span>2.1k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
+              <span>2 mins.</span>
             </span>
 
         </div>
@@ -294,7 +300,14 @@
 <h2 id="解决方案">解决方案</h2>
 <p>这里采用的是Python的正则匹配方案。对于路径<code>![text](./img/sub_path)</code>，转换为网站可识别路径只需要将<code>./</code>替换为对应的前缀即可。</p>
 <p>代码如下:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># python 3.7.3</span></span><br><span class="line"><span class="comment"># 使用：python xx.py 输入文件 需要添加的前缀</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> len(sys.argv) != <span class="number">3</span>:</span><br><span class="line">    print(<span class="string">"amount of parameters must be 3"</span>)</span><br><span class="line">    sys.exit()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 考虑./img/path  img/path 两种种情况</span></span><br><span class="line">patter = <span class="string">'\!\[.*?\]\((?P&lt;tar&gt;(\./)?).*?\)'</span></span><br><span class="line">patter = re.compile((patter))</span><br><span class="line">file_path, prefix =sys.argv[<span class="number">1</span>], sys.argv[<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(file_path, <span class="string">"r"</span>, encoding=<span class="string">'UTF-8'</span>) <span class="keyword">as</span> file_in, open(<span class="string">"out-"</span>+file_path, <span class="string">"w"</span>, encoding=<span class="string">'UTF-8'</span>) <span class="keyword">as</span> file_out:</span><br><span class="line">    line = file_in.readline()</span><br><span class="line">    <span class="keyword">while</span> line:</span><br><span class="line">        matched = patter.finditer(line) <span class="comment"># 获取所有匹配的Match对象</span></span><br><span class="line">        <span class="keyword">if</span> matched != <span class="literal">None</span>:</span><br><span class="line">            matched = list(matched)</span><br><span class="line">            <span class="keyword">for</span> v <span class="keyword">in</span> matched[::<span class="number">-1</span>]: <span class="comment"># 逆序遍历</span></span><br><span class="line">                st, ed = v.start(<span class="string">"tar"</span>), v.end(<span class="string">"tar"</span>)</span><br><span class="line">                <span class="comment"># 替换掉原来的</span></span><br><span class="line">                <span class="keyword">if</span> st == ed:</span><br><span class="line">                    line = line[:st] + prefix + line[st:]</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    line = line[:st] + prefix + line[ed<span class="number">-1</span>:]</span><br><span class="line">        file_out.write(line);</span><br><span class="line">        line = file_in.readline()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># python 3.7.3</span></span><br><span class="line"><span class="comment"># 使用：python xx.py 输入文件 需要添加的前缀</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> len(sys.argv) != <span class="number">3</span>:</span><br><span class="line">    print(<span class="string">"amount of parameters must be 3"</span>)</span><br><span class="line">    sys.exit()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 考虑./img/path  img/path 两种种情况</span></span><br><span class="line">patter = <span class="string">'\!\[.*?\]\((?P&lt;tar&gt;(\./)?).*?\)'</span></span><br><span class="line">patter = re.compile((patter))</span><br><span class="line">file_path, prefix =sys.argv[<span class="number">1</span>], sys.argv[<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(file_path, <span class="string">"r"</span>, encoding=<span class="string">'UTF-8'</span>) <span class="keyword">as</span> file_in, open(<span class="string">"out-"</span>+file_path, <span class="string">"w"</span>, encoding=<span class="string">'UTF-8'</span>) <span class="keyword">as</span> file_out:</span><br><span class="line">    line = file_in.readline()</span><br><span class="line">    <span class="keyword">while</span> line:</span><br><span class="line">        matched = patter.finditer(line) <span class="comment"># 获取所有匹配的Match对象</span></span><br><span class="line">        <span class="keyword">if</span> matched != <span class="literal">None</span>:</span><br><span class="line">            matched = list(matched)</span><br><span class="line">            <span class="keyword">for</span> v <span class="keyword">in</span> matched[::<span class="number">-1</span>]: <span class="comment"># 逆序遍历</span></span><br><span class="line">                st, ed = v.start(<span class="string">"tar"</span>), v.end(<span class="string">"tar"</span>)</span><br><span class="line">                <span class="comment"># 替换掉原来的</span></span><br><span class="line">                <span class="keyword">if</span> st == ed:</span><br><span class="line">                    line = line[:st] + prefix + line[st:]</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    line = line[:st] + prefix + line[ed:]</span><br><span class="line">        file_out.write(line);</span><br><span class="line">        line = file_in.readline()</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>2020-05-24 更新</p>
+</blockquote>
+<p>上述代码并未考虑到markdown文件中使用<code>&lt;img src=&quot;&quot; ... &gt;</code>这样的HTML标签的情况：</p>
+<p>更新代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># python 3.7.3</span></span><br><span class="line"><span class="comment"># 使用：python xx.py 输入文件 需要添加的前缀(前缀为 XXXX/)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> len(sys.argv) != <span class="number">3</span>:</span><br><span class="line">    print(<span class="string">"amount of parameters must be 3"</span>)</span><br><span class="line">    sys.exit()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 考虑./img/path  img/path 两种种情况 以及 使用markdown 和 HTML img标签</span></span><br><span class="line">patter1 = <span class="string">'\!\[.*?\]\((?P&lt;tar&gt;(\./)?).*?\)'</span></span><br><span class="line">patter1 = re.compile(patter1)</span><br><span class="line">patter2 = <span class="string">'\&lt;img src="(?P&lt;tar&gt;(\./)?).*?\&gt;'</span></span><br><span class="line">patter2 = re.compile(patter2)</span><br><span class="line">file_path, prefix =sys.argv[<span class="number">1</span>], sys.argv[<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(file_path, <span class="string">"r"</span>, encoding=<span class="string">'UTF-8'</span>) <span class="keyword">as</span> file_in, open(<span class="string">"out-"</span>+file_path, <span class="string">"w"</span>, encoding=<span class="string">'UTF-8'</span>) <span class="keyword">as</span> file_out:</span><br><span class="line">    line = file_in.readline()</span><br><span class="line">    <span class="keyword">while</span> line:</span><br><span class="line">        <span class="comment"># 获取所有匹配的Match对象</span></span><br><span class="line">        matched1 = patter1.finditer(line)</span><br><span class="line">        matched2 = patter2.finditer(line)</span><br><span class="line">        pos_list = []</span><br><span class="line">        <span class="keyword">if</span> matched1 != <span class="literal">None</span>:</span><br><span class="line">            pos_list += [(x.start(<span class="string">"tar"</span>), x.end(<span class="string">"tar"</span>)) <span class="keyword">for</span> x <span class="keyword">in</span> list(matched1)]</span><br><span class="line">        <span class="keyword">if</span> matched2 != <span class="literal">None</span>:</span><br><span class="line">            pos_list += [(x.start(<span class="string">"tar"</span>), x.end(<span class="string">"tar"</span>)) <span class="keyword">for</span> x <span class="keyword">in</span> list(matched2)]</span><br><span class="line">        pos_list.sort() <span class="comment"># 按开始位置从小到大排序</span></span><br><span class="line">        <span class="keyword">for</span> v <span class="keyword">in</span> pos_list[::<span class="number">-1</span>]: <span class="comment"># 逆序遍历</span></span><br><span class="line">            st, ed = v</span><br><span class="line">            <span class="comment"># 替换掉原来的</span></span><br><span class="line">            <span class="keyword">if</span> st == ed:</span><br><span class="line">                line = line[:st] + prefix + line[st:]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                line = line[:st] + prefix + line[ed:]</span><br><span class="line">        file_out.write(line);</span><br><span class="line">        line = file_in.readline()</span><br></pre></td></tr></table></figure>
+<p>使用命令``</p>
 <p>其中一些函数的解释可以参考：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnB5dGhvbi5vcmcvemgtY24vMy9saWJyYXJ5L3JlLmh0bWw=">正则表达式操作<i class="fa fa-external-link-alt"></i></span></p>
 
     </div>
@@ -335,7 +348,10 @@
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/23/2020-05-23-PAT-Advanced-1060/" rel="prev" title="PAT Advanced 1060 Are They Equal （模拟）">
+      <i class="fa fa-chevron-left"></i> PAT Advanced 1060 Are They Equal （模拟）
+    </a></div>
       <div class="post-nav-item">
     <a href="/2020/05/17/2020-05-17-VERCEL-DNS-EDIT/" rel="next" title="VERCEL（原名为ZEIT）DNS 记录的修改">
       VERCEL（原名为ZEIT）DNS 记录的修改 <i class="fa fa-chevron-right"></i>
@@ -415,7 +431,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -428,7 +444,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -508,13 +524,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">179k</span>
+    <span title="Symbols count total">201k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">2:43</span>
+    <span title="Reading time total">3:02</span>
 </div>
   <div class="powered-by">Powered by <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span>
   </div>
