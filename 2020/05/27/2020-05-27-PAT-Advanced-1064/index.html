@@ -23,20 +23,20 @@
     var CONFIG = {"hostname":"joke-lin.top","root":"/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="题目描述 题目地址 给定内存中的链表，节点格式为（地址，值，指向下一个节点的地址），并给出开始地址，给出此链表从小到大排序后的链表。">
+  <meta name="description" content="题目描述 给定一个各个数不同的序列，给出满足完全二叉树定义的二叉搜索树的层序遍历结果 Sample Input: 12101 2 3 4 5 6 7 8 9 0 Sample Output: 16 3 8 1 5 7 9 0 2 4">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PAT Advanced 1052 Linked List Sorting（排序）">
-<meta property="og:url" content="https://joke-lin.top/2020/05/11/2020-05-11-PAT-Advanced-1052/index.html">
+<meta property="og:title" content="PAT Advanced 1063 Complete Binary Search Tree （二叉树）">
+<meta property="og:url" content="https://joke-lin.top/2020/05/27/2020-05-27-PAT-Advanced-1064/index.html">
 <meta property="og:site_name" content="WEIJUN LIN BLOG">
-<meta property="og:description" content="题目描述 题目地址 给定内存中的链表，节点格式为（地址，值，指向下一个节点的地址），并给出开始地址，给出此链表从小到大排序后的链表。">
+<meta property="og:description" content="题目描述 给定一个各个数不同的序列，给出满足完全二叉树定义的二叉搜索树的层序遍历结果 Sample Input: 12101 2 3 4 5 6 7 8 9 0 Sample Output: 16 3 8 1 5 7 9 0 2 4">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-05-10T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-05-17T08:50:03.592Z">
+<meta property="article:published_time" content="2020-05-26T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-05-27T08:18:49.700Z">
 <meta property="article:author" content="Weijun-Lin">
 <meta property="article:tag" content="C&#x2F;C++">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://joke-lin.top/2020/05/11/2020-05-11-PAT-Advanced-1052/">
+<link rel="canonical" href="https://joke-lin.top/2020/05/27/2020-05-27-PAT-Advanced-1064/">
 
 
 <script id="page-configurations">
@@ -49,7 +49,7 @@
   };
 </script>
 
-  <title>PAT Advanced 1052 Linked List Sorting（排序） | WEIJUN LIN BLOG</title>
+  <title>PAT Advanced 1063 Complete Binary Search Tree （二叉树） | WEIJUN LIN BLOG</title>
   
 
 
@@ -216,7 +216,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://joke-lin.top/2020/05/11/2020-05-11-PAT-Advanced-1052/">
+    <link itemprop="mainEntityOfPage" href="https://joke-lin.top/2020/05/27/2020-05-27-PAT-Advanced-1064/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -229,7 +229,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          PAT Advanced 1052 Linked List Sorting（排序）
+          PAT Advanced 1063 Complete Binary Search Tree （二叉树）
         </h1>
 
         <div class="post-meta">
@@ -238,16 +238,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2020-05-11 00:00:00" itemprop="dateCreated datePublished" datetime="2020-05-11T00:00:00+08:00">2020-05-11</time>
+              <time title="Created: 2020-05-27 00:00:00 / Modified: 16:18:49" itemprop="dateCreated datePublished" datetime="2020-05-27T00:00:00+08:00">2020-05-27</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-17 16:50:03" itemprop="dateModified" datetime="2020-05-17T16:50:03+08:00">2020-05-17</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -275,7 +269,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>1.5k</span>
+              <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -295,13 +289,16 @@
 
       
         <h2 id="题目描述">题目描述</h2>
-<p><span class="exturl" data-url="aHR0cHM6Ly9waW50aWEuY24vcHJvYmxlbS1zZXRzLzk5NDgwNTM0MjcyMDg2ODM1Mi9wcm9ibGVtcy85OTQ4MDU0MjU3ODA2NzA0NjQ=">题目地址<i class="fa fa-external-link-alt"></i></span></p>
-<p>给定内存中的链表，节点格式为（地址，值，指向下一个节点的地址），并给出开始地址，给出此链表从小到大排序后的链表。</p>
+<p>给定一个各个数不同的序列，给出满足完全二叉树定义的二叉搜索树的层序遍历结果</p>
+<p>Sample Input:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">10</span><br><span class="line">1 2 3 4 5 6 7 8 9 0</span><br></pre></td></tr></table></figure>
+<p>Sample Output:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">6 3 8 1 5 7 9 0 2 4</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<h2 id="基础思路">基础思路</h2>
-<p>这道题只需要排序即可，比较基础，但有几个坑，首先这类题一定要考虑不存在的情况（即给出的开始地址是无效的），再者不要使用stl，map会超时……能够使用数组哈希表代替map就不要使用map，开销大很多。</p>
+<h2 id="基本思路">基本思路</h2>
+<p>主要需要知道完全二叉树的定义以及一些性质，完全二叉树即除底层之外，为满二叉树，且底层为从左到右排列。所以对于给定数量的节点，它的完全二叉树结构是确定的，此时只需要用中序遍历，将给定的序列排序后依次放入就可以了，因为它也是一个搜索树。最后在层序遍历输出结果即可。</p>
 <p>代码如下：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="comment">//#define LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SEE(x) cout &lt;&lt; #x &lt;&lt; <span class="meta-string">":"</span> &lt;&lt; x &lt;&lt; endl;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; Node;</span><br><span class="line">Node G[<span class="number">100010</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"./in.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="keyword">int</span> n, v, addr, next, st;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;n, &amp;st);</span><br><span class="line">    <span class="keyword">bool</span> is_empty = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n;i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d %d %d"</span>, &amp;addr, &amp;v, &amp;next);</span><br><span class="line">        <span class="keyword">if</span>(addr == st) &#123;</span><br><span class="line">            is_empty = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        G[addr] = &#123;v, next&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(is_empty) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"0 -1"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="built_in">list</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">        <span class="built_in">list</span>.push_back(st);</span><br><span class="line">        <span class="keyword">if</span>(G[st].second == <span class="number">-1</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        st = G[st].second;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(<span class="built_in">list</span>.begin(), <span class="built_in">list</span>.end(), [](<span class="keyword">int</span> &amp;a, <span class="keyword">int</span> &amp;b)-&gt;<span class="keyword">bool</span>&#123;<span class="keyword">return</span> G[a].first &lt; G[b].first;&#125;);</span><br><span class="line">    <span class="keyword">int</span> len = <span class="built_in">list</span>.size();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d %05d\n"</span>, len, <span class="built_in">list</span>[<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; len;i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(i != len - <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%05d %d %05d\n"</span>, <span class="built_in">list</span>[i], G[<span class="built_in">list</span>[i]].first, <span class="built_in">list</span>[i+<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%05d %d -1\n"</span>, <span class="built_in">list</span>[i], G[<span class="built_in">list</span>[i]].first);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iterator&gt;</span></span></span><br><span class="line"><span class="comment">//#define LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SEE(x) cout &lt;&lt; #x &lt;&lt; <span class="meta-string">":"</span> &lt;&lt; x &lt;&lt; endl;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> Tree[<span class="number">1010</span>][<span class="number">2</span>];</span><br><span class="line"><span class="keyword">int</span> vals[<span class="number">1010</span>];</span><br><span class="line"><span class="keyword">int</span> nodes[<span class="number">1010</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> layers;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">midorder</span><span class="params">(<span class="keyword">int</span> root, <span class="keyword">int</span> &amp;tar)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 遍历左边</span></span><br><span class="line">    <span class="keyword">if</span>(Tree[root][<span class="number">0</span>] != <span class="number">-1</span>) &#123;</span><br><span class="line">        midorder(Tree[root][<span class="number">0</span>], tar);</span><br><span class="line">    &#125;</span><br><span class="line">    nodes[root] = vals[tar++];</span><br><span class="line">    <span class="comment">// 遍历右边</span></span><br><span class="line">    <span class="keyword">if</span>(Tree[root][<span class="number">1</span>] != <span class="number">-1</span>) &#123;</span><br><span class="line">        midorder(Tree[root][<span class="number">1</span>], tar);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"./in.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="built_in">memset</span>(Tree, <span class="number">-1</span>, <span class="keyword">sizeof</span>(Tree));</span><br><span class="line">    <span class="keyword">int</span> n; <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n;i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, vals + i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> l, r;</span><br><span class="line">    <span class="comment">// 构建树结构</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n;i++) &#123;</span><br><span class="line">        l = <span class="number">2</span>*i+<span class="number">1</span>, r = <span class="number">2</span>*i+<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span>(l &lt; n) &#123;</span><br><span class="line">            Tree[i][<span class="number">0</span>] = l;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(r &lt; n) &#123;</span><br><span class="line">            Tree[i][<span class="number">1</span>] = r;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(vals, vals+n);</span><br><span class="line">    <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 通过中序遍历</span></span><br><span class="line">    midorder(<span class="number">0</span>, cnt);</span><br><span class="line">    <span class="comment">//层序遍历</span></span><br><span class="line">    <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">    q.push(<span class="number">0</span>);</span><br><span class="line">    cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(!q.empty()) &#123;</span><br><span class="line">        <span class="keyword">int</span> r = q.front(); q.pop();</span><br><span class="line">        cnt++;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d%s"</span>, nodes[r], cnt == n ? <span class="string">""</span> : <span class="string">" "</span>);</span><br><span class="line">        <span class="keyword">if</span>(Tree[r][<span class="number">0</span>] != <span class="number">-1</span>) &#123;</span><br><span class="line">            q.push(Tree[r][<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(Tree[r][<span class="number">1</span>] != <span class="number">-1</span>) &#123;</span><br><span class="line">            q.push(Tree[r][<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -317,7 +314,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="https://joke-lin.top/2020/05/11/2020-05-11-PAT-Advanced-1052/" title="PAT Advanced 1052 Linked List Sorting（排序）">https://joke-lin.top/2020/05/11/2020-05-11-PAT-Advanced-1052/</a>
+    <a href="https://joke-lin.top/2020/05/27/2020-05-27-PAT-Advanced-1064/" title="PAT Advanced 1063 Complete Binary Search Tree （二叉树）">https://joke-lin.top/2020/05/27/2020-05-27-PAT-Advanced-1064/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.
@@ -341,13 +338,10 @@
 
         
     <div class="post-nav">
+      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2020/05/13/2020-05-13-Binary-Index-Tree/" rel="prev" title="Binary Index Tree 树状数组">
-      <i class="fa fa-chevron-left"></i> Binary Index Tree 树状数组
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/05/06/2020-05-06-PAT-Advanced-1051/" rel="next" title="PAT Advanced 1051 Pop Sequence（栈）">
-      PAT Advanced 1051 Pop Sequence（栈） <i class="fa fa-chevron-right"></i>
+    <a href="/2020/05/24/2020-05-24-Computer-System-Architecture-Note/" rel="next" title="计算机系统结构 张晨曦-第二版 整理">
+      计算机系统结构 张晨曦-第二版 整理 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -408,7 +402,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础思路"><span class="nav-text">基础思路</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本思路"><span class="nav-text">基本思路</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -702,7 +696,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       repo        : 'Joke-Lin.github.io',
       owner       : 'Joke-Lin',
       admin       : ['Joke-Lin'],
-      id          : 'a367c597bc6e9d8e83d99a1cf1563cc3',
+      id          : 'a6e93d1706ca0ee083931094238e2c78',
         language: '',
       distractionFreeMode: true
     });
