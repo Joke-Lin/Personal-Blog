@@ -10,7 +10,7 @@ tags:
 
 [书本配套答案](https://github.com/Troy922/Computer-Network/blob/master/计算机网络自顶向下方法答案(英文第六版).pdf)
 
-> 2020-01-07 Joke-Lin
+> Github：[笔记-计算机网络自顶向下 第6版](https://github.com/Joke-Lin/Notes/tree/master/Compute-Networking-A-Top-Down-Approach-6th)
 
 <!-- more -->
 

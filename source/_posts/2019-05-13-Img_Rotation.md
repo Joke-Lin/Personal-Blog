@@ -15,7 +15,7 @@ categories:
 
 <!-- more -->
 
-如下图，推导点$(x_0,y_0) $旋转$\theta $到到点$(x,y)$，半径为R
+如下图，推导点$(x_0,y_0)$旋转$\theta$到到点$(x,y)$，半径为R
 
 ![](/assets/ArticleImg/2019/ImgRotation_1.png)
 
