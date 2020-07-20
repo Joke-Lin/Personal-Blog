@@ -4,6 +4,7 @@ date: 2020-05-13
 mathjax: true
 tags:
 - C/C++
+- Tree
 categories:
 - Coding
 - DSAA

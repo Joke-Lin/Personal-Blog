@@ -91,7 +91,7 @@ tags:
 
 	以上四类的基本结构：IS：指令流，DS：数据流，CS：控制流，CU：控制部件，PU：处理部件，MM和SM：存储器
 
-	<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/1-1.jpg" style="zoom:50%;" />
+	<img src="/assets/Note/计算机系统结构-张晨曦-第二版/1-1.jpg" style="zoom:50%;" />
 
 ### 1.3 定量分析技术
 
@@ -194,7 +194,7 @@ tags:
 
 #### 冯·诺依曼结构 
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/1-2.jpg" style="zoom:50%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/1-2.jpg" style="zoom:50%;" />
 
 主要特点：（存储程序计算机）
 
@@ -240,7 +240,7 @@ tags:
 
 二次重叠执行过程如下：
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/3-1.png" style="zoom:48%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/3-1.png" style="zoom:48%;" />
 
 此时，执行n条指令花费的时间为$T=(2+n)t$
 
@@ -266,7 +266,7 @@ tags:
 
 	先行指令缓冲站的组成如下：
 
-	<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/3-2.jpg" style="zoom:50%;" />
+	<img src="/assets/Note/计算机系统结构-张晨曦-第二版/3-2.jpg" style="zoom:50%;" />
 
 	- 指令缓冲存储区和相应的控制逻辑
 		- 按队列方式工作
@@ -280,7 +280,7 @@ tags:
 
 当每个子过程执行的时间不相等时，会出现部件空闲的情况：
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/3-3.png" style="zoom:48%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/3-3.png" style="zoom:48%;" />
 
 #### 先行控制
 
@@ -291,7 +291,7 @@ tags:
 
 2. 采用先行控制方式的处理机结构 
 
-	<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/3-4.jpg" style="zoom:50%;" />
+	<img src="/assets/Note/计算机系统结构-张晨曦-第二版/3-4.jpg" style="zoom:50%;" />
 
 	特点：
 
@@ -327,7 +327,7 @@ tags:
 	- 静态流水线：在同一时间内，多功能流水线中的各段只能按同一种功能的连接方式工作，只有输入为一串相同的运算任务时，流水的效率才得到充分的发挥
 	- 动态流水线：在同一时间内，多功能流水线中的各段可以按照不同的方式连接，同时执行多种功能
 
-	<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/3-5.png" style="zoom:75%;" />
+	<img src="/assets/Note/计算机系统结构-张晨曦-第二版/3-5.png" style="zoom:75%;" />
 
 - 部件级、处理机级及处理机间流水线
 
@@ -358,7 +358,7 @@ tags:
 
 1. 各段时间均相等的流水线
 
-	<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/3-6.jpg" style="zoom:50%;" />
+	<img src="/assets/Note/计算机系统结构-张晨曦-第二版/3-6.jpg" style="zoom:50%;" />
 
 	由图可以得出，此流水线的实际吞吐率为:
 
@@ -370,7 +370,7 @@ tags:
 
 2. 各段不完全相等的流水线
 
-	<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/3-7.jpg" style="zoom:70%;" />
+	<img src="/assets/Note/计算机系统结构-张晨曦-第二版/3-7.jpg" style="zoom:70%;" />
 
 	实际吞吐率如下：
 
@@ -382,23 +382,23 @@ tags:
 
 解决流水线瓶颈问题的常用方法
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/3-8.jpg" style="zoom:50%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/3-8.jpg" style="zoom:50%;" />
 
 1. 细分瓶颈段
 
 	对上图$S_3$，将其划分为3个子流水线段即可
 
-	<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/3-9.jpg" style="zoom:50%;" />
+	<img src="/assets/Note/计算机系统结构-张晨曦-第二版/3-9.jpg" style="zoom:50%;" />
 
 2. 重复设置瓶颈段
 
 	使用空间弥补的方法，对$S_3 $只需要设置3个即可
 
-	<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/3-10.jpg" style="zoom:50%;" />
+	<img src="/assets/Note/计算机系统结构-张晨曦-第二版/3-10.jpg" style="zoom:50%;" />
 
 	重置后的时空图如下：
 
-	<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/3-11.jpg" style="zoom:50%;" />
+	<img src="/assets/Note/计算机系统结构-张晨曦-第二版/3-11.jpg" style="zoom:50%;" />
 
 #### 加速比
 
@@ -458,7 +458,7 @@ tags:
 
 虚线代表此处仅花费时钟单元的一半时间,	可以在前半段时间写回后半段从寄存器读取
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/3-13.jpg" style="zoom:50%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/3-13.jpg" style="zoom:50%;" />
 
 1. 取指令周期IF
 
@@ -544,11 +544,11 @@ tags:
 
 	**通过插入暂停周期（气泡）**解决，或者设置独立的指令存储器和数据存储器或者设置独立的Cache
 
-	<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/3-14.jpg" style="zoom:40%;" />
+	<img src="/assets/Note/计算机系统结构-张晨曦-第二版/3-14.jpg" style="zoom:40%;" />
 
 	插入气泡后：
 
-	<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/3-15.jpg" style="zoom:40%;" />
+	<img src="/assets/Note/计算机系统结构-张晨曦-第二版/3-15.jpg" style="zoom:40%;" />
 
 	结构冲突有时候是允许的，可以减少硬件成本
 
@@ -556,7 +556,7 @@ tags:
 
 	当指令在流水线中重叠执行时，因需要用到前面指令的执行结果而发生的冲突
 
-	<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/3-16.jpg" style="zoom:40%;" />
+	<img src="/assets/Note/计算机系统结构-张晨曦-第二版/3-16.jpg" style="zoom:40%;" />
 
 	**前提条件：对于两个指令i，j且i在j前**，有以下三种类型：
 
@@ -590,11 +590,11 @@ tags:
 
 	关键思想：在某条指令产生计算结果之前，后面等待使用该结果的指令并不一定立即需要该结果，如果能够将该计算结果从其产生的地方（ALU出口）直接送到其他指令需要它的地方（ALU入口），那么就可以避免停顿。
 
-	<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/3-17.jpg" style="zoom:40%;" />
+	<img src="/assets/Note/计算机系统结构-张晨曦-第二版/3-17.jpg" style="zoom:40%;" />
 
 	并不是所有的数据冲突都可以用定向技术来解决，必要时需要增加**暂停**：
 
-	<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/3-18.jpg" style="zoom:40%;" />
+	<img src="/assets/Note/计算机系统结构-张晨曦-第二版/3-18.jpg" style="zoom:40%;" />
 
 	**通过编译器解决数据冲突**
 
@@ -606,7 +606,7 @@ tags:
 
 	处理分支指令最简单的方法：排空流水线，给流水线带来3个时钟周期的延迟
 
-	<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/3-19.jpg" style="zoom:70%;" />
+	<img src="/assets/Note/计算机系统结构-张晨曦-第二版/3-19.jpg" style="zoom:70%;" />
 
 	由分支指令引起的延迟为**分支延迟**
 
@@ -617,7 +617,7 @@ tags:
 
 	下面的讨论中，我们假设：这两步工作被提前到ID段完成，即分支指令是在ID段的末尾执行完成，所带来的分支延迟为一个时钟周期
 
-	<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/3-20.jpg" style="zoom:50%;" />
+	<img src="/assets/Note/计算机系统结构-张晨曦-第二版/3-20.jpg" style="zoom:50%;" />
 
 	**减少分支延迟的方法**:
 
@@ -643,7 +643,7 @@ tags:
 	
 	从逻辑上“延长”分支指令的执行时间。把延迟分支看成是由原来的分支指令和若干个延迟槽构成，不管分支是否成功，都要按顺序执行延迟槽中的指令
 	
-		<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/3-21.jpg" style="zoom:70%;" />
+		<img src="/assets/Note/计算机系统结构-张晨曦-第二版/3-21.jpg" style="zoom:70%;" />
 	
 	分支延迟指令的调度:
 	
@@ -652,7 +652,7 @@ tags:
 		- 从目标处调度
 	- 从失败处调度
 	
-	<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/3-22.jpg" style="zoom:70%;" />
+	<img src="/assets/Note/计算机系统结构-张晨曦-第二版/3-22.jpg" style="zoom:70%;" />
 	
 		分支延迟受到两个方面的限制：
 	
@@ -662,7 +662,7 @@ tags:
 		进一步改进：分支取消机制（取消分支）
 		当分支的实际执行方向和事先所预测的一样时，执行分支延迟槽中的指令，否则就将分支延迟槽中的指令转化成一个空操作
 	
-		<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/3-23.jpg" style="zoom:70%;" />
+		<img src="/assets/Note/计算机系统结构-张晨曦-第二版/3-23.jpg" style="zoom:70%;" />
 
 ### 3.5 向量处理机
 
@@ -741,7 +741,7 @@ tags:
 
 获取状态转换图：
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/4-1.jpg" style="zoom:50%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/4-1.jpg" style="zoom:50%;" />
 
 其中5权值边可以看作是0C，右移5位形成的，构建成新的闭合回路
 
@@ -761,7 +761,7 @@ tags:
 
 8个指令进入流水线的时空图如下：
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/4-2.jpg" style="zoom:50%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/4-2.jpg" style="zoom:50%;" />
 
 吞吐率  P = 8/(17Δt)；
 加速比  S = (6Δt×8)/(17Δt)=48/17
@@ -785,7 +785,7 @@ tags:
 
 基于MIPS的Tomasulo基本结构：
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/4-3.jpg" style="zoom:50%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/4-3.jpg" style="zoom:50%;" />
 
 - 保留站
 
@@ -854,43 +854,43 @@ Tomasulo算法具有以下两个特点:
 
 Tomasulo示例：
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/4-4.jpg" style="zoom:50%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/4-4.jpg" style="zoom:50%;" />
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/4-5.jpg" style="zoom:50%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/4-5.jpg" style="zoom:50%;" />
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/4-6.jpg" style="zoom:50%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/4-6.jpg" style="zoom:50%;" />
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/4-7.jpg" style="zoom:50%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/4-7.jpg" style="zoom:50%;" />
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/4-8.jpg" style="zoom:50%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/4-8.jpg" style="zoom:50%;" />
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/4-9.jpg" style="zoom:50%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/4-9.jpg" style="zoom:50%;" />
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/4-10.jpg" style="zoom:50%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/4-10.jpg" style="zoom:50%;" />
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/4-11.jpg" style="zoom:50%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/4-11.jpg" style="zoom:50%;" />
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/4-12.jpg" style="zoom:50%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/4-12.jpg" style="zoom:50%;" />
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/4-13.jpg" style="zoom:50%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/4-13.jpg" style="zoom:50%;" />
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/4-14.jpg" style="zoom:50%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/4-14.jpg" style="zoom:50%;" />
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/4-15.jpg" style="zoom:50%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/4-15.jpg" style="zoom:50%;" />
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/4-16.jpg" style="zoom:50%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/4-16.jpg" style="zoom:50%;" />
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/4-17.jpg" style="zoom:50%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/4-17.jpg" style="zoom:50%;" />
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/4-18.jpg" style="zoom:50%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/4-18.jpg" style="zoom:50%;" />
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/4-19.jpg" style="zoom:50%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/4-19.jpg" style="zoom:50%;" />
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/4-20.jpg" style="zoom:50%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/4-20.jpg" style="zoom:50%;" />
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/4-21.jpg" style="zoom:50%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/4-21.jpg" style="zoom:50%;" />
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/4-22.jpg" style="zoom:50%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/4-22.jpg" style="zoom:50%;" />
 
 ### 4.3 动态分支预测技术
 
@@ -927,7 +927,7 @@ Tomasulo示例：
 
 	提高预测的准确度，研究结果表明：两位分支预测的性能与n位（n>2）分支预测的性能差不多
 
-	<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/4-23.jpg" style="zoom:50%;" />
+	<img src="/assets/Note/计算机系统结构-张晨曦-第二版/4-23.jpg" style="zoom:50%;" />
 
 适用情况：
 
@@ -946,7 +946,7 @@ Tomasulo示例：
 
 结构如下：
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/4-24.jpg" style="zoom:50%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/4-24.jpg" style="zoom:50%;" />
 
 看成是用专门的硬件实现的一张表格。 表格中的每一项至少有两个字段： 
 
@@ -955,7 +955,7 @@ Tomasulo示例：
 
 执行流程如下：
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/4-25.jpg" style="zoom:50%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/4-25.jpg" style="zoom:50%;" />
 
 BTB的另一种形式:
 
@@ -993,7 +993,7 @@ BTB的另一种形式:
 
 符合前瞻执行的结构：
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/4-26.jpg" style="zoom:50%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/4-26.jpg" style="zoom:50%;" />
 
 ROB中的每一项由以下4个字段组成：
 
@@ -1178,7 +1178,7 @@ M2的参数为：$S_1,T_{A1},C_1$
 
 目录表结构：
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/5-1.png" style="zoom:48%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/5-1.png" style="zoom:48%;" />
 
 #### 替换算法
 
@@ -1248,7 +1248,7 @@ M2的参数为：$S_1,T_{A1},C_1$
 
 - 程序执行时间
 
-	<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/5-2.png" style="zoom:48%;" />
+	<img src="/assets/Note/计算机系统结构-张晨曦-第二版/5-2.png" style="zoom:48%;" />
 
 Cache失效对于一个CPI较小而时钟频率较高的CPU来说，影响是双重的：
 
@@ -1341,7 +1341,7 @@ Cache容量越大，使失效率达到最低的块大小就越大
 
 #### 5. 伪相联 Cache 
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/5-3.png" style="zoom:60%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/5-3.png" style="zoom:60%;" />
 
 伪相联Cache的优点：
 
@@ -1413,7 +1413,7 @@ Cache中的写缓冲器导致对存储器访问的复杂化：
 
 #### 5. 采用两级Cache
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/5-4.png" style="zoom:60%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/5-4.png" style="zoom:60%;" />
 
 局部失效率与全局失效率：
 
@@ -1489,6 +1489,6 @@ Cache中的写缓冲器导致对存储器访问的复杂化：
 空格栏：表示它对该指标无影响
 复杂性：0表示最容易，3表示最复杂
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/5-5.png" style="zoom:60%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/5-5.png" style="zoom:60%;" />
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/img/5-6.png" style="zoom:60%;" />
+<img src="/assets/Note/计算机系统结构-张晨曦-第二版/5-6.png" style="zoom:60%;" />

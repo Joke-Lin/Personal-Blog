@@ -6,6 +6,7 @@ categories:
 - Note
 tags:
 - Computer Network
+
 ---
 
 [书本配套答案](https://github.com/Troy922/Computer-Network/blob/master/计算机网络自顶向下方法答案(英文第六版).pdf)
@@ -58,17 +59,17 @@ each router has a **forwarding table** （转发表）that maps destination addr
 
 >  the resources needed along **a path (buffers, link transmission rate) to provide for communication between the end systems are reserved** for the duration of the communication session between the end systems
 >
-> **end-to-end** connection
+>  **end-to-end** connection
 
 ##### Multiplexing in Circuit-Switched Networks
 
--  frequency-division multiplexing (FDM)  频分复用 ：
+- frequency-division multiplexing (FDM)  频分复用 ：
 
-  The width of the range of frequency is called, not surprisingly, the **bandwidth**.
+	The width of the range of frequency is called, not surprisingly, the **bandwidth**.
 
 - time-division multiplexing (TDM) 时分复用:
 
-  circuit switching is **wasteful** because the dedicated circuits are idle during **silent periods**(静默期)
+	circuit switching is **wasteful** because the dedicated circuits are idle during **silent periods**(静默期)
 
 #### iii. Packet Switching Versus Circuit Switching
 
@@ -88,7 +89,7 @@ each router has a **forwarding table** （转发表）that maps destination addr
 
 - ISP: 互联网服务提供商
 - IXP： Internet Exchange Point 因特网交换点 保证同级ISP对等（peering）
--  content provider networks：内容提供商网络
+- content provider networks：内容提供商网络
 
 ### 3. *Delay, Loss, and Throughput 
 
@@ -96,27 +97,27 @@ each router has a **forwarding table** （转发表）that maps destination addr
 
 #### Types Of Delay
 
--  **nodal processing delay**（节点处理时延）: 
+- **nodal processing delay**（节点处理时延）: 
 
-  The time required to **examine the packet’s header** and **determine where to direct the packet** is part of the processing delay.
+	The time required to **examine the packet’s header** and **determine where to direct the packet** is part of the processing delay.
 
 - **Queuing Delay**（排队时延）：
 
-  At the queue, the packet experiences a queuing delay as it waits to be transmitted onto the link.
+	At the queue, the packet experiences a queuing delay as it waits to be transmitted onto the link.
 
 - **Transmission Delay**（传输时延）：
 
-  Denote the length of the packet by L bits, and denote the transmission rate of the link from router A to router B by R bits/sec.  The transmission delay is L/R
+	Denote the length of the packet by L bits, and denote the transmission rate of the link from router A to router B by R bits/sec.  The transmission delay is L/R
 
 - **Propagation Delay**（传播时延）：
 
-  Once a bit is pushed into the link, it needs to propagate to router B. The time required to propagate from the beginning of the link to router B is the propagation delay
+	Once a bit is pushed into the link, it needs to propagate to router B. The time required to propagate from the beginning of the link to router B is the propagation delay
 
 #### Queuing Delay and Packet Loss
 
 -  **traffic intensity**（流量强度）： let *a* denote the **average rate at which packets** arrive at the queue (*a* is in units of packets/sec)（包到达平均速度）Recall that R is the transmission rate（传输速度）; Also suppose, for simplicity, that all packets consist of L bits. Then the average rate at which bits arrive at the queue is *La* bits/sec（包到达路由平均速度） The ratio *La/R*, called the traffic intensity. 保证流量强度<=1才能正常工作
-- **Packet Loss**（丢包）：With no place to store such a packet, a router will drop that packet; that is, the
-  packet will be lost.
+-  **Packet Loss**（丢包）：With no place to store such a packet, a router will drop that packet; that is, the
+	packet will be lost.
 
 #### End-to-End Delay
 
@@ -142,26 +143,26 @@ $ d_{end-end} = N(d_{proc}+d_{trans}+d_{prop})$
 
 1. **Application Layer**: HTTP
 
-   The application layer is where **network applications and their application-layer protocols** reside. this packet of information at the application layer as a **message**（报文）.
+	The application layer is where **network applications and their application-layer protocols** reside. this packet of information at the application layer as a **message**（报文）.
 
 2. **Transport Layer**：TCP UDP
 
-   The Internet’s transport layer transports application-layer messages between application endpoints. Transport-layer packet as a **segment**(报文段).
+	The Internet’s transport layer transports application-layer messages between application endpoints. Transport-layer packet as a **segment**(报文段).
 
-   TCP guaranteed delivery of application-layer messages to the destination and flow control (that is,
-   sender/receiver speed matching) But UDP not.
+	TCP guaranteed delivery of application-layer messages to the destination and flow control (that is,
+	sender/receiver speed matching) But UDP not.
 
 3. **Network Layer**：IP
 
-   The Internet’s network layer is responsible for moving network-layer packets known as **datagrams** (数据报)from one host to another. 
+	The Internet’s network layer is responsible for moving network-layer packets known as **datagrams** (数据报)from one host to another. 
 
 4. **Link Layer**:
 
-    To move a packet from one node (host or router) to the next node in the route, the network layer relies on the services of the link layer. The services provided by the link layer depend on the **specific link-layer protocol**(特定链路层协议) that is employed over the link. refer to the linklayer packets as **frames.**（帧）
+	To move a packet from one node (host or router) to the next node in the route, the network layer relies on the services of the link layer. The services provided by the link layer depend on the **specific link-layer protocol**(特定链路层协议) that is employed over the link. refer to the linklayer packets as **frames.**（帧）
 
 5. **Physical Layer**：
 
-    the job of the physical layer is to **move the individual bits** within the frame from one node to the next.
+	the job of the physical layer is to **move the individual bits** within the frame from one node to the next.
 
 **OSI Model**：
 
@@ -169,7 +170,7 @@ $ d_{end-end} = N(d_{proc}+d_{trans}+d_{prop})$
 > data link layer, and physical layer from up to down.
 
 - **presentation layer** is to provide services that allow communicating applications to interpret the meaning of data exchanged. These services include **data compression** and **data encryption** as well as **data description**.
--  **The session layer** provides for **delimiting and synchronization of data exchange**(数据交换和定界), including the means to build a checkpointing and recovery scheme.
+- **The session layer** provides for **delimiting and synchronization of data exchange**(数据交换和定界), including the means to build a checkpointing and recovery scheme.
 
 #### Encapsulation
 
@@ -193,13 +194,13 @@ In every layer, the layer encapsulates the data from last layer as payload field
 
 - **the client-server architecture：**
 
-  client and server are separate and fixed, and they perform they own functions
+	client and server are separate and fixed, and they perform they own functions
 
 - **P2P architecture:**
 
-  Because the peers（对等方） communicate without passing through a dedicated（专用的） server, the architecture is called peer-to-peer. These peers can be server also can be clientz.
+	Because the peers（对等方） communicate without passing through a dedicated（专用的） server, the architecture is called peer-to-peer. These peers can be server also can be clientz.
 
-  P2P is **self-scalability and cost effective**. And have three **challenges**: ISP Friendly, Security, Incentives（激励）.
+	P2P is **self-scalability and cost effective**. And have three **challenges**: ISP Friendly, Security, Incentives（激励）.
 
 #### ii. Processes Communicating
 
@@ -220,11 +221,11 @@ We use **IP address and port number** to do addressing process.
 
 - TCP Servies
 
-  Connection-oriented service and Reliable data transfer service
+	Connection-oriented service and Reliable data transfer service
 
 - UDP
 
-  UDP is a no-frills, lightweight transport protocol, providing minimal services. UDP is **connectionless, unreliable**. UDP provides **no guarantee** that the message will ever reach the receiving process. Furthermore, messages that do arrive at the receiving process may arrive **out of order**. And no  congestion-control mechanism（拥塞机制）.
+	UDP is a no-frills, lightweight transport protocol, providing minimal services. UDP is **connectionless, unreliable**. UDP provides **no guarantee** that the message will ever reach the receiving process. Furthermore, messages that do arrive at the receiving process may arrive **out of order**. And no  congestion-control mechanism（拥塞机制）.
 
 #### V. Services Not Provided by Internet Transport Protocols
 
@@ -248,7 +249,7 @@ The **HyperText Transfer Protocol (HTTP)**, the Web’s application-layer protoc
 > 2. 返回必须按照接收顺序，已处理好的必须等前一个发送后才可以发送
 
 - **non-persistent connections**: 
-  each request/response pair be sent over a separate TCP connection
+	each request/response pair be sent over a separate TCP connection
 - **persistent connections**: all of the requests and their corresponding responses be sent over the same TCP connection，注意持久化一般是流水线
 
 **round-trip time (RTT 往返时延)**：the time it takes for a small packet to travel from client to server and then back to the client
@@ -262,41 +263,41 @@ Non-persistent connections have some **shortcomings**.
 
 #### iii.  HTTP Message Format 
 
-1.  HTTP Request Message 
+1. HTTP Request Message 
 
-   - request line（请求行）: first line
-     - method field:   **GET, POST**, HEAD, PUT, and DELETE 
-     - URL field
-     - HTTP Version field
-   - header line（首部行）:  subsequent  line
-     -  Host :  specifies the host on which the object resides 
-     - Connection : whether use  persistent connections 
-     - User-agent :  specifies the user agent , that is, the browser type.  This header line is useful because the server can actually send different versions of the same object to different types of user agents.
-     - Accept-language:   indicates that the user prefers language version
-     - POST method:  has an entity body for post data, but get also can do use work with saving data in URLs.
+	- request line（请求行）: first line
+		- method field:   **GET, POST**, HEAD, PUT, and DELETE 
+		- URL field
+		- HTTP Version field
+	- header line（首部行）:  subsequent  line
+		-  Host :  specifies the host on which the object resides 
+		-  Connection : whether use  persistent connections 
+		-  User-agent :  specifies the user agent , that is, the browser type.  This header line is useful because the server can actually send different versions of the same object to different types of user agents.
+		-  Accept-language:   indicates that the user prefers language version
+		-  POST method:  has an entity body for post data, but get also can do use work with saving data in URLs.
 
-2.  HTTP Request Message 
+2. HTTP Request Message 
 
-   -  status line : first line
+	- status line : first line
 
-     version + status code + phrase
+		version + status code + phrase
 
-     - 200 OK :  succeeded 
-     - 301 Moved Permanently : Requested object has been permanently moved and new URL will be returned
-     - 400 Bad Request :   the request could not be understood by the server. 
-     - 404 Not Found : The requested document does not exist on this server 
-     -  505 HTTP Version Not Supported : ~~~
+		- 200 OK :  succeeded 
+		- 301 Moved Permanently : Requested object has been permanently moved and new URL will be returned
+		- 400 Bad Request :   the request could not be understood by the server. 
+		- 404 Not Found : The requested document does not exist on this server 
+		- 505 HTTP Version Not Supported : ~~~
 
-   - header line: subsequent line :
+	- header line: subsequent line :
 
-     - Connection :   tell the client that whether close the TCP connection after sending the message
-     - Date : **indicates the time and date when the HTTP response was created and sent by the server**.  Note that this is not the time when the object was created or last modified; it is the time when the server retrieves the object from its file system, inserts the object into the response message, and sends the response message.
-     - Server :  analogous to the User-agent
-     - Last-Modified : the time and date when the object was created or last modified
-     - Content-Length : data size
-     - Content-Type : data type such as HTML
+		- Connection :   tell the client that whether close the TCP connection after sending the message
+		- Date : **indicates the time and date when the HTTP response was created and sent by the server**.  Note that this is not the time when the object was created or last modified; it is the time when the server retrieves the object from its file system, inserts the object into the response message, and sends the response message.
+		- Server :  analogous to the User-agent
+		- Last-Modified : the time and date when the object was created or last modified
+		- Content-Length : data size
+		- Content-Type : data type such as HTML
 
-   - entity body : save data
+	- entity body : save data
 
 #### iv. User-Server Interaction: Cookies 
 
@@ -317,7 +318,7 @@ Although cookies often simplify the Internet shopping experience for the user, t
 
 It works like this: 
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/web_cache_1.png)
+![](/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/web_cache_1.png)
 
 Note that a cache is ***both a server and a client*** at the same time.
 
@@ -354,17 +355,17 @@ Definition:
 ####  ii. Overview of How DNS Works 
 
 - centralized design:  A simple design for DNS would have one DNS server that contains all the mappings 
-  - A single point of failure
-  - Traffic volume
-  - Distant centralized database
-  - Maintenance
+	- A single point of failure
+	- Traffic volume
+	- Distant centralized database
+	- Maintenance
 - distributed hierarchical design:  uses a large number of servers, organized in a hierarchical fashion and distributed around the world 
-  - root DNS servers :  In the Internet there are 13 root DNS servers 
-  - top-level domain (TLD) servers
-  - authoritative DNS servers（权威域名服务器）:  Every organization with publicly accessible hosts (such as Web servers and mail servers) on the Internet must provide publicly accessible DNS records that map the names of those hosts to IP addresses 
-  - local DNS server :  A local DNS server does not strictly belong to the hierarchy of servers but is nevertheless central to the DNS architecture;  When a host makes a DNS query, the query is sent to the local DNS server, which acts a proxy.
-    - recursive：如果全部采用这种方式会给更服务器极大的压力
-    - iterative
+	- root DNS servers :  In the Internet there are 13 root DNS servers 
+	- top-level domain (TLD) servers
+	- authoritative DNS servers（权威域名服务器）:  Every organization with publicly accessible hosts (such as Web servers and mail servers) on the Internet must provide publicly accessible DNS records that map the names of those hosts to IP addresses 
+	- local DNS server :  A local DNS server does not strictly belong to the hierarchy of servers but is nevertheless central to the DNS architecture;  When a host makes a DNS query, the query is sent to the local DNS server, which acts a proxy.
+		- recursive：如果全部采用这种方式会给更服务器极大的压力
+		- iterative
 
 #### iv.  DNS Records and Messages 
 
@@ -419,7 +420,7 @@ transport layer lies just above the network layer in the protocol stack. Whereas
 
 - multiplexing & demultiplexing
 
-	 Extending **host-to-host** delivery to **process-to-process** delivery
+	Extending **host-to-host** delivery to **process-to-process** delivery
 
 - TCP
 
@@ -438,7 +439,7 @@ a process can have one or more ***sockets***, doors through which data passes fr
 Socket:
 
 1. unique identifiers to identify UDP, TCP sockets
-2.  the **source port number field** and the **destination port number field**
+2. the **source port number field** and the **destination port number field**
 
 the port number ranges from 0 to 65535 (16 bits to express), [0, 1024) is well-known port numbers
 
@@ -471,7 +472,7 @@ identified by four values:
 
 ####  UDP Segment Structure
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_7.png" style="zoom:50%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_7.png" style="zoom:50%;" />
 
 #### UDP Checksum
 
@@ -485,7 +486,7 @@ UDP at the sender side performs the 1s complement of the sum of all the 16-bit w
 
 	the underlying channel is completely reliable
 
-	<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_9.png" style="zoom:50%;" />
+	<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_9.png" style="zoom:50%;" />
 
 2. **rdt2.0**: Reliable Data Transfer over a Channel with Bit Errors
 
@@ -499,21 +500,21 @@ UDP at the sender side performs the 1s complement of the sum of all the 16-bit w
 
   - resend
 
-  <img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_10.png" style="zoom:50%;" />
+  <img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_10.png" style="zoom:50%;" />
 
 3. **rdt2.1**: can detect ACK or NAK errors based on 2.0
 
-	<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_11.png" style="zoom:50%;" />
-	<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_12.png" style="zoom:50%;" />
-	
+	<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_11.png" style="zoom:50%;" />
+	<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_12.png" style="zoom:50%;" />
+
 4. **rdt2.2**: implement without NAK based on 2.1
 
-	<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_13.png" style="zoom:50%;" />
-	<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_14.png" style="zoom:50%;" />
+	<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_13.png" style="zoom:50%;" />
+	<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_14.png" style="zoom:50%;" />
 
 5. **rdt3.0**: Reliable Data Transfer over a Lossy Channel with Bit Errors
 
-	<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_15.png" style="zoom:50%;" />
+	<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_15.png" style="zoom:50%;" />
 
  
 
@@ -523,11 +524,11 @@ UDP at the sender side performs the 1s complement of the sum of all the 16-bit w
 
 2. PipeLine: gbn, sr, tcp  in order.
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_19.png" style="zoom:50%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_19.png" style="zoom:50%;" />
 
   Example:
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_22.png" style="zoom:50%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_22.png" style="zoom:50%;" />
 
   The window size will move as long as getting the ACK.
 
@@ -537,7 +538,7 @@ UDP at the sender side performs the 1s complement of the sum of all the 16-bit w
 
 	sequence-number space format:
 
-	<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_23.png" style="zoom:50%;" />
+	<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_23.png" style="zoom:50%;" />
 
 	Actions in sender:
 
@@ -554,14 +555,14 @@ UDP at the sender side performs the 1s complement of the sum of all the 16-bit w
 
 	**SR’s problem**: can’t know ***a new packet or a retransmission?***
 
-	<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_27.png" style="zoom:70%;" />
+	<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_27.png" style="zoom:70%;" />
 
 	The solution of this problem: ***the window size must be less than or equal to half the***
 	***size of the sequence number space for SR protocols.***
 
 **Summary:**
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/T3_1.png" style="zoom:70%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/T3_1.png" style="zoom:70%;" />
 
 ### 3.5 Connection-Oriented Transport: TCP
 
@@ -570,22 +571,22 @@ GBN-SR 窗口不变, TCP 窗口可以变
 #### The TCP Connection
 
 -  connection-oriented
-- full-duplex service（全双工）
-- point-to-point
-- three-way handshake
-- **maximum segment size (MSS):** The maximum amount of data that can be grabbed and placed in a segment
+-  full-duplex service（全双工）
+-  point-to-point
+-  three-way handshake
+-  **maximum segment size (MSS):** The maximum amount of data that can be grabbed and placed in a segment
 -  **maximum transmission unit (MTU):** the length of the largest link-layer frame that can be sent by the local sending host
 
 #### TCP Segment Structure
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_29.png" style="zoom:50%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_29.png" style="zoom:50%;" />
 
 - **Sequence Numbers(SEQ)**: the byte-stream number of the first byte in the segment
 - **Acknowledgment Numbers(ACK)**:  Host A puts in its segment is the sequence number of the next byte Host A is expecting from Host B（想要的下一个序号）TCP is said to provide **cumulative acknowledgments**
 
 Example：
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_31.png" style="zoom:50%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_31.png" style="zoom:50%;" />
 
 #### Round-Trip Time Estimation and Timeout
 
@@ -641,9 +642,9 @@ MSS在传输SYN时传输确定, TCP可以将包合并发就合并发, SYN 包要
 SYN：1.同步网络参数 2.同步序列号
 FIN：表示不发了，但可以接收
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_39.png" style="zoom:50%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_39.png" style="zoom:50%;" />
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_40.png" style="zoom:50%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_40.png" style="zoom:50%;" />
 
 ### 3.7 TCP Congestion Control
 
@@ -657,7 +658,7 @@ TCP uses acknowledgments to trigger (or clock) its increase in congestion window
 
 对快速重传的快速恢复的cwnd有减半加三（考虑重传时没有拥塞）和不加三两种操作，这里采用不加三
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_52.png" style="zoom:70%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_52.png" style="zoom:70%;" />
 
 **TCP congestion-control algorithm**:
 
@@ -678,11 +679,11 @@ TCP uses acknowledgments to trigger (or clock) its increase in congestion window
 
 Example:
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_53.png)
+![](/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_53.png)
 
 TCP is **fair**
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_56.png" style="zoom:50%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_56.png" style="zoom:50%;" />
 
 these two connection will infinitely approach *the equal bandwidth share line*.
 
@@ -707,8 +708,8 @@ ATM services models:
 consists of:
 
 -  a **path** (that is, a series of links and routers) between the source and destination hosts
-- **VC numbers**, one number for each link along the path
-- entries in the **forwarding table** in each router along the path
+-  **VC numbers**, one number for each link along the path
+-  entries in the **forwarding table** in each router along the path
 
 Whenever a new VC is established across a router, an entry is added to the forwarding table. Similarly, whenever a VC terminates, the appropriate entries in each table along its path are removed.
 
@@ -728,11 +729,11 @@ Because forwarding tables in datagram networks **can be modified at any time**, 
 
 #### Architecture
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_6.png" style="zoom:50%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_6.png" style="zoom:50%;" />
 
 #### Switching
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_8.png" style="zoom:50%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_8.png" style="zoom:50%;" />
 
 #### Where Does Queueing Occur?
 
@@ -747,7 +748,7 @@ the router’s memory can eventually be exhausted and packet loss will occur whe
 
 **head-of-the-line (HOL) blocking（线路前部阻塞）**: 前一个分组和其他的输入端口竞争，阻塞了后面没有冲突的分组的发送
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_11.png" style="zoom:50%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_11.png" style="zoom:50%;" />
 
 #### The Routing Control Plane
 
@@ -755,11 +756,11 @@ software pass....
 
 ### 4.4 IP
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_12.png" style="zoom:60%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_12.png" style="zoom:60%;" />
 
 #### Datagram Format
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_13.png" style="zoom:50%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_13.png" style="zoom:50%;" />
 
 此处校验和计算方法和UDP处出现的校验和计算方法一致
 
@@ -771,7 +772,7 @@ MTU: 1500 bytes
 
 IP header: 20 bytes
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/T4_2.png" style="zoom:50%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/T4_2.png" style="zoom:50%;" />
 
 #### IPv4 Addressing
 
@@ -789,7 +790,7 @@ To determine the subnets, detach each interface from its host or router, creatin
 
 0.0.0.0 网卡本身地址
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_17.png" style="zoom:50%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_17.png" style="zoom:50%;" />
 
 - **Classless Interdomain Routing (CIDR 无类别区域间路由选择)**
 
@@ -805,7 +806,7 @@ To determine the subnets, detach each interface from its host or router, creatin
 
 a **plug-and-play protocol**(即插即用协议)
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_21.png" style="zoom:50%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_21.png" style="zoom:50%;" />
 
 因为可能存在多个DHCP服务器所以需要二次确认，客户端选择一个IP并告知（一般都是第一个）
 
@@ -831,7 +832,7 @@ The most typical use of ICMP is for error reporting
 
 #### IPv6
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_24.png" style="zoom:50%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_24.png" style="zoom:50%;" />
 
 - Next hdr:交付到哪一个协议（TCP/UDP）和v4的协议字段相同
 - IPv6不允许在路由器上分片和组装
@@ -843,11 +844,11 @@ The most typical use of ICMP is for error reporting
 
 - **dual-stack**：使用既可以处理v4也可以处理v6的路由器，但可能丢失流标签（或者其他v6特有标签）
 
-	<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_25.png" style="zoom:50%;" />
+	<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_25.png" style="zoom:50%;" />
 
--  **tunneling**（建隧道）：将v6整体作为v4的数据段传递
+- **tunneling**（建隧道）：将v6整体作为v4的数据段传递
 
-	<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_26.png" style="zoom:50%;" />
+	<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_26.png" style="zoom:50%;" />
 
 ### 4.5 Routing Algorithms
 
@@ -863,19 +864,19 @@ classification
 - p(v): previous node (neighbor of v) along the current least-cost path from the source to v.
 - N' : subset of nodes; v is in N’ if the least-cost path from the source to v is definitively known.
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/LS.png" style="zoom:50%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/LS.png" style="zoom:50%;" />
 
 Example:
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/T4_3.png" style="zoom:50%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/T4_3.png" style="zoom:50%;" />
 
 Then we can get the forward table of u:
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_28.png" style="zoom:50%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_28.png" style="zoom:50%;" />
 
 oscillations occur in any algorithm, not just an LS algorithm, that uses a congestion or delay-based link metric
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_29.png" style="zoom:60%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_29.png" style="zoom:60%;" />
 
 One way to avoid such self synchronization is for each router to randomize the time it sends out a link
 advertisement.
@@ -890,11 +891,11 @@ use this formula to update forwarding table:
 
 $D_x(y)=min_v\{c(x,v)+D_v(y) \tag{for each node y in N}\} $
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/DV.png" style="zoom:50%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/DV.png" style="zoom:50%;" />
 
 Examlpe:
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_30.png" style="zoom:65%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_30.png" style="zoom:65%;" />
 
 #### Distance-Vector Algorithm: Adding Poisoned Reverse
 
@@ -933,7 +934,7 @@ https://blog.csdn.net/tianlongtc/article/details/80261581
 
 **hop**: the number of subnets traversed along the shortest path from source router to destination subnet, including the destination subnet
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_34.png" style="zoom:50%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_34.png" style="zoom:50%;" />
 
 The maximum cost of a path is limited to 15 in RIP.
 
@@ -941,13 +942,13 @@ In RIP, routing updates are exchanged between neighbors approximately every 30 s
 
 Example:
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_35.png" style="zoom:50%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_35.png" style="zoom:50%;" />
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_36.png" style="zoom:50%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_36.png" style="zoom:50%;" />
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_37.png" style="zoom:50%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_37.png" style="zoom:50%;" />
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_38.png" style="zoom:50%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_38.png" style="zoom:50%;" />
 
 #### Intra-AS Routing in the Internet: OSPF
 
@@ -986,7 +987,7 @@ When a router advertises a prefix across a BGP session, it includes with the pre
 - *AS-PATH*:包含了前缀的通告已经听过的那些AS
 - Providing the critical link between the inter-AS and intra-AS routing protocols, the NEXT-HOP attribute has a subtle but important use. **The NEXT-HOP is the router interface that begins the AS-PATH.**
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/BGP_routing.png" style="zoom:50%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/BGP_routing.png" style="zoom:50%;" />
 
 
 
@@ -1009,7 +1010,7 @@ When a router advertises a prefix across a BGP session, it includes with the pre
 
 **network adapter** also named **network interface card (NIC)**
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/5_2.png" style="zoom:50%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/5_2.png" style="zoom:50%;" />
 
 ### 5.2 Error-Detection and -Correction Techniques
 
@@ -1025,7 +1026,7 @@ Even with the use of error-detection bits there still may be **undetected bit er
 
 对每一行每一列都进行奇偶校验,然后对列行奇偶校验位进行奇偶校验, 就校验可以检测和纠正单个比特错误,可以检测但是不能纠正两个比特的任意错误组合
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/5_5.png" style="zoom:50%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/5_5.png" style="zoom:50%;" />
 
 The ability of the receiver to both detect and correct errors is known as **forward error correction (FEC前向纠错)**.
 
@@ -1086,20 +1087,20 @@ characteristics:
 	- Nodes start to transmit frames only at the beginnings of slots.
 	- The nodes are synchronized so that each node knows when the slots begin.
 	- If two or more frames collide in a slot, then all the nodes detect the collision event before the slot ends.
-	
+
 	p 是一个0-1的概率, 有如下操作:
-	
+
 	- 当节点要发送一个新帧时,需要在下一个时隙开始并在该时隙传输整个帧
 	- 如果没有碰撞则成功传输,不需要考虑重传
 	- 如果有碰撞,该结点在时隙结束之前检测到碰撞,之后以p在之后的每一杠时隙重传,直到成功
-	
+
 	此协议需要时钟同步,但是当只有一个结点时,效率是R
-	
+
 	此协议效率定义为:有大量活跃结点发送大量帧时,长期运行中成功时隙的份额
-	
+
 	在p的概率下 N个结点的效率为$Np(1-p)^{N-1}$ N趋于无穷时有极限1/e = 0.37
-	
-	<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/5_10.png" style="zoom:50%;" />
+
+	<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/5_10.png" style="zoom:50%;" />
 
 - ALOHA
 
@@ -1114,24 +1115,24 @@ characteristics:
 
 	These two rules are embodied in the family of **carrier sense multiple access(CSMA)** and **CSMA with collision detection (CSMA/CD)** protocols 
 
-	<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/5_12.png" style="zoom:50%;" />
+	<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/5_12.png" style="zoom:50%;" />
 
-	<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/5_13.png" style="zoom:50%;" />
-	
+	<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/5_13.png" style="zoom:50%;" />
+
 	CSMA/CD 的运行
-	
+
 	1. The adapter obtains a datagram from the network layer, prepares a link-layer frame, and puts the frame adapter buffer.
 	2. If the adapter senses that the channel is idle (that is, there is no signal energy entering the adapter from the channel 即在96比特时间内没有检测到信道上有信号), it starts to transmit the frame. If, on the other hand, the adapter senses that the channel is busy, it waits until it senses no signal energy and then starts to transmit the frame.
 	3. While transmitting, the adapter monitors for the presence of signal energy coming from other adapters using the broadcast channel.
 	4. If the adapter transmits the entire frame without detecting signal energy from other adapters, the adapter is finished with the frame. If, on the other hand, the adapter detects signal energy from other adapters while transmitting, it aborts the transmission (that is, it stops transmitting its frame).
 	5. After aborting, the adapter waits a random amount of time and then returns to step 2.
-	
+
 	选择随机回退时间算法:
-	
+
 	**binary exponential backoff(二进制指数后退)**algorithm
-	
+
 	经历n次碰撞之后,结点随机的从$\{0,1,2,...,2^n-1\}$选择一个值作为回退时间
-	
+
 #### Taking-Turns Protocols
 
 Recall that two desirable properties of a multiple access protocol are (1) when only one node is active, the active node has a throughput of R bps, and (2) when M nodes are active, then each active node has a throughput of nearly R/M bps. The ALOHA and CSMA protocols have this first property but not the second.
@@ -1151,7 +1152,7 @@ Recall that two desirable properties of a multiple access protocol are (1) when 
 
 	ARP 维护一个ARP表
 
-	<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/5_18.png" style="zoom:50%;" />
+	<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/5_18.png" style="zoom:50%;" />
 
 	表中没有所需要的项时,就会发送一个ARP分组并向子网广播获取对方的MAC地址,当需要发送到子网以外时,需要先获取网关路由器的MAC地址,然后一步步转发出去
 
@@ -1162,7 +1163,7 @@ Recall that two desirable properties of a multiple access protocol are (1) when 
 
 结构:
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/5_20.png" style="zoom:50%;" />
+<img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/5_20.png" style="zoom:50%;" />
 
 以太网技术提供不可靠服务,接收方会执行CRC校验,失败则丢弃,但不对发送方产生任何的反馈信息
 

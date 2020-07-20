@@ -60,27 +60,27 @@ tags:
 - 新建态：已创建PCB但还未加载到内存中的进程
 - 退出态：操作系统从可执行进程组释放出的进程
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_3/5_states_module.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_2/c_3/5_states_module.jpg)
 
 #### 5. 进程的挂起
 
 **原因**：当所有进程都处于阻塞态时，处理器处于休闲状态。此时将某个进程的一部分或者全部移入磁盘，然后从挂起队列加载一个新进程，放入内存中运行
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_3/suspended_state.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_2/c_3/suspended_state.jpg)
 
 ##### 进程挂起的原因
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_3/suspended_reason.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_2/c_3/suspended_reason.jpg)
 
 #### 6. 进程创建和终止
 
 - 进程创建的原因：
 
-	![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_3/creat_process_reason.jpg)
+	![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_2/c_3/creat_process_reason.jpg)
 
 - 进程终止的原因：
 
-	![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_3/end_process_reason.jpg)
+	![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_2/c_3/end_process_reason.jpg)
 
 #### 7. 操作系统控制结构
 
@@ -104,7 +104,7 @@ tags:
 - 进程状态信息（处理器状态信息）：存储所有的程序状态字（PSW）
 - 进程控制信息：操作系统协调各种活动进程的额外信息
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_3/PCB.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_2/c_3/PCB.jpg)
 
 ##### PCB 的作用
 
@@ -129,7 +129,7 @@ tags:
 
 ##### 内核的典型功能
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_3/OS_kernel_function.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_2/c_3/OS_kernel_function.jpg)
 
 #### 10. 进程创建 具体过程
 
@@ -159,7 +159,7 @@ tags:
 
 ##### 进程切换
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_3/process_change.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_2/c_3/process_change.jpg)
 
 #### 12. 操作系统的执行
 
@@ -186,7 +186,7 @@ tags:
 2. 有些非关键系统功能可简单的用独立的进程来实现（例如监视各种资源和状态的程序）
 3. 在多处理器和多机环境中很有用
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_3/OS_and_userprocess.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_2/c_3/OS_and_userprocess.jpg)
 
 ### 第四章 线程
 
@@ -220,7 +220,7 @@ tags:
 - 局部变量的静态存储空间
 - 与其他线程共享的内存和资源的访问
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_4/thread_module.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_2/c_4/thread_module.jpg)
 
 使用线程的几个例子：
 
@@ -248,7 +248,7 @@ tags:
 
 #### 2. 线程分类
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_4/thread_type.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_2/c_4/thread_type.jpg)
 
 ##### 用户级（ULT）
 
@@ -285,7 +285,7 @@ tags:
 
 #### 3、多核和多线程
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_4/Amdahl.jpg)                                      
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_2/c_4/Amdahl.jpg)                                      
 
 > 并不是核越多越好，管理起来越麻烦，会有更多多余的开销
 
@@ -337,7 +337,7 @@ zvoid echo() {
 
 ##### 进程的交互
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_5/interfaceOfProcess.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_2/c_5/interfaceOfProcess.jpg)
 
 有几个基本概念：
 
@@ -353,7 +353,7 @@ zvoid echo() {
 
 > 互斥：简单来说，就是两个或多个进程需要访问一个不可分享的资源的保护机制
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_5/demandOfMutex.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_2/c_5/demandOfMutex.jpg)
 
 #### 2、互斥：硬件的支持
 
@@ -406,7 +406,7 @@ void exchange(int *register, int *memory)
 }
 ```
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_5/mutexInHardware.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_2/c_5/mutexInHardware.jpg)
 
 **忙等待（自旋等待）**：进程在得到临界区访问权之前，它只能继续执行测试变量的指令来得到访问权，除此之外不能做任何事情
 
@@ -440,7 +440,7 @@ $$ bolt + \sum_ikey_i = n $$
 
 常用的并发机制：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_5/concurrencyWays.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_2/c_5/concurrencyWays.jpg)
 
 基本原理如下：
 
@@ -519,7 +519,7 @@ void semSignalB(semaphore s)
 
 **信号量机制示例**
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_5/semaphoreExample.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_2/c_5/semaphoreExample.jpg)
 
 ##### 互斥
 
@@ -542,7 +542,7 @@ void main() {
 }
 ```
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_5/explainAboutMutexInSemaphore.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_2/c_5/explainAboutMutexInSemaphore.jpg)
 
 ##### 生产者消费者问题
 
@@ -588,7 +588,7 @@ void main() {
 
 为什么是错误的，可能造成消费完之后继续取
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_5/wrongInProducer_Consumer.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_2/c_5/wrongInProducer_Consumer.jpg)
 
 也就是在消费者消费之后已经不属于互斥资源保护区，发生中断之后不能保护原有变量的值，正如上图第10行，本来应该阻塞消费者进程，但是由于中断使n++，并且有重新将delay置1，而后恢复消费者进程消费完缓冲区之后delay信号仍然为1所以，此时缓冲区为空但是并不会阻塞进程，所以还会继续从已经为空的缓冲区拿东西（也就是delay信号并不能匹配了）
 
@@ -686,7 +686,7 @@ void main()....
 
 ##### 信号量的实现
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_5/implementOfSemaphore.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_2/c_5/implementOfSemaphore.jpg)
 
 #### 4、管程
 
@@ -711,7 +711,7 @@ void main()....
 
 ##### 管程的结构
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_5/tubePassStruct.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_2/c_5/tubePassStruct.jpg)
 
 ##### 例子：重写消费者生产者问题
 
@@ -787,7 +787,7 @@ void main()....
 
 ##### 消息格式
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_5/messageForm.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_2/c_5/messageForm.jpg)
 
 ##### 排队原则
 
@@ -820,7 +820,7 @@ void main()
 
 **生产者消费者问题：**
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_5/pcMessage.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_2/c_5/pcMessage.jpg)
 
 #### 6、**读者写者问题**
 
@@ -843,7 +843,7 @@ void main()
 
 操作系统中死锁检测、预防和避免方法小结：
 
-![操作系统中死锁检测、预防和避免方法小结](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_6/01.jpg)
+![操作系统中死锁检测、预防和避免方法小结](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_2/c_6/01.jpg)
 
 ##### 资源分配图
 
@@ -851,7 +851,7 @@ void main()
 
 其中原点表示资源的一个实例，边表示请求资源和占有资源
 
-![操作系统中死锁检测、预防和避免方法小结](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_6/02.jpg)
+![操作系统中死锁检测、预防和避免方法小结](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_2/c_6/02.jpg)
 
 如果资源分配图中出现环，并且环中存在资源实例个数小于环中进程的个数，则可能导致死锁
 
@@ -911,11 +911,11 @@ void main()
 
 考虑 n 个进程和 m 种不同类型资源的系统，有以下定义：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_6/03.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_2/c_6/03.jpg)
 
 从中可以得知：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_6/04.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_2/c_6/04.jpg)
 
 ##### 资源分配拒绝
 
@@ -930,7 +930,7 @@ $C_{ij} - A_{ij} \le V_j , 对所有的j$
 
 一个安全状态的例子：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_6/05.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_2/c_6/05.jpg)
 
 **死锁避免的优点**：无须死锁预防的抢占和回滚进程，且与死锁预防相比限制较少
 
@@ -1001,7 +1001,7 @@ $C_{ij} - A_{ij} \le V_j , 对所有的j$
 
 两种方案的解决代码如下：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_2/c_6/06.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_2/c_6/06.jpg)
 
 
 
@@ -1062,7 +1062,7 @@ $C_{ij} - A_{ij} \le V_j , 对所有的j$
 
 内存管理的主要操作是处理器把程序装入内存中执行，内存管理技术由以下几种：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_7/01.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_3/c_7/01.jpg)
 
 ##### 固定分区
 
@@ -1120,11 +1120,11 @@ void get_hole(int i) {
 
 例子：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_7/02.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_3/c_7/02.jpg)
 
 释放B后的二叉树：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_7/03.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_3/c_7/03.jpg)
 
 ##### 重定位
 
@@ -1136,7 +1136,7 @@ void get_hole(int i) {
 
 重定位的硬件支持如下：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_7/04.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_3/c_7/04.jpg)
 
 #### 7.3 分页
 
@@ -1156,7 +1156,7 @@ void get_hole(int i) {
 
 简单分页的图形表示如下：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_7/05.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_3/c_7/05.jpg)
 
 #### 7.4 分段
 
@@ -1177,7 +1177,7 @@ void get_hole(int i) {
 
 简单分段的图形表示：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_7/06.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_3/c_7/06.jpg)
 
 这里讨论的还是**简单分页和简单分段，进程必须把所有全部加载到内存中**，如果采用了覆盖或者虚存技术，则可以部分加载内存中，这部分在下一章讨论。
 
@@ -1222,7 +1222,7 @@ void get_hole(int i) {
 
 分页和分段的特点：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/01.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_3/c_8/01.jpg)
 
 ##### 局部性和虚拟内存
 
@@ -1247,21 +1247,21 @@ void get_hole(int i) {
 
 虚存分页和简单分页一样都有页表，其中**页表项（Page Table Entry，PTE）**相比简单分页也多了一些内容，如下：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/02.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_3/c_8/02.jpg)
 
 其中的 **P** 表示它所对应的页当前是否在内存中，如果在内存中，则还包括页框号，另一位是**修改位（M）**表示相应的内容装入内存后是否发生变化，若没有改变则无需重新写入辅存，负责需要用该页更新原来的页。
 
 同简单分页类似，逻辑地址依然由页号和偏移量组成，而物理地址由页框号和偏移量组成，页表的长度基于进程长度的变化而变化，以下给出了一种硬件实现：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/03.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_3/c_8/03.jpg)
 
 上述页表的简单处理在虚存空间大的时候会导致页表项的也十分大，一种解决方案是在虚存中保存页表，着以为着**页表和其他页一样服从分页管理**，一个进程在运行时，它的页表至少有一部分在内存中，这一部分包括正在运行的页的页表项，有一种**两级层次页表结构**来组织大型页表，典型情况如下：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/04.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_3/c_8/04.jpg)
 
 以上是32位地址两级方案的例子，假设采用字节级寻址，页尺寸为 $4KB (2^{12})$ ,则$4GB (2^{32})$虚拟地址空间由$2^{20}$页组成，若这些页的每一页都由一个4字节的页表项映射，则可创建由$2^{20}$页表项组成的页表，这时需要$4MB(2^{22})$的内存空间。这个由$2^{10}$页组成的巨大用户页表可以保留在虚存中，并由一个包括$2^{10}$个页表项的根页表映射，根页表占据的内存为$4KB(2^12)$，二级页表的地址转换如下图：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/05.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_3/c_8/05.jpg)
 
 ---
 
@@ -1276,7 +1276,7 @@ void get_hole(int i) {
 
 下图是一个n位页号m位数索引倒排表的页表结构图：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/06.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_3/c_8/06.jpg)
 
 ---
 
@@ -1287,25 +1287,25 @@ void get_hole(int i) {
 
 因此简单的虚拟内存方案会导致内存访问时间加倍，为克服这个问题，可以采用**转换检测缓冲区（Translation Lookaside Buffer，TLB）**（一个特殊的高速缓存，包含最近用过的页表项）。给定一个虚拟地址，处理器首先检查TLB，若需要的页表项在其中，则检索页框号形成实地址，若未找到则使用页号检索检查页表。然后查看其”存在位“状态，若不在内存中，则会产生一次内存访问故障，称为**缺页（page fault）**中断，此时由操作系统负责装入所需要的页，并更新页表。基本机理如下：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/07.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_3/c_8/07.jpg)
 
 TLB使用流程如下，图中未显示磁盘I/O过程中可以调度另外进程执行。根据局部性原理大多数虚存访问都位于最近使用过的页中，所以此方案可以提高性能。
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/08.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_3/c_8/08.jpg)
 
 TLB的实际组织还有许多额外细节，由于TLB仅包含整个页表中的部分表项，因此不能简单地把页号编入TLB的索引，所以TLB的项必须包含页号和完整的页表项（和倒排表一样），这两种技术对应直接映射（索引）和关联映射，如下所示：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/09.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_3/c_8/09.jpg)
 
 虚存机制须与高速缓冲系统（内存高缓）进行交互。首先，内存系统查看TLB是否存在匹配的页表项，若不存在则从页表中读取页表项。产生一个TAG标记和其余部分组成的实地址后，查看高速缓存中是否存在，若有则返回给CPU，若没有，则从内存中检索这个字。若被访问的字在磁盘中，则包含该字的页必须装入内存，且所在的块须装入高速缓存，且其页表项必须更新。
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/10.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_3/c_8/10.jpg)
 
 ---
 
 页尺寸是一个重要的硬件设计决策，页越小，内部碎片总量越少；另一方面，页越小，每个进程需要的页数量越多，页表也会变得更大。大页表不容易存储(二级页表)会导致产生两次缺页中断（读取页表，读取页），但大页表又利于数据块传送。大体来说，**缺页率**和**页尺寸**和分配的**页框数**有关系。
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/11.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_3/c_8/11.jpg)
 
 页尺寸的设计问题还与物理内存大小和程序大小有关。
 
@@ -1324,7 +1324,7 @@ TLB的实际组织还有许多额外细节，由于TLB仅包含整个页表中�
 
 类似的虚存分段和简单分段一样也为每个进程维护一个段表，段表项包含存在位和修改位，以及该段的起始地址和长度。分段的地址转换如下图：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/12.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_3/c_8/12.jpg)
 
 ---
 
@@ -1332,7 +1332,7 @@ TLB的实际组织还有许多额外细节，由于TLB仅包含整个页表中�
 
 分段和分页各有所长，在段页式系统中，用户地址空间被程序员划分为许多段，每段划分为和内存页框大小相同的页。逻辑地址仍然由段号和偏移量组成，段偏移量可视为指定段中的页号和页偏移量。其地址转换如下图：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/13.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_3/c_8/13.jpg)
 
 
 
@@ -1348,7 +1348,7 @@ TLB的实际组织还有许多额外细节，由于TLB仅包含整个页表中�
 
 虚拟内存的操作系统策略：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/14.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_3/c_8/14.jpg)
 
 上表不存在一种绝对的最佳策略，**在所有的策略中都要做到通过适当的安排，使得一个进程在执行时，访问一个未命中的页中的字的概率最小**。
 
@@ -1407,11 +1407,11 @@ TLB的实际组织还有许多额外细节，由于TLB仅包含整个页表中�
 
 四种方法的比较：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/15.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_3/c_8/15.jpg)
 
 对固定页框数量且为局部页面置换，有如下关系：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/16.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_3/c_8/16.jpg)
 
 一种更有效的时钟算法采取了**使用位和修改位**，此时每个页框状态有：
 
@@ -1461,7 +1461,7 @@ TLB的实际组织还有许多额外细节，由于TLB仅包含整个页表中�
 
 置换范围和驻留集大小之间的关系：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/17.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_3/c_8/17.jpg)
 
 **工作集策略**：略
 
@@ -1488,7 +1488,7 @@ TLB的实际组织还有许多额外细节，由于TLB仅包含整个页表中�
 
 加载控制会影响到驻留在内存中的进程数量，着称之为系统并发度。如果驻留进程过少，那么所有进程都处于阻塞态概率就较大，因而许多时间花费在交换上。另一方面，进程过多，那么驻留集大小可能会不够用，会发生频繁的缺页中断，导致系统抖动
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_3/c_8/18.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_3/c_8/18.jpg)
 
 解决上述冲突，可以使用工作集策略或PFF算法。还有人提出了 L=S 准则，通过调整系统并发度，来使缺页中断之间的平均时间等于处理一次缺页中断所需的平均时间。这样处理器的利用率达到最大。
 
@@ -1533,11 +1533,11 @@ TLB的实际组织还有许多额外细节，由于TLB仅包含整个页表中�
 
 调度的层次结构以及进程状态和其所属调度种类如下：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_4/c_9/01.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_4/c_9/01.jpg)
 
 调度决定哪个进程须等待、哪个进程能继续运行，因此会影响系统的性能。本质上说调度属于队列管理，用于在排队环境中减少延迟并优化性能。
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_4/c_9/02.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_4/c_9/02.jpg)
 
 ##### 长程调度
 
@@ -1587,7 +1587,7 @@ TLB的实际组织还有许多额外细节，由于TLB仅包含整个页表中�
 
 下表总结了几种重要的调度规则，相互依赖，不可能同时达到最优，比如提供较好的响应时间可能需要调度算法在进程间频繁切换，但也会增加系统开销，降低吞吐量。
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_4/c_9/03.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_4/c_9/03.jpg)
 
 ##### 优先级的使用
 
@@ -1607,7 +1607,7 @@ TLB的实际组织还有许多额外细节，由于TLB仅包含整个页表中�
 - *e*：目前位置花费的执行时间
 - *s*：进程所需的服务总时间
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_4/c_9/04.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_4/c_9/04.jpg)
 
 - **非抢占**：一旦进程处于运行状态，就会不断执行直到终止。进程要么因为等待I/O，要么因为请求某些操作系统服务而阻塞自己
 - **抢占**：当前正运行进程可能被操作系统中断，并转换为就绪态
@@ -1618,15 +1618,15 @@ TLB的实际组织还有许多额外细节，由于TLB仅包含整个页表中�
 
 下面是一个例子：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_4/c_9/05.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_4/c_9/05.jpg)
 
 调度策略的比较如下：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_4/c_9/06.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_4/c_9/06.jpg)
 
 各个策略的效率的简单度量：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_4/c_9/07.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_4/c_9/07.jpg)
 
 
 
@@ -1648,7 +1648,7 @@ FCFS 自身对于单处理器系统而言并不是很有吸引力的选择，但
 
 虚拟轮转法，这种方法可以避免上述不公平性，此方法的不同之处在于，接触了I/O阻塞的进程都会转移到一个FCFS辅助队列中。进行调度决策时，辅助队列中的决策优先于就绪队列中的进程，这种方法在公平性方面确实优于轮转法
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_4/c_9/08.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_4/c_9/08.jpg)
 
 ##### 最短进程优先 （Shortest Process Next， SPN）
 
@@ -1693,7 +1693,7 @@ SRT不像FCFS那样偏向长进程，也不像轮转法那样产生额外的中�
 1. 给低优先级的进程更多的时间片，一般而言，从*RQi*中调度的进程允许执行 $q=2^i$ 时间后被抢占
 2. 当一个进程在其队列等待服务的时间超过一定时间后，就把它提升到优先级高的队列中
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_4/c_9/09.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_4/c_9/09.jpg)
 
 ##### 性能比较
 
@@ -1715,7 +1715,7 @@ SRT不像FCFS那样偏向长进程，也不像轮转法那样产生额外的中�
 
 优先级数值越大，所表示的优先级越低，适用于组*k*中进程*j*的公式如下：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_4/c_9/10.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_4/c_9/10.jpg)
 
 ## 第五部分 输入/输出和文件
 
@@ -1760,7 +1760,7 @@ SRT不像FCFS那样偏向长进程，也不像轮转法那样产生额外的中�
 
 可选的DMA配置如下：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_11/01.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_5/c_11/01.jpg)
 
 
 
@@ -1775,7 +1775,7 @@ SRT不像FCFS那样偏向长进程，也不像轮转法那样产生额外的中�
 
 ##### I/O 功能的逻辑结构
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_11/02.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_5/c_11/02.jpg)
 
 #### 11.4 I/O 缓冲
 
@@ -1788,7 +1788,7 @@ SRT不像FCFS那样偏向长进程，也不像轮转法那样产生额外的中�
 
 I/O缓冲方案：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_11/03.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_5/c_11/03.jpg)
 
 缓冲的作用：
 
@@ -1813,7 +1813,7 @@ T_s 为平均寻道时间，b表示传输的字节数，N表示一个磁道的�
 $$
 时序比较的经典例子：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_11/04.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_5/c_11/04.jpg)
 
 
 
@@ -1825,7 +1825,7 @@ $$
 
 访问的磁道序列为：55、58、39、18、90、160、150、38、184
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_11/05.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_5/c_11/05.jpg)
 
 除此之外，还有**基于优先级（PRI）**和**后进先出**的算法
 
@@ -1859,7 +1859,7 @@ $$
 
 使用分区，新区老区（中间区），对不同区的对应措施不同
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_11/06.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_5/c_11/06.jpg)
 
 
 
@@ -1899,11 +1899,11 @@ $$
 
 文件系统架构：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_12/01.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_5/c_12/01.jpg)
 
 文件管理的要素：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_12/02.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_5/c_12/02.jpg)
 
 文件管理系统作为一个单独的系统实用程序和操作系统关注的是不同两方面的内容，之间的共同点是记录的处理。
 
@@ -1927,7 +1927,7 @@ $$
 - **索引文件**：索引顺序文件保留了顺序文件的一个限制：基于文件的一个域进行处理。当需要基于其他属性而非关键域查找一条记录时，这两种形式的顺序文件都无法胜任。索引文件采取多索引的结构，摒弃了顺序性和关键字的概念，只能通过索引来访问记录。对记录的位置不再有限制，还可使用长度可变的记录。
 - **直接或散列文件**：直接访问磁盘中任何一个地址已知块的能力。直接文件使用基于关键字的散列，直接文件常在要求快速访问时使用，且记录的长度是固定的，通常一次访问一条记录。
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_12/03.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_5/c_12/03.jpg)
 
 
 
@@ -1935,11 +1935,11 @@ $$
 
 目录包含关于文件的信息，如属性、位置、所有权，都由操作系统管理。
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_12/04.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_5/c_12/04.jpg)
 
 目录的结构通常是树状结构：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_12/05.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_5/c_12/05.jpg)
 
 #### 12.5 文件共享
 
@@ -1947,7 +1947,7 @@ $$
 
 访问权限有如下：
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_12/06.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_5/c_12/06.jpg)
 
 话可以按面向用户分组：特定用户，用户组，全部
 
@@ -1963,7 +1963,7 @@ $$
 - **变长跨越式组块**：使用变长的记录，并紧缩到块中，块中不存在未使用的空间，某些记录会跨越两个块，使用指针连接
 - **变长非跨越式组块**：使用变长的记录，但不采用跨越方式，在大多数块中都会有未使用的空间
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_12/07.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_5/c_12/07.jpg)
 
 定长组块是记录定产顺序文件最常用的方式，变长跨越式存储效率高，但难以实现。跨越两个块需要两次I/O操作，文件很难修改。变长非跨越式浪费空间，且存在记录大小不能超过块大小的限制。
 
@@ -2004,11 +2004,11 @@ $$
 
 **链式分配**：链式分配基于单个块，使用指针建立联系，不必担心外部碎片的出现，但是局部性原理不再适用，为了克服这个问题，有些系统会周期性的合并文件
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_12/08.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_5/c_12/08.jpg)
 
 **索引分配**：解决了连续分配和链式分配中的许多问题。每个问价在文件分配表中都有一个一级的索引，分配给该文件的每个分区在索引中都有一个表项。
 
-![](https://raw.githubusercontent.com/Joke-Lin/Notes/master/Operating-System-Internals-and-Design-Principles-8th/img/part_5/c_12/09.jpg)
+![](/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_5/c_12/09.jpg)
 
 ##### 空闲空间管理
 

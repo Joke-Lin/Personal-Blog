@@ -102,6 +102,57 @@ with open(file_path, "r", encoding='UTF-8') as file_in, open("out-"+file_path, "
     
 ```
 
-使用命令``
+> 2020-07-20 更新
+
+前面使用与`./img/file_path,img/file_path`的情况
+
+现在给出一种更通用的方式，这里把图片路径看作:
+
+`原始图片路径的公共前缀 + 图片路径`，现在通过正则将原来的前缀包括原始图片公共前缀一起替换掉，如：
+
+`img/c_2/img1.png`，`img/c_3/img2.png`用`https://test/`替换，图片公共前缀为`img/`所以替换后为``https://test/c_2/img1.png`
+
+现在的代码如下：
+
+```python
+# python 3.7.3
+
+import re
+import sys
+
+if len(sys.argv) != 3:
+    print("amount of parameters must be 3")
+    sys.exit()
+
+all_prefix = "img/" # 图片公共前缀
+patter1 = '\!\[.*?\]\((?P<tar>.*{}).*?.*?\)'.format(all_prefix)
+patter1 = re.compile(patter1)
+patter2 = '\<img src="(?P<tar>.*{}).*?\..*?\>'.format(all_prefix)
+patter2 = re.compile(patter2)
+file_path, prefix =sys.argv[1], sys.argv[2]
+print(prefix)
+with open(file_path, "r", encoding='UTF-8') as file_in, open("out-"+file_path, "w", encoding='UTF-8') as file_out:
+    line = file_in.readline()
+    while line:
+        # 获取所有匹配的Match对象
+        matched1 = patter1.finditer(line)
+        matched2 = patter2.finditer(line)
+        pos_list = []
+        if matched1 != None:
+            pos_list += [(x.start("tar"), x.end("tar")) for x in list(matched1)]
+        if matched2 != None:
+            pos_list += [(x.start("tar"), x.end("tar")) for x in list(matched2)]
+        pos_list.sort() # 按开始位置从小到大排序
+        for v in pos_list[::-1]: # 逆序遍历
+            st, ed = v
+            # 替换掉原来的
+            if st == ed:
+                line = line[:st] + prefix + line[st:]
+            else:
+                line = line[:st] + prefix + line[ed:]
+        file_out.write(line);
+        line = file_in.readline()
+    
+```
 
 其中一些函数的解释可以参考：[正则表达式操作](https://docs.python.org/zh-cn/3/library/re.html)

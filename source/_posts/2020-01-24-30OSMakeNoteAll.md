@@ -24,7 +24,7 @@ categories:
 
 书本实现了一个名为OSASK的只有80KB的简单操作系统，效果图如下
 
-<img src="https://raw.githubusercontent.com/Joke-Lin/30DaysMakeOS-Note/master/Screen.png" style="zoom:50%;" />
+<img src="/assets/Note/30DaysOs/Screen.png" style="zoom:50%;" />
 
 ## 书本各章内容概要（摘自原文）
 

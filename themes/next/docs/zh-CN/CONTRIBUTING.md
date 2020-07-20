@@ -5,9 +5,11 @@
   <a title="俄语" href="../ru/CONTRIBUTING.md">:ru:</a>
 </div>
 
-# <div align="center"><a title="Go to homepage" href="https://theme-next.js.org"><img align="center" width="56" height="56" src="https://raw.githubusercontent.com/next-theme/hexo-theme-next/master/source/images/logo.svg?sanitize=true"></a> e x T</div>
+<a title="NexT website" href="https://theme-next.js.org"><img align="right" alt="NexT logo" width="100" height="100" src="https://raw.githubusercontent.com/next-theme/hexo-theme-next/master/source/images/logo.svg"></a>
 
-首先，非常感谢大家抽出宝贵时间来让我们的 NexT 主题越变越好。在这里，我们介绍一下 [NexT 主题及其子模块](https://github.com/theme-next) 的开源贡献指南。不过，我们希望大家不要局限于此，更欢迎大家随时进行补充。
+# NexT
+
+首先，非常感谢大家抽出宝贵时间来让我们的 NexT 主题越变越好。在这里，我们介绍一下 [NexT 主题及其子模块](https://github.com/next-theme) 的开源贡献指南。不过，我们希望大家不要局限于此，更欢迎大家随时进行补充。
 
 ## 目录
 
@@ -56,7 +58,7 @@
     * Bug 是否能够重现？是一直出现还是偶尔出现？
     * Bug 是从什么时候开始发生的？
     * 如果 Bug 突然发生，使用 [旧版本主题](https://github.com/next-theme/hexo-theme-next/releases) 是否能够重现 Bug？又是从哪个版本开始出现 Bug？
-    * 你所使用 Node，Hexo 以及 Next 的版本号多少？你可以运行 `node -v` 和 `hexo version` 获取版本号，或者查看文件 `package.json` 的内容。
+    * 你所使用 Node，Hexo 以及 NexT 的版本号多少？你可以运行 `node -v` 和 `hexo version` 获取版本号，或者查看文件 `package.json` 的内容。
     * 你使用了哪些插件包？查看文件 `package.json` 的内容即可获取。
 * 一步步详细你是如何重现 Bug 的，做了什么，使用了哪些功能等等。如果你需要展示代码段，请使用 [Markdown 代码块](https://help.github.com/articles/creating-and-highlighting-code-blocks/) 或 [Github 预览链接](https://help.github.com/articles/creating-a-permanent-link-to-a-code-snippet/) 或 [Gist 链接](https://gist.github.com/)。
 * 提供 Bug 的样例，如图像文件、在线演示网址等等。
