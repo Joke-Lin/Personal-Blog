@@ -16,11 +16,13 @@
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  
+  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
 
-<script id="hexo-configurations">
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"joke-lin.top","root":"/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"joke-lin.top","root":"/","scheme":"Gemini","version":"8.0.0-rc.4","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"path":"search.xml"};
   </script>
 
   <meta name="description" content="书本配套答案  Github：笔记-计算机网络自顶向下 第6版">
@@ -30,68 +32,68 @@
 <meta property="og:site_name" content="WEIJUN LIN BLOG">
 <meta property="og:description" content="书本配套答案  Github：笔记-计算机网络自顶向下 第6版">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/web_cache_1.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_7.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_9.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_10.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_11.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_12.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_13.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_14.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_15.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_19.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_22.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_23.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_27.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/T3_1.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_29.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_31.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_39.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_40.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_52.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_53.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_56.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_6.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_8.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_11.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_12.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_13.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/T4_2.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_17.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_21.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_24.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_25.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_26.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/LS.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/T4_3.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_28.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_29.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/DV.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_30.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_34.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_35.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_36.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_37.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_38.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/BGP_routing.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/5_2.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/5_5.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/5_10.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/5_12.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/5_13.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/5_18.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/5_20.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/web_cache_1.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_7.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_9.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_10.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_11.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_12.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_13.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_14.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_15.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_19.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_22.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_23.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_27.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/T3_1.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_29.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_31.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_39.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_40.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_52.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_53.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_56.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_6.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_8.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_11.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_12.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_13.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/T4_2.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_17.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_21.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_24.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_25.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_26.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/LS.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/T4_3.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_28.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_29.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/DV.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_30.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_34.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_35.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_36.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_37.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_38.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/BGP_routing.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/5_2.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/5_5.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/5_10.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/5_12.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/5_13.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/5_18.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/5_20.png">
 <meta property="article:published_time" content="2020-03-01T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-05-24T01:47:24.494Z">
+<meta property="article:modified_time" content="2020-07-20T05:07:54.583Z">
 <meta property="article:author" content="Weijun-Lin">
 <meta property="article:tag" content="Computer Network">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/web_cache_1.png">
+<meta name="twitter:image" content="https://joke-lin.top/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/web_cache_1.png">
 
 <link rel="canonical" href="https://joke-lin.top/2020/03/02/2020-03-02-Compute-Networking-A-Top-Down-Approach-6th/">
 
 
-<script id="page-configurations">
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -120,24 +122,36 @@
 
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
@@ -148,8 +162,9 @@
   <div class="container use-motion">
     <div class="headband"></div>
 
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="Toggle navigation bar">
         <span class="toggle-line toggle-line-first"></span>
@@ -161,9 +176,9 @@
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">WEIJUN LIN BLOG</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
   </div>
 
@@ -203,6 +218,11 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
 
   </li>
+        <li class="menu-item menu-item-notes">
+
+    <a href="/categories/%E9%9A%8F%E7%AC%94/Note/" rel="section"><i class="fa fa-clipboard fa-fw"></i>Notes</a>
+
+  </li>
         <li class="menu-item menu-item-rss">
 
     <a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a>
@@ -239,7 +259,7 @@
 </div>
 <div id="search-result">
   <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
 
@@ -247,22 +267,132 @@
   </div>
 
 </div>
-    </header>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
 
-    
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#chapter-1-计算机网络和因特网"><span class="nav-text">Chapter 1 计算机网络和因特网</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#网络边缘"><span class="nav-text">1. 网络边缘</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#物理媒介"><span class="nav-text">物理媒介</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络核心"><span class="nav-text">*2. 网络核心</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#i.-packet-switching-分组交换"><span class="nav-text">i. Packet Switching 分组交换</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#a.-store-and-forward-transmission-存储转发传输"><span class="nav-text">a. Store-and-Forward Transmission 存储转发传输</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#b.-queuing-delays-and-packet-loss"><span class="nav-text">b. Queuing Delays and Packet Loss</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#c.-forwarding-tables-and-routing-protocols"><span class="nav-text">c. Forwarding Tables and Routing Protocols</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ii.-circuit-switching-电路交换"><span class="nav-text">ii. Circuit Switching 电路交换</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#multiplexing-in-circuit-switched-networks"><span class="nav-text">Multiplexing in Circuit-Switched Networks</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#iii.-packet-switching-versus-circuit-switching"><span class="nav-text">iii. Packet Switching Versus Circuit Switching</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#packet-switching"><span class="nav-text">Packet Switching</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#circuit-switching"><span class="nav-text">Circuit Switching</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#iv.-a-network-of-networks"><span class="nav-text">IV. A Network of Networks</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#delay-loss-and-throughput"><span class="nav-text">3. *Delay, Loss, and Throughput</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#types-of-delay"><span class="nav-text">Types Of Delay</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#queuing-delay-and-packet-loss"><span class="nav-text">Queuing Delay and Packet Loss</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#end-to-end-delay"><span class="nav-text">End-to-End Delay</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#throughput-in-computer-networks"><span class="nav-text">Throughput in Computer Networks</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#protocol-layers-and-their-service-models"><span class="nav-text">4. Protocol Layers and Their Service Models</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#layered-architecture"><span class="nav-text">Layered Architecture</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#encapsulation"><span class="nav-text">Encapsulation</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chapter-2-application-layer"><span class="nav-text">Chapter 2 Application Layer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#principles-of-network-applications"><span class="nav-text">1. Principles of Network Applications</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#i.-network-application-architectures"><span class="nav-text">i. Network Application Architectures</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ii.-processes-communicating"><span class="nav-text">ii. Processes Communicating</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#iii.-transport-services-available-to-applications"><span class="nav-text">iii. Transport Services Available to Applications</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#iv.-transport-services-provided-by-the-internet"><span class="nav-text">IV. Transport Services Provided by the Internet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#v.-services-not-provided-by-internet-transport-protocols"><span class="nav-text">V. Services Not Provided by Internet Transport Protocols</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#the-web-and-http"><span class="nav-text">*2. The Web and HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#i.-overview-of-http"><span class="nav-text">i. Overview of HTTP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ii.-non-persistent-and-persistent-connections"><span class="nav-text">ii. Non-Persistent and Persistent Connections</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#iii.-http-message-format"><span class="nav-text">iii. HTTP Message Format</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#iv.-user-server-interaction-cookies"><span class="nav-text">iv. User-Server Interaction: Cookies</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#v.-web-caching"><span class="nav-text">V. Web Caching</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vi.-the-conditional-get"><span class="nav-text">VI. The Conditional GET</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dnsthe-internets-directory-service"><span class="nav-text">5. DNS—The Internet’s Directory Service</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#i.-services-provided-by-dns"><span class="nav-text">i. Services Provided by DNS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ii.-overview-of-how-dns-works"><span class="nav-text">ii. Overview of How DNS Works</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#iv.-dns-records-and-messages"><span class="nav-text">iv. DNS Records and Messages</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#电子邮件"><span class="nav-text">电子邮件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#smtp保存状态"><span class="nav-text">SMTP(保存状态)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pop3"><span class="nav-text">POP3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#imap保存状态"><span class="nav-text">IMAP（保存状态）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ftp保存状态"><span class="nav-text">FTP（保存状态）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chapter-3-transport-layer"><span class="nav-text">Chapter 3 Transport Layer</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#relationship-between-transport-and-network-layers"><span class="nav-text">Relationship Between Transport and Network Layers</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#overview-of-the-transport-layer-in-the-internet"><span class="nav-text">Overview of the Transport Layer in the Internet</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#multiplexing-and-demultiplexing"><span class="nav-text">3.2 Multiplexing and Demultiplexing</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#connectionless-multiplexing-and-demultiplexing"><span class="nav-text">Connectionless Multiplexing and Demultiplexing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#connection-oriented-multiplexing-and-demultiplexing"><span class="nav-text">Connection-Oriented Multiplexing and Demultiplexing</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#connectionless-transport-udp"><span class="nav-text">3.3 Connectionless Transport: UDP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#udp-segment-structure"><span class="nav-text">UDP Segment Structure</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#udp-checksum"><span class="nav-text">UDP Checksum</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#principles-of-reliable-data-transfer"><span class="nav-text">3.4 Principles of Reliable Data Transfer</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#building-a-reliable-data-transfer-protocol"><span class="nav-text">Building a Reliable Data Transfer Protocol</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pipelined-reliable-data-transfer-protocols"><span class="nav-text">Pipelined Reliable Data Transfer Protocols</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#connection-oriented-transport-tcp"><span class="nav-text">3.5 Connection-Oriented Transport: TCP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#the-tcp-connection"><span class="nav-text">The TCP Connection</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tcp-segment-structure"><span class="nav-text">TCP Segment Structure</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#round-trip-time-estimation-and-timeout"><span class="nav-text">Round-Trip Time Estimation and Timeout</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#reliable-data-transfer"><span class="nav-text">Reliable Data Transfer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#flow-control"><span class="nav-text">Flow Control</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tcp-connection-management"><span class="nav-text">TCP Connection Management</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tcp-congestion-control"><span class="nav-text">3.7 TCP Congestion Control</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chapter-4-the-network-layer"><span class="nav-text">Chapter 4 The Network Layer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#introduction"><span class="nav-text">4.1 Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#virtual-circuit-and-datagram-networks"><span class="nav-text">4.2 Virtual Circuit and Datagram Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#virtual-circuit-networks"><span class="nav-text">Virtual-Circuit Networks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#datagram-networks"><span class="nav-text">Datagram Networks</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#whats-inside-a-router"><span class="nav-text">4.3 What’s Inside a Router?</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#architecture"><span class="nav-text">Architecture</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#switching"><span class="nav-text">Switching</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#where-does-queueing-occur"><span class="nav-text">Where Does Queueing Occur?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#the-routing-control-plane"><span class="nav-text">The Routing Control Plane</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ip"><span class="nav-text">4.4 IP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#datagram-format"><span class="nav-text">Datagram Format</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ipv4-addressing"><span class="nav-text">IPv4 Addressing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dhcp-the-dynamic-host-configuration-protocol"><span class="nav-text">DHCP: the Dynamic Host Configuration Protocol</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#network-address-translation-nat"><span class="nav-text">Network Address Translation (NAT)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#internet-control-message-protocol-icmp"><span class="nav-text">Internet Control Message Protocol (ICMP)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ipv6"><span class="nav-text">IPv6</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#routing-algorithms"><span class="nav-text">4.5 Routing Algorithms</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#link-state-algorithm-ls"><span class="nav-text">Link-State Algorithm (LS)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#the-distance-vector-dv-routing-algorithm"><span class="nav-text">The Distance-Vector (DV) Routing Algorithm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#distance-vector-algorithm-adding-poisoned-reverse"><span class="nav-text">Distance-Vector Algorithm: Adding Poisoned Reverse</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#a-comparison-of-ls-and-dv-routing-algorithms"><span class="nav-text">A Comparison of LS and DV Routing Algorithms</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hierarchical-routing"><span class="nav-text">Hierarchical Routing</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#routing-in-the-internet"><span class="nav-text">4.6 Routing in the Internet</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#intra-as-routing-in-the-internet-rip"><span class="nav-text">Intra-AS Routing in the Internet: RIP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#intra-as-routing-in-the-internet-ospf"><span class="nav-text">Intra-AS Routing in the Internet: OSPF</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#inter-as-routing-bgpborder-gateway-protocol"><span class="nav-text">Inter-AS Routing: BGP（Border Gateway Protocol）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chapter-5-the-link-layer-links-access-networks-and-lans"><span class="nav-text">Chapter 5 The Link Layer: Links, Access Networks, and LANs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#introduction-to-the-link-layer"><span class="nav-text">5.1 Introduction to the Link Layer</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#where-is-the-link-layer-implemented"><span class="nav-text">Where Is the Link Layer Implemented?</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#error-detection-and--correction-techniques"><span class="nav-text">5.2 Error-Detection and -Correction Techniques</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#parity-checks"><span class="nav-text">Parity Checks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#checksumming-methods"><span class="nav-text">Checksumming Methods</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cyclic-redundancy-check-crc"><span class="nav-text">Cyclic Redundancy Check (CRC)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#multiple-access-links-and-protocols"><span class="nav-text">5.3 Multiple Access Links and Protocols</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#channel-partitioning-protocols"><span class="nav-text">Channel Partitioning Protocols</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#random-access-protocols"><span class="nav-text">Random Access Protocols</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#taking-turns-protocols"><span class="nav-text">Taking-Turns Protocols</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#switched-local-area-networks"><span class="nav-text">5.4 Switched Local Area Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#link-layer-addressing-and-arp"><span class="nav-text">Link-Layer Addressing and ARP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ethernet"><span class="nav-text">Ethernet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#link-layer-switches"><span class="nav-text">Link-Layer Switches</span></a></li></ol></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Weijun-Lin"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Weijun-Lin</p>
+  <div class="site-description" itemprop="description">Learing and Using</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2pva2UtbGlu" title="Github → https:&#x2F;&#x2F;github.com&#x2F;joke-lin"><i class="fab fa-github fa-fw"></i>Github</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3Blb3BsZS9qb2tlci04OC02Mi01Ny9hY3Rpdml0aWVz" title="ZHIHU → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;joker-88-62-57&#x2F;activities"><i class="fab fa-zhihu fa-fw"></i>ZHIHU</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwOTUzMjgx" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_40953281"><i class="fas fa-globe fa-fw"></i>CSDN</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOndlaWp1bi1saW5AZm94bWFpbC5jb20=" title="E-Mail → mailto:weijun-lin@foxmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+  <div class="links-of-blogroll animated">
+    <div class="links-of-blogroll-title"><i class="link fa-fw"></i>
+      Friends
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9taWxreS13LmdpdGh1Yi5pbw==" title="https:&#x2F;&#x2F;milky-w.github.io">Milky Way</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9sZXN0ZXJ0YW4uaW5r" title="https:&#x2F;&#x2F;lestertan.ink">Lester</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9oZXJpeHRoLnRvcA==" title="https:&#x2F;&#x2F;herixth.top">Herixth</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9jb2xpbi1qYXkuY24v" title="https:&#x2F;&#x2F;colin-jay.cn&#x2F;">Colin Jay</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly95ZXotbGl1LmdpdGh1Yi5pby8=" title="https:&#x2F;&#x2F;yez-liu.github.io&#x2F;">yez-liu</span>
+        </li>
+    </ul>
+  </div>
+
+      </section>
+        <div class="back-to-top animated">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
   <div class="reading-progress-bar"></div>
   <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
   <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL2pva2UtbGlu" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
 
+<noscript>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
+
       <div class="main-inner">
-        <div class="content-wrap">
-          
+        
 
-          <div class="content post posts-expand">
-            
+        <div class="content post posts-expand">
+          
 
     
   
@@ -298,7 +428,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-24 09:47:24" itemprop="dateModified" datetime="2020-05-24T09:47:24+08:00">2020-05-24</time>
+                <time title="Modified: 2020-07-20 13:07:54" itemprop="dateModified" datetime="2020-07-20T13:07:54+08:00">2020-07-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -386,10 +516,8 @@
 </blockquote>
 <h5 id="multiplexing-in-circuit-switched-networks">Multiplexing in Circuit-Switched Networks</h5>
 <ul>
-<li>frequency-division multiplexing (FDM) 频分复用 ：</li>
-</ul>
-<p>The width of the range of frequency is called, not surprisingly, the <strong>bandwidth</strong>.</p>
-<ul>
+<li><p>frequency-division multiplexing (FDM) 频分复用 ：</p>
+<p>The width of the range of frequency is called, not surprisingly, the <strong>bandwidth</strong>.</p></li>
 <li><p>time-division multiplexing (TDM) 时分复用:</p>
 <p>circuit switching is <strong>wasteful</strong> because the dedicated circuits are idle during <strong>silent periods</strong>(静默期)</p></li>
 </ul>
@@ -418,10 +546,8 @@
 </blockquote>
 <h4 id="types-of-delay">Types Of Delay</h4>
 <ul>
-<li><strong>nodal processing delay</strong>（节点处理时延）:</li>
-</ul>
-<p>The time required to <strong>examine the packet’s header</strong> and <strong>determine where to direct the packet</strong> is part of the processing delay.</p>
-<ul>
+<li><p><strong>nodal processing delay</strong>（节点处理时延）:</p>
+<p>The time required to <strong>examine the packet’s header</strong> and <strong>determine where to direct the packet</strong> is part of the processing delay.</p></li>
 <li><p><strong>Queuing Delay</strong>（排队时延）：</p>
 <p>At the queue, the packet experiences a queuing delay as it waits to be transmitted onto the link.</p></li>
 <li><p><strong>Transmission Delay</strong>（传输时延）：</p>
@@ -540,8 +666,7 @@
 </ul>
 <h4 id="iii.-http-message-format">iii. HTTP Message Format</h4>
 <ol type="1">
-<li>HTTP Request Message</li>
-</ol>
+<li><p>HTTP Request Message</p>
 <ul>
 <li>request line（请求行）: first line
 <ul>
@@ -557,21 +682,18 @@
 <li>Accept-language: indicates that the user prefers language version</li>
 <li>POST method: has an entity body for post data, but get also can do use work with saving data in URLs.</li>
 </ul></li>
-</ul>
-<ol start="2" type="1">
-<li>HTTP Request Message</li>
-</ol>
+</ul></li>
+<li><p>HTTP Request Message</p>
 <ul>
-<li>status line : first line</li>
-</ul>
-<pre><code> version + status code + phrase
-
- - 200 OK :  succeeded 
- - 301 Moved Permanently : Requested object has been permanently moved and new URL will be returned
- - 400 Bad Request :   the request could not be understood by the server. 
- - 404 Not Found : The requested document does not exist on this server 
- -  505 HTTP Version Not Supported : ~~~</code></pre>
+<li><p>status line : first line</p>
+<p>version + status code + phrase</p>
 <ul>
+<li>200 OK : succeeded</li>
+<li>301 Moved Permanently : Requested object has been permanently moved and new URL will be returned</li>
+<li>400 Bad Request : the request could not be understood by the server.</li>
+<li>404 Not Found : The requested document does not exist on this server</li>
+<li>505 HTTP Version Not Supported : ~~~</li>
+</ul></li>
 <li><p>header line: subsequent line :</p>
 <ul>
 <li>Connection : tell the client that whether close the TCP connection after sending the message</li>
@@ -582,7 +704,8 @@
 <li>Content-Type : data type such as HTML</li>
 </ul></li>
 <li><p>entity body : save data</p></li>
-</ul>
+</ul></li>
+</ol>
 <h4 id="iv.-user-server-interaction-cookies">iv. User-Server Interaction: Cookies</h4>
 <blockquote>
 <p>cookies allow sites to keep track of users</p>
@@ -600,7 +723,7 @@
 <p>A Web cache—also called a proxy server（代理服务器）—is a network entity that satisfies HTTP requests on the behalf of an origin Web server</p>
 </blockquote>
 <p>It works like this:</p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/web_cache_1.png" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/web_cache_1.png" /></p>
 <p>Note that a cache is <strong><em>both a server and a client</em></strong> at the same time.</p>
 <p>Advantages:</p>
 <ul>
@@ -723,7 +846,7 @@
 <li><p>we mention that it is possible for an application to have reliable data transfer when using UDP. This can be done if reliability is built into the application itself</p></li>
 </ul>
 <h4 id="udp-segment-structure">UDP Segment Structure</h4>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_7.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_7.png" style="zoom:50%;" /></p>
 <h4 id="udp-checksum">UDP Checksum</h4>
 <p>UDP at the sender side performs the 1s complement of the sum of all the 16-bit words in the segment, with any overflow encountered during the sum being wrapped around(<strong>add the overflow bits with the sum</strong>)</p>
 <h3 id="principles-of-reliable-data-transfer">3.4 Principles of Reliable Data Transfer</h3>
@@ -731,7 +854,7 @@
 <ol type="1">
 <li><p><strong>rdt1.0</strong></p>
 <p>the underlying channel is completely reliable</p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_9.png" style="zoom:50%;" /></p></li>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_9.png" style="zoom:50%;" /></p></li>
 <li><p><strong>rdt2.0</strong>: Reliable Data Transfer over a Channel with Bit Errors</p></li>
 </ol>
 <p>an ARQ (Automatic Repeat reQuest) protocols</p>
@@ -741,29 +864,29 @@
 <li><p>feedback (ACK,NAK)</p></li>
 <li><p>resend</p></li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_10.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_10.png" style="zoom:50%;" /></p>
 <ol start="3" type="1">
 <li><p><strong>rdt2.1</strong>: can detect ACK or NAK errors based on 2.0</p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_11.png" style="zoom:50%;" /> <img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_12.png" style="zoom:50%;" /></p></li>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_11.png" style="zoom:50%;" /> <img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_12.png" style="zoom:50%;" /></p></li>
 <li><p><strong>rdt2.2</strong>: implement without NAK based on 2.1</p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_13.png" style="zoom:50%;" /> <img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_14.png" style="zoom:50%;" /></p></li>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_13.png" style="zoom:50%;" /> <img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_14.png" style="zoom:50%;" /></p></li>
 <li><p><strong>rdt3.0</strong>: Reliable Data Transfer over a Lossy Channel with Bit Errors</p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_15.png" style="zoom:50%;" /></p></li>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_15.png" style="zoom:50%;" /></p></li>
 </ol>
 <h4 id="pipelined-reliable-data-transfer-protocols">Pipelined Reliable Data Transfer Protocols</h4>
 <ol type="1">
 <li><p>Stop&amp;Wait: rdt</p></li>
 <li><p>PipeLine: gbn, sr, tcp in order.</p></li>
 </ol>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_19.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_19.png" style="zoom:50%;" /></p>
 <p>Example:</p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_22.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_22.png" style="zoom:50%;" /></p>
 <p>The window size will move as long as getting the ACK.</p>
 <p><strong>only a single timer</strong>, which can be thought of as a timer for the oldest transmitted but not yet acknowledged packet. If an ACK is received but there are still additional transmitted but not yet acknowledged packets, the timer is restarted. If there are no outstanding, unacknowledged packets, the timer is stopped.</p>
 <ul>
 <li><p><strong>Selective Repeat (SR)</strong></p>
 <p>sequence-number space format:</p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_23.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_23.png" style="zoom:50%;" /></p>
 <p>Actions in sender:</p>
 <ol type="1">
 <li>Data received from above</li>
@@ -777,11 +900,11 @@
 <li>Packet with sequence number in [rcv_base-N, rcv_base-1] is correctly received. return an ACK</li>
 </ol>
 <p><strong>SR’s problem</strong>: can’t know <strong><em>a new packet or a retransmission?</em></strong></p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_27.png" style="zoom:70%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_27.png" style="zoom:70%;" /></p>
 <p>The solution of this problem: <strong><em>the window size must be less than or equal to half the</em></strong> <strong><em>size of the sequence number space for SR protocols.</em></strong></p></li>
 </ul>
 <p><strong>Summary:</strong></p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/T3_1.png" style="zoom:70%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/T3_1.png" style="zoom:70%;" /></p>
 <h3 id="connection-oriented-transport-tcp">3.5 Connection-Oriented Transport: TCP</h3>
 <p>GBN-SR 窗口不变, TCP 窗口可以变</p>
 <h4 id="the-tcp-connection">The TCP Connection</h4>
@@ -794,13 +917,13 @@
 <li><strong>maximum transmission unit (MTU):</strong> the length of the largest link-layer frame that can be sent by the local sending host</li>
 </ul>
 <h4 id="tcp-segment-structure">TCP Segment Structure</h4>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_29.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_29.png" style="zoom:50%;" /></p>
 <ul>
 <li><strong>Sequence Numbers(SEQ)</strong>: the byte-stream number of the first byte in the segment</li>
 <li><strong>Acknowledgment Numbers(ACK)</strong>: Host A puts in its segment is the sequence number of the next byte Host A is expecting from Host B（想要的下一个序号）TCP is said to provide <strong>cumulative acknowledgments</strong></li>
 </ul>
 <p>Example：</p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_31.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_31.png" style="zoom:50%;" /></p>
 <h4 id="round-trip-time-estimation-and-timeout">Round-Trip Time Estimation and Timeout</h4>
 <p>The sample RTT, denoted SampleRTT, for a segment is the amount of time between when the segment is sent (that is, passed to IP) and when an acknowledgment for the segment is received.</p>
 <p>TCP never computes a SampleRTT for a segment that has been retransmitted; it only measures SampleRTT for segments that have been transmitted once.</p>
@@ -837,15 +960,15 @@
 <p><strong>当主机B接收窗口为空时，主机A继续发送只有一个字节数据的报文段，避免A被阻塞的情况</strong></p>
 <h4 id="tcp-connection-management">TCP Connection Management</h4>
 <p>MSS在传输SYN时传输确定, TCP可以将包合并发就合并发, SYN 包要独占一个序列号 SYN：1.同步网络参数 2.同步序列号 FIN：表示不发了，但可以接收</p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_39.png" style="zoom:50%;" /></p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_40.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_39.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_40.png" style="zoom:50%;" /></p>
 <h3 id="tcp-congestion-control">3.7 TCP Congestion Control</h3>
 <p><strong>each side of a TCP connection</strong> consists of a <strong>receive buffer, a send buffer, and several variables</strong> (LastByteRead, rwnd, and so on). The TCP congestion-control mechanism operating at the sender keeps track of an additional variable, the congestion window. <strong>The congestion window</strong>, denoted cwnd, imposes a constraint on the rate at which a TCP sender can send traffic into the network.</p>
 <p>TCP uses acknowledgments to trigger (or clock) its increase in congestion window size, TCP is said to be <strong>self-clocking</strong>.</p>
 <p><strong>书本中的TCP标准遵循单一重传定时器的推荐</strong></p>
 <p><strong>FSM</strong>：</p>
 <p>对快速重传的快速恢复的cwnd有减半加三（考虑重传时没有拥塞）和不加三两种操作，这里采用不加三</p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_52.png" style="zoom:70%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_52.png" style="zoom:70%;" /></p>
 <p><strong>TCP congestion-control algorithm</strong>:</p>
 <ol type="1">
 <li><p>Slow Start</p>
@@ -860,9 +983,9 @@
 </ul></li>
 </ol>
 <p>Example:</p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_53.png" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_53.png" /></p>
 <p>TCP is <strong>fair</strong></p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/3_56.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/3_56.png" style="zoom:50%;" /></p>
 <p>these two connection will infinitely approach <em>the equal bandwidth share line</em>.</p>
 <h2 id="chapter-4-the-network-layer">Chapter 4 The Network Layer</h2>
 <h3 id="introduction">4.1 Introduction</h3>
@@ -896,9 +1019,9 @@
 <p>Because forwarding tables in datagram networks <strong>can be modified at any time</strong>, a series of packets sent from one end system to another may follow different paths through the network and may arrive <strong>out of order</strong>.</p>
 <h3 id="whats-inside-a-router">4.3 What’s Inside a Router?</h3>
 <h4 id="architecture">Architecture</h4>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_6.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_6.png" style="zoom:50%;" /></p>
 <h4 id="switching">Switching</h4>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_8.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_8.png" style="zoom:50%;" /></p>
 <h4 id="where-does-queueing-occur">Where Does Queueing Occur?</h4>
 <p>the router’s memory can eventually be exhausted and packet loss will occur when no memory is available to store arriving packets.</p>
 <p><strong>packet scheduler（分组调度）</strong>:</p>
@@ -908,19 +1031,19 @@
 <li>Random Early Detection (RED随机早期检测)</li>
 </ul>
 <p><strong>head-of-the-line (HOL) blocking（线路前部阻塞）</strong>: 前一个分组和其他的输入端口竞争，阻塞了后面没有冲突的分组的发送</p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_11.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_11.png" style="zoom:50%;" /></p>
 <h4 id="the-routing-control-plane">The Routing Control Plane</h4>
 <p>software pass....</p>
 <h3 id="ip">4.4 IP</h3>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_12.png" style="zoom:60%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_12.png" style="zoom:60%;" /></p>
 <h4 id="datagram-format">Datagram Format</h4>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_13.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_13.png" style="zoom:50%;" /></p>
 <p>此处校验和计算方法和UDP处出现的校验和计算方法一致</p>
 <p><strong>IP Datagram Fragmentation</strong></p>
 <p>datagram: 4000 bytes</p>
 <p>MTU: 1500 bytes</p>
 <p>IP header: 20 bytes</p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/T4_2.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/T4_2.png" style="zoom:50%;" /></p>
 <h4 id="ipv4-addressing">IPv4 Addressing</h4>
 <p>The boundary between the host and the physical link is called an <strong>interface</strong>.</p>
 <p>To determine the subnets, detach each interface from its host or router, creating islands of isolated networks, with interfaces terminating the end points of the isolated networks. Each of these isolated networks is called a subnet. 没有穿越路由器属于一个子网</p>
@@ -929,7 +1052,7 @@
 <p>子网本身IP地址：前缀+全1(直接广播地址)（对目标子网广播）</p>
 <p>255.255.255.255 子网广播地址（受限广播地址）（广播本子网）</p>
 <p>0.0.0.0 网卡本身地址</p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_17.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_17.png" style="zoom:50%;" /></p>
 <ul>
 <li><p><strong>Classless Interdomain Routing (CIDR 无类别区域间路由选择)</strong></p>
 <p>a.b.c.d/x ; use prefix can reduce the size of the forwarding table</p></li>
@@ -938,7 +1061,7 @@
 </ul>
 <h4 id="dhcp-the-dynamic-host-configuration-protocol">DHCP: the Dynamic Host Configuration Protocol</h4>
 <p>a <strong>plug-and-play protocol</strong>(即插即用协议)</p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_21.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_21.png" style="zoom:50%;" /></p>
 <p>因为可能存在多个DHCP服务器所以需要二次确认，客户端选择一个IP并告知（一般都是第一个）</p>
 <h4 id="network-address-translation-nat">Network Address Translation (NAT)</h4>
 <p>use a <strong>NAT translation table</strong> at the NAT router, and to include port numbers as well as IP addresses in the table entries</p>
@@ -949,7 +1072,7 @@
 <p>The most typical use of ICMP is for error reporting</p>
 <p>使用IP协议的网络层协议</p>
 <h4 id="ipv6">IPv6</h4>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_24.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_24.png" style="zoom:50%;" /></p>
 <ul>
 <li>Next hdr:交付到哪一个协议（TCP/UDP）和v4的协议字段相同</li>
 <li>IPv6不允许在路由器上分片和组装</li>
@@ -960,9 +1083,9 @@
 <p><strong>Transitioning from IPv4 to IPv6</strong></p>
 <ul>
 <li><p><strong>dual-stack</strong>：使用既可以处理v4也可以处理v6的路由器，但可能丢失流标签（或者其他v6特有标签）</p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_25.png" style="zoom:50%;" /></p></li>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_25.png" style="zoom:50%;" /></p></li>
 <li><p><strong>tunneling</strong>（建隧道）：将v6整体作为v4的数据段传递</p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_26.png" style="zoom:50%;" /></p></li>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_26.png" style="zoom:50%;" /></p></li>
 </ul>
 <h3 id="routing-algorithms">4.5 Routing Algorithms</h3>
 <p>classification</p>
@@ -977,13 +1100,13 @@
 <li>p(v): previous node (neighbor of v) along the current least-cost path from the source to v.</li>
 <li>N' : subset of nodes; v is in N’ if the least-cost path from the source to v is definitively known.</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/LS.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/LS.png" style="zoom:50%;" /></p>
 <p>Example:</p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/T4_3.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/T4_3.png" style="zoom:50%;" /></p>
 <p>Then we can get the forward table of u:</p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_28.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_28.png" style="zoom:50%;" /></p>
 <p>oscillations occur in any algorithm, not just an LS algorithm, that uses a congestion or delay-based link metric</p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_29.png" style="zoom:60%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_29.png" style="zoom:60%;" /></p>
 <p>One way to avoid such self synchronization is for each router to randomize the time it sends out a link advertisement.</p>
 <h4 id="the-distance-vector-dv-routing-algorithm">The Distance-Vector (DV) Routing Algorithm</h4>
 <ul>
@@ -993,9 +1116,9 @@
 </ul>
 <p>use this formula to update forwarding table:</p>
 <p>$D_x(y)=min_v{c(x,v)+D_v(y) } $</p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/DV.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/DV.png" style="zoom:50%;" /></p>
 <p>Examlpe:</p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_30.png" style="zoom:65%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_30.png" style="zoom:65%;" /></p>
 <h4 id="distance-vector-algorithm-adding-poisoned-reverse">Distance-Vector Algorithm: Adding Poisoned Reverse</h4>
 <p>好消息: 链路开销减小, 迭代次数少便收敛</p>
 <p>坏消息 链路开销增加, 可能陷入无穷迭代（原因在于消息的虚假，增加的这条链路被其他节点引用但无法更新）</p>
@@ -1023,14 +1146,14 @@
 </ol>
 <h4 id="intra-as-routing-in-the-internet-rip">Intra-AS Routing in the Internet: RIP</h4>
 <p><strong>hop</strong>: the number of subnets traversed along the shortest path from source router to destination subnet, including the destination subnet</p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_34.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_34.png" style="zoom:50%;" /></p>
 <p>The maximum cost of a path is limited to 15 in RIP.</p>
 <p>In RIP, routing updates are exchanged between neighbors approximately every 30 seconds using a <strong>RIP response message</strong>(RIP advertisements)</p>
 <p>Example:</p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_35.png" style="zoom:50%;" /></p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_36.png" style="zoom:50%;" /></p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_37.png" style="zoom:50%;" /></p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/4_38.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_35.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_36.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_37.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/4_38.png" style="zoom:50%;" /></p>
 <h4 id="intra-as-routing-in-the-internet-ospf">Intra-AS Routing in the Internet: OSPF</h4>
 <p>OSPF broadcasts routing information to <strong>all</strong> other routers in the autonomous system</p>
 <p>Some of the advances embodied in OSPF：</p>
@@ -1062,7 +1185,7 @@
 <li><em>AS-PATH</em>:包含了前缀的通告已经听过的那些AS</li>
 <li>Providing the critical link between the inter-AS and intra-AS routing protocols, the NEXT-HOP attribute has a subtle but important use. <strong>The NEXT-HOP is the router interface that begins the AS-PATH.</strong></li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/BGP_routing.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/BGP_routing.png" style="zoom:50%;" /></p>
 <h2 id="chapter-5-the-link-layer-links-access-networks-and-lans">Chapter 5 The Link Layer: Links, Access Networks, and LANs</h2>
 <h3 id="introduction-to-the-link-layer">5.1 Introduction to the Link Layer</h3>
 <ul>
@@ -1079,7 +1202,7 @@
 </ol>
 <h4 id="where-is-the-link-layer-implemented">Where Is the Link Layer Implemented?</h4>
 <p><strong>network adapter</strong> also named <strong>network interface card (NIC)</strong></p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/5_2.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/5_2.png" style="zoom:50%;" /></p>
 <h3 id="error-detection-and--correction-techniques">5.2 Error-Detection and -Correction Techniques</h3>
 <p>use <strong>error-detection and -correction bits(EDC)</strong> to detect and correct error bits</p>
 <p>Even with the use of error-detection bits there still may be <strong>undetected bit errors</strong></p>
@@ -1087,7 +1210,7 @@
 <p>奇偶校验只需要查看加上检验比特(奇偶校验位)的1 是奇数还是偶数</p>
 <p>二维奇偶校验:</p>
 <p>对每一行每一列都进行奇偶校验,然后对列行奇偶校验位进行奇偶校验, 就校验可以检测和纠正单个比特错误,可以检测但是不能纠正两个比特的任意错误组合</p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/5_5.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/5_5.png" style="zoom:50%;" /></p>
 <p>The ability of the receiver to both detect and correct errors is known as <strong>forward error correction (FEC前向纠错)</strong>.</p>
 <h4 id="checksumming-methods">Checksumming Methods</h4>
 <p>和UDP/TCP中的类似</p>
@@ -1143,7 +1266,7 @@
 <p>此协议需要时钟同步,但是当只有一个结点时,效率是R</p>
 <p>此协议效率定义为:有大量活跃结点发送大量帧时,长期运行中成功时隙的份额</p>
 <p>在p的概率下 N个结点的效率为<span class="math inline">\(Np(1-p)^{N-1}\)</span> N趋于无穷时有极限1/e = 0.37</p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/5_10.png" style="zoom:50%;" /></p></li>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/5_10.png" style="zoom:50%;" /></p></li>
 <li><p>ALOHA</p>
 <p>时隙ALOHA的无时钟同步版本, 效率降低一半</p></li>
 <li><p>Carrier Sense Multiple Access (CSMA 载波监听多路访问)</p>
@@ -1153,8 +1276,8 @@
 <li><em>If someone else begins talking at the same time, stop talking</em>, this is called <strong>collision detection</strong></li>
 </ol>
 <p>These two rules are embodied in the family of <strong>carrier sense multiple access(CSMA)</strong> and <strong>CSMA with collision detection (CSMA/CD)</strong> protocols</p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/5_12.png" style="zoom:50%;" /></p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/5_13.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/5_12.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/5_13.png" style="zoom:50%;" /></p>
 <p>CSMA/CD 的运行</p>
 <ol type="1">
 <li>The adapter obtains a datagram from the network layer, prepares a link-layer frame, and puts the frame adapter buffer.</li>
@@ -1180,7 +1303,7 @@
 <li><p><strong>MAC(LAN address, a physical address)</strong>: 48 bits, FF-FF-FF-FF-FF-FF <strong>broadcast address</strong></p></li>
 <li><p><strong>Address Resolution Protocol (ARP)</strong>:</p>
 <p>ARP 维护一个ARP表</p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/5_18.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/5_18.png" style="zoom:50%;" /></p>
 <p>表中没有所需要的项时,就会发送一个ARP分组并向子网广播获取对方的MAC地址,当需要发送到子网以外时,需要先获取网关路由器的MAC地址,然后一步步转发出去</p></li>
 </ul>
 <h4 id="ethernet">Ethernet</h4>
@@ -1189,7 +1312,7 @@
 <li>switch(交换机):存储转发功能,且无碰撞(因为有缓存)</li>
 </ul>
 <p>结构:</p>
-<p><img src="https://raw.githubusercontent.com/Joke-Lin/Notes/master/Compute-Networking-A-Top-Down-Approach-6th/img/5_20.png" style="zoom:50%;" /></p>
+<p><img src="/assets/Note/Compute-Networking-A-Top-Down-Approach-6th/5_20.png" style="zoom:50%;" /></p>
 <p>以太网技术提供不可靠服务,接收方会执行CRC校验,失败则丢弃,但不对发送方产生任何的反馈信息</p>
 <h4 id="link-layer-switches">Link-Layer Switches</h4>
 <ul>
@@ -1276,8 +1399,8 @@
 
 
 
-          </div>
-          
+        </div>
+        
     <div class="comments" id="gitalk-container"></div>
 
 <script>
@@ -1302,116 +1425,6 @@
   }
 </script>
 
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#chapter-1-计算机网络和因特网"><span class="nav-text">Chapter 1 计算机网络和因特网</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#网络边缘"><span class="nav-text">1. 网络边缘</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#物理媒介"><span class="nav-text">物理媒介</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络核心"><span class="nav-text">*2. 网络核心</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#i.-packet-switching-分组交换"><span class="nav-text">i. Packet Switching 分组交换</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#a.-store-and-forward-transmission-存储转发传输"><span class="nav-text">a. Store-and-Forward Transmission 存储转发传输</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#b.-queuing-delays-and-packet-loss"><span class="nav-text">b. Queuing Delays and Packet Loss</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#c.-forwarding-tables-and-routing-protocols"><span class="nav-text">c. Forwarding Tables and Routing Protocols</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ii.-circuit-switching-电路交换"><span class="nav-text">ii. Circuit Switching 电路交换</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#multiplexing-in-circuit-switched-networks"><span class="nav-text">Multiplexing in Circuit-Switched Networks</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#iii.-packet-switching-versus-circuit-switching"><span class="nav-text">iii. Packet Switching Versus Circuit Switching</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#packet-switching"><span class="nav-text">Packet Switching</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#circuit-switching"><span class="nav-text">Circuit Switching</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#iv.-a-network-of-networks"><span class="nav-text">IV. A Network of Networks</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#delay-loss-and-throughput"><span class="nav-text">3. *Delay, Loss, and Throughput</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#types-of-delay"><span class="nav-text">Types Of Delay</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#queuing-delay-and-packet-loss"><span class="nav-text">Queuing Delay and Packet Loss</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#end-to-end-delay"><span class="nav-text">End-to-End Delay</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#throughput-in-computer-networks"><span class="nav-text">Throughput in Computer Networks</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#protocol-layers-and-their-service-models"><span class="nav-text">4. Protocol Layers and Their Service Models</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#layered-architecture"><span class="nav-text">Layered Architecture</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#encapsulation"><span class="nav-text">Encapsulation</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chapter-2-application-layer"><span class="nav-text">Chapter 2 Application Layer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#principles-of-network-applications"><span class="nav-text">1. Principles of Network Applications</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#i.-network-application-architectures"><span class="nav-text">i. Network Application Architectures</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ii.-processes-communicating"><span class="nav-text">ii. Processes Communicating</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#iii.-transport-services-available-to-applications"><span class="nav-text">iii. Transport Services Available to Applications</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#iv.-transport-services-provided-by-the-internet"><span class="nav-text">IV. Transport Services Provided by the Internet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#v.-services-not-provided-by-internet-transport-protocols"><span class="nav-text">V. Services Not Provided by Internet Transport Protocols</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#the-web-and-http"><span class="nav-text">*2. The Web and HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#i.-overview-of-http"><span class="nav-text">i. Overview of HTTP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ii.-non-persistent-and-persistent-connections"><span class="nav-text">ii. Non-Persistent and Persistent Connections</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#iii.-http-message-format"><span class="nav-text">iii. HTTP Message Format</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#iv.-user-server-interaction-cookies"><span class="nav-text">iv. User-Server Interaction: Cookies</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#v.-web-caching"><span class="nav-text">V. Web Caching</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vi.-the-conditional-get"><span class="nav-text">VI. The Conditional GET</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dnsthe-internets-directory-service"><span class="nav-text">5. DNS—The Internet’s Directory Service</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#i.-services-provided-by-dns"><span class="nav-text">i. Services Provided by DNS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ii.-overview-of-how-dns-works"><span class="nav-text">ii. Overview of How DNS Works</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#iv.-dns-records-and-messages"><span class="nav-text">iv. DNS Records and Messages</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#电子邮件"><span class="nav-text">电子邮件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#smtp保存状态"><span class="nav-text">SMTP(保存状态)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pop3"><span class="nav-text">POP3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#imap保存状态"><span class="nav-text">IMAP（保存状态）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ftp保存状态"><span class="nav-text">FTP（保存状态）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chapter-3-transport-layer"><span class="nav-text">Chapter 3 Transport Layer</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#relationship-between-transport-and-network-layers"><span class="nav-text">Relationship Between Transport and Network Layers</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#overview-of-the-transport-layer-in-the-internet"><span class="nav-text">Overview of the Transport Layer in the Internet</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#multiplexing-and-demultiplexing"><span class="nav-text">3.2 Multiplexing and Demultiplexing</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#connectionless-multiplexing-and-demultiplexing"><span class="nav-text">Connectionless Multiplexing and Demultiplexing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#connection-oriented-multiplexing-and-demultiplexing"><span class="nav-text">Connection-Oriented Multiplexing and Demultiplexing</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#connectionless-transport-udp"><span class="nav-text">3.3 Connectionless Transport: UDP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#udp-segment-structure"><span class="nav-text">UDP Segment Structure</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#udp-checksum"><span class="nav-text">UDP Checksum</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#principles-of-reliable-data-transfer"><span class="nav-text">3.4 Principles of Reliable Data Transfer</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#building-a-reliable-data-transfer-protocol"><span class="nav-text">Building a Reliable Data Transfer Protocol</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pipelined-reliable-data-transfer-protocols"><span class="nav-text">Pipelined Reliable Data Transfer Protocols</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#connection-oriented-transport-tcp"><span class="nav-text">3.5 Connection-Oriented Transport: TCP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#the-tcp-connection"><span class="nav-text">The TCP Connection</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tcp-segment-structure"><span class="nav-text">TCP Segment Structure</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#round-trip-time-estimation-and-timeout"><span class="nav-text">Round-Trip Time Estimation and Timeout</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#reliable-data-transfer"><span class="nav-text">Reliable Data Transfer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#flow-control"><span class="nav-text">Flow Control</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tcp-connection-management"><span class="nav-text">TCP Connection Management</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tcp-congestion-control"><span class="nav-text">3.7 TCP Congestion Control</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chapter-4-the-network-layer"><span class="nav-text">Chapter 4 The Network Layer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#introduction"><span class="nav-text">4.1 Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#virtual-circuit-and-datagram-networks"><span class="nav-text">4.2 Virtual Circuit and Datagram Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#virtual-circuit-networks"><span class="nav-text">Virtual-Circuit Networks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#datagram-networks"><span class="nav-text">Datagram Networks</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#whats-inside-a-router"><span class="nav-text">4.3 What’s Inside a Router?</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#architecture"><span class="nav-text">Architecture</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#switching"><span class="nav-text">Switching</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#where-does-queueing-occur"><span class="nav-text">Where Does Queueing Occur?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#the-routing-control-plane"><span class="nav-text">The Routing Control Plane</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ip"><span class="nav-text">4.4 IP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#datagram-format"><span class="nav-text">Datagram Format</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ipv4-addressing"><span class="nav-text">IPv4 Addressing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dhcp-the-dynamic-host-configuration-protocol"><span class="nav-text">DHCP: the Dynamic Host Configuration Protocol</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#network-address-translation-nat"><span class="nav-text">Network Address Translation (NAT)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#internet-control-message-protocol-icmp"><span class="nav-text">Internet Control Message Protocol (ICMP)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ipv6"><span class="nav-text">IPv6</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#routing-algorithms"><span class="nav-text">4.5 Routing Algorithms</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#link-state-algorithm-ls"><span class="nav-text">Link-State Algorithm (LS)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#the-distance-vector-dv-routing-algorithm"><span class="nav-text">The Distance-Vector (DV) Routing Algorithm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#distance-vector-algorithm-adding-poisoned-reverse"><span class="nav-text">Distance-Vector Algorithm: Adding Poisoned Reverse</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#a-comparison-of-ls-and-dv-routing-algorithms"><span class="nav-text">A Comparison of LS and DV Routing Algorithms</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hierarchical-routing"><span class="nav-text">Hierarchical Routing</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#routing-in-the-internet"><span class="nav-text">4.6 Routing in the Internet</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#intra-as-routing-in-the-internet-rip"><span class="nav-text">Intra-AS Routing in the Internet: RIP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#intra-as-routing-in-the-internet-ospf"><span class="nav-text">Intra-AS Routing in the Internet: OSPF</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#inter-as-routing-bgpborder-gateway-protocol"><span class="nav-text">Inter-AS Routing: BGP（Border Gateway Protocol）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chapter-5-the-link-layer-links-access-networks-and-lans"><span class="nav-text">Chapter 5 The Link Layer: Links, Access Networks, and LANs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#introduction-to-the-link-layer"><span class="nav-text">5.1 Introduction to the Link Layer</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#where-is-the-link-layer-implemented"><span class="nav-text">Where Is the Link Layer Implemented?</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#error-detection-and--correction-techniques"><span class="nav-text">5.2 Error-Detection and -Correction Techniques</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#parity-checks"><span class="nav-text">Parity Checks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#checksumming-methods"><span class="nav-text">Checksumming Methods</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cyclic-redundancy-check-crc"><span class="nav-text">Cyclic Redundancy Check (CRC)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#multiple-access-links-and-protocols"><span class="nav-text">5.3 Multiple Access Links and Protocols</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#channel-partitioning-protocols"><span class="nav-text">Channel Partitioning Protocols</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#random-access-protocols"><span class="nav-text">Random Access Protocols</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#taking-turns-protocols"><span class="nav-text">Taking-Turns Protocols</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#switched-local-area-networks"><span class="nav-text">5.4 Switched Local Area Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#link-layer-addressing-and-arp"><span class="nav-text">Link-Layer Addressing and ARP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ethernet"><span class="nav-text">Ethernet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#link-layer-switches"><span class="nav-text">Link-Layer Switches</span></a></li></ol></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Weijun-Lin"
-      src="/images/avatar.png">
-  <p class="site-author-name" itemprop="name">Weijun-Lin</p>
-  <div class="site-description" itemprop="description">Learing and Using</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">53</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">14</span>
-        <span class="site-state-item-name">categories</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">16</span>
-        <span class="site-state-item-name">tags</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2pva2UtbGlu" title="Github → https:&#x2F;&#x2F;github.com&#x2F;joke-lin"><i class="fab fa-github fa-fw"></i>Github</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3Blb3BsZS9qb2tlci04OC02Mi01Ny9hY3Rpdml0aWVz" title="ZHIHU → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;joker-88-62-57&#x2F;activities"><i class="fab fa-zhihu fa-fw"></i>ZHIHU</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwOTUzMjgx" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_40953281"><i class="fas fa-globe fa-fw"></i>CSDN</span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="bWFpbHRvOndlaWp1bi1saW5AZm94bWFpbC5jb20=" title="E-Mail → mailto:weijun-lin@foxmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
-      </span>
-  </div>
-  <div class="cc-license motion-element" itemprop="license">
-    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
-  </div>
-
-
-  <div class="links-of-blogroll motion-element">
-    <div class="links-of-blogroll-title"><i class="link fa-fw"></i>
-      Friends
-    </div>
-    <ul class="links-of-blogroll-list">
-        <li class="links-of-blogroll-item">
-          <span class="exturl" data-url="aHR0cHM6Ly9taWxreS13LmdpdGh1Yi5pbw==" title="https:&#x2F;&#x2F;milky-w.github.io">Milky Way</span>
-        </li>
-        <li class="links-of-blogroll-item">
-          <span class="exturl" data-url="aHR0cHM6Ly9sZXN0ZXJ0YW4uaW5r" title="https:&#x2F;&#x2F;lestertan.ink">Lester</span>
-        </li>
-        <li class="links-of-blogroll-item">
-          <span class="exturl" data-url="aHR0cHM6Ly9oZXJpeHRoLnRvcA==" title="https:&#x2F;&#x2F;herixth.top">Herixth</span>
-        </li>
-        <li class="links-of-blogroll-item">
-          <span class="exturl" data-url="aHR0cHM6Ly9jb2xpbi1qYXkuY24v" title="https:&#x2F;&#x2F;colin-jay.cn&#x2F;">Colin Jay</span>
-        </li>
-        <li class="links-of-blogroll-item">
-          <span class="exturl" data-url="aHR0cHM6Ly95ZXotbGl1LmdpdGh1Yi5pby8=" title="https:&#x2F;&#x2F;yez-liu.github.io&#x2F;">yez-liu</span>
-        </li>
-    </ul>
-  </div>
-
-      </div>
-        <div class="back-to-top motion-element">
-          <i class="fa fa-arrow-up"></i>
-          <span>0%</span>
-        </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
       </div>
     </main>
 
@@ -1434,13 +1447,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">207k</span>
+    <span title="Symbols count total">208k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">3:08</span>
+    <span title="Reading time total">3:09</span>
 </div>
   <div class="powered-by">Powered by <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span>
   </div>
@@ -1481,23 +1494,16 @@
   
   <script src="/lib/anime.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
 
 <script src="/js/utils.js"></script>
 
 <script src="/js/motion.js"></script>
 
 
-<script src="/js/schemes/pisces.js"></script>
-
-
 <script src="/js/next-boot.js"></script>
 
 <script src="/js/bookmark.js"></script>
-
-
 
 
   
