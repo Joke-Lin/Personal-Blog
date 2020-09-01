@@ -860,7 +860,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-07-20 15:54:54" itemprop="dateModified" datetime="2020-07-20T15:54:54+08:00">2020-07-20</time>
+                <time title="Modified: 2020-09-01 15:04:31" itemprop="dateModified" datetime="2020-09-01T15:04:31+08:00">2020-09-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -882,14 +882,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>3.3k</span>
+              <span>1.8k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>3 mins.</span>
+              <span>2 mins.</span>
             </span>
 
         </div>
@@ -902,7 +902,9 @@
 
       
           <h2 id="问题描述">问题描述</h2>
-<p>在博客网站下直接写文章时,会涉及到图像的路径，但在本地下的路径和最终部署后的路径是不同。对于不是很长的文章，便直接写路径为<code>site.com/assert/.../</code>这样的了。但对于图片过多的情况，这样子渲染起来一堆无效图片，很难受。所以长篇文章就在站点文件夹之外新建一个文件夹写，将图片也存一份到此文件夹下，最后发布的时候，在将所有的图片的路径改成可以显示的。但手动改很麻烦，可以使用正则匹配解决。</p>
+<p>在博客网站下直接写文章时，会涉及到图像的路径，一般采用的相对路径。但是这样子在最后部署的时候的路径一般都会出现问题（或者自己另外写好的文章放到网站上就不可避免的重新编辑图像地址）。</p>
+<p>一种解决方法是把所有图片放在图床上，就不存在上面的问题了。但本人一般喜欢本地写，图片资源直接放在GitHub上，或者博客网站的相应位置，所以将本地路径转换为 GitHub /网站 路径就显的很重要。</p>
+<p>这里采用的是 Python 正则替换实现此功能</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/05/22/2020-05-22-blog-image-replace/#more" rel="contents">
