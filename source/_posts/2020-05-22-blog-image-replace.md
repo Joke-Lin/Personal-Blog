@@ -10,127 +10,44 @@ categories:
 
 ## 问题描述
 
-在博客网站下直接写文章时,会涉及到图像的路径，但在本地下的路径和最终部署后的路径是不同。对于不是很长的文章，便直接写路径为`site.com/assert/.../`这样的了。但对于图片过多的情况，这样子渲染起来一堆无效图片，很难受。所以长篇文章就在站点文件夹之外新建一个文件夹写，将图片也存一份到此文件夹下，最后发布的时候，在将所有的图片的路径改成可以显示的。但手动改很麻烦，可以使用正则匹配解决。
+在博客网站下直接写文章时，会涉及到图像的路径，一般采用的相对路径。但是这样子在最后部署的时候的路径一般都会出现问题（或者自己另外写好的文章放到网站上就不可避免的重新编辑图像地址）。
+
+一种解决方法是把所有图片放在图床上，就不存在上面的问题了。但本人一般喜欢本地写，图片资源直接放在GitHub上，或者博客网站的相应位置，所以将本地路径转换为 GitHub /网站 路径就显的很重要。
+
+这里采用的是 Python 正则替换实现此功能
 
 <!-- more -->
 
 ## 解决方案
 
-这里采用的是Python的正则匹配方案。对于路径`![text](./img/sub_path)`，转换为网站可识别路径只需要将`./`替换为对应的前缀即可。
+这里采用的是Python的正则匹配方案。
 
-代码如下:
+Markdown 中的图像都是以 `![text](./img_directory/sub_path)` 或者 `![text](img_directory/sub_path)` 这样的形式，而目标则色把他们的公共前缀路径替换为超链接前缀，如 `![text](https://site/sub_path)`，所以简单的思路就是把图像中的路径 `****prefix/img.jpg` 替换为 `site_path/img.jpg` 即把 prefix 及其前面的部分替换为网址前缀，防止图像路径有的使用 `./` 有的不适用的格式。
 
-```python
-    # python 3.7.3
-    # 使用：python xx.py 输入文件 需要添加的前缀
-
-    import re
-    import sys
-
-    if len(sys.argv) != 3:
-        print("amount of parameters must be 3")
-        sys.exit()
-
-    # 考虑./img/path  img/path 两种种情况
-    patter = '\!\[.*?\]\((?P<tar>(\./)?).*?\)'
-    patter = re.compile((patter))
-    file_path, prefix =sys.argv[1], sys.argv[2]
-
-    with open(file_path, "r", encoding='UTF-8') as file_in, open("out-"+file_path, "w", encoding='UTF-8') as file_out:
-        line = file_in.readline()
-        while line:
-            matched = patter.finditer(line) # 获取所有匹配的Match对象
-            if matched != None:
-                matched = list(matched)
-                for v in matched[::-1]: # 逆序遍历
-                    st, ed = v.start("tar"), v.end("tar")
-                    # 替换掉原来的
-                    if st == ed:
-                        line = line[:st] + prefix + line[st:]
-                    else:
-                        line = line[:st] + prefix + line[ed:]
-            file_out.write(line);
-            line = file_in.readline()
-    
-```
-
-> 2020-05-24 更新
-
-上述代码并未考虑到markdown文件中使用`<img src="" ... >`这样的HTML标签的情况：
-
-更新代码如下：
+代码如下：
 
 ```python
-# python 3.7.3
-# 使用：python xx.py 输入文件 需要添加的前缀(前缀为 XXXX/)
+# -*- coding: utf-8 -*-
+# @Author : Weijun Lin
+# @File : change-img-path.py
+# @Software: VS Code
+# @Version: python 3.7.3
+# @Desc: 使用方式 python change-img-path.py tar-markdown-file prefix newprefix
 
 import re
 import sys
 
-if len(sys.argv) != 3:
-    print("amount of parameters must be 3")
+if len(sys.argv) != 4:
+    print("amount of parameters must be 4")
     sys.exit()
 
-# 考虑./img/path  img/path 两种种情况 以及 使用markdown 和 HTML img标签
-patter1 = '\!\[.*?\]\((?P<tar>(\./)?).*?\)'
-patter1 = re.compile(patter1)
-patter2 = '\<img src="(?P<tar>(\./)?).*?\>'
-patter2 = re.compile(patter2)
-file_path, prefix =sys.argv[1], sys.argv[2]
-
-with open(file_path, "r", encoding='UTF-8') as file_in, open("out-"+file_path, "w", encoding='UTF-8') as file_out:
-    line = file_in.readline()
-    while line:
-        # 获取所有匹配的Match对象
-        matched1 = patter1.finditer(line)
-        matched2 = patter2.finditer(line)
-        pos_list = []
-        if matched1 != None:
-            pos_list += [(x.start("tar"), x.end("tar")) for x in list(matched1)]
-        if matched2 != None:
-            pos_list += [(x.start("tar"), x.end("tar")) for x in list(matched2)]
-        pos_list.sort() # 按开始位置从小到大排序
-        for v in pos_list[::-1]: # 逆序遍历
-            st, ed = v
-            # 替换掉原来的
-            if st == ed:
-                line = line[:st] + prefix + line[st:]
-            else:
-                line = line[:st] + prefix + line[ed:]
-        file_out.write(line);
-        line = file_in.readline()
-    
-```
-
-> 2020-07-20 更新
-
-前面使用与`./img/file_path,img/file_path`的情况
-
-现在给出一种更通用的方式，这里把图片路径看作:
-
-`原始图片路径的公共前缀 + 图片路径`，现在通过正则将原来的前缀包括原始图片公共前缀一起替换掉，如：
-
-`img/c_2/img1.png`，`img/c_3/img2.png`用`https://test/`替换，图片公共前缀为`img/`所以替换后为``https://test/c_2/img1.png`
-
-现在的代码如下：
-
-```python
-# python 3.7.3
-
-import re
-import sys
-
-if len(sys.argv) != 3:
-    print("amount of parameters must be 3")
-    sys.exit()
-
-all_prefix = "img/" # 图片公共前缀
+all_prefix = sys.argv[2]
 patter1 = '\!\[.*?\]\((?P<tar>.*{}).*?.*?\)'.format(all_prefix)
 patter1 = re.compile(patter1)
 patter2 = '\<img src="(?P<tar>.*{}).*?\..*?\>'.format(all_prefix)
 patter2 = re.compile(patter2)
-file_path, prefix =sys.argv[1], sys.argv[2]
-print(prefix)
+file_path, prefix =sys.argv[1], sys.argv[3]
+
 with open(file_path, "r", encoding='UTF-8') as file_in, open("out-"+file_path, "w", encoding='UTF-8') as file_out:
     line = file_in.readline()
     while line:
@@ -154,5 +71,9 @@ with open(file_path, "r", encoding='UTF-8') as file_in, open("out-"+file_path, "
         line = file_in.readline()
     
 ```
+
+使用方式为 `python change-img-path.py tar-markdown-file prefix newprefix`
+
+使用 `newprefix` 替换图像路径中的 `prefix`
 
 其中一些函数的解释可以参考：[正则表达式操作](https://docs.python.org/zh-cn/3/library/re.html)

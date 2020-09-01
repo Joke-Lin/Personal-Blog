@@ -999,7 +999,7 @@ When a router advertises a prefix across a BGP session, it includes with the pre
 - **links:**the communication channels that connect adjacent nodes along the communication path
 - **link-layer frame**: link-layer data transmission format
 
-####　The Services Provided by the Link Layer
+#### The Services Provided by the Link Layer
 
 1. *Framing*(成帧)
 2. *Link access*(链路接入)
