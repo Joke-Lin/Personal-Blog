@@ -4695,7 +4695,7 @@ d[k-1][i][k] + d[k-1][k][j]　（经过K点）\\
 <ul>
 <li>线程转换时 需要切换到内核状态</li>
 </ul>
-<p>#####　混合</p>
+<h5 id="混合">混合</h5>
 <blockquote>
 <p>结合两者优点</p>
 </blockquote>
@@ -4821,7 +4821,7 @@ d[k-1][i][k] + d[k-1][k][j]　（经过K点）\\
 </ul>
 <p>可以理解==强信号量不会导致饥饿，而弱信号量可能导致饥饿==</p>
 <p><strong>信号量机制示例</strong></p>
-<p><img src="https://joke-lin.top/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_2./c_5/semaphoreExample.jpg" /></p>
+<p><img src="https://joke-lin.top/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_2/c_5/semaphoreExample.jpg" /></p>
 <h5 id="互斥">互斥</h5>
 <p>使用信号量的互斥：</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> n = <span class="comment">/*进程数*/</span>;</span><br><span class="line">semaphore s = <span class="number">1</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">P</span><span class="params">(<span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">        semWait(s);</span><br><span class="line">        <span class="comment">//临界区</span></span><br><span class="line">        semSignal(s);</span><br><span class="line">        <span class="comment">//Else</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    parbegin(P(<span class="number">1</span>), P(<span class="number">2</span>), ..., P(n));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
