@@ -56,7 +56,7 @@ footer:
     color: "#808080"
 
   # If not defined, `author` from Hexo `_config.yml` will be used.
-  copyright: Joke-Lin
+  copyright: Weijun-Lin
 
   powered:
     # Hexo link (Powered by Hexo).
@@ -172,7 +172,7 @@ site_state: true
 # Key is the link label showing to end users.
 # Value before `||` delimiter is the target permalink, value after `||` delimiter is the name of Font Awesome icon.
 social:
-  Github: https://github.com/joke-lin || fab fa-github
+  Github: https://github.com/weijun-lin || fab fa-github
   ZHIHU: https://www.zhihu.com/people/joker-88-62-57/activities || fab fa-zhihu
   CSDN: https://blog.csdn.net/qq_40953281 || fas fa-globe
   # GitHub: https://github.com/yourname || github
@@ -397,7 +397,7 @@ bookmark:
 # `Follow me on GitHub` banner in the top-right corner.
 github_banner:
   enable: true
-  permalink: https://github.com/joke-lin
+  permalink: https://github.com/weijun-lin
   title: Follow me on GitHub
 
 
@@ -638,11 +638,11 @@ livere_uid: # <your_uid>
 # For more information: https://gitalk.github.io, https://github.com/gitalk/gitalk
 gitalk:
   enable: true
-  github_id: Joke-Lin # GitHub repo owner
-  repo: Joke-Lin.github.io # Repository name to store issues
+  github_id: Weijun-Lin # GitHub repo owner
+  repo: Personal-Blog # Repository name to store issues
   client_id: 64f708c73ee01327eaff # GitHub Application Client ID
   client_secret: fe1991c81ffd1b32cc8aec2ab7e1e7a1f79957ab # GitHub Application Client Secret
-  admin_user: Joke-Lin # GitHub repo owner and collaborators, only these guys can initialize gitHub issues
+  admin_user: Weijun-Lin # GitHub repo owner and collaborators, only these guys can initialize gitHub issues
   distraction_free_mode: true # Facebook-like distraction free mode
   # Gitalk's display language depends on user's browser or system environment
   # If you want everyone visiting your site to see a uniform language, you can set a force language value

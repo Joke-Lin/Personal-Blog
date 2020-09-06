@@ -279,7 +279,7 @@ tags:
 
 - 线程转换时 需要切换到内核状态
 
-#####　混合
+##### 混合
 
 > 结合两者优点
 
@@ -522,7 +522,7 @@ void semSignalB(semaphore s)
 
 **信号量机制示例**
 
-![](https://joke-lin.top/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_2./c_5/semaphoreExample.jpg)
+![](https://joke-lin.top/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_2/c_5/semaphoreExample.jpg)
 
 ##### 互斥
 
