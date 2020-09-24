@@ -492,7 +492,11 @@
 
         </div>
         
-    <div class="comments" id="gitalk-container"></div>
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC8zOTczMy8xNjI2MA=="></div>
+  </div>
+  
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -705,23 +709,19 @@
 
   
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
-
 <script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID    : '64f708c73ee01327eaff',
-      clientSecret: 'fe1991c81ffd1b32cc8aec2ab7e1e7a1f79957ab',
-      repo        : 'Personal-Blog',
-      owner       : 'Weijun-Lin',
-      admin       : ['Weijun-Lin'],
-      id          : '68d24076fb6e9dbba7efafdfb0bd07aa',
-        language: '',
-      distractionFreeMode: true
-    });
-    gitalk.render('gitalk-container');
-  }, window.Gitalk);
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
 });
 </script>
 
