@@ -33,7 +33,7 @@
 <meta property="og:description" content="参考：  【博客园】 STL next_permutation 算法原理和自行实现 【CSDN】next_permutation和pre_permutation源码解析   基本思路 【STL】 next_permutation 函数就是返回当前序列的下一个字典序，已经为最大字典序则返回 False，否则为返回 True 基本思想如下：  从尾端开始依次比较两个相邻元素直到">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-09-23T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-09-24T08:40:58.203Z">
+<meta property="article:modified_time" content="2020-09-24T08:46:42.152Z">
 <meta property="article:author" content="Weijun-Lin">
 <meta property="article:tag" content="C&#x2F;C++">
 <meta property="article:tag" content="STL">
@@ -371,7 +371,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-09-24 00:00:00 / Modified: 16:40:58" itemprop="dateCreated datePublished" datetime="2020-09-24T00:00:00+08:00">2020-09-24</time>
+              <time title="Created: 2020-09-24 00:00:00 / Modified: 16:46:42" itemprop="dateCreated datePublished" datetime="2020-09-24T00:00:00+08:00">2020-09-24</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -430,6 +430,7 @@
 <li>从尾端开始向前检验，找出第一个大于 <span class="math inline">\(a_i\)</span> 的元素 <span class="math inline">\(a_j\)</span>，交换 <span class="math inline">\(a_i,a_j\)</span></li>
 <li>将 <span class="math inline">\(a_i\)</span> 之后（不包括 <span class="math inline">\(a_i\)</span>）的序列做反序处理</li>
 </ol>
+<a id="more"></a>
 <p>可能的代码实现：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">BidirIt</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">bool</span> <span class="title">next_permutation</span>(<span class="title">BidirIt</span> <span class="title">first</span>, <span class="title">BidirIt</span> <span class="title">last</span>)</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">if</span> (first == last) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    BidirIt i = last;</span><br><span class="line">    <span class="keyword">if</span> (first == --i) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">        BidirIt i1, i2;</span><br><span class="line"> </span><br><span class="line">        i1 = i;</span><br><span class="line">        <span class="keyword">if</span> (*--i &lt; *i1) &#123;</span><br><span class="line">            i2 = last;</span><br><span class="line">            <span class="keyword">while</span> (!(*i &lt; *--i2))</span><br><span class="line">                ;</span><br><span class="line">            <span class="built_in">std</span>::iter_swap(i, i2);</span><br><span class="line">            <span class="built_in">std</span>::reverse(i1, last);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (i == first) &#123;</span><br><span class="line">            <span class="built_in">std</span>::reverse(first, last);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="简单证明">简单证明</h2>
