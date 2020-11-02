@@ -35,7 +35,7 @@
 <meta property="og:description" content="VERCEL提供静态网站的部署和CDN的加速，十分优秀的工具（适合白嫖）  问题简述 在部署自己的静态网站后（从GITHUB），VERCEL提供了他们的子域名，当然可以使用自己的域名。可以用CNAME将域名导向VERCEL的子域名，也可以直接使用我们自己的域名（不通过CNAME）。具体配置参考：Custom Domain 但直接使用自己的域名会出现一个问题，使用VERCEL提供的DNS">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-05-16T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-11-01T11:01:48.317Z">
+<meta property="article:modified_time" content="2020-05-16T16:00:00.000Z">
 <meta property="article:author" content="Weijun-Lin">
 <meta name="twitter:card" content="summary">
 
@@ -373,13 +373,6 @@
 
       <time title="Created: 2020-05-17 00:00:00" itemprop="dateCreated datePublished" datetime="2020-05-17T00:00:00+08:00">2020-05-17</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-11-01 19:01:48" itemprop="dateModified" datetime="2020-11-01T19:01:48+08:00">2020-11-01</time>
-      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -431,7 +424,7 @@
 <p>VERCEL提供静态网站的部署和CDN的加速，十分优秀的工具（适合白嫖）</p>
 </blockquote>
 <h2 id="问题简述">问题简述</h2>
-<p>在部署自己的静态网站后（从GITHUB），VERCEL提供了他们的子域名，当然可以使用自己的域名。可以用CNAME将域名导向VERCEL的子域名，也可以直接使用我们自己的域名（不通过CNAME）。具体配置参考：<a target="_blank" rel="noopener" href="https://vercel.com/docs/v2/custom-domains">Custom Domain</a></p>
+<p>在部署自己的静态网站后（从GITHUB），VERCEL提供了他们的子域名，当然可以使用自己的域名。可以用CNAME将域名导向VERCEL的子域名，也可以直接使用我们自己的域名（不通过CNAME）。具体配置参考：<span class="exturl" data-url="aHR0cHM6Ly92ZXJjZWwuY29tL2RvY3MvdjIvY3VzdG9tLWRvbWFpbnM=">Custom Domain<i class="fa fa-external-link-alt"></i></span></p>
 <p>但直接使用自己的域名会出现一个问题，使用VERCEL提供的DNS服务器后，原来配置的DNS解析失效了。原来我使用的是阿里云的云解析，在更改为VERCEL的DNS服务后，子域名的A记录失效。</p>
 <a id="more"></a>
 <h2 id="解决方案">解决方案</h2>

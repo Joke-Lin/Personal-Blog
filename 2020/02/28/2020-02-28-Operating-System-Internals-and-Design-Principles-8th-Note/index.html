@@ -114,7 +114,7 @@
 <meta property="og:image" content="https://joke-lin.top/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_5/c_12/08.jpg">
 <meta property="og:image" content="https://joke-lin.top/assets/Note/Operating-System-Internals-and-Design-Principles-8th/part_5/c_12/09.jpg">
 <meta property="article:published_time" content="2020-02-27T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-11-01T10:57:00.870Z">
+<meta property="article:modified_time" content="2020-02-27T16:00:00.000Z">
 <meta property="article:author" content="Weijun-Lin">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
@@ -454,13 +454,6 @@
 
       <time title="Created: 2020-02-28 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-28T00:00:00+08:00">2020-02-28</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-11-01 18:57:00" itemprop="dateModified" datetime="2020-11-01T18:57:00+08:00">2020-11-01</time>
-      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -509,7 +502,7 @@
     
     <div class="post-body" itemprop="articleBody">
         <blockquote>
-<p>Github地址：<a target="_blank" rel="noopener" href="https://github.com/Joke-Lin/Notes/blob/master/Operating-System-Internals-and-Design-Principles-8th/note.md">笔记-操作系统精髓与设计原理第8版</a></p>
+<p>Github地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0pva2UtTGluL05vdGVzL2Jsb2IvbWFzdGVyL09wZXJhdGluZy1TeXN0ZW0tSW50ZXJuYWxzLWFuZC1EZXNpZ24tUHJpbmNpcGxlcy04dGgvbm90ZS5tZA==">笔记-操作系统精髓与设计原理第8版<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 <p>操作系统是管理计算机硬件与软件资源的系统软件，同时也是计算机系统的内核与基石。操作系统需要处理如管理与配置内存、决定系统资源供需的优先次序、控制输入与输出设备、操作网络与管理文件系统等基本事务。操作系统也提供一个让用户与系统交互的操作界面。—— 维基百科</p>
 <blockquote>
@@ -821,7 +814,7 @@
 </ul>
 <h4 id="信号量">3、信号量</h4>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jhcelue/p/7080146.html" class="uri">https://www.cnblogs.com/jhcelue/p/7080146.html</a></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vamhjZWx1ZS9wLzcwODAxNDYuaHRtbA==">https://www.cnblogs.com/jhcelue/p/7080146.html<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 <p>讨论的是提供并发性的操作系统和设计语言的机制</p>
 <p>常用的并发机制：</p>
@@ -918,7 +911,7 @@
 <blockquote>
 <p>进程交互式必须满足两个基本要求：<strong>同步和通信</strong>，为实施互斥，进程间需要同步；为实现合作，进程需要交换信息，提供这一方法之一就是消息传递</p>
 </blockquote>
-<p><strong><em>注</em></strong>：互斥和同步的联系：——摘自<a target="_blank" rel="noopener" href="https://zhidao.baidu.com/question/414593560.html">百度知道</a>：</p>
+<p><strong><em>注</em></strong>：互斥和同步的联系：——摘自<span class="exturl" data-url="aHR0cHM6Ly96aGlkYW8uYmFpZHUuY29tL3F1ZXN0aW9uLzQxNDU5MzU2MC5odG1s">百度知道<i class="fa fa-external-link-alt"></i></span>：</p>
 <p>​ 相交进程之间的关系主要有两种，同步与互斥。所谓互斥，是指散布在不同进程之间的若干程序片断，当某个进程运行其中一个程序片段时，其它进程就不能运行它 们之中的任一程序片段，只能等到该进程运行完这个程序片段后才可以运行。所谓同步，是指散布在不同进程之间的若干程序片断，它们的运行必须严格按照规定的某种先后次序来运行，这种先后次序依赖于要完成的特定的任务。 　　显然，==同步是一种更为复杂的互斥，而互斥是一种特殊的同步==。 　　也就是说互斥是两个线程之间不可以同时运行，它们会相互排斥，必须等待一个线程运行完毕，另一个才能运行，而同步也是不能同时运行，但它是必须要安照某种次序来运行相应的线程（也是一种互斥）！ 　　<strong>总结</strong>：互斥：是指某一资源同时只允许一个访问者对其进行访问，具有唯一性和排它性。但互斥无法限制访问者对资源的访问顺序，即访问是无序的。 　　<strong>同步</strong>：是指在互斥的基础上（大多数情况），通过其它机制实现访问者对资源的有序访问。在大多数情况下，同步已经实现了互斥，特别是所有写入资源的情况必定是互斥的。少数情况是指可以允许多个访问者同时访问资源。</p>
 <p><strong>特点（优点）</strong>：可以在分布式系统、共享内存的多处理器系统和单处理器系统中实现</p>
 <p><strong><em>消息传递原语</em></strong>：</p>

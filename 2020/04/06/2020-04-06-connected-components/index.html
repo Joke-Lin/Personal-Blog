@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://joke-lin.top/assets/ArticleImg/2020/connected-components-1.png">
 <meta property="og:image" content="https://joke-lin.top/assets/ArticleImg/2020/connected-components-2.jpg">
 <meta property="article:published_time" content="2020-04-05T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-11-01T10:58:31.422Z">
+<meta property="article:modified_time" content="2020-04-05T16:00:00.000Z">
 <meta property="article:author" content="Weijun-Lin">
 <meta property="article:tag" content="C&#x2F;C++">
 <meta property="article:tag" content="Graph Theory">
@@ -378,13 +378,6 @@
 
       <time title="Created: 2020-04-06 00:00:00" itemprop="dateCreated datePublished" datetime="2020-04-06T00:00:00+08:00">2020-04-06</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-11-01 18:58:31" itemprop="dateModified" datetime="2020-11-01T18:58:31+08:00">2020-11-01</time>
-      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -442,7 +435,7 @@
 <h2 id="有向图">有向图</h2>
 <p>下面两个算法都是<span class="math inline">\(O(N+E)\)</span>的复杂度</p>
 <h3 id="tarjan算法">Tarjan算法</h3>
-<p>可参考：<a target="_blank" rel="noopener" href="https://www.byvoid.com/zhs/blog/scc-tarjan">有向图强连通分量的Tarjan算法</a></p>
+<p>可参考：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYnl2b2lkLmNvbS96aHMvYmxvZy9zY2MtdGFyamFu">有向图强连通分量的Tarjan算法<i class="fa fa-external-link-alt"></i></span></p>
 <p>算法的基本思想如下：任选一节点开始进行深度优先搜索（<strong>若深度优先搜索结束后仍有未访问的节点，则再从中任选一点再次进行</strong>）。搜索过程中已访问的节点不再访问。搜索树的若干子树构成了图的强连通分量。</p>
 <p>节点按照被访问的顺序存入堆栈中。从搜索树的子树返回至一个节点时，检查该节点是否是某一强连通分量的根节点（见下）并将其从堆栈中删除。如果某节点是强连通分量的根，则在它之前出堆栈且还不属于其他强连通分量的节点构成了该节点所在的强连通分量。</p>
 <p>算法代码为：</p>
@@ -455,7 +448,7 @@
 <p>此算法其中判断强连通分量的思路就是，在以u为根节点进行DFS的过程中如果出现一个结点v指向了之前遍历过的点t，即<span class="math inline">\(u \rightarrow t \rightarrow v \rightarrow t\)</span>也就表明出现了一个环，其中<span class="math inline">\(t,v,t\)</span>就构成了环，即连通分量。</p>
 <p>其中的DFN就保存每个结点的访问顺序，Low保存相关子树的最早访问时间，在算法回溯的时候更新，可保证一个强连通分量的Low都是一致的，栈保存的是拓扑序，即遍历的次序，不断出栈获取连通分量。</p>
 <h3 id="kosaraju算法">Kosaraju算法</h3>
-<p>可参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/nullzx/p/6437926.html">Kosaraju算法解析: 求解图的强连通分量</a></p>
+<p>可参考：<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vbnVsbHp4L3AvNjQzNzkyNi5odG1s">Kosaraju算法解析: 求解图的强连通分量<i class="fa fa-external-link-alt"></i></span></p>
 <p>Kosaraju算法比Tarjan算法看似要简单一些，但效率没有Tarjan算法高，Kosaraju算法依靠DFS遍历获取极大连通子图。但存在一点问题。</p>
 <p><img src="\assets\ArticleImg\2020\connected-components-1.png" /></p>
 <p>对于上图，从A0开始遍历和B4开始遍历是不一样的结果。如果从B开始遍历，需要2次DFS便可以遍历完整个图，而A0只需要一次。<strong>所以Kosaraju算法的第一个DFS需要获取正确的遍历顺序，</strong>然后第二次DFS的次数便是连通分量的个数了。</p>
@@ -469,7 +462,7 @@
 <li>反向原图根据上面获取的遍历顺序，重新DFS</li>
 </ol>
 <h4 id="反图的作用">反图的作用</h4>
-<p>其中的反图很有意思，对于强连通子图，反图和原图并无区别。但对于非强连通的则会有很大的影响。例如<span class="math inline">\(A \rightarrow B \rightarrow C\)</span>反图为<span class="math inline">\(A \leftarrow B \leftarrow C\)</span> 从A开始遍历一次便遍历完，但反图后从A开始便需要3次，也就是强连通分量的个数（单个结点也是强连通）。而且反图保证了图的收缩，可参考：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/265266923/answer/912239192">Kosaraju算法为什么是用图G的反向图的逆后序，而不能是图G的后序？</a></p>
+<p>其中的反图很有意思，对于强连通子图，反图和原图并无区别。但对于非强连通的则会有很大的影响。例如<span class="math inline">\(A \rightarrow B \rightarrow C\)</span>反图为<span class="math inline">\(A \leftarrow B \leftarrow C\)</span> 从A开始遍历一次便遍历完，但反图后从A开始便需要3次，也就是强连通分量的个数（单个结点也是强连通）。而且反图保证了图的收缩，可参考：<span class="exturl" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3F1ZXN0aW9uLzI2NTI2NjkyMy9hbnN3ZXIvOTEyMjM5MTky">Kosaraju算法为什么是用图G的反向图的逆后序，而不能是图G的后序？<i class="fa fa-external-link-alt"></i></span></p>
 <p><strong>所以通过后续遍历获取遍历结点的顺序，然后通过反图获取强连通分量的个数。</strong></p>
 
     </div>
