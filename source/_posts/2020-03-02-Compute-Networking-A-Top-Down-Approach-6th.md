@@ -1,8 +1,9 @@
 ---
 title: '计算机网络自顶向下 第6版 阅读笔记'
 date: 2020-03-02
+mathjax: true
 categories:
-- 随笔
+- Computer Science
 - Note
 tags:
 - Computer Network

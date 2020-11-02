@@ -14,7 +14,7 @@
 > «NexT» is a high quality elegant [Hexo](https://hexo.io) theme. It is crafted from scratch with love.
 
 [![NPM version](https://img.shields.io/npm/v/hexo-theme-next?color=red&logo=npm&style=flat-square)](https://www.npmjs.com/package/hexo-theme-next)
-[![Required Hexo version](https://img.shields.io/badge/hexo-%3E=4.0.0-blue?style=flat-square&logo=hexo)](https://hexo.io)
+[![Required Hexo version](https://img.shields.io/badge/hexo-%3E=5.0.0-blue?style=flat-square&logo=hexo)](https://hexo.io)
 [![License](https://img.shields.io/badge/license-%20AGPL-orange?style=flat-square&logo=gnu)](https://github.com/next-theme/hexo-theme-next/blob/master/LICENSE.md)
 [![Code Quality](https://img.shields.io/lgtm/grade/javascript/github/next-theme/hexo-theme-next?label=code%20quality&logo=lgtm&style=flat-square)](https://lgtm.com/projects/g/next-theme/hexo-theme-next/)
 [![Build Status](https://img.shields.io/github/workflow/status/next-theme/hexo-theme-next/Linter?label=test&logo=github&style=flat-square)](https://github.com/next-theme/hexo-theme-next/actions?query=workflow%3ALinter)
@@ -31,18 +31,39 @@
 
 ## Installation
 
-The simplest way to install is to clone the entire repository:
+If you're using Hexo 5.0 or later, the simplest way to install is through npm:
 
 ```sh
-$ cd hexo
+$ cd hexo-site
+$ npm install hexo-theme-next
+```
+
+Or you can clone the entire repository:
+
+```sh
+$ cd hexo-site
 $ git clone https://github.com/next-theme/hexo-theme-next themes/next
 ```
 
-Or you can see [detailed installation instructions][docs-installation-url] if you want any other variant.
+See [detailed installation instructions][docs-installation-url] if you want any other variant.
+
+After the installation, open Hexo config file and set `theme` variable to `next`.
+
+```yml
+theme: next
+```
+
+## Configuration
+
+At present, NexT encourages users to use the [Alternate Theme Config][docs-configuration-url] to configure NexT. And it's easy to customize the layout or style of NexT using [Custom Files][docs-custom-files-url].
+
+It is not recommended to directly modify any files in the NexT theme. Because this may cause errors (e.g. merge conflicts), and the modified files may be discarded when upgrading the theme.
+
+However, you can bypass merge conflicts (error message like **«Commit your changes or stash them before you can merge»**) by using the `Commit`, `Stash` or `Reset` commands for local changes. See [here](https://stackoverflow.com/a/15745424/5861495) how to do it.
 
 ## Plugins
 
-Plugins extend and expand the functionality of NexT. There are two types of plugins: core plugins and third-party plugins. The core plugins are required by the basic functions of NexT. Third-party plugins are loaded from jsDelivr CDN by default, and they provide a large number of optional features.
+Plugins extend and expand the functionality of NexT. There are two types of plugins: core plugins and third-party plugins. The core plugins are required by the basic functions of NexT. Third-party plugins provide a large number of optional features.
 
 Configuring these plugins is very easy. For example, if you want to enable `pjax` on your site, just set `pjax` to `true` in NexT config file:
 
@@ -54,29 +75,35 @@ pjax: true
 
 ### Configure CDN
 
-If you want to specify the CDN provider for any plugins, you need to set / update the CDN URL.
+Third-party plugins are loaded from [jsDelivr](https://www.jsdelivr.com) CDN by default. We also provide other optional CDNs, including the famous [UNPKG](https://unpkg.com) and [CDNJS](https://cdnjs.com).
 
-For example, if you want to set the CDN URL for `mediumzoom`, go to NexT config and see:
+For example, if you want to use `unpkg` instead of `jsdelivr` as the default CDN provider, you need to edit the following settings in NexT config file:
 
 ```yml
 vendors:
   # ...
   # Some contents...
   # ...
-  mediumzoom: # Set or update mediumzoom CDN URL.
+  plugins: unpkg
 ```
 
 ## Update
 
-NexT releases new versions every month. You can update to latest master branch by the following command:
+A new version of NexT will be released every month. You can update NexT by the following command.
+
+Install the latest version throuth npm:
+
+```sh
+$ cd hexo-site
+$ npm update hexo-theme-next
+```
+
+Or update to latest master branch:
 
 ```sh
 $ cd themes/next
 $ git pull
 ```
-
-And if you see any error message during update (something like **«Commit your changes or stash them before you can merge»**), recommended to learn [Alternate Theme Config][docs-data-files-url] feature.\
-However, you can bypass update errors by using the `Commit`, `Stash` or `Reset` commands for local changes. See [here](https://stackoverflow.com/a/15745424/5861495) how to do it.
 
 **If you want to update from v5.x / v7.x to the latest version, read [this][docs-update-5-1-x-url].**
 
@@ -120,7 +147,8 @@ Also, we welcome Issue or PR to our [official-plugins][official-plugins-url].
 > Thanks jsDelivr for providing public CDN service.
 
 [docs-installation-url]: https://theme-next.js.org/docs/getting-started/installation.html
-[docs-data-files-url]: https://theme-next.js.org/docs/getting-started/configuration.html
+[docs-configuration-url]: https://theme-next.js.org/docs/getting-started/configuration.html
+[docs-custom-files-url]: https://theme-next.js.org/docs/advanced-settings/custom-files.html
 [docs-update-5-1-x-url]: https://theme-next.js.org/docs/getting-started/update-from-v5.html
 
 [gitter-url]: https://gitter.im/hexo-next

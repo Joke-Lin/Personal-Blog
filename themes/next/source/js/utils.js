@@ -71,17 +71,20 @@ NexT.utils = {
    * One-click copy code support.
    */
   registerCopyCode: function() {
-    document.querySelectorAll('figure.highlight').forEach(element => {
+    let figure = document.querySelectorAll('figure.highlight');
+    if (figure.length === 0) figure = document.querySelectorAll('pre');
+    figure.forEach(element => {
       element.querySelectorAll('.code .line span').forEach(span => {
         span.classList.forEach(name => {
           span.classList.replace(name, `hljs-${name}`);
         });
       });
       if (!CONFIG.copycode) return;
-      element.insertAdjacentHTML('beforeend', '<div class="copy-btn"><i class="fa fa-clipboard fa-fw"></i></div>');
+      element.insertAdjacentHTML('beforeend', '<div class="copy-btn"><i class="fa fa-copy fa-fw"></i></div>');
       const button = element.querySelector('.copy-btn');
       button.addEventListener('click', () => {
-        const code = [...button.parentNode.querySelectorAll('.code .line')].map(line => line.innerText).join('\n');
+        const lines = element.querySelector('.code') || element.querySelector('code');
+        const code = lines.innerText;
         const ta = document.createElement('textarea');
         ta.style.top = window.scrollY + 'px'; // Prevent page scrolling
         ta.style.position = 'absolute';
@@ -100,7 +103,7 @@ NexT.utils = {
       });
       element.addEventListener('mouseleave', () => {
         setTimeout(() => {
-          button.querySelector('i').className = 'fa fa-clipboard fa-fw';
+          button.querySelector('i').className = 'fa fa-copy fa-fw';
         }, 300);
       });
     });
@@ -142,9 +145,7 @@ NexT.utils = {
     // For init back to top in sidebar if page was scrolled after page refresh.
     window.addEventListener('scroll', () => {
       if (backToTop || readingProgressBar) {
-        const docHeight = document.querySelector('.container').offsetHeight;
-        const winHeight = window.innerHeight;
-        const contentHeight = docHeight > winHeight ? docHeight - winHeight : document.body.scrollHeight - winHeight;
+        const contentHeight = document.body.scrollHeight - window.innerHeight;
         const scrollPercent = contentHeight > 0 ? Math.min(100 * window.scrollY / contentHeight, 100) : 0;
         if (backToTop) {
           backToTop.classList.toggle('back-to-top-on', Math.round(scrollPercent) >= 5);
@@ -187,12 +188,12 @@ NexT.utils = {
         // Prevent selected tab to select again.
         if (element.classList.contains('active')) return;
         // Add & Remove active class on `nav-tabs` & `tab-content`.
-        element.parentNode.childNodes.forEach(target => {
+        [...element.parentNode.children].forEach(target => {
           target.classList.toggle('active', target === element);
         });
         // https://stackoverflow.com/questions/20306204/using-queryselector-with-ids-that-are-numbers
         const tActive = document.getElementById(element.querySelector('a').getAttribute('href').replace('#', ''));
-        tActive.parentNode.childNodes.forEach(target => {
+        [...tActive.parentNode.children].forEach(target => {
           target.classList.toggle('active', target === tActive);
         });
         // Trigger event
@@ -271,7 +272,7 @@ NexT.utils = {
       parent = parent.parentNode;
     }
     // Scrolling to center active TOC element if TOC content is taller then viewport.
-    const tocElement = document.querySelector('.post-toc-wrap');
+    const tocElement = document.querySelector('.sidebar-panel-container');
     window.anime({
       targets  : tocElement,
       duration : 200,
@@ -282,10 +283,9 @@ NexT.utils = {
 
   supportsPDFs: function() {
     const ua = navigator.userAgent;
-    const isFirefoxWithPDFJS = ua.includes('irefox') && parseInt(ua.split('rv:')[1].split('.')[0], 10) > 18;
     const supportsPdfMimeType = typeof navigator.mimeTypes['application/pdf'] !== 'undefined';
     const isIOS = /iphone|ipad|ipod/i.test(ua.toLowerCase());
-    return isFirefoxWithPDFJS || (supportsPdfMimeType && !isIOS);
+    return ua.includes('irefox') || (supportsPdfMimeType && !isIOS);
   },
 
   getComputedStyle: function(element) {
@@ -348,7 +348,8 @@ NexT.utils = {
     }
   },
 
-  loadComments: function(element, callback) {
+  loadComments: function(selector, callback) {
+    const element = document.querySelector(selector);
     if (!CONFIG.comments.lazyload || !element) {
       callback();
       return;

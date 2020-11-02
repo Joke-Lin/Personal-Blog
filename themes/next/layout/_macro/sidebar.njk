@@ -1,8 +1,8 @@
 {% macro render(display_toc) %}
   <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
   </div>
 
   <aside class="sidebar">
@@ -22,19 +22,21 @@
         </li>
       </ul>
 
-      <!--noindex-->
-      <section class="post-toc-wrap sidebar-panel">
-        {%- if display_toc %}
-          <div class="post-toc animated">{{ toc }}</div>
-        {%- endif %}
-      </section>
-      <!--/noindex-->
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+          {%- if display_toc %}
+            <div class="post-toc animated">{{ toc }}</div>
+          {%- endif %}
+        </section>
+        <!--/noindex-->
 
-      <section class="site-overview-wrap sidebar-panel">
-        {{ partial('_partials/sidebar/site-overview.njk', {}, {cache: theme.cache.enable}) }}
+        <section class="site-overview-wrap sidebar-panel">
+          {{ partial('_partials/sidebar/site-overview.njk', {}, {cache: theme.cache.enable}) }}
 
-        {{- next_inject('sidebar') }}
-      </section>
+          {{- next_inject('sidebar') }}
+        </section>
+      </div>
 
       {%- if theme.back2top.enable and theme.back2top.sidebar %}
         <div class="back-to-top animated">
@@ -44,5 +46,5 @@
       {%- endif %}
     </div>
   </aside>
-  <div id="sidebar-dimmer"></div>
+  <div class="sidebar-dimmer"></div>
 {% endmacro %}

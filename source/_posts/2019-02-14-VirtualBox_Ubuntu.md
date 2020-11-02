@@ -2,8 +2,8 @@
 title: 'Virtual Box 配置虚拟机 Ubuntu'
 date: 2019-02-14
 categories: 
-- 随笔
-- ELSE
+- Computer Science
+- Tool
 tags:
 - linux
 ---

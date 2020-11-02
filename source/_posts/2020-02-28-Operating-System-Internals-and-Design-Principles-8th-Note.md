@@ -1,8 +1,9 @@
 ---
 title: '操作系统精髓与设计原理 第8版 阅读笔记'
 date: 2020-02-28
+mathjax: true
 categories:
-- 随笔
+- Computer Science
 - Note
 tags:
 - 操作系统

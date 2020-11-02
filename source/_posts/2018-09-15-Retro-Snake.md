@@ -4,9 +4,8 @@ date: 2018-09-15
 tags:
 - C/C++
 categories:
-- Coding
+- Computer Science
 - Game
-- C++ Game
 photos:
 ---
 

@@ -6,7 +6,7 @@ tags:
 - C/C++
 - Tree
 categories:
-- Coding
+- Computer Science
 - DSAA
 ---
 
@@ -21,11 +21,11 @@ categories:
 
 即单点修改和区间和计算
 
-<!-- more --->
+<!-- more -->
 
 ## 原理介绍
 
-### 树状数组结构：
+### 树状数组结构
 
 ![](\assets\ArticleImg\2020\bit.png)
 
@@ -39,7 +39,7 @@ categories:
 4. $SUM(5) = a[4]+a[5]$
 5. $SUM(6) = a[4]+a[6]$
 
-要获取$SUM[n]$则必须知道$SUM(n-(2^{0的个数}))$，这个0的个数通过以下函数获取:
+要获取$SUM[n]$则必须知道$SUM(n-(2^{0的个数}))$，这个 $2^{0的个数}$ 的个数通过以下函数获取:
 
 ```cpp
 int lowbit(int x) {

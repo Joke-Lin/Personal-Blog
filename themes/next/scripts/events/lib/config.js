@@ -1,41 +1,31 @@
 'use strict';
 
 const merge = require('hexo-util').deepMerge || require('lodash/merge');
-let plugins;
-try {
-  plugins = require('@next-theme/plugins');
-} catch (error) {
-}
 
 module.exports = hexo => {
   const data = hexo.locals.get('data');
 
-  /**
-   * Merge configs from _data/next.yml into hexo.theme.config.
-   * If next.yml not exists, merge all `theme_config.*` into hexo.theme.config.
-   */
   if (data.next) {
-    hexo.config = merge(hexo.config, data.next);
-    hexo.theme.config = merge(hexo.theme.config, data.next);
-  } else if (hexo.config.theme_config) {
-    hexo.theme.config = merge(hexo.theme.config, hexo.config.theme_config);
+    hexo.log.warn('`next.yml` is deprecated. Please upgrade to Hexo 5.0 and use `_config.next.yml` instead.');
+    hexo.log.warn('Documentation: https://theme-next.js.org/docs/getting-started/configuration.html');
   }
 
-  const { cache, language_switcher } = hexo.theme.config;
+  const { cache, language_switcher, leancloud_visitors, valine } = hexo.theme.config;
+  const warning = function(...args) {
+    hexo.log.warn(`Since ${args[0]} is turned on, the ${args[1]} is disabled to avoid potential hazards.`);
+  };
+
   if (cache && cache.enable && language_switcher) {
-    hexo.log.warn('Since language_switcher is turned on, the caching is disabled to avoid potential hazards.');
+    warning('language_switcher', 'caching');
     cache.enable = false;
   }
   if (cache && cache.enable && hexo.config.relative_link) {
-    hexo.log.warn('Since caching is turned on, the `relative_link` option in Hexo `_config.yml` is set to `false` to avoid potential hazards.');
+    warning('caching', '`relative_link` option in Hexo `_config.yml`');
     hexo.config.relative_link = false;
   }
-  if (typeof plugins === 'function') {
-    const { vendors, generator } = plugins();
-    Object.keys(vendors).forEach(key => {
-      hexo.theme.config.vendors[key] = hexo.theme.config.vendors[key] || vendors[key];
-    });
-    hexo.extend.generator.register('next_vendors', () => generator);
+  if (leancloud_visitors && leancloud_visitors.enable && valine && valine.enable && valine.visitor) {
+    warning('valine.visitor', 'leancloud_visitors');
+    leancloud_visitors.enable = false;
   }
   hexo.config.meta_generator = false;
 

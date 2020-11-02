@@ -1,8 +1,9 @@
 ---
 title: '计算机系统结构 张晨曦-第二版 整理'
 date: 2020-05-24
+mathjax: true
 categories:
-- 随笔
+- Computer Science
 - Note
 tags:
 - 计算机系统结构

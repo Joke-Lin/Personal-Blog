@@ -2,8 +2,8 @@
 title: VERCEL（原名为ZEIT）DNS 记录的修改
 date: 2020-05-17
 categories:
-- 随笔
-- Tutorial
+- Computer Science
+- Tool
 ---
 
 > VERCEL提供静态网站的部署和CDN的加速，十分优秀的工具（适合白嫖）

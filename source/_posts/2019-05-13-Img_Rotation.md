@@ -5,8 +5,8 @@ mathjax: true
 tags:
 - Python
 categories:
-- Coding
-- Image Processing
+- Computer Science
+- CV&CG&DIP
 ---
 
 ### 旋转原理

@@ -1,11 +1,12 @@
 ---
 title: '《30天自制操作系统》 笔记目录'
 date: 2020-01-24
+mathjax: true
 tags:
 - 30天自制操作系统
 - 操作系统
 categories:
-- 随笔
+- Computer Science
 - Note
 ---
 

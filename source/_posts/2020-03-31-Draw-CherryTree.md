@@ -5,8 +5,8 @@ mathjax: true
 tags:
 - C/C++
 categories:
-- Coding
-- ELSE
+- Computer Science
+- Tool
 ---
 
 > 看到网上很多代码绘制的樱花树，参见[CSDN](https://blog.csdn.net/weixin_43943977/article/details/102691392)，便想自己试试，但是画的有点丑

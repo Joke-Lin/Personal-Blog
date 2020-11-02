@@ -6,7 +6,7 @@ tags:
 - C/C++
 - Graph Theory
 categories:
-- Coding
+- Computer Science
 - DSAA
 ---
 

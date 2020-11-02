@@ -1,10 +1,11 @@
 ---
 title: '埃氏筛 & 欧拉筛'
 date: 2020-03-24
+mathjax: true
 tags:
 - C/C++
 categories:
-- Coding
+- Computer Science
 - DSAA
 ---
 

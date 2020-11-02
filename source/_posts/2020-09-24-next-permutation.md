@@ -1,10 +1,12 @@
 ---
 title: 【STL】next_permutation 算法原理
 date: 2020-09-24
+mathjax: true
 tags:
 - C/C++
 - STL
 categories:
+- Computer Science
 - DSAA
 ---
 
