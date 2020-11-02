@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 5.2.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico">
@@ -15,14 +17,14 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  
-  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"joke-lin.top","root":"/","scheme":"Gemini","version":"8.0.0-rc.4","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"path":"search.xml"};
+    var CONFIG = {"hostname":"joke-lin.top","root":"/","scheme":"Gemini","version":"8.0.2","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
   <meta name="description" content="图的基础，最短路径的几种解答 单源最短路： Bellman-Ford &amp; Dijkstra 及其简单优化 以及负圈的判断 多源最短路：Floyd-Warshall 算法的简单理解 路径还原问题 算法代码及思路主要参考：《挑战程序设计竞赛》  在此之前读者应对图已经有基础的概念，以及图的邻接表 &amp; 邻接矩阵的表示方法">
@@ -35,12 +37,13 @@
 <meta property="og:image" content="https://joke-lin.top/assets/ArticleImg/2018/shortpath1.png">
 <meta property="og:image" content="https://joke-lin.top/assets/ArticleImg/2018/shortpath2.png">
 <meta property="article:published_time" content="2018-12-06T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-05-24T02:00:15.917Z">
+<meta property="article:modified_time" content="2020-11-01T10:55:17.517Z">
 <meta property="article:author" content="Weijun-Lin">
 <meta property="article:tag" content="C&#x2F;C++">
 <meta property="article:tag" content="Graph Theory">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://joke-lin.top/assets/ArticleImg/2018/shortpath1.png">
+
 
 <link rel="canonical" href="https://joke-lin.top/2018/12/07/2018-12-07-ShortestPath/">
 
@@ -110,18 +113,17 @@
 <link rel="alternate" href="/atom.xml" title="WEIJUN LIN BLOG" type="application/atom+xml">
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
-    <main class="main">
-      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-        <div class="header-inner"><div class="site-brand-container">
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="Toggle navigation bar">
-        <span class="toggle-line toggle-line-first"></span>
-        <span class="toggle-line toggle-line-middle"></span>
-        <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
@@ -144,7 +146,7 @@
 
 
 <nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
@@ -168,11 +170,6 @@
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
-        <li class="menu-item menu-item-notes">
-
-    <a href="/categories/%E9%9A%8F%E7%AC%94/Note/" rel="section"><i class="fa fa-clipboard fa-fw"></i>Notes</a>
 
   </li>
         <li class="menu-item menu-item-rss">
@@ -201,7 +198,7 @@
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
            placeholder="Searching..." spellcheck="false"
            type="search" class="search-input">
   </div>
@@ -209,8 +206,8 @@
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
     <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
@@ -219,12 +216,12 @@
   </div>
 
 </div>
-          
+        
   
   <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
   </div>
 
   <aside class="sidebar">
@@ -239,43 +236,44 @@
         </li>
       </ul>
 
-      <!--noindex-->
-      <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#bellman-ford"><span class="nav-text">Bellman-Ford</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#负圈的判断"><span class="nav-text">负圈的判断</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dijkstra"><span class="nav-text">Dijkstra</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单的优化"><span class="nav-text">简单的优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#floyd-warshall"><span class="nav-text">Floyd-Warshall</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路径还原"><span class="nav-text">路径还原</span></a></li></ol></div>
-      </section>
-      <!--/noindex-->
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#bellman-ford"><span class="nav-text">Bellman-Ford</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%9F%E5%9C%88%E7%9A%84%E5%88%A4%E6%96%AD"><span class="nav-text">负圈的判断</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dijkstra"><span class="nav-text">Dijkstra</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84%E4%BC%98%E5%8C%96"><span class="nav-text">简单的优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#floyd-warshall"><span class="nav-text">Floyd-Warshall</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E8%BF%98%E5%8E%9F"><span class="nav-text">路径还原</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
 
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Weijun-Lin"
       src="/images/avatar.png">
   <p class="site-author-name" itemprop="name">Weijun-Lin</p>
   <div class="site-description" itemprop="description">Learing and Using</div>
 </div>
-<div class="site-state-wrap animated">
+<div class="site-state-wrap site-overview-item animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-count">55</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author animated">
+  <div class="links-of-author site-overview-item animated">
       <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlaWp1bi1saW4=" title="Github → https:&#x2F;&#x2F;github.com&#x2F;weijun-lin"><i class="fab fa-github fa-fw"></i>Github</span>
       </span>
@@ -289,12 +287,12 @@
         <span class="exturl" data-url="bWFpbHRvOndlaWp1bi1saW5AZm94bWFpbC5jb20=" title="E-Mail → mailto:weijun-lin@foxmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
       </span>
   </div>
-  <div class="cc-license animated" itemprop="license">
+  <div class="cc-license site-overview-item animated" itemprop="license">
     <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
   </div>
 
 
-  <div class="links-of-blogroll animated">
+  <div class="links-of-blogroll site-overview-item animated">
     <div class="links-of-blogroll-title"><i class="link fa-fw"></i>
       Friends
     </div>
@@ -317,39 +315,43 @@
     </ul>
   </div>
 
-      </section>
+        </section>
+      </div>
         <div class="back-to-top animated">
           <i class="fa fa-arrow-up"></i>
           <span>0%</span>
         </div>
     </div>
   </aside>
-  <div id="sidebar-dimmer"></div>
+  <div class="sidebar-dimmer"></div>
 
 
-      </header>
+    </header>
 
-      
+    
   <div class="reading-progress-bar"></div>
   <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
   <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlaWp1bi1saW4=" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
 
 <noscript>
-  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
 </noscript>
 
 
-      <div class="main-inner">
-        
+    <div class="main-inner post posts-expand">
+      
 
-        <div class="content post posts-expand">
-          
+      
 
-    
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
     <link itemprop="mainEntityOfPage" href="https://joke-lin.top/2018/12/07/2018-12-07-ShortestPath/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -366,58 +368,62 @@
           最短路径的三种算法以及路径还原与负圈判断
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2018-12-07 00:00:00" itemprop="dateCreated datePublished" datetime="2018-12-07T00:00:00+08:00">2018-12-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-24 10:00:15" itemprop="dateModified" datetime="2020-05-24T10:00:15+08:00">2020-05-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Coding/" itemprop="url" rel="index"><span itemprop="name">Coding</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Coding/DSAA/" itemprop="url" rel="index"><span itemprop="name">DSAA</span></a>
-                </span>
-            </span>
+      <time title="Created: 2018-12-07 00:00:00" itemprop="dateCreated datePublished" datetime="2018-12-07T00:00:00+08:00">2018-12-07</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-11-01 18:55:17" itemprop="dateModified" datetime="2020-11-01T18:55:17+08:00">2020-11-01</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Science/" itemprop="url" rel="index"><span itemprop="name">Computer Science</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Science/DSAA/" itemprop="url" rel="index"><span itemprop="name">DSAA</span></a>
+        </span>
+    </span>
 
-          
-            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
-              <span class="post-meta-item-icon">
-                <i class="eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span id="busuanzi_value_page_pv"></span>
-            </span><br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>5.3k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>5 mins.</span>
-            </span>
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>5.3k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>5 mins.</span>
+    </span>
+</div>
 
         </div>
       </header>
@@ -426,8 +432,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
         <blockquote>
 <p>图的基础，最短路径的几种解答</p>
 <p>单源最短路： Bellman-Ford &amp; Dijkstra 及其简单优化 以及负圈的判断</p>
@@ -448,7 +452,7 @@ d[i] = min\{d[j] + edge(j,i)\} edge(j,i) \in E
 <p>解，每一次更新都会有更短的路径产生，那么在V个点的图中，两个点的最远距离只能是V-1条边，所以循环最多</p>
 <p>只会执行V-1次，这个特性将是我们判断是否存在负圈的重要性质</p>
 <p>所以我们也可以将上面的代码简单化为：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Bellman_Ford</span><span class="params">(<span class="keyword">int</span> s)</span> <span class="comment">// 不存在负圈的情况</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; V;i++) d[i] = INF;</span><br><span class="line">    d[s] = <span class="number">0</span>; <span class="comment">// 到自己为0</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; V<span class="number">-1</span>;j++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; E; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            Edge temp = edges[i];</span><br><span class="line">            d[temp.to] = <span class="built_in">min</span>(d[temp.to],d[temp.from]+temp.cost)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Bellman_Ford</span><span class="params">(<span class="keyword">int</span> s)</span> <span class="comment">// 不存在负圈的情况</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; V;i++) d[i] = INF;</span><br><span class="line">    d[s] = <span class="number">0</span>; <span class="comment">// 到自己为0</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; V<span class="number">-1</span>;j++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; E; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            Edge temp = edges[i];</span><br><span class="line">            d[temp.to] = min(d[temp.to],d[temp.from]+temp.cost)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>很容易可以看出来Bellman算法的复杂度为 **O(V*E)**</p>
 <h3 id="负圈的判断">负圈的判断</h3>
 <p>在这里，首先要明确<strong>负圈（负权环）</strong>和<strong>负权边</strong>的区别</p>
@@ -459,7 +463,7 @@ d[i] = min\{d[j] + edge(j,i)\} edge(j,i) \in E
 <p>只要存在了负圈，那么Bellman的松弛操作（也就是那个每次更新的内容）将会永远的执行下去。</p>
 <p>相当于没走一个这个负圈总的权值（路径长度）就会减少。但是我们上面已经得到在不存在负圈的图中最多执行</p>
 <p>V-1次循环，所以我们只要判断在第V次仍然更新了，那么就存在负圈了。代码只要更改一点点就行：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Bellman_Ford</span><span class="params">(<span class="keyword">int</span> s)</span> <span class="comment">// 不存在负圈的情况</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; V;i++) d[i] = INF;</span><br><span class="line">    d[s] = <span class="number">0</span>; <span class="comment">// 到自己为0</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; V;j++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; E; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            Edge temp = edges[i];</span><br><span class="line">            <span class="keyword">if</span>(d[temp.from] != INF &amp;&amp; d[temp.to] &gt; d[temp.from]+temp.cost)</span><br><span class="line">            &#123;</span><br><span class="line">                d[temp.to] = d[temp.from] + temp.cost;</span><br><span class="line">                <span class="comment">// 只要再次加上到第V-1次的特判</span></span><br><span class="line">                <span class="keyword">if</span>(j == V<span class="number">-1</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="built_in">cout</span> &lt;&lt; <span class="string">"存在负圈"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Bellman_Ford</span><span class="params">(<span class="keyword">int</span> s)</span> <span class="comment">// 不存在负圈的情况</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; V;i++) d[i] = INF;</span><br><span class="line">    d[s] = <span class="number">0</span>; <span class="comment">// 到自己为0</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; V;j++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; E; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            Edge temp = edges[i];</span><br><span class="line">            <span class="keyword">if</span>(d[temp.from] != INF &amp;&amp; d[temp.to] &gt; d[temp.from]+temp.cost)</span><br><span class="line">            &#123;</span><br><span class="line">                d[temp.to] = d[temp.from] + temp.cost;</span><br><span class="line">                <span class="comment">// 只要再次加上到第V-1次的特判</span></span><br><span class="line">                <span class="keyword">if</span>(j == V<span class="number">-1</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;存在负圈&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="dijkstra">Dijkstra</h2>
 <p>我们先考虑不存在负边的情况，在Bellman算法中每一次都要全部遍历所有的边，而且如果d[i]本身不是最短路径</p>
 <p>那么进行那个松弛操作之后的d[i]依然不是最短，所以可以对此进行优化：</p>
@@ -477,18 +481,18 @@ d[i] = min\{d[j] + edge(j,i)\} edge(j,i) \in E
 <p>在最开始时，只有起点的最短距离是确定的（而且所有点都未曾使用）。而在尚未使用的顶点中，距离d[i]最小的顶点就是最短距离已经确定的顶点。因为不存在负边，所以d[i]不会在以后的更新中变小。这就是Dijkstra算法</p>
 </blockquote>
 <p>代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> cost[MAXN][MAXN]; <span class="comment">// cost[i][j] 表示从i到j之间的权值（不存在是为INF）</span></span><br><span class="line"><span class="keyword">int</span> d[MAXN]; <span class="comment">// 从起点到其他点的最短距离</span></span><br><span class="line"><span class="keyword">bool</span> used[MAXN]; <span class="comment">// 已经使用过的图（已经确定最短距离的点）</span></span><br><span class="line"><span class="keyword">int</span> V; <span class="comment">// 点的个数</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Dijkstra</span><span class="params">(<span class="keyword">int</span> s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">fill</span>(d,d+V,INF); <span class="comment">// algorithm中的函数 将d数组全部赋为INF</span></span><br><span class="line">    <span class="built_in">fill</span>(used,used+V,<span class="literal">false</span>);</span><br><span class="line">    d[s] = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)    </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> v = <span class="number">-1</span>;</span><br><span class="line">        <span class="comment">// c从未使用过的点集中取一个距离最小的点</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> u = <span class="number">0</span>;u &lt; V;u++)</span><br><span class="line">        	<span class="keyword">if</span>(!used[u] &amp;&amp; (v == <span class="number">-1</span> || d[u] &lt; d[v])) v = u;</span><br><span class="line">        <span class="keyword">if</span>(v == <span class="number">-1</span>) <span class="keyword">break</span>; <span class="comment">// 所有的点的最短路径确定则退出</span></span><br><span class="line">       	used[v] = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> u = <span class="number">0</span>;u &lt; V;u++)</span><br><span class="line">        &#123;</span><br><span class="line">            d[u] = <span class="built_in">min</span>(d[u],d[v]+cost[v][u]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> cost[MAXN][MAXN]; <span class="comment">// cost[i][j] 表示从i到j之间的权值（不存在是为INF）</span></span><br><span class="line"><span class="keyword">int</span> d[MAXN]; <span class="comment">// 从起点到其他点的最短距离</span></span><br><span class="line"><span class="keyword">bool</span> used[MAXN]; <span class="comment">// 已经使用过的图（已经确定最短距离的点）</span></span><br><span class="line"><span class="keyword">int</span> V; <span class="comment">// 点的个数</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Dijkstra</span><span class="params">(<span class="keyword">int</span> s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    fill(d,d+V,INF); <span class="comment">// algorithm中的函数 将d数组全部赋为INF</span></span><br><span class="line">    fill(used,used+V,<span class="literal">false</span>);</span><br><span class="line">    d[s] = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)    </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> v = <span class="number">-1</span>;</span><br><span class="line">        <span class="comment">// c从未使用过的点集中取一个距离最小的点</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> u = <span class="number">0</span>;u &lt; V;u++)</span><br><span class="line">        	<span class="keyword">if</span>(!used[u] &amp;&amp; (v == <span class="number">-1</span> || d[u] &lt; d[v])) v = u;</span><br><span class="line">        <span class="keyword">if</span>(v == <span class="number">-1</span>) <span class="keyword">break</span>; <span class="comment">// 所有的点的最短路径确定则退出</span></span><br><span class="line">       	used[v] = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> u = <span class="number">0</span>;u &lt; V;u++)</span><br><span class="line">        &#123;</span><br><span class="line">            d[u] = min(d[u],d[v]+cost[v][u]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="简单的优化">简单的优化</h3>
 <p>上面代码的时间复杂度是 O(V<sup>2</sup>) , 我们可以通过堆（优先队列）降为O(E*log(V))</p>
 <p>上面有一个操作是找到距离最小的点和标记是否使用，这个就可以使用堆来优化</p>
 <p>代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; P; <span class="comment">// first 是最短距离 second 是顶点编号</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span>&#123;</span><span class="keyword">int</span> to, cost&#125;;</span><br><span class="line"><span class="built_in">vector</span>&lt;edge&gt; G[MAXN]; <span class="comment">// 使用邻接表存图</span></span><br><span class="line"><span class="keyword">int</span> d[MAXN]; <span class="comment">// 从起点到其他点的最短距离</span></span><br><span class="line"><span class="keyword">bool</span> used[MAXN]; <span class="comment">// 已经使用过的图（已经确定最短距离的点）</span></span><br><span class="line"><span class="keyword">int</span> V; <span class="comment">// 点的个数</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Dijkstra</span><span class="params">(<span class="keyword">int</span> s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    priority_queue&lt;P,<span class="built_in">vector</span>&lt;P&gt;, greater&lt;P&gt; &gt; que; <span class="comment">// 定义一个堆 从按最短距离小到的大排</span></span><br><span class="line">    <span class="built_in">fill</span>(d,d+V,INF);</span><br><span class="line">    d[s] = <span class="number">0</span>;</span><br><span class="line">    que.push(P(<span class="number">0</span>,s));</span><br><span class="line">    <span class="keyword">while</span>(!que.empty()) <span class="comment">// 为空就说明所有节点都已经用过</span></span><br><span class="line">    &#123;</span><br><span class="line">        P temp = que.top(); que.pop();</span><br><span class="line">        <span class="keyword">int</span> v = temp.second;</span><br><span class="line">        <span class="keyword">if</span>(d[v] &lt; temp.first) <span class="keyword">continue</span>; <span class="comment">// 没必要更新了</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; G[v].<span class="built_in">size</span>();i++)</span><br><span class="line">        &#123;</span><br><span class="line">            edge e = G[v][i];</span><br><span class="line">            <span class="keyword">if</span>(d[e.to] &gt; d[v]+e.cost)</span><br><span class="line">            &#123;</span><br><span class="line">                d[e.to] = d[v]+e.cost;</span><br><span class="line">                que.push(P(d[e.to],e.to));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="built_in">pair</span>&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; P; <span class="comment">// first 是最短距离 second 是顶点编号</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span>&#123;</span><span class="keyword">int</span> to, cost&#125;;</span><br><span class="line"><span class="built_in">vector</span>&lt;edge&gt; G[MAXN]; <span class="comment">// 使用邻接表存图</span></span><br><span class="line"><span class="keyword">int</span> d[MAXN]; <span class="comment">// 从起点到其他点的最短距离</span></span><br><span class="line"><span class="keyword">bool</span> used[MAXN]; <span class="comment">// 已经使用过的图（已经确定最短距离的点）</span></span><br><span class="line"><span class="keyword">int</span> V; <span class="comment">// 点的个数</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Dijkstra</span><span class="params">(<span class="keyword">int</span> s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">priority_queue</span>&lt;P,<span class="built_in">vector</span>&lt;P&gt;, greater&lt;P&gt; &gt; que; <span class="comment">// 定义一个堆 从按最短距离小到的大排</span></span><br><span class="line">    fill(d,d+V,INF);</span><br><span class="line">    d[s] = <span class="number">0</span>;</span><br><span class="line">    que.push(P(<span class="number">0</span>,s));</span><br><span class="line">    <span class="keyword">while</span>(!que.empty()) <span class="comment">// 为空就说明所有节点都已经用过</span></span><br><span class="line">    &#123;</span><br><span class="line">        P temp = que.top(); que.pop();</span><br><span class="line">        <span class="keyword">int</span> v = temp.second;</span><br><span class="line">        <span class="keyword">if</span>(d[v] &lt; temp.first) <span class="keyword">continue</span>; <span class="comment">// 没必要更新了</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; G[v].size();i++)</span><br><span class="line">        &#123;</span><br><span class="line">            edge e = G[v][i];</span><br><span class="line">            <span class="keyword">if</span>(d[e.to] &gt; d[v]+e.cost)</span><br><span class="line">            &#123;</span><br><span class="line">                d[e.to] = d[v]+e.cost;</span><br><span class="line">                que.push(P(d[e.to],e.to));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="floyd-warshall">Floyd-Warshall</h2>
 <blockquote>
 <p>Floyd算法简单暴力，主要用于求多源最短路径（任意两个点的最短路径）</p>
 </blockquote>
 <p>核心代码十分短小精悍</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> d[MAXN][MAXN]; <span class="comment">// d[u][v] 表示从u -&gt; v的权值 不存在的时候为0</span></span><br><span class="line"><span class="keyword">int</span> V; <span class="comment">// 顶点个数</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Floyd</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>;k &lt; V;k++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; V;i++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; V;j++)</span><br><span class="line">                d[i][j] = <span class="built_in">min</span>(d[i][j],d[i][k]+d[k][j]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> d[MAXN][MAXN]; <span class="comment">// d[u][v] 表示从u -&gt; v的权值 不存在的时候为0</span></span><br><span class="line"><span class="keyword">int</span> V; <span class="comment">// 顶点个数</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Floyd</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>;k &lt; V;k++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; V;i++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; V;j++)</span><br><span class="line">                d[i][j] = min(d[i][j],d[i][k]+d[k][j]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>十分暴力复杂度可想而知O(V<sup>3</sup>)</p>
 <p>那么这几行代码是什么意思呢？ 这其实还是DP</p>
 <p>我们用<strong>d[k+1][i][j]</strong> 来表示只使用<strong>0~k和i,j</strong>顶点的情况下的最短路</p>
@@ -510,7 +514,7 @@ d[k-1][i][k] + d[k-1][k][j]　（经过K点）\\
 <p>我们用一个数组prev来存相应节点的前驱结点，不断寻找前驱结点就可以找到最短路了，不过这是从后往前找</p>
 <p>最后需要反转一下得到最后的答案。</p>
 <p>示例代码如下： 注意第25行</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> cost[MAXN][MAXN]; <span class="comment">// cost[i][j] 表示从i到j之间的权值（不存在是为INF）</span></span><br><span class="line"><span class="keyword">int</span> d[MAXN]; <span class="comment">// 从起点到其他点的最短距离</span></span><br><span class="line"><span class="keyword">bool</span> used[MAXN]; <span class="comment">// 已经使用过的图（已经确定最短距离的点）</span></span><br><span class="line"><span class="keyword">int</span> V; <span class="comment">// 点的个数</span></span><br><span class="line"><span class="keyword">int</span> prev[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Dijkstra</span><span class="params">(<span class="keyword">int</span> s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">fill</span>(d,d+V,INF); <span class="comment">// algorithm中的函数 将d数组全部赋为INF</span></span><br><span class="line">    <span class="built_in">fill</span>(used,used+V,<span class="literal">false</span>);</span><br><span class="line">    <span class="built_in">fill</span>(prev,prev+V,<span class="number">-1</span>); <span class="comment">// -1表示到头了 即没有前驱结点</span></span><br><span class="line">    d[s] = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)    </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> v = <span class="number">-1</span>;</span><br><span class="line">        <span class="comment">// c从未使用过的点集中取一个距离最小的点</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> u = <span class="number">0</span>;u &lt; V;u++)</span><br><span class="line">        	<span class="keyword">if</span>(!used[u] &amp;&amp; (v == <span class="number">-1</span> || d[u] &lt; d[v])) v = u;</span><br><span class="line">        <span class="keyword">if</span>(v == <span class="number">-1</span>) <span class="keyword">break</span>; <span class="comment">// 所有的点的最短路径确定则退出</span></span><br><span class="line">       	used[v] = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> u = <span class="number">0</span>;u &lt; V;u++)</span><br><span class="line">        &#123;</span><br><span class="line">            d[u] = <span class="built_in">min</span>(d[u],d[v]+cost[v][u]);</span><br><span class="line">            prev[u] = v; </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 到顶点t的最短路</span></span><br><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">get_path</span><span class="params">(<span class="keyword">int</span> t)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; path;</span><br><span class="line">    <span class="keyword">for</span>(; t != <span class="number">-1</span>;t = prev[t]) path.push_pack(t);</span><br><span class="line">    reverse(path.<span class="built_in">begin</span>(),path.<span class="built_in">end</span>());</span><br><span class="line">    <span class="keyword">return</span> path;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> cost[MAXN][MAXN]; <span class="comment">// cost[i][j] 表示从i到j之间的权值（不存在是为INF）</span></span><br><span class="line"><span class="keyword">int</span> d[MAXN]; <span class="comment">// 从起点到其他点的最短距离</span></span><br><span class="line"><span class="keyword">bool</span> used[MAXN]; <span class="comment">// 已经使用过的图（已经确定最短距离的点）</span></span><br><span class="line"><span class="keyword">int</span> V; <span class="comment">// 点的个数</span></span><br><span class="line"><span class="keyword">int</span> prev[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Dijkstra</span><span class="params">(<span class="keyword">int</span> s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    fill(d,d+V,INF); <span class="comment">// algorithm中的函数 将d数组全部赋为INF</span></span><br><span class="line">    fill(used,used+V,<span class="literal">false</span>);</span><br><span class="line">    fill(prev,prev+V,<span class="number">-1</span>); <span class="comment">// -1表示到头了 即没有前驱结点</span></span><br><span class="line">    d[s] = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)    </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> v = <span class="number">-1</span>;</span><br><span class="line">        <span class="comment">// c从未使用过的点集中取一个距离最小的点</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> u = <span class="number">0</span>;u &lt; V;u++)</span><br><span class="line">        	<span class="keyword">if</span>(!used[u] &amp;&amp; (v == <span class="number">-1</span> || d[u] &lt; d[v])) v = u;</span><br><span class="line">        <span class="keyword">if</span>(v == <span class="number">-1</span>) <span class="keyword">break</span>; <span class="comment">// 所有的点的最短路径确定则退出</span></span><br><span class="line">       	used[v] = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> u = <span class="number">0</span>;u &lt; V;u++)</span><br><span class="line">        &#123;</span><br><span class="line">            d[u] = min(d[u],d[v]+cost[v][u]);</span><br><span class="line">            prev[u] = v; </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 到顶点t的最短路</span></span><br><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">get_path</span><span class="params">(<span class="keyword">int</span> t)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; path;</span><br><span class="line">    <span class="keyword">for</span>(; t != <span class="number">-1</span>;t = prev[t]) path.push_pack(t);</span><br><span class="line">    reverse(path.begin(),path.end());</span><br><span class="line">    <span class="keyword">return</span> path;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>The end</strong> !!!</p>
 
     </div>
@@ -518,16 +522,18 @@ d[k-1][i][k] + d[k-1][k][j]　（经过K点）\\
     
     
     
-        
 
-<div>
-<ul class="post-copyright">
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
   <li class="post-copyright-author">
-    <strong>Post author:  </strong>Weijun-Lin
+      <strong>Post author:  </strong>Weijun-Lin
   </li>
   <li class="post-copyright-link">
-    <strong>Post link: </strong>
-    <a href="https://joke-lin.top/2018/12/07/2018-12-07-ShortestPath/" title="最短路径的三种算法以及路径还原与负圈判断">https://joke-lin.top/2018/12/07/2018-12-07-ShortestPath/</a>
+      <strong>Post link: </strong>
+      <a href="https://joke-lin.top/2018/12/07/2018-12-07-ShortestPath/" title="最短路径的三种算法以及路径还原与负圈判断">https://joke-lin.top/2018/12/07/2018-12-07-ShortestPath/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.
@@ -535,8 +541,6 @@ d[k-1][i][k] + d[k-1][k][j]　（经过K点）\\
 </ul>
 </div>
 
-
-      <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/C-C/" rel="tag"><i class="fa fa-tag"></i> C/C++</a>
               <a href="/tags/Graph-Theory/" rel="tag"><i class="fa fa-tag"></i> Graph Theory</a>
@@ -549,29 +553,28 @@ d[k-1][i][k] + d[k-1][k][j]　（经过K点）\\
     </div>
   </div>
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2019/01/12/2019-01-12-If_I_Stay/" rel="prev" title="IF I STAY">
-      <i class="fa fa-chevron-left"></i> IF I STAY
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2018/11/02/2018-11-02-BinaryFileReader/" rel="next" title="简单的二进制阅读器">
-      简单的二进制阅读器 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/01/12/2019-01-12-If_I_Stay/" rel="prev" title="IF I STAY">
+                  <i class="fa fa-chevron-left"></i> IF I STAY
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/11/02/2018-11-02-BinaryFileReader/" rel="next" title="简单的二进制阅读器">
+                  简单的二进制阅读器 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
   </article>
-  
-  
-  
+</div>
 
 
 
-        </div>
-        
+
+
+
+      
     
   <div class="comments">
     <div id="lv-container" data-id="city" data-uid="MTAyMC8zOTczMy8xNjI2MA=="></div>
@@ -585,7 +588,7 @@ d[k-1][i][k] + d[k-1][k][j]　（经过K点）\\
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -594,20 +597,20 @@ d[k-1][i][k] + d[k-1][k][j]　（经过K点）\\
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
 
-      </div>
-    </main>
+    </div>
+  </main>
 
-    <footer class="footer">
-      <div class="footer-inner">
-        
+  <footer class="footer">
+    <div class="footer-inner">
+      
 
-        
+      
 
 <div class="copyright">
   
@@ -617,25 +620,24 @@ d[k-1][i][k] + d[k-1][k][j]　（经过K点）\\
     <i class="heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Weijun-Lin</span>
-    <span class="post-meta-divider">|</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
     <span class="post-meta-item-icon">
-      <i class="fa fa-chart-area"></i>
+      <i class="fa fa-chart-line"></i>
     </span>
-      <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">209k</span>
-    <span class="post-meta-divider">|</span>
+      <span>Symbols count total: </span>
+    <span title="Symbols count total">215k</span>
+  </span>
+  <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-      <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">3:10</span>
+      <span>Reading time total &asymp;</span>
+    <span title="Reading time total">3:16</span>
+  </span>
 </div>
-  <div class="powered-by">Powered by <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span>
-  </div>
-
-        
 <div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
       <span class="post-meta-item-icon">
         <i class="user"></i>
@@ -644,7 +646,6 @@ d[k-1][i][k] + d[k-1][k][j]　（经过K点）\\
         <span id="busuanzi_value_site_uv"></span>
       </span>
     </span>
-    <span class="post-meta-divider">|</span>
     <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
       <span class="post-meta-item-icon">
         <i class="eye"></i>
@@ -654,32 +655,17 @@ d[k-1][i][k] + d[k-1][k][j]　（经过K点）\\
       </span>
     </span>
 </div>
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
+  <div class="powered-by">Powered by <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span>
   </div>
 
+    </div>
+  </footer>
+
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-<script src="/js/bookmark.js"></script>
-
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
 
   
   <script>
@@ -715,13 +701,24 @@ d[k-1][i][k] + d[k-1][k][j]　（经过K点）\\
   }
   </script>
 
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
-<script src="/js/local-search.js"></script>
-
-
-
-
-
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
@@ -733,17 +730,9 @@ d[k-1][i][k] + d[k-1][k][j]　（经过K点）\\
   
 
   
-      
-
-<script>
+      <script>
   if (typeof MathJax === 'undefined') {
     window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
       tex: {
         inlineMath: {'[+]': [['$', '$']]},
         tags: 'ams'
@@ -763,7 +752,7 @@ d[k-1][i][k] + d[k-1][k][j]　（经过K点）\\
           }, '', false],
           insertedScript: [200, () => {
             document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
+              const target = node.parentNode;
               if (target.nodeName.toLowerCase() === 'li') {
                 target.parentNode.classList.add('has-jax');
               }
@@ -772,14 +761,13 @@ d[k-1][i][k] + d[k-1][k][j]　（经过K点）\\
         }
       }
     };
-    (function () {
-      var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
   } else {
     MathJax.startup.document.state(0);
+    MathJax.typesetClear();
     MathJax.texReset();
     MathJax.typeset();
   }
@@ -790,9 +778,9 @@ d[k-1][i][k] + d[k-1][k][j]　（经过K点）\\
   
 
 <script>
-NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+NexT.utils.loadComments('#lv-container', () => {
   window.livereOptions = {
-    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+    refer: "2018/12/07/2018-12-07-ShortestPath/"
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];

@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 5.2.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico">
@@ -15,14 +17,14 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  
-  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"joke-lin.top","root":"/","scheme":"Gemini","version":"8.0.0-rc.4","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"path":"search.xml"};
+    var CONFIG = {"hostname":"joke-lin.top","root":"/","scheme":"Gemini","version":"8.0.2","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
   <meta name="description" content="原理参考：https:&#x2F;&#x2F;blog.csdn.net&#x2F;ssaalkjhgf&#x2F;article&#x2F;details&#x2F;80435676">
@@ -33,10 +35,11 @@
 <meta property="og:description" content="原理参考：https:&#x2F;&#x2F;blog.csdn.net&#x2F;ssaalkjhgf&#x2F;article&#x2F;details&#x2F;80435676">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2019-05-02T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-05-17T08:43:53.718Z">
+<meta property="article:modified_time" content="2020-11-01T11:02:24.371Z">
 <meta property="article:author" content="Weijun-Lin">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
+
 
 <link rel="canonical" href="https://joke-lin.top/2019/05/03/2019-05-03-CYK/">
 
@@ -106,18 +109,17 @@
 <link rel="alternate" href="/atom.xml" title="WEIJUN LIN BLOG" type="application/atom+xml">
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
-    <main class="main">
-      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-        <div class="header-inner"><div class="site-brand-container">
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="Toggle navigation bar">
-        <span class="toggle-line toggle-line-first"></span>
-        <span class="toggle-line toggle-line-middle"></span>
-        <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
@@ -140,7 +142,7 @@
 
 
 <nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
@@ -164,11 +166,6 @@
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
-        <li class="menu-item menu-item-notes">
-
-    <a href="/categories/%E9%9A%8F%E7%AC%94/Note/" rel="section"><i class="fa fa-clipboard fa-fw"></i>Notes</a>
 
   </li>
         <li class="menu-item menu-item-rss">
@@ -197,7 +194,7 @@
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
            placeholder="Searching..." spellcheck="false"
            type="search" class="search-input">
   </div>
@@ -205,8 +202,8 @@
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
     <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
@@ -215,12 +212,12 @@
   </div>
 
 </div>
-          
+        
   
   <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
   </div>
 
   <aside class="sidebar">
@@ -235,43 +232,44 @@
         </li>
       </ul>
 
-      <!--noindex-->
-      <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现过程"><span class="nav-text">实现过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#类说明"><span class="nav-text">类说明</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#cnf"><span class="nav-text">CNF</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#cyk"><span class="nav-text">CYK</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#input"><span class="nav-text">Input</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#visualization"><span class="nav-text">Visualization</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码"><span class="nav-text">代码</span></a></li></ol></li></ol></div>
-      </section>
-      <!--/noindex-->
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B"><span class="nav-text">实现过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E8%AF%B4%E6%98%8E"><span class="nav-text">类说明</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#cnf"><span class="nav-text">CNF</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#cyk"><span class="nav-text">CYK</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#input"><span class="nav-text">Input</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#visualization"><span class="nav-text">Visualization</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-text">代码</span></a></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
 
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Weijun-Lin"
       src="/images/avatar.png">
   <p class="site-author-name" itemprop="name">Weijun-Lin</p>
   <div class="site-description" itemprop="description">Learing and Using</div>
 </div>
-<div class="site-state-wrap animated">
+<div class="site-state-wrap site-overview-item animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-count">55</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author animated">
+  <div class="links-of-author site-overview-item animated">
       <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlaWp1bi1saW4=" title="Github → https:&#x2F;&#x2F;github.com&#x2F;weijun-lin"><i class="fab fa-github fa-fw"></i>Github</span>
       </span>
@@ -285,12 +283,12 @@
         <span class="exturl" data-url="bWFpbHRvOndlaWp1bi1saW5AZm94bWFpbC5jb20=" title="E-Mail → mailto:weijun-lin@foxmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
       </span>
   </div>
-  <div class="cc-license animated" itemprop="license">
+  <div class="cc-license site-overview-item animated" itemprop="license">
     <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
   </div>
 
 
-  <div class="links-of-blogroll animated">
+  <div class="links-of-blogroll site-overview-item animated">
     <div class="links-of-blogroll-title"><i class="link fa-fw"></i>
       Friends
     </div>
@@ -313,39 +311,43 @@
     </ul>
   </div>
 
-      </section>
+        </section>
+      </div>
         <div class="back-to-top animated">
           <i class="fa fa-arrow-up"></i>
           <span>0%</span>
         </div>
     </div>
   </aside>
-  <div id="sidebar-dimmer"></div>
+  <div class="sidebar-dimmer"></div>
 
 
-      </header>
+    </header>
 
-      
+    
   <div class="reading-progress-bar"></div>
   <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
   <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlaWp1bi1saW4=" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
 
 <noscript>
-  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
 </noscript>
 
 
-      <div class="main-inner">
-        
+    <div class="main-inner post posts-expand">
+      
 
-        <div class="content post posts-expand">
-          
+      
 
-    
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
     <link itemprop="mainEntityOfPage" href="https://joke-lin.top/2019/05/03/2019-05-03-CYK/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -362,58 +364,62 @@
           CYK Algorithm
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-05-03 00:00:00" itemprop="dateCreated datePublished" datetime="2019-05-03T00:00:00+08:00">2019-05-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-17 16:43:53" itemprop="dateModified" datetime="2020-05-17T16:43:53+08:00">2020-05-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">随笔</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9A%8F%E7%AC%94/ELSE/" itemprop="url" rel="index"><span itemprop="name">ELSE</span></a>
-                </span>
-            </span>
+      <time title="Created: 2019-05-03 00:00:00" itemprop="dateCreated datePublished" datetime="2019-05-03T00:00:00+08:00">2019-05-03</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-11-01 19:02:24" itemprop="dateModified" datetime="2020-11-01T19:02:24+08:00">2020-11-01</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Science/" itemprop="url" rel="index"><span itemprop="name">Computer Science</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Science/DSAA/" itemprop="url" rel="index"><span itemprop="name">DSAA</span></a>
+        </span>
+    </span>
 
-          
-            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
-              <span class="post-meta-item-icon">
-                <i class="eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span id="busuanzi_value_page_pv"></span>
-            </span><br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>3.9k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>4 mins.</span>
-            </span>
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>4.5k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>4 mins.</span>
+    </span>
+</div>
 
         </div>
       </header>
@@ -422,10 +428,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
         <blockquote>
-<p>原理参考：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NzYWFsa2poZ2YvYXJ0aWNsZS9kZXRhaWxzLzgwNDM1Njc2">https://blog.csdn.net/ssaalkjhgf/article/details/80435676<i class="fa fa-external-link-alt"></i></span></p>
+<p>原理参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/ssaalkjhgf/article/details/80435676" class="uri">https://blog.csdn.net/ssaalkjhgf/article/details/80435676</a></p>
 </blockquote>
 <a id="more"></a>
 <h3 id="实现过程">实现过程</h3>
@@ -446,23 +450,25 @@
 <p>将<code>.csv</code>文件使用<strong>Excel</strong>打开便可查看完整推导过程</p>
 <p>代码中已有完整注释和使用说明</p>
 <h4 id="代码">代码</h4>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Used for judging a string whether be in the CFL (presented in CNF) using CYK algorithm</span></span><br><span class="line"><span class="string">Author: JOke-Lin</span></span><br><span class="line"><span class="string">Time: 2019-4-27</span></span><br><span class="line"><span class="string">Introduction: </span></span><br><span class="line"><span class="string">    For reading CNF you should use the format "A -&gt; BC|a|b" (the blank space is allowed except "-&gt;")</span></span><br><span class="line"><span class="string">    The first character will be considered as CFL's Start Symbol</span></span><br><span class="line"><span class="string">    And end inputing by input "Ctrl + Z"</span></span><br><span class="line"><span class="string">    For testing strings, you can input as many as strings you want</span></span><br><span class="line"><span class="string">    And exit by using "ctrl + Z"</span></span><br><span class="line"><span class="string">    For Output, the output format is the .csv file whcih should be checked by Excel</span></span><br><span class="line"><span class="string">    The output file name can be changed in codes (the default is "result.csv")</span></span><br><span class="line"><span class="string">Attention:</span></span><br><span class="line"><span class="string">    When you test a new string, you must closed the last .csv file</span></span><br><span class="line"><span class="string">    Otherwise you will meet a I/O Error because the read-write conflict</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CNF</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, cnf: dict)</span>:</span></span><br><span class="line">        <span class="string">''' cnf: [str:list] '''</span></span><br><span class="line">        self.cnf = cnf</span><br><span class="line">        self.S = list(cnf.keys())[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">find_product</span><span class="params">(self, target: str)</span>:</span></span><br><span class="line">        <span class="string">''' find the productor  '''</span></span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">for</span> key, value <span class="keyword">in</span> self.cnf.items():</span><br><span class="line">            <span class="keyword">if</span> target <span class="keyword">in</span> value:</span><br><span class="line">                res.append(key)</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CYK</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, cnf: CNF)</span>:</span></span><br><span class="line">        self.cnf = cnf</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">find</span><span class="params">(self, target: str)</span>:</span></span><br><span class="line">        <span class="string">''' judge if the target is in the CNF '''</span></span><br><span class="line">        self.dp_mat = [[<span class="string">""</span>]*len(target) <span class="keyword">for</span> i <span class="keyword">in</span> range(len(target))]</span><br><span class="line">        <span class="comment"># initialize</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(target)):</span><br><span class="line">            self.dp_mat[i][i] = list(set(self.cnf.find_product(target[i])))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> length <span class="keyword">in</span> range(<span class="number">2</span>, len(target) + <span class="number">1</span>):</span><br><span class="line">            <span class="comment"># i,j are the position in dp_mat</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(len(target) - length + <span class="number">1</span>):</span><br><span class="line">                j = i + length - <span class="number">1</span></span><br><span class="line">                temp = []</span><br><span class="line">                <span class="comment"># split the sub_target</span></span><br><span class="line">                <span class="keyword">for</span> k <span class="keyword">in</span> range(i, j):</span><br><span class="line">                    list1 = self.dp_mat[i][k]</span><br><span class="line">                    list2 = self.dp_mat[k+<span class="number">1</span>][j]</span><br><span class="line">                    temp += self.find_product(list1, list2)</span><br><span class="line">                self.dp_mat[i][j] = list(set(temp))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> self.cnf.S <span class="keyword">in</span> self.dp_mat[<span class="number">0</span>][len(target) - <span class="number">1</span>]:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">find_product</span><span class="params">(self, list1: list, list2: list)</span>:</span></span><br><span class="line">        <span class="string">''' find all productions from Cartesian product of two lists '''</span></span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(list1)):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(len(list2)):</span><br><span class="line">                temp = self.cnf.find_product(list1[i]+list2[j])</span><br><span class="line">                <span class="keyword">if</span> temp != <span class="literal">None</span>:</span><br><span class="line">                    res += temp</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Input</span>:</span></span><br><span class="line">    <span class="string">''' my input class for reading the CNF '''</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getDictItemFromInput</span><span class="params">(self, s: str)</span>:</span></span><br><span class="line">        s = s.replace(<span class="string">' '</span>, <span class="string">''</span>)  <span class="comment"># delete extra blank spacing</span></span><br><span class="line">        temp = s.split(<span class="string">"-&gt;"</span>)</span><br><span class="line">        <span class="keyword">return</span> temp[<span class="number">0</span>], temp[<span class="number">1</span>].split(<span class="string">"|"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getInput</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">''' return a dict CNF '''</span></span><br><span class="line">        res = &#123;&#125;</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                s = input()</span><br><span class="line">                dict_item = self.getDictItemFromInput(s)</span><br><span class="line">                res[dict_item[<span class="number">0</span>]] = dict_item[<span class="number">1</span>]</span><br><span class="line">            <span class="keyword">except</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Visualization</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    make the deduction visualized</span></span><br><span class="line"><span class="string">    use dp_mat from class CYK to initialize</span></span><br><span class="line"><span class="string">    and creat .csv file to show in Excel</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, data: list)</span>:</span></span><br><span class="line">        self.data = [[<span class="string">""</span>]*len(data) <span class="keyword">for</span> i <span class="keyword">in</span> range(len(data))]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(data)):</span><br><span class="line">            temp = data[i][i:]</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(len(data) - i):</span><br><span class="line">                self.data[len(data) - j - <span class="number">1</span>][i] = temp[j]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">seeAsCsv</span><span class="params">(self, filename: str)</span>:</span></span><br><span class="line">        <span class="string">''' write data to filename as .csv '''</span></span><br><span class="line">        <span class="keyword">with</span> open(filename, <span class="string">"w"</span>) <span class="keyword">as</span> f:</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(len(self.data)):</span><br><span class="line">                line = <span class="string">""</span></span><br><span class="line">                <span class="keyword">for</span> j <span class="keyword">in</span> range(len(self.data[i])):</span><br><span class="line">                    temp = <span class="string">""</span></span><br><span class="line">                    <span class="keyword">if</span> type(self.data[i][j]) == str:</span><br><span class="line">                        temp = self.data[i][j]</span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        temp = <span class="string">"\"X&#123;&#125;,&#123;&#125;="</span>.format(j+<span class="number">1</span>,len(self.data)-i)+<span class="string">"&#123;"</span></span><br><span class="line">                        <span class="keyword">for</span> k <span class="keyword">in</span> range(len(self.data[i][j])):</span><br><span class="line">                            temp = temp + self.data[i][j][k]</span><br><span class="line">                            <span class="keyword">if</span> k != len(self.data[i][j]) - <span class="number">1</span>:</span><br><span class="line">                                temp = temp + <span class="string">","</span></span><br><span class="line">                        temp = temp + <span class="string">"&#125;\""</span></span><br><span class="line">                    line = line + temp + <span class="string">","</span></span><br><span class="line">                f.write(line + <span class="string">"\n"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    print(<span class="string">"Please Input the CNF: (The First Character must be Start symbol until Ctrl+Z )"</span>)</span><br><span class="line">    myinput = Input()</span><br><span class="line">    <span class="comment"># get the CNF read until miss ctrl + Z</span></span><br><span class="line">    data_dict = myinput.getInput()</span><br><span class="line">    <span class="comment"># creat my CYK algorithm</span></span><br><span class="line">    cyk = CYK(CNF(data_dict))</span><br><span class="line">    print(<span class="string">"input the string: (until Ctrl+Z)"</span>)</span><br><span class="line">    <span class="comment"># test the input string until read the ctrl + z</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            target_str = input()</span><br><span class="line">            <span class="keyword">if</span> cyk.find(target_str):</span><br><span class="line">                print(<span class="string">"Yes"</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                print(<span class="string">"No"</span>)</span><br><span class="line">            visual = Visualization(cyk.dp_mat)</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                visual.seeAsCsv(<span class="string">"result.csv"</span>)</span><br><span class="line">            <span class="keyword">except</span>:</span><br><span class="line">                print(<span class="string">"Write Error: Please Close Last csv file"</span>)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Used for judging a string whether be in the CFL (presented in CNF) using CYK algorithm</span></span><br><span class="line"><span class="string">Author: JOke-Lin</span></span><br><span class="line"><span class="string">Time: 2019-4-27</span></span><br><span class="line"><span class="string">Introduction: </span></span><br><span class="line"><span class="string">    For reading CNF you should use the format &quot;A -&gt; BC|a|b&quot; (the blank space is allowed except &quot;-&gt;&quot;)</span></span><br><span class="line"><span class="string">    The first character will be considered as CFL&#x27;s Start Symbol</span></span><br><span class="line"><span class="string">    And end inputing by input &quot;Ctrl + Z&quot;</span></span><br><span class="line"><span class="string">    For testing strings, you can input as many as strings you want</span></span><br><span class="line"><span class="string">    And exit by using &quot;ctrl + Z&quot;</span></span><br><span class="line"><span class="string">    For Output, the output format is the .csv file whcih should be checked by Excel</span></span><br><span class="line"><span class="string">    The output file name can be changed in codes (the default is &quot;result.csv&quot;)</span></span><br><span class="line"><span class="string">Attention:</span></span><br><span class="line"><span class="string">    When you test a new string, you must closed the last .csv file</span></span><br><span class="line"><span class="string">    Otherwise you will meet a I/O Error because the read-write conflict</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CNF</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, cnf: <span class="built_in">dict</span></span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27; cnf: [str:list] &#x27;&#x27;&#x27;</span></span><br><span class="line">        self.cnf = cnf</span><br><span class="line">        self.S = <span class="built_in">list</span>(cnf.keys())[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">find_product</span>(<span class="params">self, target: <span class="built_in">str</span></span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27; find the productor  &#x27;&#x27;&#x27;</span></span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">for</span> key, value <span class="keyword">in</span> self.cnf.items():</span><br><span class="line">            <span class="keyword">if</span> target <span class="keyword">in</span> value:</span><br><span class="line">                res.append(key)</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CYK</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, cnf: CNF</span>):</span></span><br><span class="line">        self.cnf = cnf</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">find</span>(<span class="params">self, target: <span class="built_in">str</span></span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27; judge if the target is in the CNF &#x27;&#x27;&#x27;</span></span><br><span class="line">        self.dp_mat = [[<span class="string">&quot;&quot;</span>]*<span class="built_in">len</span>(target) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(target))]</span><br><span class="line">        <span class="comment"># initialize</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(target)):</span><br><span class="line">            self.dp_mat[i][i] = <span class="built_in">list</span>(<span class="built_in">set</span>(self.cnf.find_product(target[i])))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> length <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, <span class="built_in">len</span>(target) + <span class="number">1</span>):</span><br><span class="line">            <span class="comment"># i,j are the position in dp_mat</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(target) - length + <span class="number">1</span>):</span><br><span class="line">                j = i + length - <span class="number">1</span></span><br><span class="line">                temp = []</span><br><span class="line">                <span class="comment"># split the sub_target</span></span><br><span class="line">                <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(i, j):</span><br><span class="line">                    list1 = self.dp_mat[i][k]</span><br><span class="line">                    list2 = self.dp_mat[k+<span class="number">1</span>][j]</span><br><span class="line">                    temp += self.find_product(list1, list2)</span><br><span class="line">                self.dp_mat[i][j] = <span class="built_in">list</span>(<span class="built_in">set</span>(temp))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> self.cnf.S <span class="keyword">in</span> self.dp_mat[<span class="number">0</span>][<span class="built_in">len</span>(target) - <span class="number">1</span>]:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">find_product</span>(<span class="params">self, list1: <span class="built_in">list</span>, list2: <span class="built_in">list</span></span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27; find all productions from Cartesian product of two lists &#x27;&#x27;&#x27;</span></span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(list1)):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(list2)):</span><br><span class="line">                temp = self.cnf.find_product(list1[i]+list2[j])</span><br><span class="line">                <span class="keyword">if</span> temp != <span class="literal">None</span>:</span><br><span class="line">                    res += temp</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Input</span>:</span></span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27; my input class for reading the CNF &#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getDictItemFromInput</span>(<span class="params">self, s: <span class="built_in">str</span></span>):</span></span><br><span class="line">        s = s.replace(<span class="string">&#x27; &#x27;</span>, <span class="string">&#x27;&#x27;</span>)  <span class="comment"># delete extra blank spacing</span></span><br><span class="line">        temp = s.split(<span class="string">&quot;-&gt;&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> temp[<span class="number">0</span>], temp[<span class="number">1</span>].split(<span class="string">&quot;|&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getInput</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27; return a dict CNF &#x27;&#x27;&#x27;</span></span><br><span class="line">        res = &#123;&#125;</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                s = <span class="built_in">input</span>()</span><br><span class="line">                dict_item = self.getDictItemFromInput(s)</span><br><span class="line">                res[dict_item[<span class="number">0</span>]] = dict_item[<span class="number">1</span>]</span><br><span class="line">            <span class="keyword">except</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Visualization</span>:</span></span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    make the deduction visualized</span></span><br><span class="line"><span class="string">    use dp_mat from class CYK to initialize</span></span><br><span class="line"><span class="string">    and creat .csv file to show in Excel</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, data: <span class="built_in">list</span></span>):</span></span><br><span class="line">        self.data = [[<span class="string">&quot;&quot;</span>]*<span class="built_in">len</span>(data) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(data))]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(data)):</span><br><span class="line">            temp = data[i][i:]</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(data) - i):</span><br><span class="line">                self.data[<span class="built_in">len</span>(data) - j - <span class="number">1</span>][i] = temp[j]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">seeAsCsv</span>(<span class="params">self, filename: <span class="built_in">str</span></span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27; write data to filename as .csv &#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(filename, <span class="string">&quot;w&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(self.data)):</span><br><span class="line">                line = <span class="string">&quot;&quot;</span></span><br><span class="line">                <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(self.data[i])):</span><br><span class="line">                    temp = <span class="string">&quot;&quot;</span></span><br><span class="line">                    <span class="keyword">if</span> <span class="built_in">type</span>(self.data[i][j]) == <span class="built_in">str</span>:</span><br><span class="line">                        temp = self.data[i][j]</span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        temp = <span class="string">&quot;\&quot;X&#123;&#125;,&#123;&#125;=&quot;</span>.<span class="built_in">format</span>(j+<span class="number">1</span>,<span class="built_in">len</span>(self.data)-i)+<span class="string">&quot;&#123;&quot;</span></span><br><span class="line">                        <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(self.data[i][j])):</span><br><span class="line">                            temp = temp + self.data[i][j][k]</span><br><span class="line">                            <span class="keyword">if</span> k != <span class="built_in">len</span>(self.data[i][j]) - <span class="number">1</span>:</span><br><span class="line">                                temp = temp + <span class="string">&quot;,&quot;</span></span><br><span class="line">                        temp = temp + <span class="string">&quot;&#125;\&quot;&quot;</span></span><br><span class="line">                    line = line + temp + <span class="string">&quot;,&quot;</span></span><br><span class="line">                f.write(line + <span class="string">&quot;\n&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    print(<span class="string">&quot;Please Input the CNF: (The First Character must be Start symbol until Ctrl+Z )&quot;</span>)</span><br><span class="line">    myinput = Input()</span><br><span class="line">    <span class="comment"># get the CNF read until miss ctrl + Z</span></span><br><span class="line">    data_dict = myinput.getInput()</span><br><span class="line">    <span class="comment"># creat my CYK algorithm</span></span><br><span class="line">    cyk = CYK(CNF(data_dict))</span><br><span class="line">    print(<span class="string">&quot;input the string: (until Ctrl+Z)&quot;</span>)</span><br><span class="line">    <span class="comment"># test the input string until read the ctrl + z</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            target_str = <span class="built_in">input</span>()</span><br><span class="line">            <span class="keyword">if</span> cyk.find(target_str):</span><br><span class="line">                print(<span class="string">&quot;Yes&quot;</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                print(<span class="string">&quot;No&quot;</span>)</span><br><span class="line">            visual = Visualization(cyk.dp_mat)</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                visual.seeAsCsv(<span class="string">&quot;result.csv&quot;</span>)</span><br><span class="line">            <span class="keyword">except</span>:</span><br><span class="line">                print(<span class="string">&quot;Write Error: Please Close Last csv file&quot;</span>)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
     </div>
 
     
     
     
-        
 
-<div>
-<ul class="post-copyright">
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
   <li class="post-copyright-author">
-    <strong>Post author:  </strong>Weijun-Lin
+      <strong>Post author:  </strong>Weijun-Lin
   </li>
   <li class="post-copyright-link">
-    <strong>Post link: </strong>
-    <a href="https://joke-lin.top/2019/05/03/2019-05-03-CYK/" title="CYK Algorithm">https://joke-lin.top/2019/05/03/2019-05-03-CYK/</a>
+      <strong>Post link: </strong>
+      <a href="https://joke-lin.top/2019/05/03/2019-05-03-CYK/" title="CYK Algorithm">https://joke-lin.top/2019/05/03/2019-05-03-CYK/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.
@@ -470,8 +476,6 @@
 </ul>
 </div>
 
-
-      <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
           </div>
@@ -483,29 +487,28 @@
     </div>
   </div>
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2019/05/12/2019-05-13-Img_Rotation/" rel="prev" title="图像旋转算法实现 Python">
-      <i class="fa fa-chevron-left"></i> 图像旋转算法实现 Python
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2019/02/24/2019-02-24-stb_image/" rel="next" title="图像库stb_image & stb_image_write">
-      图像库stb_image & stb_image_write <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/05/12/2019-05-13-Img_Rotation/" rel="prev" title="图像旋转算法实现 Python">
+                  <i class="fa fa-chevron-left"></i> 图像旋转算法实现 Python
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/02/24/2019-02-24-stb_image/" rel="next" title="图像库stb_image & stb_image_write">
+                  图像库stb_image & stb_image_write <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
   </article>
-  
-  
-  
+</div>
 
 
 
-        </div>
-        
+
+
+
+      
     
   <div class="comments">
     <div id="lv-container" data-id="city" data-uid="MTAyMC8zOTczMy8xNjI2MA=="></div>
@@ -519,7 +522,7 @@
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -528,20 +531,20 @@
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
 
-      </div>
-    </main>
+    </div>
+  </main>
 
-    <footer class="footer">
-      <div class="footer-inner">
-        
+  <footer class="footer">
+    <div class="footer-inner">
+      
 
-        
+      
 
 <div class="copyright">
   
@@ -551,25 +554,24 @@
     <i class="heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Weijun-Lin</span>
-    <span class="post-meta-divider">|</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
     <span class="post-meta-item-icon">
-      <i class="fa fa-chart-area"></i>
+      <i class="fa fa-chart-line"></i>
     </span>
-      <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">209k</span>
-    <span class="post-meta-divider">|</span>
+      <span>Symbols count total: </span>
+    <span title="Symbols count total">215k</span>
+  </span>
+  <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-      <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">3:10</span>
+      <span>Reading time total &asymp;</span>
+    <span title="Reading time total">3:16</span>
+  </span>
 </div>
-  <div class="powered-by">Powered by <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span>
-  </div>
-
-        
 <div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
       <span class="post-meta-item-icon">
         <i class="user"></i>
@@ -578,7 +580,6 @@
         <span id="busuanzi_value_site_uv"></span>
       </span>
     </span>
-    <span class="post-meta-divider">|</span>
     <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
       <span class="post-meta-item-icon">
         <i class="eye"></i>
@@ -588,32 +589,17 @@
       </span>
     </span>
 </div>
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
+  <div class="powered-by">Powered by <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span>
   </div>
 
+    </div>
+  </footer>
+
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-<script src="/js/bookmark.js"></script>
-
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
 
   
   <script>
@@ -649,13 +635,24 @@
   }
   </script>
 
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
-<script src="/js/local-search.js"></script>
-
-
-
-
-
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
@@ -667,17 +664,9 @@
   
 
   
-      
-
-<script>
+      <script>
   if (typeof MathJax === 'undefined') {
     window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
       tex: {
         inlineMath: {'[+]': [['$', '$']]},
         tags: 'ams'
@@ -697,7 +686,7 @@
           }, '', false],
           insertedScript: [200, () => {
             document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
+              const target = node.parentNode;
               if (target.nodeName.toLowerCase() === 'li') {
                 target.parentNode.classList.add('has-jax');
               }
@@ -706,14 +695,13 @@
         }
       }
     };
-    (function () {
-      var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
   } else {
     MathJax.startup.document.state(0);
+    MathJax.typesetClear();
     MathJax.texReset();
     MathJax.typeset();
   }
@@ -724,9 +712,9 @@
   
 
 <script>
-NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+NexT.utils.loadComments('#lv-container', () => {
   window.livereOptions = {
-    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+    refer: "2019/05/03/2019-05-03-CYK/"
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];

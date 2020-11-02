@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 5.2.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico">
@@ -15,14 +17,14 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  
-  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"joke-lin.top","root":"/","scheme":"Gemini","version":"8.0.0-rc.4","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"path":"search.xml"};
+    var CONFIG = {"hostname":"joke-lin.top","root":"/","scheme":"Gemini","version":"8.0.2","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
   <meta name="description" content="leetcode5:https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;longest-palindromic-substring&#x2F;description&#x2F; 可以自己提交看看对不对  暴力搜索 这个应该是最容易的方法了，但是一看复杂度O(n3)，还是放弃好了。 但是这个方法也是遍历所有字符串字串的一种方法。下面是暴力搜索的代码：">
@@ -33,11 +35,12 @@
 <meta property="og:description" content="leetcode5:https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;longest-palindromic-substring&#x2F;description&#x2F; 可以自己提交看看对不对  暴力搜索 这个应该是最容易的方法了，但是一看复杂度O(n3)，还是放弃好了。 但是这个方法也是遍历所有字符串字串的一种方法。下面是暴力搜索的代码：">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2018-09-30T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-05-17T08:41:40.553Z">
+<meta property="article:modified_time" content="2020-11-01T10:54:49.730Z">
 <meta property="article:author" content="Weijun-Lin">
-<meta property="article:tag" content="动态规划">
 <meta property="article:tag" content="Java">
+<meta property="article:tag" content="动态规划">
 <meta name="twitter:card" content="summary">
+
 
 <link rel="canonical" href="https://joke-lin.top/2018/10/01/2018-10-01-manacher/">
 
@@ -107,18 +110,17 @@
 <link rel="alternate" href="/atom.xml" title="WEIJUN LIN BLOG" type="application/atom+xml">
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
-    <main class="main">
-      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-        <div class="header-inner"><div class="site-brand-container">
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="Toggle navigation bar">
-        <span class="toggle-line toggle-line-first"></span>
-        <span class="toggle-line toggle-line-middle"></span>
-        <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
@@ -141,7 +143,7 @@
 
 
 <nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
@@ -165,11 +167,6 @@
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
-        <li class="menu-item menu-item-notes">
-
-    <a href="/categories/%E9%9A%8F%E7%AC%94/Note/" rel="section"><i class="fa fa-clipboard fa-fw"></i>Notes</a>
 
   </li>
         <li class="menu-item menu-item-rss">
@@ -198,7 +195,7 @@
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
            placeholder="Searching..." spellcheck="false"
            type="search" class="search-input">
   </div>
@@ -206,8 +203,8 @@
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
     <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
@@ -216,12 +213,12 @@
   </div>
 
 </div>
-          
+        
   
   <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
   </div>
 
   <aside class="sidebar">
@@ -236,43 +233,44 @@
         </li>
       </ul>
 
-      <!--noindex-->
-      <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#暴力搜索"><span class="nav-text">暴力搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中心拓展法"><span class="nav-text">中心拓展法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dp动态规划"><span class="nav-text">Dp动态规划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#manacher算法"><span class="nav-text">Manacher算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#统一格式化源字符串"><span class="nav-text">1.统一格式化源字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置映射关系"><span class="nav-text">2.设置映射关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#找到-mid-以及-r"><span class="nav-text">3.找到 mid 以及 r</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复杂度"><span class="nav-text">4.复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码如下其实先看代码可能更好理解"><span class="nav-text">5.代码如下（其实先看代码可能更好理解）</span></a></li></ol></li></ol></div>
-      </section>
-      <!--/noindex-->
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9A%B4%E5%8A%9B%E6%90%9C%E7%B4%A2"><span class="nav-text">暴力搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AD%E5%BF%83%E6%8B%93%E5%B1%95%E6%B3%95"><span class="nav-text">中心拓展法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dp%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="nav-text">Dp动态规划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#manacher%E7%AE%97%E6%B3%95"><span class="nav-text">Manacher算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%9F%E4%B8%80%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%BA%90%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-text">1.统一格式化源字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E6%98%A0%E5%B0%84%E5%85%B3%E7%B3%BB"><span class="nav-text">2.设置映射关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%BE%E5%88%B0-mid-%E4%BB%A5%E5%8F%8A-r"><span class="nav-text">3.找到 mid 以及 r</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-text">4.复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%A6%82%E4%B8%8B%E5%85%B6%E5%AE%9E%E5%85%88%E7%9C%8B%E4%BB%A3%E7%A0%81%E5%8F%AF%E8%83%BD%E6%9B%B4%E5%A5%BD%E7%90%86%E8%A7%A3"><span class="nav-text">5.代码如下（其实先看代码可能更好理解）</span></a></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
 
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Weijun-Lin"
       src="/images/avatar.png">
   <p class="site-author-name" itemprop="name">Weijun-Lin</p>
   <div class="site-description" itemprop="description">Learing and Using</div>
 </div>
-<div class="site-state-wrap animated">
+<div class="site-state-wrap site-overview-item animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-count">55</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author animated">
+  <div class="links-of-author site-overview-item animated">
       <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlaWp1bi1saW4=" title="Github → https:&#x2F;&#x2F;github.com&#x2F;weijun-lin"><i class="fab fa-github fa-fw"></i>Github</span>
       </span>
@@ -286,12 +284,12 @@
         <span class="exturl" data-url="bWFpbHRvOndlaWp1bi1saW5AZm94bWFpbC5jb20=" title="E-Mail → mailto:weijun-lin@foxmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
       </span>
   </div>
-  <div class="cc-license animated" itemprop="license">
+  <div class="cc-license site-overview-item animated" itemprop="license">
     <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
   </div>
 
 
-  <div class="links-of-blogroll animated">
+  <div class="links-of-blogroll site-overview-item animated">
     <div class="links-of-blogroll-title"><i class="link fa-fw"></i>
       Friends
     </div>
@@ -314,39 +312,43 @@
     </ul>
   </div>
 
-      </section>
+        </section>
+      </div>
         <div class="back-to-top animated">
           <i class="fa fa-arrow-up"></i>
           <span>0%</span>
         </div>
     </div>
   </aside>
-  <div id="sidebar-dimmer"></div>
+  <div class="sidebar-dimmer"></div>
 
 
-      </header>
+    </header>
 
-      
+    
   <div class="reading-progress-bar"></div>
   <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
   <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlaWp1bi1saW4=" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
 
 <noscript>
-  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
 </noscript>
 
 
-      <div class="main-inner">
-        
+    <div class="main-inner post posts-expand">
+      
 
-        <div class="content post posts-expand">
-          
+      
 
-    
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
     <link itemprop="mainEntityOfPage" href="https://joke-lin.top/2018/10/01/2018-10-01-manacher/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -363,58 +365,62 @@
           最长回文子串算法
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2018-10-01 00:00:00" itemprop="dateCreated datePublished" datetime="2018-10-01T00:00:00+08:00">2018-10-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-17 16:41:40" itemprop="dateModified" datetime="2020-05-17T16:41:40+08:00">2020-05-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Coding/" itemprop="url" rel="index"><span itemprop="name">Coding</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Coding/DSAA/" itemprop="url" rel="index"><span itemprop="name">DSAA</span></a>
-                </span>
-            </span>
+      <time title="Created: 2018-10-01 00:00:00" itemprop="dateCreated datePublished" datetime="2018-10-01T00:00:00+08:00">2018-10-01</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-11-01 18:54:49" itemprop="dateModified" datetime="2020-11-01T18:54:49+08:00">2020-11-01</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Science/" itemprop="url" rel="index"><span itemprop="name">Computer Science</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Science/DSAA/" itemprop="url" rel="index"><span itemprop="name">DSAA</span></a>
+        </span>
+    </span>
 
-          
-            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
-              <span class="post-meta-item-icon">
-                <i class="eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span id="busuanzi_value_page_pv"></span>
-            </span><br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>5k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>5 mins.</span>
-            </span>
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>5k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>5 mins.</span>
+    </span>
+</div>
 
         </div>
       </header>
@@ -423,8 +429,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
         <blockquote>
 <p>leetcode5:<code>https://leetcode-cn.com/problems/longest-palindromic-substring/description/</code><br />
 可以自己提交看看对不对</p>
@@ -493,7 +497,7 @@ p[i] 为以i为中心的半径 mostRight是已知的回文串右端点最右的�
 所以复杂度是O(n)<br />
 并不是有两个循环复杂度就是O(n<sup>2</sup>)</p>
 <h3 id="代码如下其实先看代码可能更好理解">5.代码如下（其实先看代码可能更好理解）</h3>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// manacher</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">maxPalindromeStringManacher</span><span class="params">(<span class="keyword">final</span> String target)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (target.length() == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> target;</span><br><span class="line">    StringBuffer temp = <span class="keyword">new</span> StringBuffer(<span class="string">"$#"</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; target.length(); i++) &#123;</span><br><span class="line">        temp.append(target.charAt(i) + <span class="string">"#"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 防止$#a#b#a# 读到最后a的时候向两边扩散的时候溢出 C++则不需要C++字符串有/0结束符最后加的字符不能为$否则还是会溢出</span></span><br><span class="line">    temp.append(<span class="string">'&amp;'</span>);</span><br><span class="line">    <span class="keyword">int</span>[] p = <span class="keyword">new</span> <span class="keyword">int</span>[temp.length() + <span class="number">1</span>]; <span class="comment">//以i为中心的半径</span></span><br><span class="line">    <span class="keyword">int</span> mostRight = <span class="number">0</span>; <span class="comment">// 已知回文串所能达到的最右边的下标</span></span><br><span class="line">    <span class="keyword">int</span> mid = <span class="number">0</span>; <span class="comment">// 已知最右边的回文串的中心下标</span></span><br><span class="line">    <span class="keyword">int</span> resLen = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> resMid = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; temp.length() - <span class="number">1</span>; i++) &#123; <span class="comment">// 注意是从1开始第一个字符不算在内</span></span><br><span class="line">        <span class="comment">// 最关键一步 初始化已知的 p[i]</span></span><br><span class="line">        p[i] = mostRight &gt; i ? Math.min(p[<span class="number">2</span> * mid - i], mostRight - i) : <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (temp.charAt(i + p[i]) == temp.charAt(i - p[i]))</span><br><span class="line">            p[i]++;</span><br><span class="line">        <span class="keyword">if</span> (mostRight &lt; i + p[i]) &#123;</span><br><span class="line">            mostRight = i + p[i];</span><br><span class="line">            mid = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (resLen &lt; p[i]) &#123;</span><br><span class="line">            resLen = p[i];</span><br><span class="line">            resMid = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> target.substring((resMid - resLen) / <span class="number">2</span>, (resMid - resLen) / <span class="number">2</span> + resLen - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// manacher</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">maxPalindromeStringManacher</span><span class="params">(<span class="keyword">final</span> String target)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (target.length() == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> target;</span><br><span class="line">    StringBuffer temp = <span class="keyword">new</span> StringBuffer(<span class="string">&quot;$#&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; target.length(); i++) &#123;</span><br><span class="line">        temp.append(target.charAt(i) + <span class="string">&quot;#&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 防止$#a#b#a# 读到最后a的时候向两边扩散的时候溢出 C++则不需要C++字符串有/0结束符最后加的字符不能为$否则还是会溢出</span></span><br><span class="line">    temp.append(<span class="string">&#x27;&amp;&#x27;</span>);</span><br><span class="line">    <span class="keyword">int</span>[] p = <span class="keyword">new</span> <span class="keyword">int</span>[temp.length() + <span class="number">1</span>]; <span class="comment">//以i为中心的半径</span></span><br><span class="line">    <span class="keyword">int</span> mostRight = <span class="number">0</span>; <span class="comment">// 已知回文串所能达到的最右边的下标</span></span><br><span class="line">    <span class="keyword">int</span> mid = <span class="number">0</span>; <span class="comment">// 已知最右边的回文串的中心下标</span></span><br><span class="line">    <span class="keyword">int</span> resLen = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> resMid = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; temp.length() - <span class="number">1</span>; i++) &#123; <span class="comment">// 注意是从1开始第一个字符不算在内</span></span><br><span class="line">        <span class="comment">// 最关键一步 初始化已知的 p[i]</span></span><br><span class="line">        p[i] = mostRight &gt; i ? Math.min(p[<span class="number">2</span> * mid - i], mostRight - i) : <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (temp.charAt(i + p[i]) == temp.charAt(i - p[i]))</span><br><span class="line">            p[i]++;</span><br><span class="line">        <span class="keyword">if</span> (mostRight &lt; i + p[i]) &#123;</span><br><span class="line">            mostRight = i + p[i];</span><br><span class="line">            mid = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (resLen &lt; p[i]) &#123;</span><br><span class="line">            resLen = p[i];</span><br><span class="line">            resMid = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> target.substring((resMid - resLen) / <span class="number">2</span>, (resMid - resLen) / <span class="number">2</span> + resLen - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>如果还有疑惑 可以参考下面两篇文章（我觉得很不错的）：<br />
 <code>https://www.cnblogs.com/grandyang/p/4475985.html</code>(我也是这里学习的) <code>https://mp.weixin.qq.com/s/Zrj35DrnQKtAENiR5llrcw</code>(漫画的形式讲的很清楚) 不好的地方 欢迎提出(￣▽￣)&quot;</p>
@@ -504,16 +508,18 @@ p[i] 为以i为中心的半径 mostRight是已知的回文串右端点最右的�
     
     
     
-        
 
-<div>
-<ul class="post-copyright">
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
   <li class="post-copyright-author">
-    <strong>Post author:  </strong>Weijun-Lin
+      <strong>Post author:  </strong>Weijun-Lin
   </li>
   <li class="post-copyright-link">
-    <strong>Post link: </strong>
-    <a href="https://joke-lin.top/2018/10/01/2018-10-01-manacher/" title="最长回文子串算法">https://joke-lin.top/2018/10/01/2018-10-01-manacher/</a>
+      <strong>Post link: </strong>
+      <a href="https://joke-lin.top/2018/10/01/2018-10-01-manacher/" title="最长回文子串算法">https://joke-lin.top/2018/10/01/2018-10-01-manacher/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.
@@ -521,11 +527,9 @@ p[i] 为以i为中心的半径 mostRight是已知的回文串右端点最右的�
 </ul>
 </div>
 
-
-      <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag"><i class="fa fa-tag"></i> 动态规划</a>
               <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag"><i class="fa fa-tag"></i> 动态规划</a>
           </div>
 
         
@@ -535,29 +539,28 @@ p[i] 为以i为中心的半径 mostRight是已知的回文串右端点最右的�
     </div>
   </div>
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2018/11/02/2018-11-02-BinaryFileReader/" rel="prev" title="简单的二进制阅读器">
-      <i class="fa fa-chevron-left"></i> 简单的二进制阅读器
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2018/09/18/2018-09-18-youdao/" rel="next" title="Python 爬取有道翻译">
-      Python 爬取有道翻译 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/11/02/2018-11-02-BinaryFileReader/" rel="prev" title="简单的二进制阅读器">
+                  <i class="fa fa-chevron-left"></i> 简单的二进制阅读器
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/09/18/2018-09-18-youdao/" rel="next" title="Python 爬取有道翻译">
+                  Python 爬取有道翻译 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
   </article>
-  
-  
-  
+</div>
 
 
 
-        </div>
-        
+
+
+
+      
     
   <div class="comments">
     <div id="lv-container" data-id="city" data-uid="MTAyMC8zOTczMy8xNjI2MA=="></div>
@@ -571,7 +574,7 @@ p[i] 为以i为中心的半径 mostRight是已知的回文串右端点最右的�
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -580,20 +583,20 @@ p[i] 为以i为中心的半径 mostRight是已知的回文串右端点最右的�
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
 
-      </div>
-    </main>
+    </div>
+  </main>
 
-    <footer class="footer">
-      <div class="footer-inner">
-        
+  <footer class="footer">
+    <div class="footer-inner">
+      
 
-        
+      
 
 <div class="copyright">
   
@@ -603,25 +606,24 @@ p[i] 为以i为中心的半径 mostRight是已知的回文串右端点最右的�
     <i class="heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Weijun-Lin</span>
-    <span class="post-meta-divider">|</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
     <span class="post-meta-item-icon">
-      <i class="fa fa-chart-area"></i>
+      <i class="fa fa-chart-line"></i>
     </span>
-      <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">209k</span>
-    <span class="post-meta-divider">|</span>
+      <span>Symbols count total: </span>
+    <span title="Symbols count total">215k</span>
+  </span>
+  <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-      <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">3:10</span>
+      <span>Reading time total &asymp;</span>
+    <span title="Reading time total">3:16</span>
+  </span>
 </div>
-  <div class="powered-by">Powered by <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span>
-  </div>
-
-        
 <div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
       <span class="post-meta-item-icon">
         <i class="user"></i>
@@ -630,7 +632,6 @@ p[i] 为以i为中心的半径 mostRight是已知的回文串右端点最右的�
         <span id="busuanzi_value_site_uv"></span>
       </span>
     </span>
-    <span class="post-meta-divider">|</span>
     <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
       <span class="post-meta-item-icon">
         <i class="eye"></i>
@@ -640,32 +641,17 @@ p[i] 为以i为中心的半径 mostRight是已知的回文串右端点最右的�
       </span>
     </span>
 </div>
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
+  <div class="powered-by">Powered by <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span>
   </div>
 
+    </div>
+  </footer>
+
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-<script src="/js/bookmark.js"></script>
-
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
 
   
   <script>
@@ -701,13 +687,24 @@ p[i] 为以i为中心的半径 mostRight是已知的回文串右端点最右的�
   }
   </script>
 
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
-<script src="/js/local-search.js"></script>
-
-
-
-
-
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
@@ -719,17 +716,9 @@ p[i] 为以i为中心的半径 mostRight是已知的回文串右端点最右的�
   
 
   
-      
-
-<script>
+      <script>
   if (typeof MathJax === 'undefined') {
     window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
       tex: {
         inlineMath: {'[+]': [['$', '$']]},
         tags: 'ams'
@@ -749,7 +738,7 @@ p[i] 为以i为中心的半径 mostRight是已知的回文串右端点最右的�
           }, '', false],
           insertedScript: [200, () => {
             document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
+              const target = node.parentNode;
               if (target.nodeName.toLowerCase() === 'li') {
                 target.parentNode.classList.add('has-jax');
               }
@@ -758,14 +747,13 @@ p[i] 为以i为中心的半径 mostRight是已知的回文串右端点最右的�
         }
       }
     };
-    (function () {
-      var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
   } else {
     MathJax.startup.document.state(0);
+    MathJax.typesetClear();
     MathJax.texReset();
     MathJax.typeset();
   }
@@ -776,9 +764,9 @@ p[i] 为以i为中心的半径 mostRight是已知的回文串右端点最右的�
   
 
 <script>
-NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+NexT.utils.loadComments('#lv-container', () => {
   window.livereOptions = {
-    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+    refer: "2018/10/01/2018-10-01-manacher/"
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];

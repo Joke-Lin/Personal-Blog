@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 5.2.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico">
@@ -15,14 +17,14 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  
-  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"joke-lin.top","root":"/","scheme":"Gemini","version":"8.0.0-rc.4","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"path":"search.xml"};
+    var CONFIG = {"hostname":"joke-lin.top","root":"/","scheme":"Gemini","version":"8.0.2","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
   <meta name="description" content="1. 文字鼠标显示 a. 定义BOOTINFO结构体  这个结构体包含操作系统的基础信息">
@@ -37,12 +39,13 @@
 <meta property="og:image" content="https://joke-lin.top/assets/Note/30DaysOs/06_1.png">
 <meta property="og:image" content="https://joke-lin.top/assets/Note/30DaysOs/08_1.gif">
 <meta property="article:published_time" content="2020-02-08T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-07-20T07:21:46.604Z">
+<meta property="article:modified_time" content="2020-11-01T10:56:41.942Z">
 <meta property="article:author" content="Weijun-Lin">
 <meta property="article:tag" content="30天自制操作系统">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://joke-lin.top/assets/Note/30DaysOs/05_1.png">
+
 
 <link rel="canonical" href="https://joke-lin.top/2020/02/09/2020-02-09-30OSMakeNote05-08/">
 
@@ -112,18 +115,17 @@
 <link rel="alternate" href="/atom.xml" title="WEIJUN LIN BLOG" type="application/atom+xml">
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
-    <main class="main">
-      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-        <div class="header-inner"><div class="site-brand-container">
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="Toggle navigation bar">
-        <span class="toggle-line toggle-line-first"></span>
-        <span class="toggle-line toggle-line-middle"></span>
-        <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
@@ -146,7 +148,7 @@
 
 
 <nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
@@ -170,11 +172,6 @@
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
-        <li class="menu-item menu-item-notes">
-
-    <a href="/categories/%E9%9A%8F%E7%AC%94/Note/" rel="section"><i class="fa fa-clipboard fa-fw"></i>Notes</a>
 
   </li>
         <li class="menu-item menu-item-rss">
@@ -203,7 +200,7 @@
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
            placeholder="Searching..." spellcheck="false"
            type="search" class="search-input">
   </div>
@@ -211,8 +208,8 @@
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
     <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
@@ -221,12 +218,12 @@
   </div>
 
 </div>
-          
+        
   
   <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
   </div>
 
   <aside class="sidebar">
@@ -241,43 +238,44 @@
         </li>
       </ul>
 
-      <!--noindex-->
-      <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#文字鼠标显示"><span class="nav-text">1. 文字鼠标显示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#a.-定义bootinfo结构体"><span class="nav-text">a. 定义BOOTINFO结构体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b.-字符和鼠标指针显示"><span class="nav-text">b. 字符和鼠标指针显示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gdtidt初始化"><span class="nav-text">2. GDT&#x2F;IDT初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#a.-gdtidt基础"><span class="nav-text">a. GDT&#x2F;IDT基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b.-gdtidt设置"><span class="nav-text">b. GDT&#x2F;IDT设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中断处理"><span class="nav-text">3. 中断处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#fifo-缓冲配置"><span class="nav-text">FIFO 缓冲配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#鼠标控制"><span class="nav-text">4. 鼠标控制</span></a></li></ol></div>
-      </section>
-      <!--/noindex-->
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E5%AD%97%E9%BC%A0%E6%A0%87%E6%98%BE%E7%A4%BA"><span class="nav-text">1. 文字鼠标显示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#a.-%E5%AE%9A%E4%B9%89bootinfo%E7%BB%93%E6%9E%84%E4%BD%93"><span class="nav-text">a. 定义BOOTINFO结构体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b.-%E5%AD%97%E7%AC%A6%E5%92%8C%E9%BC%A0%E6%A0%87%E6%8C%87%E9%92%88%E6%98%BE%E7%A4%BA"><span class="nav-text">b. 字符和鼠标指针显示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gdtidt%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-text">2. GDT&#x2F;IDT初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#a.-gdtidt%E5%9F%BA%E7%A1%80"><span class="nav-text">a. GDT&#x2F;IDT基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b.-gdtidt%E8%AE%BE%E7%BD%AE"><span class="nav-text">b. GDT&#x2F;IDT设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86"><span class="nav-text">3. 中断处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#fifo-%E7%BC%93%E5%86%B2%E9%85%8D%E7%BD%AE"><span class="nav-text">FIFO 缓冲配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%BC%A0%E6%A0%87%E6%8E%A7%E5%88%B6"><span class="nav-text">4. 鼠标控制</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
 
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Weijun-Lin"
       src="/images/avatar.png">
   <p class="site-author-name" itemprop="name">Weijun-Lin</p>
   <div class="site-description" itemprop="description">Learing and Using</div>
 </div>
-<div class="site-state-wrap animated">
+<div class="site-state-wrap site-overview-item animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-count">55</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author animated">
+  <div class="links-of-author site-overview-item animated">
       <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlaWp1bi1saW4=" title="Github → https:&#x2F;&#x2F;github.com&#x2F;weijun-lin"><i class="fab fa-github fa-fw"></i>Github</span>
       </span>
@@ -291,12 +289,12 @@
         <span class="exturl" data-url="bWFpbHRvOndlaWp1bi1saW5AZm94bWFpbC5jb20=" title="E-Mail → mailto:weijun-lin@foxmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
       </span>
   </div>
-  <div class="cc-license animated" itemprop="license">
+  <div class="cc-license site-overview-item animated" itemprop="license">
     <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
   </div>
 
 
-  <div class="links-of-blogroll animated">
+  <div class="links-of-blogroll site-overview-item animated">
     <div class="links-of-blogroll-title"><i class="link fa-fw"></i>
       Friends
     </div>
@@ -319,39 +317,43 @@
     </ul>
   </div>
 
-      </section>
+        </section>
+      </div>
         <div class="back-to-top animated">
           <i class="fa fa-arrow-up"></i>
           <span>0%</span>
         </div>
     </div>
   </aside>
-  <div id="sidebar-dimmer"></div>
+  <div class="sidebar-dimmer"></div>
 
 
-      </header>
+    </header>
 
-      
+    
   <div class="reading-progress-bar"></div>
   <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
   <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlaWp1bi1saW4=" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
 
 <noscript>
-  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
 </noscript>
 
 
-      <div class="main-inner">
-        
+    <div class="main-inner post posts-expand">
+      
 
-        <div class="content post posts-expand">
-          
+      
 
-    
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
     <link itemprop="mainEntityOfPage" href="https://joke-lin.top/2020/02/09/2020-02-09-30OSMakeNote05-08/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -368,58 +370,62 @@
           《30天自制操作系统》 05-08部分 从字符显示到中断处理
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-02-09 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-09T00:00:00+08:00">2020-02-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-07-20 15:21:46" itemprop="dateModified" datetime="2020-07-20T15:21:46+08:00">2020-07-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">随笔</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9A%8F%E7%AC%94/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
-                </span>
-            </span>
+      <time title="Created: 2020-02-09 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-09T00:00:00+08:00">2020-02-09</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-11-01 18:56:41" itemprop="dateModified" datetime="2020-11-01T18:56:41+08:00">2020-11-01</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Science/" itemprop="url" rel="index"><span itemprop="name">Computer Science</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Science/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+        </span>
+    </span>
 
-          
-            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
-              <span class="post-meta-item-icon">
-                <i class="eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span id="busuanzi_value_page_pv"></span>
-            </span><br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>13k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>12 mins.</span>
-            </span>
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>13k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>12 mins.</span>
+    </span>
+</div>
 
         </div>
       </header>
@@ -428,8 +434,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
         <h2 id="文字鼠标显示">1. 文字鼠标显示</h2>
 <h3 id="a.-定义bootinfo结构体">a. 定义BOOTINFO结构体</h3>
 <blockquote>
@@ -437,9 +441,9 @@
 </blockquote>
 <a id="more"></a>
 <p>结构体声明如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">BOOTINFO</span> &#123;</span></span><br><span class="line">	<span class="keyword">char</span> cyls, leds, vmode, reserve;</span><br><span class="line">	short scrnx, scrny;</span><br><span class="line">	<span class="keyword">char</span> *vram;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">BOOTINFO</span> &#123;</span></span><br><span class="line">	<span class="keyword">char</span> cyls, leds, vmode, reserve;</span><br><span class="line">	<span class="keyword">short</span> scrnx, scrny;</span><br><span class="line">	<span class="keyword">char</span> *vram;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>对应的信息如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">; asmhead.nas</span><br><span class="line">; BOOT_INFO相关</span><br><span class="line">CYLS	EQU		0x0ff0			; 引导扇区设置</span><br><span class="line">LEDS	EQU		0x0ff1</span><br><span class="line">VMODE	EQU		0x0ff2			; 关于颜色的信息</span><br><span class="line">SCRNX	EQU		0x0ff4			; 分辨率X</span><br><span class="line">SCRNY	EQU		0x0ff6			; 分辨率Y</span><br><span class="line">VRAM	EQU		0x0ff8			; 图像缓冲区的起始地址</span><br><span class="line">		ORG		0xc200			;  这个的程序要被装载的内存地址</span><br><span class="line"></span><br><span class="line">; 画面设定</span><br><span class="line"></span><br><span class="line">		MOV		AL,0x13			; VGA显卡，320x200x8bit</span><br><span class="line">		MOV		AH,0x00</span><br><span class="line">		INT		0x10</span><br><span class="line">		MOV		BYTE [VMODE],8	; 屏幕的模式（参考C语言的引用）</span><br><span class="line">		MOV		WORD [SCRNX],320</span><br><span class="line">		MOV		WORD [SCRNY],200</span><br><span class="line">		MOV		DWORD [VRAM],0x000a0000</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">; asmhead.nas</span><br><span class="line">; BOOT_INFO相关</span><br><span class="line">CYLS	EQU		0x0ff0			; 引导扇区设置</span><br><span class="line">LEDS	EQU		0x0ff1</span><br><span class="line">VMODE	EQU		0x0ff2			; 关于颜色的信息</span><br><span class="line">SCRNX	EQU		0x0ff4			; 分辨率X</span><br><span class="line">SCRNY	EQU		0x0ff6			; 分辨率Y</span><br><span class="line">VRAM	EQU		0x0ff8			; 图像缓冲区的起始地址</span><br><span class="line">		ORG		0xc200			;  这个的程序要被装载的内存地址</span><br><span class="line"></span><br><span class="line">; 画面设定</span><br><span class="line"></span><br><span class="line">		MOV		AL,0x13			; VGA显卡，320x200x8bit</span><br><span class="line">		MOV		AH,0x00</span><br><span class="line">		INT		0x10</span><br><span class="line">		MOV		BYTE [VMODE],8	; 屏幕的模式（参考C语言的引用）</span><br><span class="line">		MOV		WORD [SCRNX],320</span><br><span class="line">		MOV		WORD [SCRNY],200</span><br><span class="line">		MOV		DWORD [VRAM],0x000a0000		</span><br></pre></td></tr></table></figure>
 <p>作者没有对<code>BOOTINFO.reserve</code>说明，仔细看<code>asmhead.nas</code>可以发现VMODE只有一个字节的内容，但是<code>SCRNX</code>是从<code>0xff4</code>开始，中间有一个字节是没有做任何设定的，由此可以看出这一个字节的内容是暂时保留的。</p>
 <p>启动信息的开始地址是0xff0，所以我们通过<code>struct BOOTINFO *binfo = (struct BOOTINFO *) 0x0ff0;</code>设置好我们的结构体。</p>
 <h3 id="b.-字符和鼠标指针显示">b. 字符和鼠标指针显示</h3>
@@ -454,9 +458,9 @@
 <p>字符串的显示也类似处理即可</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">putfonts8_asc</span><span class="params">(<span class="keyword">char</span> *vram, <span class="keyword">int</span> xsize, <span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">char</span> c, <span class="keyword">unsigned</span> <span class="keyword">char</span> *s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">extern</span> <span class="keyword">char</span> hankaku[<span class="number">4096</span>];</span><br><span class="line">	<span class="keyword">for</span> (; *s != <span class="number">0x00</span>; s++) &#123;</span><br><span class="line">		putfont8(vram, xsize, x, y, c, hankaku + *s * <span class="number">16</span>);</span><br><span class="line">		x += <span class="number">8</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>鼠标的显示也是类似的，不过作者定义了一个16*16大小的指针，作者这个鼠标太没有美感了</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init_mouse_cursor8</span><span class="params">(<span class="keyword">char</span> *mouse, <span class="keyword">char</span> bc)</span></span></span><br><span class="line"><span class="function"><span class="comment">/* マウスカーソルを準備（16x16） */</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">char</span> <span class="built_in">cursor</span>[<span class="number">16</span>][<span class="number">16</span>] = &#123;</span><br><span class="line">		<span class="string">"**************.."</span>,</span><br><span class="line">		<span class="string">"*OOOOOOOOOOO*..."</span>,</span><br><span class="line">		<span class="string">"*OOOOOOOOOO*...."</span>,</span><br><span class="line">		<span class="string">"*OOOOOOOOO*....."</span>,</span><br><span class="line">		<span class="string">"*OOOOOOOO*......"</span>,</span><br><span class="line">		<span class="string">"*OOOOOOO*......."</span>,</span><br><span class="line">		<span class="string">"*OOOOOOO*......."</span>,</span><br><span class="line">		<span class="string">"*OOOOOOOO*......"</span>,</span><br><span class="line">		<span class="string">"*OOOO**OOO*....."</span>,</span><br><span class="line">		<span class="string">"*OOO*..*OOO*...."</span>,</span><br><span class="line">		<span class="string">"*OO*....*OOO*..."</span>,</span><br><span class="line">		<span class="string">"*O*......*OOO*.."</span>,</span><br><span class="line">		<span class="string">"**........*OOO*."</span>,</span><br><span class="line">		<span class="string">"*..........*OOO*"</span>,</span><br><span class="line">		<span class="string">"............*OO*"</span>,</span><br><span class="line">		<span class="string">".............***"</span></span><br><span class="line">	&#125;;</span><br><span class="line">	<span class="keyword">int</span> x, y;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (y = <span class="number">0</span>; y &lt; <span class="number">16</span>; y++) &#123;</span><br><span class="line">		<span class="keyword">for</span> (x = <span class="number">0</span>; x &lt; <span class="number">16</span>; x++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (<span class="built_in">cursor</span>[y][x] == <span class="string">'*'</span>) &#123;</span><br><span class="line">				mouse[y * <span class="number">16</span> + x] = COL8_000000;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> (<span class="built_in">cursor</span>[y][x] == <span class="string">'O'</span>) &#123;</span><br><span class="line">				mouse[y * <span class="number">16</span> + x] = COL8_FFFFFF;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> (<span class="built_in">cursor</span>[y][x] == <span class="string">'.'</span>) &#123;</span><br><span class="line">				mouse[y * <span class="number">16</span> + x] = bc;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init_mouse_cursor8</span><span class="params">(<span class="keyword">char</span> *mouse, <span class="keyword">char</span> bc)</span></span></span><br><span class="line"><span class="function"><span class="comment">/* マウスカーソルを準備（16x16） */</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">char</span> cursor[<span class="number">16</span>][<span class="number">16</span>] = &#123;</span><br><span class="line">		<span class="string">&quot;**************..&quot;</span>,</span><br><span class="line">		<span class="string">&quot;*OOOOOOOOOOO*...&quot;</span>,</span><br><span class="line">		<span class="string">&quot;*OOOOOOOOOO*....&quot;</span>,</span><br><span class="line">		<span class="string">&quot;*OOOOOOOOO*.....&quot;</span>,</span><br><span class="line">		<span class="string">&quot;*OOOOOOOO*......&quot;</span>,</span><br><span class="line">		<span class="string">&quot;*OOOOOOO*.......&quot;</span>,</span><br><span class="line">		<span class="string">&quot;*OOOOOOO*.......&quot;</span>,</span><br><span class="line">		<span class="string">&quot;*OOOOOOOO*......&quot;</span>,</span><br><span class="line">		<span class="string">&quot;*OOOO**OOO*.....&quot;</span>,</span><br><span class="line">		<span class="string">&quot;*OOO*..*OOO*....&quot;</span>,</span><br><span class="line">		<span class="string">&quot;*OO*....*OOO*...&quot;</span>,</span><br><span class="line">		<span class="string">&quot;*O*......*OOO*..&quot;</span>,</span><br><span class="line">		<span class="string">&quot;**........*OOO*.&quot;</span>,</span><br><span class="line">		<span class="string">&quot;*..........*OOO*&quot;</span>,</span><br><span class="line">		<span class="string">&quot;............*OO*&quot;</span>,</span><br><span class="line">		<span class="string">&quot;.............***&quot;</span></span><br><span class="line">	&#125;;</span><br><span class="line">	<span class="keyword">int</span> x, y;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (y = <span class="number">0</span>; y &lt; <span class="number">16</span>; y++) &#123;</span><br><span class="line">		<span class="keyword">for</span> (x = <span class="number">0</span>; x &lt; <span class="number">16</span>; x++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (cursor[y][x] == <span class="string">&#x27;*&#x27;</span>) &#123;</span><br><span class="line">				mouse[y * <span class="number">16</span> + x] = COL8_000000;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> (cursor[y][x] == <span class="string">&#x27;O&#x27;</span>) &#123;</span><br><span class="line">				mouse[y * <span class="number">16</span> + x] = COL8_FFFFFF;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> (cursor[y][x] == <span class="string">&#x27;.&#x27;</span>) &#123;</span><br><span class="line">				mouse[y * <span class="number">16</span> + x] = bc;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在https://www.cnblogs.com/bitzhuwei/p/OS-in-30-days-05-initialize-keyboard-and-mouse.html有人给出了一个更好看的鼠标，更加符合Windows风格的鼠标</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">char</span> <span class="built_in">cursor</span>[<span class="number">16</span>][<span class="number">16</span>] = &#123;</span><br><span class="line">	<span class="string">"*..............."</span>,</span><br><span class="line">	<span class="string">"**.............."</span>,</span><br><span class="line">	<span class="string">"*O*............."</span>,</span><br><span class="line">	<span class="string">"*OO*............"</span>,</span><br><span class="line">	<span class="string">"*OOO*..........."</span>,</span><br><span class="line">	<span class="string">"*OOOO*.........."</span>,</span><br><span class="line">	<span class="string">"*OOOOO*........."</span>,</span><br><span class="line">	<span class="string">"*OOOOOO*........"</span>,</span><br><span class="line">	<span class="string">"*OOOOOOO*......."</span>,</span><br><span class="line">	<span class="string">"*OOOO*****......"</span>,</span><br><span class="line">	<span class="string">"*OO*O*.........."</span>,</span><br><span class="line">	<span class="string">"*O*.*O*........."</span>,</span><br><span class="line">	<span class="string">"**..*O*........."</span>,</span><br><span class="line">	<span class="string">"*....*O*........"</span>,</span><br><span class="line">	<span class="string">".....*O*........"</span>,</span><br><span class="line">	<span class="string">"......*........."</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">char</span> cursor[<span class="number">16</span>][<span class="number">16</span>] = &#123;</span><br><span class="line">	<span class="string">&quot;*...............&quot;</span>,</span><br><span class="line">	<span class="string">&quot;**..............&quot;</span>,</span><br><span class="line">	<span class="string">&quot;*O*.............&quot;</span>,</span><br><span class="line">	<span class="string">&quot;*OO*............&quot;</span>,</span><br><span class="line">	<span class="string">&quot;*OOO*...........&quot;</span>,</span><br><span class="line">	<span class="string">&quot;*OOOO*..........&quot;</span>,</span><br><span class="line">	<span class="string">&quot;*OOOOO*.........&quot;</span>,</span><br><span class="line">	<span class="string">&quot;*OOOOOO*........&quot;</span>,</span><br><span class="line">	<span class="string">&quot;*OOOOOOO*.......&quot;</span>,</span><br><span class="line">	<span class="string">&quot;*OOOO*****......&quot;</span>,</span><br><span class="line">	<span class="string">&quot;*OO*O*..........&quot;</span>,</span><br><span class="line">	<span class="string">&quot;*O*.*O*.........&quot;</span>,</span><br><span class="line">	<span class="string">&quot;**..*O*.........&quot;</span>,</span><br><span class="line">	<span class="string">&quot;*....*O*........&quot;</span>,</span><br><span class="line">	<span class="string">&quot;.....*O*........&quot;</span>,</span><br><span class="line">	<span class="string">&quot;......*.........&quot;</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>最后的效果图如下：</p>
 <p><img src="/assets/Note/30DaysOs/05_2.png" style="zoom:50%;" /></p>
 <h2 id="gdtidt初始化">2. GDT/IDT初始化</h2>
@@ -475,12 +479,12 @@
 <p>部分摘自：</p>
 <p>https://blog.csdn.net/misskissC/article/details/100593986 (haribote dsctbl.c 设置GDT和IDT程序阅读注释)</p>
 <p>IDT 描述符可参考：https://blog.csdn.net/fwqcuc/article/details/5855460</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">base指的是32位的基地址，在这里分为了low,mid,high三个部分，这里分为3段主要是和80286时代的程序相兼容</span></span><br><span class="line"><span class="comment">limit是指段上限，表示这个段有多少字节</span></span><br><span class="line"><span class="comment">段上限分为高低，但是只有20位，这里看上去有3个字节但是limit_high的高四位用于保存段属性</span></span><br><span class="line"><span class="comment">limit_high的高四位和access_right这12位是段属性</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SEGMENT_DESCRIPTOR</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    short limit_low, base_low;</span><br><span class="line">    <span class="keyword">char</span> base_mid, access_right;</span><br><span class="line">    <span class="keyword">char</span> limit_high, base_high;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">offset_high&amp;&amp;offset_low,</span></span><br><span class="line"><span class="comment">中断或异常处理程序在其所在内存段中的偏移;</span></span><br><span class="line"><span class="comment">selector,处理程序所在内存段的段选择符;</span></span><br><span class="line"><span class="comment">dw_count,保留未用;</span></span><br><span class="line"><span class="comment">access_right,IDT描述符有效位,特权级(DPL),类型(TYPE)等属性</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">GATE_DESCRIPTOR</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    short offset_low, selector;</span><br><span class="line">    <span class="keyword">char</span> dw_count, access_right;</span><br><span class="line">    short offset_high;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init_gdtidt</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 0x270000~0x27ffff设为GDT，将此处设置为地址并没有特别的意义</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">SEGMENT_DESCRIPTOR</span> *<span class="title">gdt</span> = (<span class="title">struct</span> <span class="title">SEGMENT_DESCRIPTOR</span> *)0<span class="title">x00270000</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">GATE_DESCRIPTOR</span> *<span class="title">idt</span> = (<span class="title">struct</span> <span class="title">GATE_DESCRIPTOR</span> *)0<span class="title">x0026f800</span>;</span></span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="comment">/* GDT的初始化 这里只是简单的全部初始化为1*/</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">8192</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        set_segmdesc(gdt + i, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 设置1，2两个段1代表的是整个内存，2保留的是我们的bootpack.hrb</span></span><br><span class="line">    set_segmdesc(gdt + <span class="number">1</span>, <span class="number">0xffffffff</span>, <span class="number">0x00000000</span>, <span class="number">0x4092</span>);</span><br><span class="line">    set_segmdesc(gdt + <span class="number">2</span>, <span class="number">0x0007ffff</span>, <span class="number">0x00280000</span>, <span class="number">0x409a</span>);</span><br><span class="line">    <span class="comment">// gdtr保存的是GDT的首地址，修改寄存器需要使用汇编，所以定义在naskfunc.nas</span></span><br><span class="line">    <span class="comment">// 下面这个函数就是设置段上限和起始地址</span></span><br><span class="line">    <span class="comment">// _load_gdtr: ; void load_gdtr(int limit, int addr);</span></span><br><span class="line">    <span class="comment">//     MOV AX,[ESP+4] ; limit</span></span><br><span class="line">    <span class="comment">//     MOV [ESP+6],AX</span></span><br><span class="line">    <span class="comment">//     LGDT [ESP+6]    ; 从ESP+6处读取6个字节内容</span></span><br><span class="line">    <span class="comment">//     RET</span></span><br><span class="line">    load_gdtr(<span class="number">0xffff</span>, <span class="number">0x00270000</span>);</span><br><span class="line">    <span class="comment">/* IDT的初始化 */</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">256</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        set_gatedesc(idt + i, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    load_idtr(<span class="number">0x7ff</span>, <span class="number">0x0026f800</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">set_segmdesc,</span></span><br><span class="line"><span class="comment">设置sd指向的GDT段描述符,</span></span><br><span class="line"><span class="comment">sd,GDT段描述符内存首地址;limit,段描述符所描述内存段基于段基址最大偏移;</span></span><br><span class="line"><span class="comment">base,段描述符所描述内存段基址;ar,段描述符特权级,类型等属性。</span></span><br><span class="line"><span class="comment">ar格式为：xxxx0000xxxxxxxx 高四位存入limit_high的高四位低8位保存到access_right</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">set_segmdesc</span><span class="params">(struct SEGMENT_DESCRIPTOR *sd, <span class="keyword">unsigned</span> <span class="keyword">int</span> limit, <span class="keyword">int</span> base, <span class="keyword">int</span> ar)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    高四位格式为GD00,G代表是否*4KB计算，D代表段的模式1为32位模式，0为16位</span></span><br><span class="line"><span class="comment">    如果超过1M大小则将G_bit置为1，此时CPU会将limit*4KB计算段上限</span></span><br><span class="line"><span class="comment">    ar的低8位有以下：</span></span><br><span class="line"><span class="comment">    00000000（0x00） ： 未使用的记录表（descriptor table） 。</span></span><br><span class="line"><span class="comment">    10010010（0x92） ： 系统专用， 可读写的段。 不可执行。</span></span><br><span class="line"><span class="comment">    10011010（0x9a） ： 系统专用， 可执行的段。 可读不可写。</span></span><br><span class="line"><span class="comment">    11110010（0xf2） ： 应用程序用， 可读写的段。 不可执行。</span></span><br><span class="line"><span class="comment">    11111010（0xfa） ： 应用程序用， 可执行的段。 可读不可写</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">if</span> (limit &gt; <span class="number">0xfffff</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ar |= <span class="number">0x8000</span>; <span class="comment">/* G_bit = 1 */</span></span><br><span class="line">        limit /= <span class="number">0x1000</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    根据GDT段描述符位格式,通过GDT段描述符结构体设置GDT描述符。</span></span><br><span class="line"><span class="comment">    bit[15..0],内存段长度低16位;</span></span><br><span class="line"><span class="comment">    bit[31..16],内存段基址低16位;</span></span><br><span class="line"><span class="comment">    bit[39..32],内存段基址23..16位;</span></span><br><span class="line"><span class="comment">    bit[47..40],有效位P,特权级DPL,类型TYPE等;</span></span><br><span class="line"><span class="comment">    bit[55..48],内存颗粒度,内存段长度19..16位;</span></span><br><span class="line"><span class="comment">    bit[63..56],内存段基址高8位。    </span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    sd-&gt;limit_low = limit &amp; <span class="number">0xffff</span>;</span><br><span class="line">    sd-&gt;base_low = base &amp; <span class="number">0xffff</span>;</span><br><span class="line">    sd-&gt;base_mid = (base &gt;&gt; <span class="number">16</span>) &amp; <span class="number">0xff</span>;</span><br><span class="line">    sd-&gt;access_right = ar &amp; <span class="number">0xff</span>;</span><br><span class="line">    sd-&gt;limit_high = ((limit &gt;&gt; <span class="number">16</span>) &amp; <span class="number">0x0f</span>) | ((ar &gt;&gt; <span class="number">8</span>) &amp; <span class="number">0xf0</span>);</span><br><span class="line">    sd-&gt;base_high = (base &gt;&gt; <span class="number">24</span>) &amp; <span class="number">0xff</span>;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">set_gatedesc,</span></span><br><span class="line"><span class="comment">设置gd指向的IDT描述符,</span></span><br><span class="line"><span class="comment">gd,IDT描述符内存首地址;offset,处理程序在其所在段的偏移地址;</span></span><br><span class="line"><span class="comment">selector,处理程序所在内存段的段选择符;ar,IDT描述符有效位,特权级,类型等属性</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">set_gatedesc</span><span class="params">(struct GATE_DESCRIPTOR *gd, <span class="keyword">int</span> offset, <span class="keyword">int</span> selector, <span class="keyword">int</span> ar)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    根据IDT段描述符位格式,通过IDT描述符结构体设置IDT描述符。</span></span><br><span class="line"><span class="comment">    bit[15..0],处理程序偏移地址低16位;</span></span><br><span class="line"><span class="comment">    bit[31..16],处理程序所在内存段的段选择符;</span></span><br><span class="line"><span class="comment">    bit[39..32],保留未用;</span></span><br><span class="line"><span class="comment">    bit[47..40],有效位P,特权级DPL,类型TYPE等;</span></span><br><span class="line"><span class="comment">    bit[63..48],处理程序偏移地址高16位。</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    gd-&gt;offset_low = offset &amp; <span class="number">0xffff</span>;</span><br><span class="line">    gd-&gt;selector = selector;</span><br><span class="line">    gd-&gt;dw_count = (ar &gt;&gt; <span class="number">8</span>) &amp; <span class="number">0xff</span>;</span><br><span class="line">    gd-&gt;access_right = ar &amp; <span class="number">0xff</span>;</span><br><span class="line">    gd-&gt;offset_high = (offset &gt;&gt; <span class="number">16</span>) &amp; <span class="number">0xffff</span>;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">base指的是32位的基地址，在这里分为了low,mid,high三个部分，这里分为3段主要是和80286时代的程序相兼容</span></span><br><span class="line"><span class="comment">limit是指段上限，表示这个段有多少字节</span></span><br><span class="line"><span class="comment">段上限分为高低，但是只有20位，这里看上去有3个字节但是limit_high的高四位用于保存段属性</span></span><br><span class="line"><span class="comment">limit_high的高四位和access_right这12位是段属性</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SEGMENT_DESCRIPTOR</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">short</span> limit_low, base_low;</span><br><span class="line">    <span class="keyword">char</span> base_mid, access_right;</span><br><span class="line">    <span class="keyword">char</span> limit_high, base_high;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">offset_high&amp;&amp;offset_low,</span></span><br><span class="line"><span class="comment">中断或异常处理程序在其所在内存段中的偏移;</span></span><br><span class="line"><span class="comment">selector,处理程序所在内存段的段选择符;</span></span><br><span class="line"><span class="comment">dw_count,保留未用;</span></span><br><span class="line"><span class="comment">access_right,IDT描述符有效位,特权级(DPL),类型(TYPE)等属性</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">GATE_DESCRIPTOR</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">short</span> offset_low, selector;</span><br><span class="line">    <span class="keyword">char</span> dw_count, access_right;</span><br><span class="line">    <span class="keyword">short</span> offset_high;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init_gdtidt</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 0x270000~0x27ffff设为GDT，将此处设置为地址并没有特别的意义</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">SEGMENT_DESCRIPTOR</span> *<span class="title">gdt</span> =</span> (struct SEGMENT_DESCRIPTOR *)<span class="number">0x00270000</span>;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">GATE_DESCRIPTOR</span> *<span class="title">idt</span> =</span> (struct GATE_DESCRIPTOR *)<span class="number">0x0026f800</span>;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="comment">/* GDT的初始化 这里只是简单的全部初始化为1*/</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">8192</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        set_segmdesc(gdt + i, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 设置1，2两个段1代表的是整个内存，2保留的是我们的bootpack.hrb</span></span><br><span class="line">    set_segmdesc(gdt + <span class="number">1</span>, <span class="number">0xffffffff</span>, <span class="number">0x00000000</span>, <span class="number">0x4092</span>);</span><br><span class="line">    set_segmdesc(gdt + <span class="number">2</span>, <span class="number">0x0007ffff</span>, <span class="number">0x00280000</span>, <span class="number">0x409a</span>);</span><br><span class="line">    <span class="comment">// gdtr保存的是GDT的首地址，修改寄存器需要使用汇编，所以定义在naskfunc.nas</span></span><br><span class="line">    <span class="comment">// 下面这个函数就是设置段上限和起始地址</span></span><br><span class="line">    <span class="comment">// _load_gdtr: ; void load_gdtr(int limit, int addr);</span></span><br><span class="line">    <span class="comment">//     MOV AX,[ESP+4] ; limit</span></span><br><span class="line">    <span class="comment">//     MOV [ESP+6],AX</span></span><br><span class="line">    <span class="comment">//     LGDT [ESP+6]    ; 从ESP+6处读取6个字节内容</span></span><br><span class="line">    <span class="comment">//     RET</span></span><br><span class="line">    load_gdtr(<span class="number">0xffff</span>, <span class="number">0x00270000</span>);</span><br><span class="line">    <span class="comment">/* IDT的初始化 */</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">256</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        set_gatedesc(idt + i, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    load_idtr(<span class="number">0x7ff</span>, <span class="number">0x0026f800</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">set_segmdesc,</span></span><br><span class="line"><span class="comment">设置sd指向的GDT段描述符,</span></span><br><span class="line"><span class="comment">sd,GDT段描述符内存首地址;limit,段描述符所描述内存段基于段基址最大偏移;</span></span><br><span class="line"><span class="comment">base,段描述符所描述内存段基址;ar,段描述符特权级,类型等属性。</span></span><br><span class="line"><span class="comment">ar格式为：xxxx0000xxxxxxxx 高四位存入limit_high的高四位低8位保存到access_right</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">set_segmdesc</span><span class="params">(struct SEGMENT_DESCRIPTOR *sd, <span class="keyword">unsigned</span> <span class="keyword">int</span> limit, <span class="keyword">int</span> base, <span class="keyword">int</span> ar)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    高四位格式为GD00,G代表是否*4KB计算，D代表段的模式1为32位模式，0为16位</span></span><br><span class="line"><span class="comment">    如果超过1M大小则将G_bit置为1，此时CPU会将limit*4KB计算段上限</span></span><br><span class="line"><span class="comment">    ar的低8位有以下：</span></span><br><span class="line"><span class="comment">    00000000（0x00） ： 未使用的记录表（descriptor table） 。</span></span><br><span class="line"><span class="comment">    10010010（0x92） ： 系统专用， 可读写的段。 不可执行。</span></span><br><span class="line"><span class="comment">    10011010（0x9a） ： 系统专用， 可执行的段。 可读不可写。</span></span><br><span class="line"><span class="comment">    11110010（0xf2） ： 应用程序用， 可读写的段。 不可执行。</span></span><br><span class="line"><span class="comment">    11111010（0xfa） ： 应用程序用， 可执行的段。 可读不可写</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">if</span> (limit &gt; <span class="number">0xfffff</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ar |= <span class="number">0x8000</span>; <span class="comment">/* G_bit = 1 */</span></span><br><span class="line">        limit /= <span class="number">0x1000</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    根据GDT段描述符位格式,通过GDT段描述符结构体设置GDT描述符。</span></span><br><span class="line"><span class="comment">    bit[15..0],内存段长度低16位;</span></span><br><span class="line"><span class="comment">    bit[31..16],内存段基址低16位;</span></span><br><span class="line"><span class="comment">    bit[39..32],内存段基址23..16位;</span></span><br><span class="line"><span class="comment">    bit[47..40],有效位P,特权级DPL,类型TYPE等;</span></span><br><span class="line"><span class="comment">    bit[55..48],内存颗粒度,内存段长度19..16位;</span></span><br><span class="line"><span class="comment">    bit[63..56],内存段基址高8位。    </span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    sd-&gt;limit_low = limit &amp; <span class="number">0xffff</span>;</span><br><span class="line">    sd-&gt;base_low = base &amp; <span class="number">0xffff</span>;</span><br><span class="line">    sd-&gt;base_mid = (base &gt;&gt; <span class="number">16</span>) &amp; <span class="number">0xff</span>;</span><br><span class="line">    sd-&gt;access_right = ar &amp; <span class="number">0xff</span>;</span><br><span class="line">    sd-&gt;limit_high = ((limit &gt;&gt; <span class="number">16</span>) &amp; <span class="number">0x0f</span>) | ((ar &gt;&gt; <span class="number">8</span>) &amp; <span class="number">0xf0</span>);</span><br><span class="line">    sd-&gt;base_high = (base &gt;&gt; <span class="number">24</span>) &amp; <span class="number">0xff</span>;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">set_gatedesc,</span></span><br><span class="line"><span class="comment">设置gd指向的IDT描述符,</span></span><br><span class="line"><span class="comment">gd,IDT描述符内存首地址;offset,处理程序在其所在段的偏移地址;</span></span><br><span class="line"><span class="comment">selector,处理程序所在内存段的段选择符;ar,IDT描述符有效位,特权级,类型等属性</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">set_gatedesc</span><span class="params">(struct GATE_DESCRIPTOR *gd, <span class="keyword">int</span> offset, <span class="keyword">int</span> selector, <span class="keyword">int</span> ar)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    根据IDT段描述符位格式,通过IDT描述符结构体设置IDT描述符。</span></span><br><span class="line"><span class="comment">    bit[15..0],处理程序偏移地址低16位;</span></span><br><span class="line"><span class="comment">    bit[31..16],处理程序所在内存段的段选择符;</span></span><br><span class="line"><span class="comment">    bit[39..32],保留未用;</span></span><br><span class="line"><span class="comment">    bit[47..40],有效位P,特权级DPL,类型TYPE等;</span></span><br><span class="line"><span class="comment">    bit[63..48],处理程序偏移地址高16位。</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    gd-&gt;offset_low = offset &amp; <span class="number">0xffff</span>;</span><br><span class="line">    gd-&gt;selector = selector;</span><br><span class="line">    gd-&gt;dw_count = (ar &gt;&gt; <span class="number">8</span>) &amp; <span class="number">0xff</span>;</span><br><span class="line">    gd-&gt;access_right = ar &amp; <span class="number">0xff</span>;</span><br><span class="line">    gd-&gt;offset_high = (offset &gt;&gt; <span class="number">16</span>) &amp; <span class="number">0xffff</span>;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="中断处理">3. 中断处理</h2>
 <p>前面已经正确的将GDT以及IDT初始化完成了，要使用中断还需要初始化<strong><em>PIC（programmable interrupt controller 可编程中断控制器）</em></strong>，前面提到中断向量表IDT可以配置256个中断向量号，但是x86系列机提供15个可编程中断，其他中断大多是系统中断。</p>
 <p>x86使用的是2片PIC（8259A）级联形成的15个可编程中断。如下图主IPC的2号中断和从IPC连接，所以一共只有15个中断。</p>
 <p><img src="/assets/Note/30DaysOs/06_1.png" style="zoom:50%;" /></p>
-<p>链接：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xvbmdpbnRjaGFyL2FydGljbGUvZGV0YWlscy83OTQzOTQ2Ng==">8259A详细工作原理<i class="fa fa-external-link-alt"></i></span></p>
+<p>链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/longintchar/article/details/79439466">8259A详细工作原理</a></p>
 <p>PIC 初始化（对相关寄存器进行配置）：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init_pic</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"><span class="comment">/* PIC初始化 */</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	io_out8(PIC0_IMR,  <span class="number">0xff</span>  ); <span class="comment">/* 禁止所有中断 */</span></span><br><span class="line">	io_out8(PIC1_IMR,  <span class="number">0xff</span>  ); <span class="comment">/* 禁止所有中断 */</span></span><br><span class="line"></span><br><span class="line">	io_out8(PIC0_ICW1, <span class="number">0x11</span>  ); <span class="comment">/* 边缘触发模式（edge trigger mode） */</span></span><br><span class="line">	io_out8(PIC0_ICW2, <span class="number">0x20</span>  ); <span class="comment">/* IRQ0-7由INT20-27接收 */</span></span><br><span class="line">	io_out8(PIC0_ICW3, <span class="number">1</span> &lt;&lt; <span class="number">2</span>); <span class="comment">/* PIC1由IRQ2相连 */</span></span><br><span class="line">	io_out8(PIC0_ICW4, <span class="number">0x01</span>  ); <span class="comment">/* 无缓冲区模式 */</span></span><br><span class="line"></span><br><span class="line">	io_out8(PIC1_ICW1, <span class="number">0x11</span>  ); <span class="comment">/* 边缘触发模式（edge trigger mode） */</span></span><br><span class="line">	io_out8(PIC1_ICW2, <span class="number">0x28</span>  ); <span class="comment">/* IRQ8-15由INT28-2f接收 */</span></span><br><span class="line">	io_out8(PIC1_ICW3, <span class="number">2</span>     ); <span class="comment">/* PIC1由IRQ2连接 */</span></span><br><span class="line">	io_out8(PIC1_ICW4, <span class="number">0x01</span>  ); <span class="comment">/* 无缓冲区模式 */</span></span><br><span class="line"></span><br><span class="line">	io_out8(PIC0_IMR,  <span class="number">0xfb</span>  ); <span class="comment">/* 11111011 PIC1以外全部禁止 */</span></span><br><span class="line">	io_out8(PIC1_IMR,  <span class="number">0xff</span>  ); <span class="comment">/* 11111111 禁止所有中断 */</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>通过<strong>ICW2</strong>我们实现将IRQ和INT号相绑定</p>
@@ -496,14 +500,14 @@
 <h3 id="fifo-缓冲配置">FIFO 缓冲配置</h3>
 <p>中断几乎是无时无刻不再发生的，处理一个中断的过程中可能有其他中断发生，所以我们需要把处理中断的程序编写的越短越好（操作系统中中断是有优先级的，这里作者并没有明确的说明）</p>
 <p>所以在我们处理键盘鼠标这类外部设备的中断时，获取到数据之后不用急忙处理，而是将其放置到一个缓冲区中，等到之后处理。这个缓冲区的大小和其他设计很值得考量。作者给出了一个FIFO缓冲区的实现:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* FIFO */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"bootpack.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FLAGS_OVERRUN		0x0001</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fifo8_init</span><span class="params">(struct FIFO8 *fifo, <span class="keyword">int</span> <span class="built_in">size</span>, <span class="keyword">unsigned</span> <span class="keyword">char</span> *buf)</span></span></span><br><span class="line"><span class="function"><span class="comment">/* 初始化FIFO缓冲区 */</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	fifo-&gt;<span class="built_in">size</span> = <span class="built_in">size</span>;</span><br><span class="line">	fifo-&gt;buf = buf;</span><br><span class="line">	fifo-&gt;<span class="built_in">free</span> = <span class="built_in">size</span>; <span class="comment">/* 缓冲区大小 */</span></span><br><span class="line">	fifo-&gt;flags = <span class="number">0</span>;</span><br><span class="line">	fifo-&gt;p = <span class="number">0</span>; <span class="comment">/* 下一个数据写入位置 */</span></span><br><span class="line">	fifo-&gt;q = <span class="number">0</span>; <span class="comment">/* 下一个数据读出位置 */</span></span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fifo8_put</span><span class="params">(struct FIFO8 *fifo, <span class="keyword">unsigned</span> <span class="keyword">char</span> data)</span></span></span><br><span class="line"><span class="function"><span class="comment">/* 向FIFO传送数据并保存 */</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (fifo-&gt;<span class="built_in">free</span> == <span class="number">0</span>) &#123;</span><br><span class="line">		<span class="comment">/* 没有空间了，溢出 */</span></span><br><span class="line">		fifo-&gt;flags |= FLAGS_OVERRUN;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	fifo-&gt;buf[fifo-&gt;p] = data;</span><br><span class="line">	fifo-&gt;p++;</span><br><span class="line">	<span class="keyword">if</span> (fifo-&gt;p == fifo-&gt;<span class="built_in">size</span>) &#123;</span><br><span class="line">		fifo-&gt;p = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	fifo-&gt;<span class="built_in">free</span>--;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fifo8_get</span><span class="params">(struct FIFO8 *fifo)</span></span></span><br><span class="line"><span class="function"><span class="comment">/* 从FIFO取得一个数据 */</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> data;</span><br><span class="line">	<span class="keyword">if</span> (fifo-&gt;<span class="built_in">free</span> == fifo-&gt;<span class="built_in">size</span>) &#123;</span><br><span class="line">		<span class="comment">/* 如果缓冲区为空则返回-1 */</span></span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	data = fifo-&gt;buf[fifo-&gt;q];</span><br><span class="line">	fifo-&gt;q++;</span><br><span class="line">	<span class="keyword">if</span> (fifo-&gt;q == fifo-&gt;<span class="built_in">size</span>) &#123;</span><br><span class="line">		fifo-&gt;q = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	fifo-&gt;<span class="built_in">free</span>++;</span><br><span class="line">	<span class="keyword">return</span> data;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fifo8_status</span><span class="params">(struct FIFO8 *fifo)</span></span></span><br><span class="line"><span class="function"><span class="comment">/* 报告一下积攒是数据量 */</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> fifo-&gt;<span class="built_in">size</span> - fifo-&gt;<span class="built_in">free</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* FIFO */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;bootpack.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FLAGS_OVERRUN		0x0001</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fifo8_init</span><span class="params">(struct FIFO8 *fifo, <span class="keyword">int</span> size, <span class="keyword">unsigned</span> <span class="keyword">char</span> *buf)</span></span></span><br><span class="line"><span class="function"><span class="comment">/* 初始化FIFO缓冲区 */</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	fifo-&gt;size = size;</span><br><span class="line">	fifo-&gt;buf = buf;</span><br><span class="line">	fifo-&gt;<span class="built_in">free</span> = size; <span class="comment">/* 缓冲区大小 */</span></span><br><span class="line">	fifo-&gt;flags = <span class="number">0</span>;</span><br><span class="line">	fifo-&gt;p = <span class="number">0</span>; <span class="comment">/* 下一个数据写入位置 */</span></span><br><span class="line">	fifo-&gt;q = <span class="number">0</span>; <span class="comment">/* 下一个数据读出位置 */</span></span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fifo8_put</span><span class="params">(struct FIFO8 *fifo, <span class="keyword">unsigned</span> <span class="keyword">char</span> data)</span></span></span><br><span class="line"><span class="function"><span class="comment">/* 向FIFO传送数据并保存 */</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (fifo-&gt;<span class="built_in">free</span> == <span class="number">0</span>) &#123;</span><br><span class="line">		<span class="comment">/* 没有空间了，溢出 */</span></span><br><span class="line">		fifo-&gt;flags |= FLAGS_OVERRUN;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	fifo-&gt;buf[fifo-&gt;p] = data;</span><br><span class="line">	fifo-&gt;p++;</span><br><span class="line">	<span class="keyword">if</span> (fifo-&gt;p == fifo-&gt;size) &#123;</span><br><span class="line">		fifo-&gt;p = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	fifo-&gt;<span class="built_in">free</span>--;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fifo8_get</span><span class="params">(struct FIFO8 *fifo)</span></span></span><br><span class="line"><span class="function"><span class="comment">/* 从FIFO取得一个数据 */</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> data;</span><br><span class="line">	<span class="keyword">if</span> (fifo-&gt;<span class="built_in">free</span> == fifo-&gt;size) &#123;</span><br><span class="line">		<span class="comment">/* 如果缓冲区为空则返回-1 */</span></span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	data = fifo-&gt;buf[fifo-&gt;q];</span><br><span class="line">	fifo-&gt;q++;</span><br><span class="line">	<span class="keyword">if</span> (fifo-&gt;q == fifo-&gt;size) &#123;</span><br><span class="line">		fifo-&gt;q = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	fifo-&gt;<span class="built_in">free</span>++;</span><br><span class="line">	<span class="keyword">return</span> data;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fifo8_status</span><span class="params">(struct FIFO8 *fifo)</span></span></span><br><span class="line"><span class="function"><span class="comment">/* 报告一下积攒是数据量 */</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> fifo-&gt;size - fifo-&gt;<span class="built_in">free</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这个实现还是比较容易的</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// int.c</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">inthandler21</span><span class="params">(<span class="keyword">int</span> *esp)</span></span></span><br><span class="line"><span class="function"><span class="comment">/* 来自PS/2键盘的中断 */</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">BOOTINFO</span> *<span class="title">binfo</span> = (<span class="title">struct</span> <span class="title">BOOTINFO</span> *) <span class="title">ADR_BOOTINFO</span>;</span></span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> data, s[<span class="number">4</span>];</span><br><span class="line">    <span class="comment">/* 通知PIC IRQ-01 已经受理完毕 否则不处理下一次中断 */</span></span><br><span class="line">	io_out8(PIC0_OCW2, <span class="number">0x61</span>);</span><br><span class="line">	data = io_in8(PORT_KEYDAT);</span><br><span class="line">	fifo8_put(&amp;keyfifo, data);</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// int.c</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">inthandler21</span><span class="params">(<span class="keyword">int</span> *esp)</span></span></span><br><span class="line"><span class="function"><span class="comment">/* 来自PS/2键盘的中断 */</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">BOOTINFO</span> *<span class="title">binfo</span> =</span> (struct BOOTINFO *) ADR_BOOTINFO;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> data, s[<span class="number">4</span>];</span><br><span class="line">    <span class="comment">/* 通知PIC IRQ-01 已经受理完毕 否则不处理下一次中断 */</span></span><br><span class="line">	io_out8(PIC0_OCW2, <span class="number">0x61</span>);</span><br><span class="line">	data = io_in8(PORT_KEYDAT);</span><br><span class="line">	fifo8_put(&amp;keyfifo, data);</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>在<code>inthandler21</code>里面只需要对数据保存即可，然后在<code>bootpack.c</code>主循环中显示对应的信息即可</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bootpack.c</span></span><br><span class="line"><span class="keyword">for</span> (;;) &#123;</span><br><span class="line">		io_cli();</span><br><span class="line">		<span class="keyword">if</span> (fifo8_status(&amp;keyfifo) + fifo8_status(&amp;mousefifo) == <span class="number">0</span>) &#123;</span><br><span class="line">			io_stihlt();</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">if</span> (fifo8_status(&amp;keyfifo) != <span class="number">0</span>) &#123;</span><br><span class="line">				i = fifo8_get(&amp;keyfifo);</span><br><span class="line">				io_sti();</span><br><span class="line">				<span class="built_in">sprintf</span>(s, <span class="string">"%02X"</span>, i);</span><br><span class="line">				boxfill8(binfo-&gt;vram, binfo-&gt;scrnx, COL8_008484,  <span class="number">0</span>, <span class="number">16</span>, <span class="number">15</span>, <span class="number">31</span>);</span><br><span class="line">				putfonts8_asc(binfo-&gt;vram, binfo-&gt;scrnx, <span class="number">0</span>, <span class="number">16</span>, COL8_FFFFFF, s);</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (fifo8_status(&amp;mousefifo) != <span class="number">0</span>) &#123;</span><br><span class="line">				i = fifo8_get(&amp;mousefifo);</span><br><span class="line">				io_sti();</span><br><span class="line">				<span class="built_in">sprintf</span>(s, <span class="string">"%02X"</span>, i);</span><br><span class="line">				boxfill8(binfo-&gt;vram, binfo-&gt;scrnx, COL8_008484, <span class="number">32</span>, <span class="number">16</span>, <span class="number">47</span>, <span class="number">31</span>);</span><br><span class="line">				putfonts8_asc(binfo-&gt;vram, binfo-&gt;scrnx, <span class="number">32</span>, <span class="number">16</span>, COL8_FFFFFF, s);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bootpack.c</span></span><br><span class="line"><span class="keyword">for</span> (;;) &#123;</span><br><span class="line">		io_cli();</span><br><span class="line">		<span class="keyword">if</span> (fifo8_status(&amp;keyfifo) + fifo8_status(&amp;mousefifo) == <span class="number">0</span>) &#123;</span><br><span class="line">			io_stihlt();</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">if</span> (fifo8_status(&amp;keyfifo) != <span class="number">0</span>) &#123;</span><br><span class="line">				i = fifo8_get(&amp;keyfifo);</span><br><span class="line">				io_sti();</span><br><span class="line">				<span class="built_in">sprintf</span>(s, <span class="string">&quot;%02X&quot;</span>, i);</span><br><span class="line">				boxfill8(binfo-&gt;vram, binfo-&gt;scrnx, COL8_008484,  <span class="number">0</span>, <span class="number">16</span>, <span class="number">15</span>, <span class="number">31</span>);</span><br><span class="line">				putfonts8_asc(binfo-&gt;vram, binfo-&gt;scrnx, <span class="number">0</span>, <span class="number">16</span>, COL8_FFFFFF, s);</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (fifo8_status(&amp;mousefifo) != <span class="number">0</span>) &#123;</span><br><span class="line">				i = fifo8_get(&amp;mousefifo);</span><br><span class="line">				io_sti();</span><br><span class="line">				<span class="built_in">sprintf</span>(s, <span class="string">&quot;%02X&quot;</span>, i);</span><br><span class="line">				boxfill8(binfo-&gt;vram, binfo-&gt;scrnx, COL8_008484, <span class="number">32</span>, <span class="number">16</span>, <span class="number">47</span>, <span class="number">31</span>);</span><br><span class="line">				putfonts8_asc(binfo-&gt;vram, binfo-&gt;scrnx, <span class="number">32</span>, <span class="number">16</span>, COL8_FFFFFF, s);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>对鼠标的操作也是类似的</p>
 <h2 id="鼠标控制">4. 鼠标控制</h2>
-<p>参考代码解释：<span class="exturl" data-url="aHR0cHM6Ly93d3cudHdibG9ncy5uZXQvYS81ZDczN2YxOWJkOWVlZTUzMjdmZjdmNjQvemgtY24=">粗略阅读haribote鼠标管理程序 mouse.c<i class="fa fa-external-link-alt"></i></span></p>
+<p>参考代码解释：<a target="_blank" rel="noopener" href="https://www.twblogs.net/a/5d737f19bd9eee5327ff7f64/zh-cn">粗略阅读haribote鼠标管理程序 mouse.c</a></p>
 <p>要使鼠标中断可以被CPU响应，除了配置中断记录表还需要执行激活鼠标的指令，所以我们需要配置两个装置，一个是鼠标控制电路，一个是鼠标本身。鼠标控制电路包含在键盘控制电路中，只要键盘控制电路初始化完成，鼠标电路控制器也就激活完成了。</p>
 <p>键盘电路初始化代码如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PORT_KEYDAT 0x0060</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PORT_KEYSTA 0x0064</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PORT_KEYCMD 0x0064</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> KEYSTA_SEND_NOTREADY 0x02</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> KEYCMD_WRITE_MODE 0x60</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> KBC_MODE 0x47</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">wait_KBC_sendready</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/* </span></span><br><span class="line"><span class="comment">    等待键盘控制电路准备完毕</span></span><br><span class="line"><span class="comment">    因为键盘控制电路的工作没有CPU快，需要循环判断是否准备好</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">for</span> (;;)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> ((io_in8(PORT_KEYSTA) &amp; KEYSTA_SEND_NOTREADY) == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init_keyboard</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/* 初始化键盘控制电路 */</span></span><br><span class="line">    wait_KBC_sendready();</span><br><span class="line">    io_out8(PORT_KEYCMD, KEYCMD_WRITE_MODE);</span><br><span class="line">    wait_KBC_sendready();</span><br><span class="line">    io_out8(PORT_KEYDAT, KBC_MODE);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -525,16 +529,18 @@
     
     
     
-        
 
-<div>
-<ul class="post-copyright">
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
   <li class="post-copyright-author">
-    <strong>Post author:  </strong>Weijun-Lin
+      <strong>Post author:  </strong>Weijun-Lin
   </li>
   <li class="post-copyright-link">
-    <strong>Post link: </strong>
-    <a href="https://joke-lin.top/2020/02/09/2020-02-09-30OSMakeNote05-08/" title="《30天自制操作系统》 05-08部分 从字符显示到中断处理">https://joke-lin.top/2020/02/09/2020-02-09-30OSMakeNote05-08/</a>
+      <strong>Post link: </strong>
+      <a href="https://joke-lin.top/2020/02/09/2020-02-09-30OSMakeNote05-08/" title="《30天自制操作系统》 05-08部分 从字符显示到中断处理">https://joke-lin.top/2020/02/09/2020-02-09-30OSMakeNote05-08/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.
@@ -542,8 +548,6 @@
 </ul>
 </div>
 
-
-      <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/30%E5%A4%A9%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag"><i class="fa fa-tag"></i> 30天自制操作系统</a>
               <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag"><i class="fa fa-tag"></i> 操作系统</a>
@@ -556,29 +560,28 @@
     </div>
   </div>
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2020/02/24/2020-02-24-PAT-Advanced-1003/" rel="prev" title="PAT Advanced 1003 Emergency（最短路）">
-      <i class="fa fa-chevron-left"></i> PAT Advanced 1003 Emergency（最短路）
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/01/26/2020-01-26-30OSMakeNote04/" rel="next" title="《30天自制操作系统》 04 C语言和画面显示的练习">
-      《30天自制操作系统》 04 C语言和画面显示的练习 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/02/24/2020-02-24-PAT-Advanced-1003/" rel="prev" title="PAT Advanced 1003 Emergency（最短路）">
+                  <i class="fa fa-chevron-left"></i> PAT Advanced 1003 Emergency（最短路）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/01/26/2020-01-26-30OSMakeNote04/" rel="next" title="《30天自制操作系统》 04 C语言和画面显示的练习">
+                  《30天自制操作系统》 04 C语言和画面显示的练习 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
   </article>
-  
-  
-  
+</div>
 
 
 
-        </div>
-        
+
+
+
+      
     
   <div class="comments">
     <div id="lv-container" data-id="city" data-uid="MTAyMC8zOTczMy8xNjI2MA=="></div>
@@ -592,7 +595,7 @@
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -601,20 +604,20 @@
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
 
-      </div>
-    </main>
+    </div>
+  </main>
 
-    <footer class="footer">
-      <div class="footer-inner">
-        
+  <footer class="footer">
+    <div class="footer-inner">
+      
 
-        
+      
 
 <div class="copyright">
   
@@ -624,25 +627,24 @@
     <i class="heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Weijun-Lin</span>
-    <span class="post-meta-divider">|</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
     <span class="post-meta-item-icon">
-      <i class="fa fa-chart-area"></i>
+      <i class="fa fa-chart-line"></i>
     </span>
-      <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">209k</span>
-    <span class="post-meta-divider">|</span>
+      <span>Symbols count total: </span>
+    <span title="Symbols count total">215k</span>
+  </span>
+  <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-      <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">3:10</span>
+      <span>Reading time total &asymp;</span>
+    <span title="Reading time total">3:16</span>
+  </span>
 </div>
-  <div class="powered-by">Powered by <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span>
-  </div>
-
-        
 <div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
       <span class="post-meta-item-icon">
         <i class="user"></i>
@@ -651,7 +653,6 @@
         <span id="busuanzi_value_site_uv"></span>
       </span>
     </span>
-    <span class="post-meta-divider">|</span>
     <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
       <span class="post-meta-item-icon">
         <i class="eye"></i>
@@ -661,32 +662,17 @@
       </span>
     </span>
 </div>
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
+  <div class="powered-by">Powered by <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span>
   </div>
 
+    </div>
+  </footer>
+
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-<script src="/js/bookmark.js"></script>
-
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
 
   
   <script>
@@ -722,13 +708,24 @@
   }
   </script>
 
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
-<script src="/js/local-search.js"></script>
-
-
-
-
-
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
@@ -740,66 +737,13 @@
   
 
   
-      
-
-<script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
-    
 
   
 
 <script>
-NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+NexT.utils.loadComments('#lv-container', () => {
   window.livereOptions = {
-    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+    refer: "2020/02/09/2020-02-09-30OSMakeNote05-08/"
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];

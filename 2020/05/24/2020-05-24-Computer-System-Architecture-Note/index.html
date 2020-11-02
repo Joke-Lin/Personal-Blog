@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 5.2.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico">
@@ -15,14 +17,14 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  
-  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"joke-lin.top","root":"/","scheme":"Gemini","version":"8.0.0-rc.4","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"path":"search.xml"};
+    var CONFIG = {"hostname":"joke-lin.top","root":"/","scheme":"Gemini","version":"8.0.2","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
   <meta name="description" content="Github：笔记-计算机系统结构-张晨曦-第二版">
@@ -32,67 +34,68 @@
 <meta property="og:site_name" content="WEIJUN LIN BLOG">
 <meta property="og:description" content="Github：笔记-计算机系统结构-张晨曦-第二版">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/1-1.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/1-2.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/3-1.png">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/3-2.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/3-3.png">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/3-4.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/3-5.png">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/3-6.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/3-7.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/3-8.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/3-9.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/3-10.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/3-11.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/3-13.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/3-14.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/3-15.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/3-16.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/3-17.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/3-18.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/3-19.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/3-20.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/3-22.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/3-23.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/4-1.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/4-2.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/4-3.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/4-4.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/4-5.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/4-6.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/4-7.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/4-8.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/4-9.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/4-10.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/4-11.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/4-12.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/4-13.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/4-14.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/4-15.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/4-16.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/4-17.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/4-18.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/4-19.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/4-20.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/4-21.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/4-22.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/4-23.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/4-24.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/4-25.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/4-26.jpg">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/5-1.png">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/5-2.png">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/5-3.png">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/5-4.png">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/5-5.png">
-<meta property="og:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/5-6.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/1-1.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/1-2.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/3-1.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/3-2.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/3-3.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/3-4.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/3-5.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/3-6.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/3-7.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/3-8.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/3-9.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/3-10.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/3-11.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/3-13.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/3-14.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/3-15.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/3-16.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/3-17.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/3-18.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/3-19.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/3-20.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/3-22.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/3-23.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/4-1.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/4-2.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/4-3.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/4-4.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/4-5.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/4-6.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/4-7.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/4-8.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/4-9.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/4-10.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/4-11.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/4-12.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/4-13.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/4-14.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/4-15.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/4-16.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/4-17.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/4-18.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/4-19.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/4-20.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/4-21.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/4-22.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/4-23.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/4-24.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/4-25.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/4-26.jpg">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/5-1.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/5-2.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/5-3.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/5-4.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/5-5.png">
+<meta property="og:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/5-6.png">
 <meta property="article:published_time" content="2020-05-23T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-07-20T07:09:57.376Z">
+<meta property="article:modified_time" content="2020-11-01T11:00:43.227Z">
 <meta property="article:author" content="Weijun-Lin">
 <meta property="article:tag" content="计算机系统结构">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://joke-lin.top/assets/Note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-%E5%BC%A0%E6%99%A8%E6%9B%A6-%E7%AC%AC%E4%BA%8C%E7%89%88/1-1.jpg">
+<meta name="twitter:image" content="https://joke-lin.top/assets/Note/计算机系统结构-张晨曦-第二版/1-1.jpg">
+
 
 <link rel="canonical" href="https://joke-lin.top/2020/05/24/2020-05-24-Computer-System-Architecture-Note/">
 
@@ -162,18 +165,17 @@
 <link rel="alternate" href="/atom.xml" title="WEIJUN LIN BLOG" type="application/atom+xml">
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
-    <main class="main">
-      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-        <div class="header-inner"><div class="site-brand-container">
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="Toggle navigation bar">
-        <span class="toggle-line toggle-line-first"></span>
-        <span class="toggle-line toggle-line-middle"></span>
-        <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
@@ -196,7 +198,7 @@
 
 
 <nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
@@ -220,11 +222,6 @@
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
-        <li class="menu-item menu-item-notes">
-
-    <a href="/categories/%E9%9A%8F%E7%AC%94/Note/" rel="section"><i class="fa fa-clipboard fa-fw"></i>Notes</a>
 
   </li>
         <li class="menu-item menu-item-rss">
@@ -253,7 +250,7 @@
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
            placeholder="Searching..." spellcheck="false"
            type="search" class="search-input">
   </div>
@@ -261,8 +258,8 @@
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
     <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
@@ -271,12 +268,12 @@
   </div>
 
 </div>
-          
+        
   
   <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
   </div>
 
   <aside class="sidebar">
@@ -291,43 +288,44 @@
         </li>
       </ul>
 
-      <!--noindex-->
-      <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一章-计算机系统结构的基本概念"><span class="nav-text">第一章 计算机系统结构的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#计算机系统结构的概念"><span class="nav-text">1.2 计算机系统结构的概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#计算机系统的层次结构"><span class="nav-text">计算机系统的层次结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算机系统结构的定义"><span class="nav-text">计算机系统结构的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算机组成和计算机实现"><span class="nav-text">计算机组成和计算机实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算机系统结构的分类"><span class="nav-text">计算机系统结构的分类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定量分析技术"><span class="nav-text">1.3 定量分析技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#计算机系统结构的定量原理"><span class="nav-text">计算机系统结构的定量原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算机系统的性能测评"><span class="nav-text">计算机系统的性能测评</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算机系统结构的发展"><span class="nav-text">1.4 计算机系统结构的发展</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#冯诺依曼结构"><span class="nav-text">冯·诺依曼结构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算机系统中并行性的发展"><span class="nav-text">1.5 计算机系统中并行性的发展</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#并行性的概念"><span class="nav-text">并行性的概念</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二章-计算机指令集结构mips"><span class="nav-text">第二章 计算机指令集结构（MIPS）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三章-流水线技术"><span class="nav-text">第三章 流水线技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#重叠执行和先行控制"><span class="nav-text">3.1 重叠执行和先行控制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#重叠执行"><span class="nav-text">重叠执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#先行控制"><span class="nav-text">先行控制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流水线的基本概念"><span class="nav-text">3.2 流水线的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是流水线"><span class="nav-text">什么是流水线</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#流水线的分类"><span class="nav-text">流水线的分类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流水线的性能指标"><span class="nav-text">3.3 流水线的性能指标</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#吞吐率"><span class="nav-text">吞吐率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#加速比"><span class="nav-text">加速比</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#效率"><span class="nav-text">效率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#流水线设计中的若干问题"><span class="nav-text">流水线设计中的若干问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流水线的相关与冲突"><span class="nav-text">3.4 流水线的相关与冲突</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#经典5段流水线"><span class="nav-text">经典5段流水线</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#相关与流水线冲突"><span class="nav-text">相关与流水线冲突</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#相关"><span class="nav-text">相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#流水线冲突"><span class="nav-text">流水线冲突</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#向量处理机"><span class="nav-text">3.5 向量处理机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第四章-指令级并行"><span class="nav-text">第四章 指令级并行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指令级并行的概念-ilp"><span class="nav-text">4.1 指令级并行的概念 ILP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指令的调度"><span class="nav-text">4.2 指令的调度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#静态和动态调度"><span class="nav-text">静态和动态调度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非线性流水线的调度问题"><span class="nav-text">非线性流水线的调度问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最优调度方法"><span class="nav-text">最优调度方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态调度的基本思想"><span class="nav-text">动态调度的基本思想</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tomasulo算法"><span class="nav-text">Tomasulo算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态分支预测技术"><span class="nav-text">4.3 动态分支预测技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#采用分支历史表-bht"><span class="nav-text">采用分支历史表 BHT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#采用分支目标缓冲器btb"><span class="nav-text">采用分支目标缓冲器BTB</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于硬件的前瞻执行"><span class="nav-text">基于硬件的前瞻执行</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多指令流出技术"><span class="nav-text">4.4 多指令流出技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基于动态调度的多流出技术"><span class="nav-text">基于动态调度的多流出技术</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#超长指令字技术vliw"><span class="nav-text">超长指令字技术（VLIW）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多流出处理器受到的限制"><span class="nav-text">多流出处理器受到的限制</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#超流水线处理机"><span class="nav-text">超流水线处理机</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第5章-存储层次"><span class="nav-text">第5章 存储层次</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存储器的层次结构"><span class="nav-text">5.1 存储器的层次结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cache的基本知识"><span class="nav-text">5.2 Cache的基本知识</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#映像规则"><span class="nav-text">映像规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查找算法"><span class="nav-text">查找算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#替换算法"><span class="nav-text">替换算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#写策略"><span class="nav-text">写策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cache的性能分析"><span class="nav-text">Cache的性能分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#改进cache的性能"><span class="nav-text">改进Cache的性能</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#降低cache失效率的方法"><span class="nav-text">5.3 降低Cache失效率的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#增加cache块大小"><span class="nav-text">1. 增加Cache块大小</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#提高相联度"><span class="nav-text">2. 提高相联度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#增加cache的容量"><span class="nav-text">3. 增加Cache的容量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#victim-cache"><span class="nav-text">4. Victim Cache</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#伪相联-cache"><span class="nav-text">5. 伪相联 Cache</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#硬件预取"><span class="nav-text">6. 硬件预取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编译器控制的预取"><span class="nav-text">7. 编译器控制的预取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编译器优化"><span class="nav-text">8. 编译器优化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#减少cache失效开销"><span class="nav-text">5.4 减少Cache失效开销</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#让读失效优先于写"><span class="nav-text">1. 让读失效优先于写</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#写缓冲合并"><span class="nav-text">2. 写缓冲合并</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#请求字处理技术"><span class="nav-text">3. 请求字处理技术</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非阻塞cache技术"><span class="nav-text">4. 非阻塞Cache技术</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#采用两级cache"><span class="nav-text">5. 采用两级Cache</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#减少命中时间"><span class="nav-text">5.5 减少命中时间</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#容量小结构简单的cache"><span class="nav-text">1. 容量小、结构简单的Cache</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#虚拟cache"><span class="nav-text">2.虚拟Cache</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cache访问流水化"><span class="nav-text">3. Cache访问流水化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#trace-cache"><span class="nav-text">4. Trace Cache</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cache优化技术总结"><span class="nav-text">5. Cache优化技术总结</span></a></li></ol></li></ol></li></ol></div>
-      </section>
-      <!--/noindex-->
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-text">第一章 计算机系统结构的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-text">1.2 计算机系统结构的概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84"><span class="nav-text">计算机系统的层次结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-text">计算机系统结构的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%92%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AE%9E%E7%8E%B0"><span class="nav-text">计算机组成和计算机实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-text">计算机系统结构的分类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E9%87%8F%E5%88%86%E6%9E%90%E6%8A%80%E6%9C%AF"><span class="nav-text">1.3 定量分析技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84%E7%9A%84%E5%AE%9A%E9%87%8F%E5%8E%9F%E7%90%86"><span class="nav-text">计算机系统结构的定量原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%84"><span class="nav-text">计算机系统的性能测评</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84%E7%9A%84%E5%8F%91%E5%B1%95"><span class="nav-text">1.4 计算机系统结构的发展</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%AF%E8%AF%BA%E4%BE%9D%E6%9B%BC%E7%BB%93%E6%9E%84"><span class="nav-text">冯·诺依曼结构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%B9%B6%E8%A1%8C%E6%80%A7%E7%9A%84%E5%8F%91%E5%B1%95"><span class="nav-text">1.5 计算机系统中并行性的发展</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%B6%E8%A1%8C%E6%80%A7%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-text">并行性的概念</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%8C%87%E4%BB%A4%E9%9B%86%E7%BB%93%E6%9E%84mips"><span class="nav-text">第二章 计算机指令集结构（MIPS）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%B5%81%E6%B0%B4%E7%BA%BF%E6%8A%80%E6%9C%AF"><span class="nav-text">第三章 流水线技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E5%8F%A0%E6%89%A7%E8%A1%8C%E5%92%8C%E5%85%88%E8%A1%8C%E6%8E%A7%E5%88%B6"><span class="nav-text">3.1 重叠执行和先行控制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E5%8F%A0%E6%89%A7%E8%A1%8C"><span class="nav-text">重叠执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%88%E8%A1%8C%E6%8E%A7%E5%88%B6"><span class="nav-text">先行控制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%81%E6%B0%B4%E7%BA%BF%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-text">3.2 流水线的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%B5%81%E6%B0%B4%E7%BA%BF"><span class="nav-text">什么是流水线</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%81%E6%B0%B4%E7%BA%BF%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-text">流水线的分类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%81%E6%B0%B4%E7%BA%BF%E7%9A%84%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87"><span class="nav-text">3.3 流水线的性能指标</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%9E%E5%90%90%E7%8E%87"><span class="nav-text">吞吐率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A0%E9%80%9F%E6%AF%94"><span class="nav-text">加速比</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%88%E7%8E%87"><span class="nav-text">效率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%81%E6%B0%B4%E7%BA%BF%E8%AE%BE%E8%AE%A1%E4%B8%AD%E7%9A%84%E8%8B%A5%E5%B9%B2%E9%97%AE%E9%A2%98"><span class="nav-text">流水线设计中的若干问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%81%E6%B0%B4%E7%BA%BF%E7%9A%84%E7%9B%B8%E5%85%B3%E4%B8%8E%E5%86%B2%E7%AA%81"><span class="nav-text">3.4 流水线的相关与冲突</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%8F%E5%85%B85%E6%AE%B5%E6%B5%81%E6%B0%B4%E7%BA%BF"><span class="nav-text">经典5段流水线</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E4%B8%8E%E6%B5%81%E6%B0%B4%E7%BA%BF%E5%86%B2%E7%AA%81"><span class="nav-text">相关与流水线冲突</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3"><span class="nav-text">相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B5%81%E6%B0%B4%E7%BA%BF%E5%86%B2%E7%AA%81"><span class="nav-text">流水线冲突</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%91%E9%87%8F%E5%A4%84%E7%90%86%E6%9C%BA"><span class="nav-text">3.5 向量处理机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%8C%87%E4%BB%A4%E7%BA%A7%E5%B9%B6%E8%A1%8C"><span class="nav-text">第四章 指令级并行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4%E7%BA%A7%E5%B9%B6%E8%A1%8C%E7%9A%84%E6%A6%82%E5%BF%B5-ilp"><span class="nav-text">4.1 指令级并行的概念 ILP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4%E7%9A%84%E8%B0%83%E5%BA%A6"><span class="nav-text">4.2 指令的调度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%92%8C%E5%8A%A8%E6%80%81%E8%B0%83%E5%BA%A6"><span class="nav-text">静态和动态调度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%9E%E7%BA%BF%E6%80%A7%E6%B5%81%E6%B0%B4%E7%BA%BF%E7%9A%84%E8%B0%83%E5%BA%A6%E9%97%AE%E9%A2%98"><span class="nav-text">非线性流水线的调度问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E4%BC%98%E8%B0%83%E5%BA%A6%E6%96%B9%E6%B3%95"><span class="nav-text">最优调度方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E8%B0%83%E5%BA%A6%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3"><span class="nav-text">动态调度的基本思想</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tomasulo%E7%AE%97%E6%B3%95"><span class="nav-text">Tomasulo算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%88%86%E6%94%AF%E9%A2%84%E6%B5%8B%E6%8A%80%E6%9C%AF"><span class="nav-text">4.3 动态分支预测技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%87%E7%94%A8%E5%88%86%E6%94%AF%E5%8E%86%E5%8F%B2%E8%A1%A8-bht"><span class="nav-text">采用分支历史表 BHT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%87%E7%94%A8%E5%88%86%E6%94%AF%E7%9B%AE%E6%A0%87%E7%BC%93%E5%86%B2%E5%99%A8btb"><span class="nav-text">采用分支目标缓冲器BTB</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%A1%AC%E4%BB%B6%E7%9A%84%E5%89%8D%E7%9E%BB%E6%89%A7%E8%A1%8C"><span class="nav-text">基于硬件的前瞻执行</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E6%8C%87%E4%BB%A4%E6%B5%81%E5%87%BA%E6%8A%80%E6%9C%AF"><span class="nav-text">4.4 多指令流出技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E5%8A%A8%E6%80%81%E8%B0%83%E5%BA%A6%E7%9A%84%E5%A4%9A%E6%B5%81%E5%87%BA%E6%8A%80%E6%9C%AF"><span class="nav-text">基于动态调度的多流出技术</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B6%85%E9%95%BF%E6%8C%87%E4%BB%A4%E5%AD%97%E6%8A%80%E6%9C%AFvliw"><span class="nav-text">超长指令字技术（VLIW）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E6%B5%81%E5%87%BA%E5%A4%84%E7%90%86%E5%99%A8%E5%8F%97%E5%88%B0%E7%9A%84%E9%99%90%E5%88%B6"><span class="nav-text">多流出处理器受到的限制</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%B6%85%E6%B5%81%E6%B0%B4%E7%BA%BF%E5%A4%84%E7%90%86%E6%9C%BA"><span class="nav-text">超流水线处理机</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC5%E7%AB%A0-%E5%AD%98%E5%82%A8%E5%B1%82%E6%AC%A1"><span class="nav-text">第5章 存储层次</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%99%A8%E7%9A%84%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84"><span class="nav-text">5.1 存储器的层次结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cache%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86"><span class="nav-text">5.2 Cache的基本知识</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%98%A0%E5%83%8F%E8%A7%84%E5%88%99"><span class="nav-text">映像规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95"><span class="nav-text">查找算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%BF%E6%8D%A2%E7%AE%97%E6%B3%95"><span class="nav-text">替换算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%99%E7%AD%96%E7%95%A5"><span class="nav-text">写策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cache%E7%9A%84%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90"><span class="nav-text">Cache的性能分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%B9%E8%BF%9Bcache%E7%9A%84%E6%80%A7%E8%83%BD"><span class="nav-text">改进Cache的性能</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%8D%E4%BD%8Ecache%E5%A4%B1%E6%95%88%E7%8E%87%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-text">5.3 降低Cache失效率的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0cache%E5%9D%97%E5%A4%A7%E5%B0%8F"><span class="nav-text">1. 增加Cache块大小</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%90%E9%AB%98%E7%9B%B8%E8%81%94%E5%BA%A6"><span class="nav-text">2. 提高相联度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0cache%E7%9A%84%E5%AE%B9%E9%87%8F"><span class="nav-text">3. 增加Cache的容量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#victim-cache"><span class="nav-text">4. Victim Cache</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%AA%E7%9B%B8%E8%81%94-cache"><span class="nav-text">5. 伪相联 Cache</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A1%AC%E4%BB%B6%E9%A2%84%E5%8F%96"><span class="nav-text">6. 硬件预取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E5%99%A8%E6%8E%A7%E5%88%B6%E7%9A%84%E9%A2%84%E5%8F%96"><span class="nav-text">7. 编译器控制的预取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E5%99%A8%E4%BC%98%E5%8C%96"><span class="nav-text">8. 编译器优化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%8F%E5%B0%91cache%E5%A4%B1%E6%95%88%E5%BC%80%E9%94%80"><span class="nav-text">5.4 减少Cache失效开销</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A9%E8%AF%BB%E5%A4%B1%E6%95%88%E4%BC%98%E5%85%88%E4%BA%8E%E5%86%99"><span class="nav-text">1. 让读失效优先于写</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%99%E7%BC%93%E5%86%B2%E5%90%88%E5%B9%B6"><span class="nav-text">2. 写缓冲合并</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%AD%97%E5%A4%84%E7%90%86%E6%8A%80%E6%9C%AF"><span class="nav-text">3. 请求字处理技术</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%9E%E9%98%BB%E5%A1%9Ecache%E6%8A%80%E6%9C%AF"><span class="nav-text">4. 非阻塞Cache技术</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%87%E7%94%A8%E4%B8%A4%E7%BA%A7cache"><span class="nav-text">5. 采用两级Cache</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%8F%E5%B0%91%E5%91%BD%E4%B8%AD%E6%97%B6%E9%97%B4"><span class="nav-text">5.5 减少命中时间</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%B9%E9%87%8F%E5%B0%8F%E7%BB%93%E6%9E%84%E7%AE%80%E5%8D%95%E7%9A%84cache"><span class="nav-text">1. 容量小、结构简单的Cache</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%99%9A%E6%8B%9Fcache"><span class="nav-text">2.虚拟Cache</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cache%E8%AE%BF%E9%97%AE%E6%B5%81%E6%B0%B4%E5%8C%96"><span class="nav-text">3. Cache访问流水化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#trace-cache"><span class="nav-text">4. Trace Cache</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cache%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93"><span class="nav-text">5. Cache优化技术总结</span></a></li></ol></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
 
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Weijun-Lin"
       src="/images/avatar.png">
   <p class="site-author-name" itemprop="name">Weijun-Lin</p>
   <div class="site-description" itemprop="description">Learing and Using</div>
 </div>
-<div class="site-state-wrap animated">
+<div class="site-state-wrap site-overview-item animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-count">55</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author animated">
+  <div class="links-of-author site-overview-item animated">
       <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlaWp1bi1saW4=" title="Github → https:&#x2F;&#x2F;github.com&#x2F;weijun-lin"><i class="fab fa-github fa-fw"></i>Github</span>
       </span>
@@ -341,12 +339,12 @@
         <span class="exturl" data-url="bWFpbHRvOndlaWp1bi1saW5AZm94bWFpbC5jb20=" title="E-Mail → mailto:weijun-lin@foxmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
       </span>
   </div>
-  <div class="cc-license animated" itemprop="license">
+  <div class="cc-license site-overview-item animated" itemprop="license">
     <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
   </div>
 
 
-  <div class="links-of-blogroll animated">
+  <div class="links-of-blogroll site-overview-item animated">
     <div class="links-of-blogroll-title"><i class="link fa-fw"></i>
       Friends
     </div>
@@ -369,39 +367,43 @@
     </ul>
   </div>
 
-      </section>
+        </section>
+      </div>
         <div class="back-to-top animated">
           <i class="fa fa-arrow-up"></i>
           <span>0%</span>
         </div>
     </div>
   </aside>
-  <div id="sidebar-dimmer"></div>
+  <div class="sidebar-dimmer"></div>
 
 
-      </header>
+    </header>
 
-      
+    
   <div class="reading-progress-bar"></div>
   <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
   <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlaWp1bi1saW4=" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
 
 <noscript>
-  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
 </noscript>
 
 
-      <div class="main-inner">
-        
+    <div class="main-inner post posts-expand">
+      
 
-        <div class="content post posts-expand">
-          
+      
 
-    
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
     <link itemprop="mainEntityOfPage" href="https://joke-lin.top/2020/05/24/2020-05-24-Computer-System-Architecture-Note/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -418,58 +420,62 @@
           计算机系统结构 张晨曦-第二版 整理
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-05-24 00:00:00" itemprop="dateCreated datePublished" datetime="2020-05-24T00:00:00+08:00">2020-05-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-07-20 15:09:57" itemprop="dateModified" datetime="2020-07-20T15:09:57+08:00">2020-07-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">随笔</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9A%8F%E7%AC%94/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
-                </span>
-            </span>
+      <time title="Created: 2020-05-24 00:00:00" itemprop="dateCreated datePublished" datetime="2020-05-24T00:00:00+08:00">2020-05-24</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-11-01 19:00:43" itemprop="dateModified" datetime="2020-11-01T19:00:43+08:00">2020-11-01</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Science/" itemprop="url" rel="index"><span itemprop="name">Computer Science</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Science/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+        </span>
+    </span>
 
-          
-            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
-              <span class="post-meta-item-icon">
-                <i class="eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span id="busuanzi_value_page_pv"></span>
-            </span><br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>18k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>17 mins.</span>
-            </span>
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>18k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>17 mins.</span>
+    </span>
+</div>
 
         </div>
       </header>
@@ -478,10 +484,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
         <blockquote>
-<p>Github：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0pva2UtTGluL05vdGVzL3RyZWUvbWFzdGVyL+iuoeeul+acuuezu+e7n+e7k+aehC3lvKDmmajmm6Yt56ys5LqM54mI">笔记-计算机系统结构-张晨曦-第二版<i class="fa fa-external-link-alt"></i></span></p>
+<p>Github：<a target="_blank" rel="noopener" href="https://github.com/Joke-Lin/Notes/tree/master/计算机系统结构-张晨曦-第二版">笔记-计算机系统结构-张晨曦-第二版</a></p>
 </blockquote>
 <a id="more"></a>
 <h2 id="第一章-计算机系统结构的基本概念">第一章 计算机系统结构的基本概念</h2>
@@ -1724,16 +1728,18 @@
     
     
     
-        
 
-<div>
-<ul class="post-copyright">
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
   <li class="post-copyright-author">
-    <strong>Post author:  </strong>Weijun-Lin
+      <strong>Post author:  </strong>Weijun-Lin
   </li>
   <li class="post-copyright-link">
-    <strong>Post link: </strong>
-    <a href="https://joke-lin.top/2020/05/24/2020-05-24-Computer-System-Architecture-Note/" title="计算机系统结构 张晨曦-第二版 整理">https://joke-lin.top/2020/05/24/2020-05-24-Computer-System-Architecture-Note/</a>
+      <strong>Post link: </strong>
+      <a href="https://joke-lin.top/2020/05/24/2020-05-24-Computer-System-Architecture-Note/" title="计算机系统结构 张晨曦-第二版 整理">https://joke-lin.top/2020/05/24/2020-05-24-Computer-System-Architecture-Note/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.
@@ -1741,8 +1747,6 @@
 </ul>
 </div>
 
-
-      <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/" rel="tag"><i class="fa fa-tag"></i> 计算机系统结构</a>
           </div>
@@ -1754,29 +1758,28 @@
     </div>
   </div>
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2020/05/27/2020-05-27-PAT-Advanced-1064/" rel="prev" title="PAT Advanced 1064 Complete Binary Search Tree （二叉树）">
-      <i class="fa fa-chevron-left"></i> PAT Advanced 1064 Complete Binary Search Tree （二叉树）
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/05/23/2020-05-23-PAT-Advanced-1060/" rel="next" title="PAT Advanced 1060 Are They Equal （模拟）">
-      PAT Advanced 1060 Are They Equal （模拟） <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/05/27/2020-05-27-PAT-Advanced-1064/" rel="prev" title="PAT Advanced 1064 Complete Binary Search Tree （二叉树）">
+                  <i class="fa fa-chevron-left"></i> PAT Advanced 1064 Complete Binary Search Tree （二叉树）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/05/23/2020-05-23-PAT-Advanced-1060/" rel="next" title="PAT Advanced 1060 Are They Equal （模拟）">
+                  PAT Advanced 1060 Are They Equal （模拟） <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
   </article>
-  
-  
-  
+</div>
 
 
 
-        </div>
-        
+
+
+
+      
     
   <div class="comments">
     <div id="lv-container" data-id="city" data-uid="MTAyMC8zOTczMy8xNjI2MA=="></div>
@@ -1790,7 +1793,7 @@
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -1799,20 +1802,20 @@
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
 
-      </div>
-    </main>
+    </div>
+  </main>
 
-    <footer class="footer">
-      <div class="footer-inner">
-        
+  <footer class="footer">
+    <div class="footer-inner">
+      
 
-        
+      
 
 <div class="copyright">
   
@@ -1822,25 +1825,24 @@
     <i class="heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Weijun-Lin</span>
-    <span class="post-meta-divider">|</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
     <span class="post-meta-item-icon">
-      <i class="fa fa-chart-area"></i>
+      <i class="fa fa-chart-line"></i>
     </span>
-      <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">209k</span>
-    <span class="post-meta-divider">|</span>
+      <span>Symbols count total: </span>
+    <span title="Symbols count total">215k</span>
+  </span>
+  <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-      <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">3:10</span>
+      <span>Reading time total &asymp;</span>
+    <span title="Reading time total">3:16</span>
+  </span>
 </div>
-  <div class="powered-by">Powered by <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span>
-  </div>
-
-        
 <div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
       <span class="post-meta-item-icon">
         <i class="user"></i>
@@ -1849,7 +1851,6 @@
         <span id="busuanzi_value_site_uv"></span>
       </span>
     </span>
-    <span class="post-meta-divider">|</span>
     <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
       <span class="post-meta-item-icon">
         <i class="eye"></i>
@@ -1859,32 +1860,17 @@
       </span>
     </span>
 </div>
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
+  <div class="powered-by">Powered by <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span>
   </div>
 
+    </div>
+  </footer>
+
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-<script src="/js/bookmark.js"></script>
-
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
 
   
   <script>
@@ -1920,13 +1906,24 @@
   }
   </script>
 
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
-<script src="/js/local-search.js"></script>
-
-
-
-
-
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
@@ -1938,66 +1935,13 @@
   
 
   
-      
-
-<script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
-    
 
   
 
 <script>
-NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+NexT.utils.loadComments('#lv-container', () => {
   window.livereOptions = {
-    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+    refer: "2020/05/24/2020-05-24-Computer-System-Architecture-Note/"
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];
