@@ -181,7 +181,7 @@ body {
 body {
   background: var(--body-bg-color);
   color: var(--text-color);
-  font-family: Lato, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: Lato, 'PingFang SC', 'Microsoft YaHei', sans-serif;
   font-size: 1em;
   line-height: 2;
   min-height: 100%;
@@ -194,7 +194,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: Lato, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: Lato, 'PingFang SC', 'Microsoft YaHei', sans-serif;
   font-weight: bold;
   line-height: 1.5;
   margin: 20px 0 15px;
@@ -218,16 +218,16 @@ h6 {
   font-size: 0.875em;
 }
 p {
-  margin: 0 0 20px 0;
+  margin: 0 0 20px;
 }
 a,
 span.exturl {
   border-bottom: 1px solid #999;
   color: var(--link-color);
+  cursor: pointer;
   outline: 0;
   text-decoration: none;
   overflow-wrap: break-word;
-  cursor: pointer;
 }
 a:hover,
 span.exturl:hover {
@@ -273,7 +273,7 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
   font-size: 0.875em;
-  margin: 0 0 20px 0;
+  margin: 0 0 20px;
   width: 100%;
 }
 tbody tr:nth-of-type(odd) {
@@ -492,7 +492,7 @@ pre {
 }
 pre,
 code {
-  font-family: consolas, Menlo, monospace, "PingFang SC", "Microsoft YaHei";
+  font-family: consolas, Menlo, monospace, 'PingFang SC', 'Microsoft YaHei';
 }
 code {
   border-radius: 3px;
@@ -885,10 +885,10 @@ pre code {
   border-bottom: 1px solid #ddd;
   border-left: 1px solid transparent;
   border-right: 1px solid transparent;
+  border-radius: 0 0 0 0;
   border-top: 3px solid transparent;
   flex-grow: 1;
   list-style-type: none;
-  border-radius: 0 0 0 0;
 }
 @media (max-width: 413px) {
   .post-body .tabs ul.nav-tabs li.tab,
@@ -941,8 +941,8 @@ pre code {
 .post-body .tabs .tab-content,
 .tabs-comment .tab-content {
   border: 1px solid #ddd;
-  border-top-color: transparent;
   border-radius: 0 0 0 0;
+  border-top-color: transparent;
 }
 @media (max-width: 413px) {
   .post-body .tabs .tab-content,
@@ -953,7 +953,7 @@ pre code {
 }
 .post-body .tabs .tab-content .tab-pane,
 .tabs-comment .tab-content .tab-pane {
-  padding: 20px 20px 0 20px;
+  padding: 20px 20px 0;
 }
 .post-body .tabs .tab-content .tab-pane:not(.active),
 .tabs-comment .tab-content .tab-pane:not(.active) {
@@ -1066,7 +1066,7 @@ pre code {
 .pagination .page-number,
 .pagination .space {
   display: inline-block;
-  margin: -1px 10px 0 10px;
+  margin: -1px 10px 0;
   padding: 0 10px;
 }
 @media (max-width: 767px) {
@@ -1206,7 +1206,7 @@ pre code {
   }
 }
 .brand {
-  border-bottom: none;
+  border-bottom: 0;
   color: var(--brand-color);
   display: inline-block;
   padding: 0 40px;
@@ -1215,7 +1215,7 @@ pre code {
   color: var(--brand-hover-color);
 }
 .site-title {
-  font-family: Lato, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: Lato, 'PingFang SC', 'Microsoft YaHei', sans-serif;
   font-size: 1.375em;
   font-weight: normal;
   margin: 0;
@@ -1320,7 +1320,7 @@ pre code {
   visibility: hidden;
 }
 .book-mark-link {
-  border-bottom: none;
+  border-bottom: 0;
   position: fixed;
   top: -10px;
   transition: top 0.3s;
@@ -1427,7 +1427,7 @@ pre code {
   margin-top: 10px;
 }
 .cc-license .cc-opacity {
-  border-bottom: none;
+  border-bottom: 0;
   opacity: 0.7;
 }
 .cc-license .cc-opacity:hover {
@@ -1505,7 +1505,7 @@ pre code {
 .sidebar-dimmer {
   display: none;
 }
-@media (max-width: 767px) {
+@media (max-width: 991px) {
   .sidebar-dimmer {
     background: #000;
     display: block;
@@ -1677,7 +1677,7 @@ pre code {
   padding: 0 15px;
 }
 .site-state-item a {
-  border-bottom: none;
+  border-bottom: 0;
   display: block;
 }
 .site-state-item-count {
@@ -1962,7 +1962,7 @@ pre code {
 }
 .posts-collapse .post-content .post-title a,
 .posts-collapse .post-content .post-title span.exturl {
-  border-bottom: none;
+  border-bottom: 0;
   color: var(--link-color);
 }
 .posts-collapse .post-content .post-title .fa-external-link-alt {
@@ -1979,7 +1979,7 @@ pre code {
   width: 4px;
 }
 .post-body {
-  font-family: Lato, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: Lato, 'PingFang SC', 'Microsoft YaHei', sans-serif;
   overflow-wrap: break-word;
 }
 @media (min-width: 1200px) {
@@ -2143,7 +2143,7 @@ pre code {
   overflow-wrap: break-word;
 }
 .posts-expand .post-title-link {
-  border-bottom: none;
+  border-bottom: 0;
   color: var(--link-color);
   display: inline-block;
   position: relative;
@@ -2168,11 +2168,12 @@ pre code {
 }
 .post-sticky-flag {
   display: inline-block;
+  margin-right: 8px;
   transform: rotate(30deg);
 }
 .posts-expand .post-meta-container {
   color: #999;
-  font-family: Lato, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: Lato, 'PingFang SC', 'Microsoft YaHei', sans-serif;
   font-size: 0.75em;
   margin-top: 3px;
 }
@@ -2213,7 +2214,7 @@ pre code {
   flex: 1;
 }
 .post-nav-item a {
-  border-bottom: none;
+  border-bottom: 0;
   display: block;
   font-size: 0.875em;
   line-height: 1.6;
@@ -2320,7 +2321,7 @@ pre code {
 }
 .post-reward img {
   display: inline-block;
-  margin: 0.8em 2em 0 2em;
+  margin: 0.8em 2em 0;
   max-width: 100%;
   width: 180px;
 }
@@ -2384,7 +2385,7 @@ pre code {
 }
 .event-list hr {
   background: #222;
-  margin: 20px 0 45px 0;
+  margin: 20px 0 45px;
 }
 .event-list hr::after {
   background: #222;
@@ -2913,7 +2914,7 @@ mjx-container[display="true"] + br {
 }
 .links-of-author-item a,
 .links-of-author-item span.exturl {
-  border-bottom: none;
+  border-bottom: 0;
   border-radius: 4px;
   display: block;
 }
@@ -2988,7 +2989,7 @@ mjx-container[display="true"] + br {
 }
 .pagination {
   border-top: initial;
-  padding: 10px 0 10px;
+  padding: 10px 0;
 }
 .post-body h1,
 .post-body h2 {
