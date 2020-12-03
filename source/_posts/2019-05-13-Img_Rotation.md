@@ -7,6 +7,7 @@ tags:
 categories:
 - Computer Science
 - CV&CG&DIP
+- DIP
 ---
 
 ### 旋转原理

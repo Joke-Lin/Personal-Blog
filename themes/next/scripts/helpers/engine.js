@@ -60,9 +60,9 @@ hexo.extend.helper.register('post_gallery', function(photos) {
 });
 
 hexo.extend.helper.register('post_edit', function(src) {
-  const { theme } = this;
-  if (!theme.post_edit.enable) return '';
-  return this.next_url(theme.post_edit.url + src, '<i class="fa fa-pen-nib"></i>', {
+  const { post_edit } = this.theme;
+  if (!post_edit.enable) return '';
+  return this.next_url(post_edit.url + src, '<i class="fa fa-pen-nib"></i>', {
     class: 'post-edit-link',
     title: this.__('post.edit')
   });
