@@ -26,18 +26,22 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"joke-lin.top","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="Learing and Using">
-<meta property="og:type" content="website">
-<meta property="og:title" content="WEIJUN LIN BLOG">
-<meta property="og:url" content="https://joke-lin.top/archives/2019/02/index.html">
+<meta name="description" content="主要介绍从傅里叶级数出发推导傅里叶变换，知乎有很多优秀的傅里叶变换的推导，这里给出一个从傅里叶级数出发，化离散为连续推导出傅里叶变换（也参考了网上的一些思路） 本文的傅里叶形式主要为冈萨雷斯中文版《数字图形处理 第三版》第四章给出的形式，下文用《DIP》替代。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="傅里叶变换推导">
+<meta property="og:url" content="https://joke-lin.top/2020/12/04/2020-12-04-FourierTransformation/index.html">
 <meta property="og:site_name" content="WEIJUN LIN BLOG">
-<meta property="og:description" content="Learing and Using">
+<meta property="og:description" content="主要介绍从傅里叶级数出发推导傅里叶变换，知乎有很多优秀的傅里叶变换的推导，这里给出一个从傅里叶级数出发，化离散为连续推导出傅里叶变换（也参考了网上的一些思路） 本文的傅里叶形式主要为冈萨雷斯中文版《数字图形处理 第三版》第四章给出的形式，下文用《DIP》替代。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-12-03T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-12-03T16:00:00.000Z">
 <meta property="article:author" content="Weijun-Lin">
+<meta property="article:tag" content="傅里叶变换">
+<meta property="article:tag" content="信号处理">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://joke-lin.top/archives/2019/02/">
+<link rel="canonical" href="https://joke-lin.top/2020/12/04/2020-12-04-FourierTransformation/">
 
 
 <script class="page-configurations">
@@ -45,11 +49,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
-<title>归档 | WEIJUN LIN BLOG</title>
+<title>傅里叶变换推导 | WEIJUN LIN BLOG</title>
   
 
   <script>
@@ -185,7 +189,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -198,6 +202,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%82%85%E9%87%8C%E5%8F%B6%E7%BA%A7%E6%95%B0"><span class="nav-text">傅里叶级数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2"><span class="nav-text">傅里叶变换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -294,91 +299,234 @@
 </noscript>
 
 
-    <div class="main-inner archive posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
+
+
+<div class="post-block">
   
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        
-        <span class="collection-header">不错! 目前共计 57 篇日志。 继续努力。</span>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://joke-lin.top/2020/12/04/2020-12-04-FourierTransformation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Weijun-Lin">
+      <meta itemprop="description" content="Learing and Using">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WEIJUN LIN BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          傅里叶变换推导
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-12-04 00:00:00" itemprop="dateCreated datePublished" datetime="2020-12-04T00:00:00+08:00">2020-12-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Science/" itemprop="url" rel="index"><span itemprop="name">Computer Science</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Science/CV-CG-DIP/" itemprop="url" rel="index"><span itemprop="name">CV&CG&DIP</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Science/CV-CG-DIP/CV/" itemprop="url" rel="index"><span itemprop="name">CV</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
       </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
 
-      
-    <div class="collection-year">
-      <span class="collection-header">2019</span>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>主要介绍从傅里叶级数出发推导傅里叶变换，知乎有很多优秀的傅里叶变换的推导，这里给出一个从傅里叶级数出发，化离散为连续推导出傅里叶变换（也参考了网上的一些思路）</p>
+<p>本文的傅里叶形式主要为冈萨雷斯中文版《数字图形处理 第三版》第四章给出的形式，下文用《DIP》替代。</p>
+<a id="more"></a>
+<h2 id="傅里叶级数">傅里叶级数</h2>
+<p>复数形式的傅里叶级数： <span class="math display">\[
+\begin{align}
+f(t) &amp;= \sum_{n=-\infty}^{\infty} C_n e^{j\frac{2\pi n}{T}t} \\
+C_n &amp;= \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} f(t) e^{-j\frac{2\pi n}{T}t} \text{d}t \\
+n &amp;= 0,\pm 1,\pm 2,\dots
+\end{align}
+\]</span> 等式摘自《DIP》 4.2.2 傅里叶级数。</p>
+<p>傅里叶级数的复数形式可参考网上，注意指数表达有角频率和频率两种，这里为角频率。傅里叶变换推导中将指出。</p>
+<h2 id="傅里叶变换">傅里叶变换</h2>
+<p>《DIP》4.2.4 给出了傅里叶变换对 <span class="math display">\[
+\begin{align}
+F(\mu) &amp;= \int_{-\infty}^{\infty} f(t) e^{-j2\pi \mu t} \text{d}t \\
+f(t) &amp;= \int_{-\infty}^{\infty} F(\mu) e^{-j2\pi \mu t} \text{d}\mu
+\end{align}
+\]</span> 其实我们发现傅里叶变换和傅里叶级数的形式是十分相似的，且<strong>级数与积分之间的关系可以用离散和连续来表示</strong>，那么可以试试将傅里叶级数连续化，看看是否可以得出傅里叶变换。傅里叶级数是适用于周期函数的，对于一般函数可认为 <span class="math inline">\(T\rightarrow \infty\)</span></p>
+<p>重写一般函数的傅里叶级数如下： <span class="math display">\[
+\begin{align}
+f(t) &amp;= \lim_{T\rightarrow \infty} \sum_{n = -\infty}^{\infty} C_n e^{j\frac{2\pi n}{T}t} \\
+&amp;=\lim_{T\rightarrow \infty} \sum_{n = -\infty}^{\infty} 
+\{\frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} f(t) e^{-j\frac{2\pi n}{T}t} \text{d}t\}
+e^{j\frac{2\pi n}{T}t} \\
+\end{align}
+\]</span> 令 <span class="math inline">\(\Delta w = \frac{2\pi}{T}\)</span>（角频率）， <span class="math inline">\(T\rightarrow \infty\)</span> 所以 <span class="math inline">\(\Delta w \rightarrow 0\)</span>，将 <span class="math inline">\(\Delta w\)</span> 带入上式可得 <span class="math display">\[
+f(t) = \lim_{\Delta w\rightarrow 0} \sum_{n = -\infty}^{\infty} 
+\{\frac{\Delta w}{2\pi} \int_{-\infty}^{\infty} f(t) e^{-j\Delta w\cdot nt} \text{d}t\}
+e^{j\Delta w\cdot nt}
+\]</span> 令 <span class="math inline">\(w = \Delta w\cdot n\)</span>，带入可得 <span class="math display">\[
+f(t) = \lim_{\Delta w\rightarrow 0} \sum_{n = -\infty}^{\infty} 
+\{\frac{\Delta w}{2\pi} \int_{-\infty}^{\infty} f(t) e^{-jwt} \text{d}t\}
+e^{jwt}
+\]</span> 这里可以发现大括号内的就是傅里叶变换的形式。所以将其单独提取出来即： <span class="math display">\[
+F(w) = \int_{-\infty}^{\infty} f(t) e^{-jwt} \text{d}t
+\]</span> 所以函数又可化为： <span class="math display">\[
+\begin{align}
+f(t) &amp;= \lim_{\Delta w\rightarrow 0} \sum_{n = -\infty}^{\infty} 
+\frac{\Delta w}{2\pi} F(w)
+e^{jwt} \\
+&amp;= \frac{1}{2\pi} \lim_{\Delta w\rightarrow 0} \sum_{n = -\infty}^{\infty} 
+\Delta w F(w)
+e^{jwt}
+\end{align}
+\]</span> 注意到 <span class="math inline">\(w = \Delta w\cdot n\)</span> ，因为 <span class="math inline">\(n \in (-\infty,\infty)\)</span>，所以 w 为<span class="math inline">\((-\infty,\infty)\)</span> 上以 <span class="math inline">\(\Delta w\)</span> 为间隔的点集。且有定义可知 w 是 n 的函数，对于确定的 <span class="math inline">\(\Delta w\)</span> ，有 <span class="math inline">\(\text{d}w = \Delta w\)</span>，现在，令 <span class="math inline">\(\Delta w\rightarrow 0\)</span> ，即将 w 连续化，所以上式的<strong>本质为函数 <span class="math inline">\(F(w)e^{jwt}\)</span> 自变量 w 在 <span class="math inline">\((-\infty,\infty)\)</span> 上的积分</strong>。最终可得： <span class="math display">\[
+\begin{align}
+f(t) &amp;= \frac{1}{2\pi} \int_{-\infty}^{\infty} 
+F(w) e^{jwt} \text{d} w \tag{1}\\
+F(w)&amp; = \int_{-\infty}^{\infty} f(t) e^{-jwt} \text{d}t \tag{2} \\
+w &amp;= \Delta w \cdot n \\
+\Delta w &amp;= \frac{2\pi}{T}
+\end{align}
+\]</span> 式子 <span class="math inline">\((1),(2)\)</span> 构成了傅里叶变换对，<span class="math inline">\((1)\)</span> 为傅里叶逆变换，<span class="math inline">\((2)\)</span> 为傅里叶变换</p>
+<p>其中并没有涉及到 <span class="math inline">\(\Delta w\)</span> ，只涉及到自变量 <span class="math inline">\(t,w\)</span>。但傅里叶变换对是时域到频率域的转换。现在也很好理解为什么连接了频率域，<strong>因为推导过程涉及到了 <span class="math inline">\(\Delta w\)</span>，它的物理意义为角频率，而 w 是数轴上以 <span class="math inline">\(\Delta w\)</span> 分割的点集，也就覆盖了全部的频率，换句话说，w 是在频率域中的变量</strong>。</p>
+<p>这个变换对定义式和《DIP》以及网上一些不同，主要在于系数 <span class="math inline">\(\frac{1}{2\pi}\)</span> 以及指数部分，本质上都是相同的，不过是<strong>自变量取角频率还是频率的区别</strong>。</p>
+<p>频率和角频率的关系为：<span class="math inline">\(w = 2 \pi \mu\)</span>，带入角频率傅里叶变换对可得：</p>
+<ol type="1">
+<li><p>傅里叶变换 <span class="math display">\[
+ F(w) = F(2\pi \mu) = \int_{-\infty}^{\infty} f(t) e^{-j2\pi \mu t} \text{d}t = F&#39;(\mu)
+ \]</span></p></li>
+<li><p>傅里叶逆变换 <span class="math display">\[
+ \begin{align}
+ f(t) &amp;= \frac{1}{2\pi} \int_{-\infty}^{\infty} 
+ F(w) e^{jwt} \text{d} w \\
+ &amp;= \frac{1}{2\pi} \int_{-\infty}^{\infty} 
+ F(2\pi \mu) e^{j2\pi \mu t} \text{d} (2\pi \mu) \\
+ &amp;= \int_{-\infty}^{\infty} 
+ F&#39;(\mu) e^{j2\pi \mu t} \text{d} \mu
+ \end{align}
+ \]</span></p></li>
+</ol>
+<p>即： $$ <span class="math display">\[\begin{align}
+F(\mu) &amp;= \int_{-\infty}^{\infty} f(t) e^{-j2\pi \mu t} \text{d}t \\
+f(t) &amp;= \int_{-\infty}^{\infty} 
+F(\mu) e^{j2\pi \mu t} \text{d} \mu
+
+\end{align}\]</span> $$</p>
+<h2 id="总结">总结</h2>
+<p>本文给出了傅里叶变换对的频率与角频率形式，以及从傅里叶级数出发推导傅里叶变换的方法，但不是很严谨，只能是说给出了一个思路，傅里叶变换其实为傅里叶级数拓展到无穷周期的表示。</p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2019-02-24T00:00:00+08:00"
-              content="2019-02-24">
-          02-24
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2019/02/24/2019-02-24-stb_image/" itemprop="url">
-            <span itemprop="name">图像库stb_image & stb_image_write</span>
-          </a>
-      </div>
+    <footer class="post-footer">
+          
 
-      
-    </header>
-  </article>
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Weijun-Lin
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://joke-lin.top/2020/12/04/2020-12-04-FourierTransformation/" title="傅里叶变换推导">https://joke-lin.top/2020/12/04/2020-12-04-FourierTransformation/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2019-02-21T00:00:00+08:00"
-              content="2019-02-21">
-          02-21
-        </time>
-      </div>
+          <div class="post-tags">
+              <a href="/tags/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" rel="tag"><i class="fa fa-tag"></i> 傅里叶变换</a>
+              <a href="/tags/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/" rel="tag"><i class="fa fa-tag"></i> 信号处理</a>
+          </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2019/02/21/2019-02-21-Life/" itemprop="url">
-            <span itemprop="name">Life Record 1</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2019-02-14T00:00:00+08:00"
-              content="2019-02-14">
-          02-14
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2019/02/14/2019-02-14-VirtualBox_Ubuntu/" itemprop="url">
-            <span itemprop="name">Virtual Box 配置虚拟机 Ubuntu</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
     </div>
   </div>
-  
-  
-  
 
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/12/03/2020-12-03-Image%20Features%20Detection%20Description%20and%20Matching/" rel="next" title="【译】图像特征检测，描述和匹配">
+                  【译】图像特征检测，描述和匹配 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC8zOTczMy8xNjI2MA=="></div>
+  </div>
+  
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -507,9 +655,55 @@
 
 
 
-  
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'none'
+      },
+      options: {
+        renderActions: {
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
 
 
+
+<script>
+NexT.utils.loadComments('#lv-container', () => {
+  window.livereOptions = {
+    refer: "2020/12/04/2020-12-04-FourierTransformation/"
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
 
 </body>
 </html>
