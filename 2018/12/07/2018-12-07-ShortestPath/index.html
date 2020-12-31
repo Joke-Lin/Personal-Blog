@@ -24,27 +24,27 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"joke-lin.top","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"weijun-lin.top","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 <meta name="description" content="图的基础，最短路径的几种解答 单源最短路： Bellman-Ford &amp; Dijkstra 及其简单优化 以及负圈的判断 多源最短路：Floyd-Warshall 算法的简单理解 路径还原问题 算法代码及思路主要参考：《挑战程序设计竞赛》  在此之前读者应对图已经有基础的概念，以及图的邻接表 &amp; 邻接矩阵的表示方法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="最短路径的三种算法以及路径还原与负圈判断">
-<meta property="og:url" content="https://joke-lin.top/2018/12/07/2018-12-07-ShortestPath/index.html">
+<meta property="og:url" content="https://weijun-lin.top/2018/12/07/2018-12-07-ShortestPath/index.html">
 <meta property="og:site_name" content="WEIJUN LIN BLOG">
 <meta property="og:description" content="图的基础，最短路径的几种解答 单源最短路： Bellman-Ford &amp; Dijkstra 及其简单优化 以及负圈的判断 多源最短路：Floyd-Warshall 算法的简单理解 路径还原问题 算法代码及思路主要参考：《挑战程序设计竞赛》  在此之前读者应对图已经有基础的概念，以及图的邻接表 &amp; 邻接矩阵的表示方法">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://joke-lin.top/assets/ArticleImg/2018/shortpath1.png">
-<meta property="og:image" content="https://joke-lin.top/assets/ArticleImg/2018/shortpath2.png">
+<meta property="og:image" content="https://weijun-lin.top/assets/ArticleImg/2018/shortpath1.png">
+<meta property="og:image" content="https://weijun-lin.top/assets/ArticleImg/2018/shortpath2.png">
 <meta property="article:published_time" content="2018-12-06T16:00:00.000Z">
 <meta property="article:modified_time" content="2018-12-06T16:00:00.000Z">
 <meta property="article:author" content="Weijun-Lin">
 <meta property="article:tag" content="C&#x2F;C++">
 <meta property="article:tag" content="Graph Theory">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://joke-lin.top/assets/ArticleImg/2018/shortpath1.png">
+<meta name="twitter:image" content="https://weijun-lin.top/assets/ArticleImg/2018/shortpath1.png">
 
 
-<link rel="canonical" href="https://joke-lin.top/2018/12/07/2018-12-07-ShortestPath/">
+<link rel="canonical" href="https://weijun-lin.top/2018/12/07/2018-12-07-ShortestPath/">
 
 
 <script class="page-configurations">
@@ -221,7 +221,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-count">58</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -234,7 +234,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -313,7 +313,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://joke-lin.top/2018/12/07/2018-12-07-ShortestPath/">
+    <link itemprop="mainEntityOfPage" href="https://weijun-lin.top/2018/12/07/2018-12-07-ShortestPath/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -487,7 +487,7 @@ d[k-1][i][k] + d[k-1][k][j]　（经过K点）\\
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://joke-lin.top/2018/12/07/2018-12-07-ShortestPath/" title="最短路径的三种算法以及路径还原与负圈判断">https://joke-lin.top/2018/12/07/2018-12-07-ShortestPath/</a>
+      <a href="https://weijun-lin.top/2018/12/07/2018-12-07-ShortestPath/" title="最短路径的三种算法以及路径还原与负圈判断">https://weijun-lin.top/2018/12/07/2018-12-07-ShortestPath/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
@@ -576,14 +576,14 @@ d[k-1][i][k] + d[k-1][k][j]　（经过K点）\\
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">253k</span>
+    <span title="站点总字数">255k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:50</span>
+    <span title="站点阅读时长">3:52</span>
   </span>
 </div>
 <div class="busuanzi-count">

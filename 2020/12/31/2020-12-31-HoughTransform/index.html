@@ -26,25 +26,24 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"weijun-lin.top","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="简单定义 有向图中称为，强连通分量。连通图和连通分量都是针对无向图。 在有向图G中，如果两个顶点间至少存在一条路径，称两个顶点强连通(strongly connected)。如果有向图G的每两个顶点都强连通，称G是一个强连通图。非强连通图有向图的极大强连通子图，称为强连通分量(strongly connected components)。">
+<meta name="description" content="简单介绍 霍夫变换可以用于边缘检测，更一般的则可以拟合曲线。基本原理如下：由曲线的定义式可得如XY确定，其对应的未知数构成的等式也可视作一个曲线表达式，这个新的表达式称作参数空间（自变量为原来的参数）改变 XY 的过程中这些位置构成的新的表达式必会都经过某一个固定点，这个固定点代表的参数就是原来曲线表达式。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="求解图的连通分量">
-<meta property="og:url" content="https://weijun-lin.top/2020/04/06/2020-04-06-connected-components/index.html">
+<meta property="og:title" content="霍夫变换直线检测原理实现">
+<meta property="og:url" content="https://weijun-lin.top/2020/12/31/2020-12-31-HoughTransform/index.html">
 <meta property="og:site_name" content="WEIJUN LIN BLOG">
-<meta property="og:description" content="简单定义 有向图中称为，强连通分量。连通图和连通分量都是针对无向图。 在有向图G中，如果两个顶点间至少存在一条路径，称两个顶点强连通(strongly connected)。如果有向图G的每两个顶点都强连通，称G是一个强连通图。非强连通图有向图的极大强连通子图，称为强连通分量(strongly connected components)。">
+<meta property="og:description" content="简单介绍 霍夫变换可以用于边缘检测，更一般的则可以拟合曲线。基本原理如下：由曲线的定义式可得如XY确定，其对应的未知数构成的等式也可视作一个曲线表达式，这个新的表达式称作参数空间（自变量为原来的参数）改变 XY 的过程中这些位置构成的新的表达式必会都经过某一个固定点，这个固定点代表的参数就是原来曲线表达式。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://weijun-lin.top/assets/ArticleImg/2020/connected-components-1.png">
-<meta property="og:image" content="https://weijun-lin.top/assets/ArticleImg/2020/connected-components-2.jpg">
-<meta property="article:published_time" content="2020-04-05T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-04-05T16:00:00.000Z">
+<meta property="og:image" content="https://weijun-lin.top/assets/ArticleImg/2020/hough.png">
+<meta property="article:published_time" content="2020-12-30T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-12-30T16:00:00.000Z">
 <meta property="article:author" content="Weijun-Lin">
-<meta property="article:tag" content="C&#x2F;C++">
-<meta property="article:tag" content="Graph Theory">
+<meta property="article:tag" content="特征检测">
+<meta property="article:tag" content="matlab">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://weijun-lin.top/assets/ArticleImg/2020/connected-components-1.png">
+<meta name="twitter:image" content="https://weijun-lin.top/assets/ArticleImg/2020/hough.png">
 
 
-<link rel="canonical" href="https://weijun-lin.top/2020/04/06/2020-04-06-connected-components/">
+<link rel="canonical" href="https://weijun-lin.top/2020/12/31/2020-12-31-HoughTransform/">
 
 
 <script class="page-configurations">
@@ -56,7 +55,7 @@
     lang   : 'zh-CN'
   };
 </script>
-<title>求解图的连通分量 | WEIJUN LIN BLOG</title>
+<title>霍夫变换直线检测原理实现 | WEIJUN LIN BLOG</title>
   
 
   <script>
@@ -205,7 +204,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E5%AE%9A%E4%B9%89"><span class="nav-text">简单定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A0%E5%90%91%E5%9B%BE"><span class="nav-text">无向图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89%E5%90%91%E5%9B%BE"><span class="nav-text">有向图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tarjan%E7%AE%97%E6%B3%95"><span class="nav-text">Tarjan算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kosaraju%E7%AE%97%E6%B3%95"><span class="nav-text">Kosaraju算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8D%E5%9B%BE%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-text">反图的作用</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D"><span class="nav-text">简单介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-text">代码实现</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -313,7 +312,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://weijun-lin.top/2020/04/06/2020-04-06-connected-components/">
+    <link itemprop="mainEntityOfPage" href="https://weijun-lin.top/2020/12/31/2020-12-31-HoughTransform/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -326,7 +325,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          求解图的连通分量
+          霍夫变换直线检测原理实现
         </h1>
 
         <div class="post-meta-container">
@@ -337,7 +336,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2020-04-06 00:00:00" itemprop="dateCreated datePublished" datetime="2020-04-06T00:00:00+08:00">2020-04-06</time>
+      <time title="创建时间：2020-12-31 00:00:00" itemprop="dateCreated datePublished" datetime="2020-12-31T00:00:00+08:00">2020-12-31</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -349,7 +348,11 @@
         </span>
           ，
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Computer-Science/DSAA/" itemprop="url" rel="index"><span itemprop="name">DSAA</span></a>
+          <a href="/categories/Computer-Science/CV-CG-DIP/" itemprop="url" rel="index"><span itemprop="name">CV&CG&DIP</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Science/CV-CG-DIP/CV/" itemprop="url" rel="index"><span itemprop="name">CV</span></a>
         </span>
     </span>
 
@@ -368,7 +371,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.4k</span>
+      <span>1.9k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -386,45 +389,25 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="简单定义">简单定义</h2>
-<p>有向图中称为，强连通分量。连通图和连通分量都是针对无向图。</p>
-<p>在有向图G中，如果两个顶点间至少存在一条路径，称两个顶点<strong>强连通</strong>(strongly connected)。如果有向图G的每两个顶点都强连通，称G是一个<strong>强连通图</strong>。非强连通图有向图的极大强连通子图，称为<strong>强连通分量</strong>(strongly connected components)。</p>
+        <h2 id="简单介绍">简单介绍</h2>
+<p>霍夫变换可以用于边缘检测，更一般的则可以拟合曲线。基本原理如下：由曲线的定义式可得如XY确定，其对应的未知数构成的等式也可视作一个曲线表达式，这个新的表达式称作<strong>参数空间</strong>（自变量为原来的参数）改变 XY 的过程中这些位置构成的新的表达式必会都经过某一个固定点，这个固定点代表的参数就是原来曲线表达式。</p>
 <a id="more"></a>
-<h2 id="无向图">无向图</h2>
-<p>对于无向图而言，只要从一个点开始使用DFS或者BFS遍历所有可以遍历的边，这些遍历到的点集就构成了一个连通分量。然后寻找下一个之前没有遍历的点作为下一个连通分量的根结点，继续进行遍历。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; G[maxn];    <span class="comment">// 邻接表</span></span><br><span class="line"><span class="keyword">bool</span> visited[maxn];     <span class="comment">// 检查是否遍历完</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// DFS 遍历连接图 获得连通分量</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> root)</span> </span>&#123;</span><br><span class="line">    visited[root] = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; G[root].size();i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!visited[G[root][i]]) &#123;</span><br><span class="line">            dfs(G[root][i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> count = <span class="number">0</span>;	<span class="comment">// 连通分量的个数</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= num_nodes;i++) &#123;</span><br><span class="line">    <span class="keyword">if</span>(!visited[i]) &#123;</span><br><span class="line">        dfs(i);</span><br><span class="line">        count++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="有向图">有向图</h2>
-<p>下面两个算法都是<span class="math inline">\(O(N+E)\)</span>的复杂度</p>
-<h3 id="tarjan算法">Tarjan算法</h3>
-<p>可参考：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYnl2b2lkLmNvbS96aHMvYmxvZy9zY2MtdGFyamFu">有向图强连通分量的Tarjan算法<i class="fa fa-external-link-alt"></i></span></p>
-<p>算法的基本思想如下：任选一节点开始进行深度优先搜索（<strong>若深度优先搜索结束后仍有未访问的节点，则再从中任选一点再次进行</strong>）。搜索过程中已访问的节点不再访问。搜索树的若干子树构成了图的强连通分量。</p>
-<p>节点按照被访问的顺序存入堆栈中。从搜索树的子树返回至一个节点时，检查该节点是否是某一强连通分量的根节点（见下）并将其从堆栈中删除。如果某节点是强连通分量的根，则在它之前出堆栈且还不属于其他强连通分量的节点构成了该节点所在的强连通分量。</p>
-<p>算法代码为：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">tarjan(u)</span><br><span class="line">&#123;</span><br><span class="line">    DFN[u]=Low[u]=++Index                      <span class="comment">// 为节点u设定次序编号和Low初值</span></span><br><span class="line">    Stack.push(u)                              <span class="comment">// 将节点u压入栈中 其实就是保存拓扑序</span></span><br><span class="line">    <span class="keyword">for</span> each (u, v) in E                       <span class="comment">// 枚举每一条边</span></span><br><span class="line">        <span class="keyword">if</span> (v is <span class="keyword">not</span> visted)                   <span class="comment">// 如果节点v未被访问过</span></span><br><span class="line">            tarjan(v)                          <span class="comment">// 继续向下找</span></span><br><span class="line">            Low[u] = min(Low[u], Low[v])</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (v in S)                       <span class="comment">// 如果节点v还在栈内</span></span><br><span class="line">            Low[u] = min(Low[u], DFN[v])</span><br><span class="line">    <span class="keyword">if</span> (DFN[u] == Low[u])                      <span class="comment">// 如果节点u是强连通分量的根</span></span><br><span class="line">        repeat</span><br><span class="line">            v = S.pop                          <span class="comment">// 将v退栈，为该强连通分量中一个顶点</span></span><br><span class="line">            print v</span><br><span class="line">        until (u== v)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>其中：</p>
-<ul>
-<li>DFN[u]：为结点u的搜索编号（时间次序）</li>
-<li>Low[u]：为结点u和与结点u相连的子树的最小搜索序（最早出现时间）</li>
-</ul>
-<p>此算法其中判断强连通分量的思路就是，在以u为根节点进行DFS的过程中如果出现一个结点v指向了之前遍历过的点t，即<span class="math inline">\(u \rightarrow t \rightarrow v \rightarrow t\)</span>也就表明出现了一个环，其中<span class="math inline">\(t,v,t\)</span>就构成了环，即连通分量。</p>
-<p>其中的DFN就保存每个结点的访问顺序，Low保存相关子树的最早访问时间，在算法回溯的时候更新，可保证一个强连通分量的Low都是一致的，栈保存的是拓扑序，即遍历的次序，不断出栈获取连通分量。</p>
-<h3 id="kosaraju算法">Kosaraju算法</h3>
-<p>可参考：<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vbnVsbHp4L3AvNjQzNzkyNi5odG1s">Kosaraju算法解析: 求解图的强连通分量<i class="fa fa-external-link-alt"></i></span></p>
-<p>Kosaraju算法比Tarjan算法看似要简单一些，但效率没有Tarjan算法高，Kosaraju算法依靠DFS遍历获取极大连通子图。但存在一点问题。</p>
-<p><img src="\assets\ArticleImg\2020\connected-components-1.png" /></p>
-<p>对于上图，从A0开始遍历和B4开始遍历是不一样的结果。如果从B开始遍历，需要2次DFS便可以遍历完整个图，而A0只需要一次。<strong>所以Kosaraju算法的第一个DFS需要获取正确的遍历顺序，</strong>然后第二次DFS的次数便是连通分量的个数了。</p>
-<p>上图的反图为：</p>
-<p><img src="\assets\ArticleImg\2020\connected-components-2.jpg" /></p>
-<p>参考代码：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// g 是原图，g2 是反图</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs1</span><span class="params">(<span class="keyword">int</span> u)</span> </span>&#123;</span><br><span class="line">  vis[u] = <span class="literal">true</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> v : g[u])</span><br><span class="line">    <span class="keyword">if</span> (!vis[v]) dfs1(v);</span><br><span class="line">  s.push_back(u);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs2</span><span class="params">(<span class="keyword">int</span> u)</span> </span>&#123;</span><br><span class="line">  color[u] = sccCnt;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> v : g2[u])</span><br><span class="line">    <span class="keyword">if</span> (!color[v]) dfs2(v);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">kosaraju</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  sccCnt = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">    <span class="keyword">if</span> (!vis[i]) dfs1(i);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = n; i &gt;= <span class="number">1</span>; --i)</span><br><span class="line">    <span class="keyword">if</span> (!color[s[i]]) &#123;</span><br><span class="line">      ++sccCnt;</span><br><span class="line">      dfs2(s[i])</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>主要就是两点：</p>
+<p>但实际上的曲线会受到噪声影响，也就是说参数空间中所有的表达式并不会经过同一点，而是大部分曲线会经过某一固定点，这个固定点可能不止一个，所以我们将参数空间切分为一个个子区域，并统计子区域中线的交点（也可以直接统计线的点数，只要代表密度即可），交点最多的那个区域就是原曲线的参数。</p>
+<p>更加详细的介绍可见《数字图像处理》中文第三版 <em>P472</em> 10.2.7 边缘检测和边界检测。或参考<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vUG9ueXMvcC8zMTQ2NzUzLmh0bWw=">Matlab 霍夫变换 ( Hough Transform） 直线检测 - Pony_s - 博客园 (cnblogs.com)<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="代码实现">代码实现</h2>
+<p>以下为 matlab 代码实现，基本实现过程如下：</p>
 <ol type="1">
-<li>后序遍历获取拓扑序，保证BA的相对顺序不会改变</li>
-<li>反向原图根据上面获取的遍历顺序，重新DFS</li>
+<li>实现生成直线</li>
+<li>给直线增加噪声</li>
+<li>对噪声处理后的图像生成其参数空间</li>
+<li>对参数空间的所有曲线做直方图统计，得到最大数量的参数表达</li>
+<li>获得拟合的直线</li>
 </ol>
-<h4 id="反图的作用">反图的作用</h4>
-<p>其中的反图很有意思，对于强连通子图，反图和原图并无区别。但对于非强连通的则会有很大的影响。例如<span class="math inline">\(A \rightarrow B \rightarrow C\)</span>反图为<span class="math inline">\(A \leftarrow B \leftarrow C\)</span> 从A开始遍历一次便遍历完，但反图后从A开始便需要3次，也就是强连通分量的个数（单个结点也是强连通）。而且反图保证了图的收缩，可参考：<span class="exturl" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3F1ZXN0aW9uLzI2NTI2NjkyMy9hbnN3ZXIvOTEyMjM5MTky">Kosaraju算法为什么是用图G的反向图的逆后序，而不能是图G的后序？<i class="fa fa-external-link-alt"></i></span></p>
-<p><strong>所以通过后续遍历获取遍历结点的顺序，然后通过反图获取强连通分量的个数。</strong></p>
+<p>代码如下：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% 霍夫变换 &amp; 直线</span></span><br><span class="line"><span class="comment">% 生成直线 y = 2x + 3</span></span><br><span class="line">x = <span class="number">-5</span>:<span class="number">5</span>;</span><br><span class="line">y = <span class="number">2</span>*x + <span class="number">3</span>;</span><br><span class="line"><span class="comment">% 添加噪声</span></span><br><span class="line">y_noise = y + <span class="built_in">randn</span>(<span class="number">1</span>, <span class="built_in">size</span>(x, <span class="number">2</span>))*<span class="number">1.5</span>;</span><br><span class="line"><span class="built_in">figure</span>(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;霍夫变换&quot;</span>);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>);</span><br><span class="line"><span class="comment">% 绘制原始线和噪声后的线</span></span><br><span class="line"><span class="built_in">plot</span>(x,y, x, y_noise, <span class="string">&#x27;--+&#x27;</span>);</span><br><span class="line">title(<span class="string">&quot;直线拟合&quot;</span>);</span><br><span class="line">axis equal</span><br><span class="line">grid on</span><br><span class="line"></span><br><span class="line"><span class="comment">% 绘制霍夫变换参数空间，ysin(theta)+xcos(theta) = p</span></span><br><span class="line"><span class="comment">% 设置范围</span></span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,[<span class="number">1</span>,<span class="number">2</span>]);</span><br><span class="line"><span class="built_in">hold</span> on</span><br><span class="line"><span class="comment">% 设置角度范围</span></span><br><span class="line">[theta_min, theta_max] = deal(<span class="number">0</span>, <span class="number">2</span>*<span class="built_in">pi</span>);</span><br><span class="line">theta = theta_min:<span class="number">0.1</span>:theta_max;</span><br><span class="line"><span class="comment">% 预开辟所有点的参数空间存储</span></span><br><span class="line">p_all = <span class="built_in">zeros</span>(<span class="built_in">size</span>(x,<span class="number">2</span>), <span class="built_in">length</span>(theta(:)));</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:<span class="built_in">size</span>(x, <span class="number">2</span>)</span><br><span class="line">    <span class="comment">% 生成对应范围内的参数曲线</span></span><br><span class="line">    p = y_noise(<span class="built_in">i</span>) * <span class="built_in">sin</span>(theta) + x(<span class="built_in">i</span>) * <span class="built_in">cos</span>(theta);</span><br><span class="line">    p_all(<span class="built_in">i</span>, :) = p;</span><br><span class="line">    <span class="comment">% 绘制参数空间的曲线</span></span><br><span class="line">    <span class="built_in">plot</span>(theta, p);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">title(<span class="string">&quot;参数空间&quot;</span>);</span><br><span class="line"><span class="built_in">hold</span> off</span><br><span class="line">axis normal</span><br><span class="line">grid on</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>)</span><br><span class="line"><span class="comment">% 统计其中每个子区域中的点数，并记录最大的</span></span><br><span class="line"><span class="comment">% 这里使用直方图hist3计算</span></span><br><span class="line">theta_repeat = <span class="built_in">repmat</span>(theta, <span class="number">11</span>, <span class="number">1</span>);</span><br><span class="line">hist3([theta_repeat(:) p_all(:)], <span class="string">&#x27;CDataMode&#x27;</span>,<span class="string">&#x27;auto&#x27;</span>,<span class="string">&#x27;FaceColor&#x27;</span>,<span class="string">&#x27;interp&#x27;</span>);</span><br><span class="line">title(<span class="string">&quot;直方图统计交点最多的区域&quot;</span>);</span><br><span class="line"><span class="comment">% num 是每个bin的数量，center为对应的x,y坐标</span></span><br><span class="line">[num, center] = hist3([theta_repeat(:) p_all(:)]);</span><br><span class="line"><span class="comment">% 找到最大的那个bin的下标并获取对应的参数</span></span><br><span class="line">[<span class="built_in">i</span>, <span class="built_in">j</span>] = <span class="built_in">find</span>(num == <span class="built_in">max</span>(<span class="built_in">max</span>(num)));</span><br><span class="line">theta_best = center&#123;<span class="number">1</span>&#125;(<span class="built_in">i</span>);</span><br><span class="line">p_best = center&#123;<span class="number">2</span>&#125;(<span class="built_in">j</span>);</span><br><span class="line"><span class="comment">% 获得拟合后的直线并绘制</span></span><br><span class="line">y_simulate = (p_best - x*<span class="built_in">cos</span>(theta_best))/<span class="built_in">sin</span>(theta_best);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>);</span><br><span class="line"><span class="built_in">hold</span> on</span><br><span class="line"><span class="built_in">plot</span>(x, y_simulate);</span><br><span class="line"><span class="built_in">legend</span>([<span class="string">&quot;y=2x+3&quot;</span>, <span class="string">&quot;y=2x+3+noise&quot;</span>, <span class="string">&quot;simulate&quot;</span>], <span class="string">&#x27;Location&#x27;</span>, <span class="string">&#x27;northwest&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> off</span><br></pre></td></tr></table></figure>
+<p>最后的效果如下：</p>
+<p><img src="/assets/ArticleImg/2020/hough.png" /></p>
+<p>其中参数空间的方框为交点比较多的，也就是比较密集的，这里有两个，代码里就取了一个，另外一个也是可以的。</p>
 
     </div>
 
@@ -442,7 +425,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://weijun-lin.top/2020/04/06/2020-04-06-connected-components/" title="求解图的连通分量">https://weijun-lin.top/2020/04/06/2020-04-06-connected-components/</a>
+      <a href="https://weijun-lin.top/2020/12/31/2020-12-31-HoughTransform/" title="霍夫变换直线检测原理实现">https://weijun-lin.top/2020/12/31/2020-12-31-HoughTransform/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
@@ -451,8 +434,8 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/C-C/" rel="tag"><i class="fa fa-tag"></i> C/C++</a>
-              <a href="/tags/Graph-Theory/" rel="tag"><i class="fa fa-tag"></i> Graph Theory</a>
+              <a href="/tags/%E7%89%B9%E5%BE%81%E6%A3%80%E6%B5%8B/" rel="tag"><i class="fa fa-tag"></i> 特征检测</a>
+              <a href="/tags/matlab/" rel="tag"><i class="fa fa-tag"></i> matlab</a>
           </div>
 
         
@@ -464,13 +447,10 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2020/04/09/2020-04-09-PAT-Advanced-1026/" rel="prev" title="PAT Advanced 1026 Table Tennis （模拟）">
-                  <i class="fa fa-chevron-left"></i> PAT Advanced 1026 Table Tennis （模拟）
-                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2020/04/03/2020-04-03-PAT-Advanced-1021/" rel="next" title="PAT Advanced 1021 Deepest Root （连通分量+树的直径）">
-                  PAT Advanced 1021 Deepest Root （连通分量+树的直径） <i class="fa fa-chevron-right"></i>
+                <a href="/2020/12/04/2020-12-04-FourierTransformation/" rel="next" title="傅里叶变换推导">
+                  傅里叶变换推导 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -616,44 +596,13 @@
 
 
 
-  <script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'none'
-      },
-      options: {
-        renderActions: {
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              const target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    const script = document.createElement('script');
-    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
-    script.defer = true;
-    document.head.appendChild(script);
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.typesetClear();
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
+  
 
 
 <script>
 NexT.utils.loadComments('#lv-container', () => {
   window.livereOptions = {
-    refer: "2020/04/06/2020-04-06-connected-components/"
+    refer: "2020/12/31/2020-12-31-HoughTransform/"
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];
