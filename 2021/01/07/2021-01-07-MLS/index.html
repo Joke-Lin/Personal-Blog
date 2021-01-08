@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="google6dc90bbfe80e28c9.html">
+  <meta name="baidu-site-verification" content="1Zn74mB0Mh">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"weijun-lin.top","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="原理介绍 原理可参考基于移动最小二乘法的曲线曲面拟合，曾清红，卢德唐，这里面已经讲得很详细了。可以结合CSDN 移动最小二乘原理，一起看，曾清红论文的式子稍微有点难懂，结合起来看很不错。 MLS(Moving Least-Squares)，移动最小二乘，是一种比较方便的曲线、曲面拟合方法，和传统最小二乘法相比有很多优点，在论文中都提到了。这里主要对其原理做个简单的说明和补充。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MLS移动最小二乘法原理及其实现">
+<meta property="og:url" content="https://weijun-lin.top/2021/01/07/2021-01-07-MLS/index.html">
+<meta property="og:site_name" content="WEIJUN LIN BLOG">
+<meta property="og:description" content="原理介绍 原理可参考基于移动最小二乘法的曲线曲面拟合，曾清红，卢德唐，这里面已经讲得很详细了。可以结合CSDN 移动最小二乘原理，一起看，曾清红论文的式子稍微有点难懂，结合起来看很不错。 MLS(Moving Least-Squares)，移动最小二乘，是一种比较方便的曲线、曲面拟合方法，和传统最小二乘法相比有很多优点，在论文中都提到了。这里主要对其原理做个简单的说明和补充。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://weijun-lin.top/assets/ArticleImg/2021/MLS_line.png">
+<meta property="og:image" content="https://weijun-lin.top/assets/ArticleImg/2021/MLS_surface1.png">
+<meta property="og:image" content="https://weijun-lin.top/assets/ArticleImg/2021/MLS_surface2.png">
+<meta property="article:published_time" content="2021-01-06T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-01-06T16:00:00.000Z">
+<meta property="article:author" content="Weijun-Lin">
+<meta property="article:tag" content="matlab">
+<meta property="article:tag" content="曲线曲面拟合">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://weijun-lin.top/assets/ArticleImg/2021/MLS_line.png">
+
+
+<link rel="canonical" href="https://weijun-lin.top/2021/01/07/2021-01-07-MLS/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>MLS移动最小二乘法原理及其实现 | WEIJUN LIN BLOG</title>
+  
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?bbba27c18f6952433b5568d3b127959f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="WEIJUN LIN BLOG" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">WEIJUN LIN BLOG</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E7%90%86%E4%BB%8B%E7%BB%8D"><span class="nav-text">原理介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%9F%E5%90%88%E5%87%BD%E6%95%B0%E7%9A%84%E5%BB%BA%E7%AB%8B"><span class="nav-text">拟合函数的建立</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%83%E5%87%BD%E6%95%B0"><span class="nav-text">权函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#matlab-%E5%AE%9E%E7%8E%B0"><span class="nav-text">Matlab 实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B2%E7%BA%BF%E6%8B%9F%E5%90%88"><span class="nav-text">曲线拟合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B2%E9%9D%A2%E6%8B%9F%E5%90%88"><span class="nav-text">曲面拟合</span></a></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Weijun-Lin"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Weijun-Lin</p>
+  <div class="site-description" itemprop="description">Learing and Using</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlaWp1bi1saW4=" title="Github → https:&#x2F;&#x2F;github.com&#x2F;weijun-lin"><i class="fab fa-github fa-fw"></i>Github</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3Blb3BsZS9qb2tlci04OC02Mi01Ny9hY3Rpdml0aWVz" title="ZHIHU → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;joker-88-62-57&#x2F;activities"><i class="fab fa-zhihu fa-fw"></i>ZHIHU</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwOTUzMjgx" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_40953281"><i class="fas fa-globe fa-fw"></i>CSDN</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOndlaWp1bi1saW5AZm94bWFpbC5jb20=" title="E-Mail → mailto:weijun-lin@foxmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="link fa-fw"></i>
+      Friends
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9sZXN0ZXJ0YW4uaW5r" title="https:&#x2F;&#x2F;lestertan.ink">Lester</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cDovL2h4LXcudG9wLw==" title="http:&#x2F;&#x2F;hx-w.top&#x2F;">Herixth</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9jb2xpbi1qYXkuY24v" title="https:&#x2F;&#x2F;colin-jay.cn&#x2F;">Colin Jay</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly95ZXotbGl1LmdpdGh1Yi5pby8=" title="https:&#x2F;&#x2F;yez-liu.github.io&#x2F;">yez-liu</span>
+        </li>
+    </ul>
+  </div>
+
+        </section>
+      </div>
+        <div class="back-to-top animated">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlaWp1bi1saW4=" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://weijun-lin.top/2021/01/07/2021-01-07-MLS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Weijun-Lin">
+      <meta itemprop="description" content="Learing and Using">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WEIJUN LIN BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MLS移动最小二乘法原理及其实现
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-01-07 00:00:00" itemprop="dateCreated datePublished" datetime="2021-01-07T00:00:00+08:00">2021-01-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Science/" itemprop="url" rel="index"><span itemprop="name">Computer Science</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Science/CV-CG-DIP/" itemprop="url" rel="index"><span itemprop="name">CV&CG&DIP</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Science/CV-CG-DIP/CV/" itemprop="url" rel="index"><span itemprop="name">CV</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="原理介绍">原理介绍</h2>
+<p>原理可参考<span class="exturl" data-url="aHR0cDovL3JlYWQucHVkbi5jb20vZG93bmxvYWRzMTk2L2RvYy85MjA0NzAvTW92aW5nTGVhc3QtU3F1YXJlc01MUy5wZGY=">基于移动最小二乘法的曲线曲面拟合，曾清红，卢德唐<i class="fa fa-external-link-alt"></i></span>，这里面已经讲得很详细了。可以结合<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2Njg2NDM3L2FydGljbGUvZGV0YWlscy8xMDYxMDM3NjA=">CSDN 移动最小二乘原理<i class="fa fa-external-link-alt"></i></span>，一起看，曾清红论文的式子稍微有点难懂，结合起来看很不错。</p>
+<p>MLS(Moving Least-Squares)，移动最小二乘，是一种比较方便的曲线、曲面拟合方法，和传统最小二乘法相比有很多优点，在论文中都提到了。这里主要对其原理做个简单的说明和补充。</p>
+<a id="more"></a>
+<p>最小二乘法是通过给定的目标函数和点集中找到目标函数的一组系数使其误差最小（L2范式）。一般是多项式函数，未知数为系数，通过找到最佳的系数来拟合。这就有很大的缺陷，对于一般的函数，很难用一个多项式函数来全局拟合。但分段拟合，其中的光滑又很难保证，会带来很大的困难。</p>
+<h3 id="拟合函数的建立">拟合函数的建立</h3>
+<p>移动最小二乘法其实本质上也类似，不同的是它采取的系数是 x 的函数，也就是对不同的目标拟合点它所属的多项式函数是不同的。这就有了很大的灵活性。有点上面直接分段的意思。</p>
+<p>在拟合区域的一个局部上，拟合函数 <span class="math inline">\(f(x)\)</span> 表示为： <span class="math display">\[
+f(x) = \sum_{i=1}^m \alpha_i(x) p_i(x) = p^T(x)\alpha(x)
+\]</span> 乘积相加就可以转换为向量点积，其中： <span class="math display">\[
+\begin{align}
+\alpha(x) &amp;= [\alpha_1(x),\alpha_2(x),\cdots,\alpha_m(x)]^T \\
+p(x) &amp;= [p_1(x), p_2(x),\cdots,p_m(x)]^T
+\end{align}
+\]</span> <span class="math inline">\(\alpha(x)\)</span> 为待求系数，每一个元素都是 x 的函数。<span class="math inline">\(p(x)\)</span> 为基函数，一个多项式函数的基，例如拟合线可以使用 <span class="math inline">\([1,x]^T, [1,x,x^2]\)</span> 这类的，对于二维问题（拟合曲面）则可以采用 <span class="math inline">\([1,x,y]^T,[1,x,y,x^2,xy,y^2]\)</span>，优化的目标函数为： <span class="math display">\[
+J = \sum_{i=1}^n w(x-x_i)[f(x_i)-y_i]^2 = \sum_{i=1}^n w(x-x_i)[p^T(x_i)\alpha(x)-y_i]^2 \rightarrow \mathrm{min}
+\]</span> 表示的意思其实是对某个小区间，其中的 x 和它对应的 <span class="math inline">\(\alpha(x)\)</span> 使得上式最小，这里<strong>把 x 视作为已知量</strong>，要求的未知量是向量 <span class="math inline">\(\alpha(x)\)</span>。上面的 <span class="math inline">\(f(x)\)</span> 我修改为 <span class="math inline">\(f(x_i)\)</span> ，感觉这才符合论文意思。因为 <span class="math inline">\(w(x-x_i)\)</span> 为权函数，并且具有紧支性（范围之外为 0）也就是<strong>只考虑与 “x” 这个小区间相邻的部分</strong>，其余那些远离它的部分没有影响。</p>
+<p>其中 n 为已知点的数量，<span class="math inline">\(x_i,y_i\)</span> 为已知点集的点。对拟合量 x 来说，未知的只有 <span class="math inline">\(\alpha(x)\)</span> 所以对它求导可得： <span class="math display">\[
+\begin{align}
+\frac{\partial J}{\partial \alpha} &amp;= A(x)\alpha(x) - B(x)y = 0\\
+A(x) &amp;= \sum_{i=1}^n w(x-x_i)p(x_i)p^T(xi) \\
+B(x) &amp;= [w(x-x_1)p(x_1), w(x-x_2)p(x_2), \cdots, w(x-x_n)p(x_n)] \\
+y^T &amp;= [y_1, y_2, \cdots,y_n]
+\end{align}
+\]</span> 可以先对 <span class="math inline">\(\alpha_i(x)\)</span> 求导，然后拓展到向量形式，偏导等于 0 时取到最小值，此时有： <span class="math display">\[
+\alpha(x) = A^{-1}(x)B(x)y
+\]</span> 此时便得到 x 对应的系数向量，其中 <span class="math inline">\(A^{-1}(x),B(x),y\)</span> 为 <span class="math inline">\(m\times m,m\times n,n\times 1\)</span> 的矩阵，把 <span class="math inline">\(\alpha(x)\)</span> 带入 <span class="math inline">\(f(x)\)</span> 定义式有： <span class="math display">\[
+f(x) = p^T(x)A^{-1}(x)B(x)y = \Phi(x) y
+\]</span> <span class="math inline">\(\Phi(x)\)</span> 就称为形函数，是一个 <span class="math inline">\(1\times m\)</span> 的向量</p>
+<h3 id="权函数">权函数</h3>
+<p>权函数在最小移动二乘法有很大的作用，甚至是核心作用。它具有紧支性，也就是<strong>权函数在 <em>x</em> 的一个子域内不等于</strong></p>
+<p><strong>零 在这个子域之外全为零</strong>，这个子域称为支持域。权函数是<strong>非负的</strong>，并且随着距离（<span class="math inline">\(\vert\vert x-x_i \vert\vert\)</span>) 的增加而减小，也就是原理 x 的认为对 x 的影响小。权函数还需要具有一定的<strong>光滑性</strong>，因为需要继承原函数的连续性。论文给出的是三次样条函数曲线（这里归一化了）： <span class="math display">\[
+w(\overline s) = 
+\left \{
+\begin{align}
+&amp; \frac{2}{3}-4 \overline s^2 + 4\overline s^3 &amp; &amp;(\overline s \le \frac{1}{2}) \\
+&amp; \frac{4}{3}-4\overline s+4\overline s^2-\frac{4}{3}\overline s^3 &amp; &amp;(\frac{1}{2} &lt;\overline s\le 1 ) \\
+&amp; 0 &amp;&amp;(\overline s &gt; 1)
+\end{align}
+\right.
+\]</span></p>
+<p>其中，<span class="math inline">\(s = x - x_i,\overline s = \frac{s}{s_{max}}\)</span>，<span class="math inline">\(s_{max}\)</span> 为影响区域的大小，也就是支持域的大小。需要注意的是，支持域的选取很麻烦，因为拟合函数需要矩阵 A 的逆，这就需要保证<strong>每个拟合点的支持域中的非共线（共面）的点数达到最低要求</strong>。对于使用一维二次基 <span class="math inline">\([1,x,x^2]\)</span> 的曲线拟合，就需要保证拟合点 x 支持域中至少有三个非共线的点。权函数并不是只可以用这个，只要满足上述的特征就可以。</p>
+<p>可以考虑<strong>支持域的动态化</strong>，唯一的支持域对非均匀分部的曲线拟合很不友好，动态化或许可以缓解。</p>
+<h2 id="matlab-实现">Matlab 实现</h2>
+<p>这里使用 matlab 实现，代码不多，只要把思路理清即可，这里分为曲线和曲面拟合，分别对应论文中的两个实验，使用的也是论文中的数据。</p>
+<h3 id="曲线拟合">曲线拟合</h3>
+<p>虽然使用和论文相同的数据，但这里采用了一维二次基 <span class="math inline">\([1,x,x^2]\)</span> 拟合，可以看出比论文的效果稍微好一些。</p>
+<p>代码如下：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">clc;clear;</span><br><span class="line"><span class="comment">% 已知点数据</span></span><br><span class="line">x = [<span class="number">0</span>, <span class="number">0.1</span>, <span class="number">0.2</span>, <span class="number">0.3</span>, <span class="number">0.4</span>, <span class="number">0.5</span>, <span class="number">0.6</span>, <span class="number">0.7</span>, <span class="number">0.8</span>, <span class="number">0.9</span>, <span class="number">1.0</span>];</span><br><span class="line">y = [<span class="number">0</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">14</span>, <span class="number">15</span>, <span class="number">14.5</span>, <span class="number">14</span>, <span class="number">12</span>, <span class="number">10</span>, <span class="number">5</span>, <span class="number">4</span>];</span><br><span class="line">n = <span class="built_in">size</span>(x,<span class="number">2</span>);</span><br><span class="line">[min_x, max_x] = deal(<span class="built_in">min</span>(x), <span class="built_in">max</span>(x));</span><br><span class="line"><span class="comment">% 绘制点的数量，也就是估计的点</span></span><br><span class="line">points_num = <span class="number">1000</span>;</span><br><span class="line">simulated_x = <span class="built_in">linspace</span>(min_x, max_x, points_num);</span><br><span class="line">simulated_y = <span class="built_in">zeros</span>(<span class="number">1</span>, points_num);</span><br><span class="line"><span class="comment">% 定义格子范围（紧支）需要保证有三个不共线的点，否则A矩阵可能不可逆，这里取4个点范围，避免共线</span></span><br><span class="line"><span class="comment">% 这里是比较均匀的，而且点比较多，到曲面就很难选取了</span></span><br><span class="line">smax = (max_x-min_x)*<span class="number">4</span>/n;</span><br><span class="line"><span class="comment">% 使用一维二次基 [1, x, x^2] m = 3</span></span><br><span class="line">m = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">% 拟合每一个拟合点</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span> = <span class="number">1</span>:points_num</span><br><span class="line">    x_val = simulated_x(<span class="built_in">j</span>);</span><br><span class="line">    <span class="comment">% 预分配 A B, 这里的p就是[1，x_val，x_val^2]</span></span><br><span class="line">    A = <span class="built_in">zeros</span>(m, m);</span><br><span class="line">    B = <span class="built_in">zeros</span>(m, n);</span><br><span class="line">    <span class="comment">% 计算 w 求和</span></span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:n</span><br><span class="line">        xi = x(<span class="built_in">i</span>);</span><br><span class="line">        w = w_func(<span class="built_in">abs</span>(x_val - xi)/smax);</span><br><span class="line">        p_i = [<span class="number">1</span>;xi;xi^<span class="number">2</span>];</span><br><span class="line">        A = A + w * (p_i*p_i&#x27;);</span><br><span class="line">        B(:, <span class="built_in">i</span>) = w*p_i;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    px = [<span class="number">1</span>, x_val, x_val^<span class="number">2</span>];</span><br><span class="line">    simulated_y(<span class="built_in">j</span>) = px * (A\B) * y&#x27;;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">plot</span>(x, y,<span class="string">&#x27;--o&#x27;</span>, simulated_x, simulated_y);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[w]</span> = <span class="title">w_func</span><span class="params">(s)</span></span></span><br><span class="line">    <span class="keyword">if</span> s &lt;= <span class="number">1</span>/<span class="number">2</span></span><br><span class="line">        w = <span class="number">2</span>/<span class="number">3</span> - <span class="number">4</span>*s^<span class="number">2</span> + <span class="number">4</span>*s^<span class="number">3</span>;</span><br><span class="line">    <span class="keyword">elseif</span> s &lt;= <span class="number">1</span></span><br><span class="line">        w = <span class="number">4</span>/<span class="number">3</span> - <span class="number">4</span>*s + <span class="number">4</span>*s^<span class="number">2</span> - <span class="number">4</span>/<span class="number">3</span>*s^<span class="number">3</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        w = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>拟合图如下：</p>
+<p><img src="/assets/ArticleImg/2021/MLS_line.png" /></p>
+<p>圆点为数据，虚线为直接连接的线，曲线为拟合线</p>
+<h3 id="曲面拟合">曲面拟合</h3>
+<p>曲面使用的是论文给的函数，使用的和论文的一样的二维线性基 <span class="math inline">\([1,x,y]\)</span> <span class="math display">\[
+\begin{align}
+z &amp;= f(x,y) \\ 
+&amp;= 2*(1-x)^2 * exp(-x^2 - (y+1)^2) - 10*(x^4/5 - y^5)
+* exp(-x^2 - y^2) - 1/3*exp(-(x+1)^2 - y^2)
+\end{align}
+\]</span> 函数图像为：</p>
+<p><img src="/assets/ArticleImg/2021/MLS_surface1.png" /></p>
+<p>代码如下：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">clc;clear;</span><br><span class="line"><span class="comment">% 定义域</span></span><br><span class="line">l = <span class="number">-3</span>; r = <span class="number">3</span>;</span><br><span class="line"><span class="comment">% 生成随机点 n 个，这 n 个点为已知数据</span></span><br><span class="line">n = <span class="number">200</span>;</span><br><span class="line">x = (r - l) * <span class="built_in">rand</span>(<span class="number">1</span>, n) + l;</span><br><span class="line">y = (r - l) * <span class="built_in">rand</span>(<span class="number">1</span>, n) + l;</span><br><span class="line"><span class="comment">% 函数定义</span></span><br><span class="line">z = <span class="number">2</span>*(<span class="number">1</span>-x).^<span class="number">2</span> .* <span class="built_in">exp</span>(-x.^<span class="number">2</span> - (y+<span class="number">1</span>).^<span class="number">2</span>) - <span class="number">10</span>*(x.^<span class="number">4</span>/<span class="number">5</span> - y.^<span class="number">5</span>) ...</span><br><span class="line">.* <span class="built_in">exp</span>(-x.^<span class="number">2</span> - y.^<span class="number">2</span>) - <span class="number">1</span>/<span class="number">3</span>*<span class="built_in">exp</span>(-(x+<span class="number">1</span>).^<span class="number">2</span> - y.^<span class="number">2</span>);</span><br><span class="line"><span class="comment">% 点是随机的数据，meshgrid 生成点，也就是这里的划分网格</span></span><br><span class="line">[xq, yq] = <span class="built_in">meshgrid</span>(l:<span class="number">0.1</span>:r, l:<span class="number">0.1</span>:r);</span><br><span class="line"><span class="comment">% 插值生成对应的网格数据</span></span><br><span class="line">zq = griddata(x, y, z, xq, yq);</span><br><span class="line"><span class="comment">% 绘制网格和点，这里的网格是插值生成的</span></span><br><span class="line"><span class="built_in">figure</span>;</span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">mesh(xq, yq, zq);</span><br><span class="line"><span class="built_in">hold</span> on</span><br><span class="line"><span class="built_in">scatter3</span>(x,y,z);</span><br><span class="line"><span class="built_in">hold</span> off</span><br><span class="line"><span class="comment">% 拟合上面的网格</span></span><br><span class="line">points_sum = <span class="built_in">size</span>(xq, <span class="number">1</span>);</span><br><span class="line">simulated_z = <span class="built_in">zeros</span>(points_sum, points_sum);</span><br><span class="line"><span class="comment">% 使用二维线性基[1, x, y] 作为基函数</span></span><br><span class="line">m = <span class="number">3</span>;</span><br><span class="line"><span class="comment">% 定义格子范围（紧支）需要保证有三个不共线的点，否则A矩阵可能不可逆，这个值很难取以避免奇异矩阵的产生，这里简单的取了很大的值</span></span><br><span class="line"><span class="comment">% 我认为严谨的应该事先判断有几个点，对那些产生奇异的块适当的扩大紧支</span></span><br><span class="line">smax = (r-l)/<span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">% i,j 为拟合点的下标</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:points_sum</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span> = <span class="number">1</span>:points_sum</span><br><span class="line">        x_val = xq(<span class="number">1</span>, <span class="built_in">i</span>); y_val = yq(<span class="built_in">j</span>, <span class="number">1</span>);</span><br><span class="line">        A = <span class="built_in">zeros</span>(m, m);</span><br><span class="line">        B = <span class="built_in">zeros</span>(m, n);</span><br><span class="line">        <span class="comment">% 对每个点加权获得拟合值</span></span><br><span class="line">        <span class="keyword">for</span> k = <span class="number">1</span>:n</span><br><span class="line">            xk = x(k); yk = y(k);</span><br><span class="line">            w = w_func(((x_val-xk)^<span class="number">2</span> + (y_val - yk)^<span class="number">2</span>)^<span class="number">0.5</span>/smax);</span><br><span class="line">            p = [<span class="number">1</span>; xk; yk];</span><br><span class="line">            A = A + w*(p*p&#x27;);</span><br><span class="line">            B(:, k) = w * p;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        p_xy = [<span class="number">1</span>, x_val, y_val];</span><br><span class="line">        <span class="comment">% 注意这里 x_val 是第 i 列， y_val是第 j 行 注意mesh的对应下标</span></span><br><span class="line">        simulated_z(<span class="built_in">j</span>, <span class="built_in">i</span>) = p_xy * (A\B) * z&#x27;;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">surf(xq, yq, simulated_z);</span><br><span class="line"><span class="built_in">hold</span> on</span><br><span class="line"><span class="built_in">scatter3</span>(x,y,z);</span><br><span class="line"><span class="built_in">hold</span> off</span><br><span class="line"></span><br><span class="line"><span class="comment">% 这里的s就是半径相当于，也可以设置为格子</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[w]</span> = <span class="title">w_func</span><span class="params">(s)</span></span></span><br><span class="line">    <span class="keyword">if</span> s &lt;= <span class="number">1</span>/<span class="number">2</span></span><br><span class="line">        w = <span class="number">2</span>/<span class="number">3</span> - <span class="number">4</span>*s^<span class="number">2</span> + <span class="number">4</span>*s^<span class="number">3</span>;</span><br><span class="line">    <span class="keyword">elseif</span> s &lt;= <span class="number">1</span></span><br><span class="line">        w = <span class="number">4</span>/<span class="number">3</span> - <span class="number">4</span>*s + <span class="number">4</span>*s^<span class="number">2</span> - <span class="number">4</span>/<span class="number">3</span>*s^<span class="number">3</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        w = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>拟合图如下：</p>
+<p><img src="/assets/ArticleImg/2021/MLS_surface2.png" /></p>
+<p>上面为随机生成的点图和 matlab 插值生成的网格图，下面为 MLS 拟合的曲面，效果还是不错的</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Weijun-Lin
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://weijun-lin.top/2021/01/07/2021-01-07-MLS/" title="MLS移动最小二乘法原理及其实现">https://weijun-lin.top/2021/01/07/2021-01-07-MLS/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/matlab/" rel="tag"><i class="fa fa-tag"></i> matlab</a>
+              <a href="/tags/%E6%9B%B2%E7%BA%BF%E6%9B%B2%E9%9D%A2%E6%8B%9F%E5%90%88/" rel="tag"><i class="fa fa-tag"></i> 曲线曲面拟合</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/12/31/2020-12-31-HoughTransform/" rel="next" title="霍夫变换直线检测原理实现">
+                  霍夫变换直线检测原理实现 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC8zOTczMy8xNjI2MA=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Weijun-Lin</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">260k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:57</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 24136,
+      el    : 'wpac-rating',
+      color : 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'none'
+      },
+      options: {
+        renderActions: {
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+<script>
+NexT.utils.loadComments('#lv-container', () => {
+  window.livereOptions = {
+    refer: "2021/01/07/2021-01-07-MLS/"
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>
