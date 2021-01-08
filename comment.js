@@ -8,9 +8,9 @@ const cheerio = require("cheerio");
 const md5 = require("md5");
 // 根据自己的情况进行配置
 const config = {
-    username: "Joke-Lin", // GitHub 用户名
+    username: "Weijun-Lin", // GitHub 用户名
     token: "08b8718a7f82293634913d2beb97844824fe16d6",  // GitHub Token
-    repo: "joke-lin.github.io",  // 存放 issues的git仓库
+    repo: "Weijun-Lin.github.io",  // 存放 issues的git仓库
     // sitemap.xml的路径，commit.js放置在根目录下，无需修改，其他情况自行处理
     sitemapUrl: path.resolve(__dirname, "./public/sitemap.xml"),
     kind: "Gitalk",  // "Gitalk" or "Gitment"

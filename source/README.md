@@ -9,4 +9,4 @@
 
 ## Python 正则替换 Markdown 图像路径前缀
 
-http://joke-lin.top/2020/05/22/2020-05-22-blog-image-replace/
+http://weijun-lin.top/2020/05/22/2020-05-22-blog-image-replace/

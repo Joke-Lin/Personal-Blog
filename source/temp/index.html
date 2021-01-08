@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8">
+    <title>平安成电智慧通行</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'SimHei';
+        }
+        .myfont {
+            font-family: monospace;
+        }
+        .title {
+            color: #129212;
+            font-size: 23px;
+        }
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+        img {
+            width:auto;
+            height:auto;
+            max-width:100%;
+            max-height:100%;
+            vertical-align: middle;
+        }
+        .left {
+            font-size: large;
+        }
+        .right {
+            font-size: xx-large;
+        }
+        .date {
+            color: #09c5a5;
+            font-size: large;
+            font-weight: bolder;
+            width: 60%;
+        }
+        .code {
+            width: 45%;
+            height: 100%;
+            background-color: #01c4a4;
+            color: white;
+        }
+        #head {
+            background-color: #753131;
+            width: 100%;
+            height: 6%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div id="head" class="d-flex p-2">
+        <img src="/temp/5.png">
+        <p style="font-size: large;"><strong>　平安成电智慧通行</strong></p>
+        <div class="flex-grow-1"></div>
+        <img src="/temp/6.jpg">
+        
+    </div> -->
+    <div style="height: 20%;" class="border-bottom d-flex flex-column justify-content-center">
+        <p class="title myfont ml-3"><strong>本科用户，出校登记成功!</strong></p>
+    </div>
+    <div style="width: 100%; height: 80%;" class="mt-2">
+        <!-- 用户姓名 -->
+        <div class="d-flex pl-4 pr-4 mb-3" style="height: 5%; width:100%">
+            <div style="width: 10%;">
+                <img src="/temp/1.jpg">
+            </div>
+            <p class="left m-1" style="vertical-align: middle;">用户姓名</p>
+            <div class="flex-grow-1"></div>
+            <p class="right myfont"><strong>侯胜凯</strong></p>
+        </div>
+        <!-- 登记类型 -->
+        <div class="d-flex pl-4 pr-4 mb-3 mt-3" style="height: 5%; width:100%">
+            <div style="width: 10%;">
+                <img src="/temp/2.jpg">
+            </div>
+            <p class="left m-1" style="vertical-align: middle;">登记类型</p>
+            <div class="flex-grow-1"></div>
+            <p class="right myfont"><strong>本科生</strong></p>
+        </div>
+        <!-- 登记时间 -->
+        <div class="d-flex pl-4 pr-4 mb-4 mt-3" style="height: 5%; width:100%">
+            <div style="width: 10%;">
+                <img src="/temp/3.jpg">
+            </div>
+            <p class="left m-1" style="vertical-align: middle;">登记时间</p>
+            <div class="flex-grow-1"></div>
+            <marquee scrollamount="4" class="right date"></marquee>
+        </div>
+        <!-- 个人二维码 -->
+        <div class="d-flex mb-3 mt-5 justify-content-center" style="width:100%; height:8%">
+            <button class="code button rounded border-0">前往个人二维码</button>
+        </div>
+        <div class="d-flex mt-2 justify-content-center" style="width:100%; height:12%">
+            <img src="/temp/4.jpg">
+        </div>
+    </div>
+
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>    
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        function helpStr(a) {
+            if(a < 10) {
+                return "0" + a;
+            } else {
+                return a;
+            }
+        }
+        var curTime = new Date();
+        var year = curTime.getFullYear();
+        var month = curTime.getMonth() + 1;
+        var day = curTime.getDate();
+        var hour = curTime.getHours();
+        var mins = curTime.getMinutes();
+        var second = curTime.getSeconds();
+        var curTimeStr = year + "-" + month + "-" + day + " " + helpStr(hour) + ":" + helpStr(mins) + ":" + helpStr(second);
+        var t = 100;
+        var final = "";
+        $('marquee')[0].stop();
+        while (t--) {
+            final += curTimeStr + " ";
+        }
+        console.log(final);
+        $('marquee').text(final);
+        var t = $('marquee');
+        $('marquee')[0].start();
+    </script>
+
+</body>
+
+</html>

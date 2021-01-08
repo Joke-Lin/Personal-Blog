@@ -13,7 +13,7 @@ timezone: ''
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://joke-lin.top
+url: https://weijun-lin.top
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -32,7 +32,8 @@ i18n_dir: :lang
 skip_render:
   - README.md
   - baidu_verify_1Zn74mB0Mh.html
-  - google6dc90bbfe80e28c9.html
+  - 'google6dc90bbfe80e28c9.html'
+  - 'temp/*'
 
 # Writing
 new_post_name: :title.md # File name of new posts

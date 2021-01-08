@@ -9,7 +9,7 @@ tags:
 - 计算机系统结构
 ---
 
->Github：[笔记-计算机系统结构-张晨曦-第二版](https://github.com/Joke-Lin/Notes/tree/master/计算机系统结构-张晨曦-第二版)
+>Github：[笔记-计算机系统结构-张晨曦-第二版](https://github.com/Weijun-Lin/Notes/tree/master/计算机系统结构-张晨曦-第二版)
 
 <!-- more -->
 
