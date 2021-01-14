@@ -24,7 +24,7 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"weijun-lin.top","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"weijun-lin.top","root":"/","images":"/images","scheme":"Gemini","version":"8.2.0","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 <meta name="description" content="Hassaballah, M. , A. A. Ali , and H. A. Alshazly . &quot;Image Features Detection, Description and Matching.&quot; (2016).a 原文地址：Image Features Detection, Description and Matching  摘要 特征检测，描述和匹配是">
 <meta property="og:type" content="article">
@@ -90,6 +90,7 @@
   </script>
 
 
+
   <noscript>
   <style>
   body { margin-top: 2rem; }
@@ -135,7 +136,7 @@
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
+    <div class="toggle" aria-label="切换导航栏" role="button">
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
@@ -188,7 +189,7 @@
            placeholder="搜索..." spellcheck="false"
            type="search" class="search-input">
   </div>
-  <span class="popup-btn-close">
+  <span class="popup-btn-close" role="button">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
@@ -204,7 +205,7 @@
 </div>
         
   
-  <div class="toggle sidebar-toggle">
+  <div class="toggle sidebar-toggle" role="button">
     <span class="toggle-line"></span>
     <span class="toggle-line"></span>
     <span class="toggle-line"></span>
@@ -224,12 +225,12 @@
 
       <div class="sidebar-panel-container">
         <!--noindex-->
-        <section class="post-toc-wrap sidebar-panel">
+        <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-text">1 介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%92%8C%E5%8E%9F%E7%90%86"><span class="nav-text">2 定义和原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E5%92%8C%E5%B1%80%E9%83%A8%E7%89%B9%E5%BE%81"><span class="nav-text">2.1 全局和局部特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E6%A3%80%E6%B5%8B%E5%99%A8%E7%9A%84%E7%89%B9%E5%BE%81"><span class="nav-text">2.2 特征检测器的特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%BA%E5%BA%A6%E5%92%8C%E4%BB%BF%E5%B0%84%E4%B8%8D%E5%8F%98%E6%80%A7"><span class="nav-text">2.3 尺度和仿射不变性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E7%89%B9%E5%BE%81%E6%A3%80%E6%B5%8B%E5%99%A8"><span class="nav-text">3 图像特征检测器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E5%B0%BA%E5%BA%A6%E6%A3%80%E6%B5%8B%E5%99%A8"><span class="nav-text">3.1 单尺度检测器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#moravecs-%E6%A3%80%E6%B5%8B%E5%99%A8"><span class="nav-text">3.1.1 Moravec’s 检测器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#harris-%E6%A3%80%E6%B5%8B%E5%99%A8"><span class="nav-text">3.1.2 Harris 检测器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#susan-%E6%A3%80%E6%B5%8B%E5%99%A8"><span class="nav-text">3.1.3 SUSAN 检测器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#fast-%E6%A3%80%E6%B5%8B%E5%99%A87"><span class="nav-text">3.1.4 FAST 检测器8</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hessian-%E6%A3%80%E6%B5%8B%E5%99%A810"><span class="nav-text">3.1.5 Hessian 检测器10</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E5%B0%BA%E5%BA%A6%E6%A3%80%E6%B5%8B%E5%99%A8"><span class="nav-text">3.2 多尺度检测器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AB%98%E6%96%AF%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AFlog"><span class="nav-text">3.2.1 高斯拉普拉斯（LoG）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AB%98%E6%96%AF%E5%B7%AE%E5%88%86dog"><span class="nav-text">3.2.2 高斯差分（DoG）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#harris-laplace13"><span class="nav-text">3.2.3 Harris-Laplace13</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hessian-laplace"><span class="nav-text">3.2.4 Hessian-Laplace</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#gabor-wavelet-%E6%A3%80%E6%B5%8B%E5%99%A8"><span class="nav-text">3.2.5 Gabor-Wavelet 检测器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%BF%E5%B0%84%E4%B8%8D%E5%8F%98%E6%A3%80%E6%B5%8B%E5%99%A8"><span class="nav-text">3.3 仿射不变检测器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E7%89%B9%E5%BE%81%E6%8F%8F%E8%BF%B0"><span class="nav-text">4 图像特征描述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%BA%E5%BA%A6%E4%B8%8D%E5%8F%98%E7%89%B9%E5%BE%81%E5%8F%98%E6%8D%A2sift"><span class="nav-text">4.1 尺度不变特征变换（SIFT）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A2%AF%E5%BA%A6%E4%BD%8D%E7%BD%AE%E6%96%B9%E5%90%91%E7%9B%B4%E6%96%B9%E5%9B%BEgloh"><span class="nav-text">4.2 梯度位置方向直方图（GLOH）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E9%80%9F%E9%B2%81%E6%A3%92%E7%89%B9%E5%BE%81%E6%8F%8F%E8%BF%B0%E7%AC%A6surf"><span class="nav-text">4.3 加速鲁棒特征描述符（SURF）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#local-binary-pattern-lbp"><span class="nav-text">4.4 Local Binary Pattern (LBP)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#binary-robust-independent-elementary-features-brief"><span class="nav-text">4.5 Binary Robust Independent Elementary Features (BRIEF)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E5%AE%83%E7%89%B9%E5%BE%81%E6%8F%8F%E8%BF%B0%E7%AC%A6"><span class="nav-text">4.6 其它特征描述符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E5%8C%B9%E9%85%8D"><span class="nav-text">5 特征匹配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E8%AF%84%E4%BC%B0"><span class="nav-text">6 性能评估</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E5%87%86%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-text">6.1 基准数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%84%E4%BC%B0%E6%A0%87%E5%87%86"><span class="nav-text">6.2 评估标准</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">7 总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-text">参考文献</span></a></li></ol></div>
-        </section>
+        </div>
         <!--/noindex-->
 
-        <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview-wrap sidebar-panel">
           <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Weijun-Lin"
       src="/images/avatar.png">
@@ -298,9 +299,9 @@
     </ul>
   </div>
 
-        </section>
+        </div>
       </div>
-        <div class="back-to-top animated">
+        <div class="back-to-top animated" role="button">
           <i class="fa fa-arrow-up"></i>
           <span>0%</span>
         </div>
@@ -838,11 +839,7 @@ LBP = \sum_{k=0}^7 S(g_p-g_c).2^k
 
 
 
-    
-  <div class="comments">
-    <div id="lv-container" data-id="city" data-uid="MTAyMC8zOTczMy8xNjI2MA=="></div>
-  </div>
-  
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC8zOTczMy8xNjI2MA=="></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -928,16 +925,6 @@ LBP = \sum_{k=0}^7 S(g_p-g_c).2^k
 
   
   <script>
-    (function(){
-      var bp = document.createElement('script');
-      var curProtocol = window.location.protocol.split(':')[0];
-      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(bp, s);
-    })();
-  </script>
-
-  <script>
   if (CONFIG.page.isPost) {
     wpac_init = window.wpac_init || [];
     wpac_init.push({
@@ -966,7 +953,6 @@ LBP = \sum_{k=0}^7 S(g_p-g_c).2^k
 
   
   <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
 
 
 
