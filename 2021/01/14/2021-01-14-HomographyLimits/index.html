@@ -372,7 +372,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>794</span>
+      <span>785</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -406,19 +406,13 @@
 <p>下面的内容参考自 <span class="exturl" data-url="aHR0cDovL3Npbmd2aXNpb24ubmV0L3RhZy9ob21vZ3JhcGh5Lw==">Homography | 奇点视觉 (singvision.net)<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 <p>相机位置改变的图示如下：</p>
-<figure>
-<img src="/assets/ArticleImg/2021/Homography_2.png" alt="img" /><figcaption>img</figcaption>
-</figure>
+<p><img src="/assets/ArticleImg/2021/Homography_2.png" /></p>
 <p>其中 <span class="math inline">\(o,o&#39;\)</span> 表示相机位置，横线表示相机的成像平面，<span class="math inline">\(s_1,s_2\)</span> 表示目标物，这里的 <span class="math inline">\(s_1,s_2\)</span> 在 <span class="math inline">\(o\)</span> 的视角下就成为了一个点，也就是说存在遮挡，这样使用单应变换就不能将一幅图像变换为另一幅图像，在图像拼接中，也就找不到对应点。</p>
 <p>但是当目标为平面时，无论视角怎么改变都不会丢失点（除非视角在平面上），当视角位置不变，仅存在旋转角度的改变时，此时单应也能模拟这种变换。</p>
 <p>视角不变时，单应可以模拟变换，但会造成另一种情况：</p>
-<figure>
-<img src="/assets/ArticleImg/2021/Homography_Near90Degreee2.png" alt="img" /><figcaption>img</figcaption>
-</figure>
+<p><img src="/assets/ArticleImg/2021/Homography_Near90Degreee2.png" /></p>
 <p>成像在 <span class="math inline">\(P&#39;\)</span> 上为均匀的点，但在 <span class="math inline">\(P\)</span> 上却是间隔非均匀的点，当 <span class="math inline">\(P\)</span> 和 <span class="math inline">\(P’\)</span> 垂直时，这种差距更大，可能会使得 <span class="math inline">\(P’\)</span> 上的点在 <span class="math inline">\(P\)</span> 上变成无穷远的点，这在大视角的图像拼接会造成很大的误差。一种解决方法是将图像重投影到均匀圆柱面或者球面上：</p>
-<figure>
-<img src="/assets/ArticleImg/2021/Homography_Warp1.png" alt="img" /><figcaption>img</figcaption>
-</figure>
+<p><img src="/assets/ArticleImg/2021/Homography_Warp1.png" /></p>
 
     </div>
 
