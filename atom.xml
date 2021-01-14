@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://weijun-lin.top/"/>
-  <updated>2021-01-06T16:00:00.000Z</updated>
+  <updated>2021-01-13T16:00:00.000Z</updated>
   <id>https://weijun-lin.top/</id>
   
   <author>
@@ -15,6 +15,40 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title> 单应变换的局限性</title>
+    <link href="https://weijun-lin.top/2021/01/14/2021-01-14-HomographyLimits/"/>
+    <id>https://weijun-lin.top/2021/01/14/2021-01-14-HomographyLimits/</id>
+    <published>2021-01-13T16:00:00.000Z</published>
+    <updated>2021-01-13T16:00:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="单应变换">单应变换</h2><p>单应变换就是两个平面内保持共线的变换，变换是一个 3*3 的矩阵，因为齐次坐标的尺度无关性所以只有8个自由度。DLT（直接线性变换）算法讨论了单应变换的相关性质，以及变换矩阵的求解。</p><h2 id="局限性">局限性</h2><p>单应变换简单来说就是可以将一个四边形映射为另一个任意的四边形，只需要满足共线点变换后仍为共线即可。在很多算法中都使用到单应变换，但单应变换只能模拟两种情况的变换：</p><ol type="1"><li>相机几何中心位置不变，目标场景任意</li><li>相机位置任意，目标场景为平面（或近似为平面，很多低空遥感图像都视作为平面）</li></ol><a id="more"></a><p>在论文 <a href="%5BPerspective-SIFT:%20An%20efficient%20tool%20for%20low-altitude%20remote%20sensing%20image%20registration%20-%20ScienceDirect%5D(https://www.sciencedirect.com/science/article/abs/pii/S0165168413001503)">Perspective-SIFT: An efficient tool for low-altitude remote sensing image registration</a> 中提取的透视不变特征使用的就是单应变换模拟。</p><p>但上面两个局限性使得在相机位置改变（平移变换）时，场景需要约束到平面。</p><h2 id="局限性的解释">局限性的解释</h2><blockquote><p>下面的内容参考自 <span class="exturl" data-url="aHR0cDovL3Npbmd2aXNpb24ubmV0L3RhZy9ob21vZ3JhcGh5Lw==">Homography | 奇点视觉 (singvision.net)<i class="fa fa-external-link-alt"></i></span></p></blockquote><p>相机位置改变的图示如下：</p><figure><img src="/assets/ArticleImg/2021/Homography_2.png" alt="img" /><figcaption>img</figcaption></figure><p>其中 <span class="math inline">\(o,o&#39;\)</span> 表示相机位置，横线表示相机的成像平面，<span class="math inline">\(s_1,s_2\)</span> 表示目标物，这里的 <span class="math inline">\(s_1,s_2\)</span> 在 <span class="math inline">\(o\)</span> 的视角下就成为了一个点，也就是说存在遮挡，这样使用单应变换就不能将一幅图像变换为另一幅图像，在图像拼接中，也就找不到对应点。</p><p>但是当目标为平面时，无论视角怎么改变都不会丢失点（除非视角在平面上），当视角位置不变，仅存在旋转角度的改变时，此时单应也能模拟这种变换。</p><p>视角不变时，单应可以模拟变换，但会造成另一种情况：</p><figure><img src="/assets/ArticleImg/2021/Homography_Near90Degreee2.png" alt="img" /><figcaption>img</figcaption></figure><p>成像在 <span class="math inline">\(P&#39;\)</span> 上为均匀的点，但在 <span class="math inline">\(P\)</span> 上却是间隔非均匀的点，当 <span class="math inline">\(P\)</span> 和 <span class="math inline">\(P’\)</span> 垂直时，这种差距更大，可能会使得 <span class="math inline">\(P’\)</span> 上的点在 <span class="math inline">\(P\)</span> 上变成无穷远的点，这在大视角的图像拼接会造成很大的误差。一种解决方法是将图像重投影到均匀圆柱面或者球面上：</p><figure><img src="/assets/ArticleImg/2021/Homography_Warp1.png" alt="img" /><figcaption>img</figcaption></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;单应变换&quot;&gt;单应变换&lt;/h2&gt;
+&lt;p&gt;单应变换就是两个平面内保持共线的变换，变换是一个 3*3 的矩阵，因为齐次坐标的尺度无关性所以只有8个自由度。DLT（直接线性变换）算法讨论了单应变换的相关性质，以及变换矩阵的求解。&lt;/p&gt;
+&lt;h2 id=&quot;局限性&quot;&gt;局限性&lt;/h2&gt;
+&lt;p&gt;单应变换简单来说就是可以将一个四边形映射为另一个任意的四边形，只需要满足共线点变换后仍为共线即可。在很多算法中都使用到单应变换，但单应变换只能模拟两种情况的变换：&lt;/p&gt;
+&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;相机几何中心位置不变，目标场景任意&lt;/li&gt;
+&lt;li&gt;相机位置任意，目标场景为平面（或近似为平面，很多低空遥感图像都视作为平面）&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+    
+      <category term="Computer Science" scheme="https://weijun-lin.top/categories/Computer-Science/"/>
+    
+      <category term="CV&amp;CG&amp;DIP" scheme="https://weijun-lin.top/categories/Computer-Science/CV-CG-DIP/"/>
+    
+      <category term="CV" scheme="https://weijun-lin.top/categories/Computer-Science/CV-CG-DIP/CV/"/>
+    
+    
+      <category term="Homography" scheme="https://weijun-lin.top/tags/Homography/"/>
+    
+  </entry>
   
   <entry>
     <title>MLS移动最小二乘法原理及其实现</title>
@@ -593,37 +627,6 @@
     
     
       <category term="C/C++" scheme="https://weijun-lin.top/tags/C-C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PAT Advanced 1044 Shopping in Mars（二分）</title>
-    <link href="https://weijun-lin.top/2020/04/21/2020-04-25-PAT-Advanced-1044/"/>
-    <id>https://weijun-lin.top/2020/04/21/2020-04-25-PAT-Advanced-1044/</id>
-    <published>2020-04-20T16:00:00.000Z</published>
-    <updated>2020-04-20T16:00:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="题目描述">题目描述</h2><p><span class="exturl" data-url="aHR0cHM6Ly9waW50aWEuY24vcHJvYmxlbS1zZXRzLzk5NDgwNTM0MjcyMDg2ODM1Mi9wcm9ibGVtcy85OTQ4MDU0MzkyMDI0NDMyNjQ=">题目地址<i class="fa fa-external-link-alt"></i></span></p><p>简单来说，即给定一串数字序列，以及目标值M，找出一段和为M的子串，若不存在找出大于M的最小子串</p><a id="more"></a><h2 id="简单思路">简单思路</h2><p>这是一道二分法的题目，开始很难看出来，因为二分意味着有序，这里并没有什么有序。唯一可能有序的就是和了，如果让一个数组sums保存从开始到此位置的和，那这个数组就是递增的了，也就可以使用二分法了。</p><p>从位置i开始（左界）寻找符合条件的右界，也就是找前缀和为sums[i-1]+M的下标，这就可以使用二分查找了</p><p>代码如下：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="comment">//#define LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SEE(x) cout &lt;&lt; #x &lt;&lt; <span class="meta-string">&quot;:&quot;</span> &lt;&lt; x &lt;&lt; endl;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1e5</span>+<span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"><span class="keyword">int</span> sums[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">divide</span><span class="params">(<span class="keyword">int</span> st)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ed = n, mid, tar = m+sums[st<span class="number">-1</span>];</span><br><span class="line">    <span class="keyword">while</span>(st &lt; ed) &#123;</span><br><span class="line">        mid = (st + ed) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(sums[mid] &gt;= tar) &#123;</span><br><span class="line">            ed = mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            st = mid+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ed;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">&quot;./in.txt&quot;</span>, <span class="string">&quot;r&quot;</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    sums[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;n, &amp;m);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid; <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;mid);</span><br><span class="line">        sums[i] = sums[i<span class="number">-1</span>] + mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> min_m = sums[n];</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">pair</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; res;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> tar_pos = divide(i);</span><br><span class="line">        <span class="keyword">int</span> temp = sums[tar_pos]-sums[i<span class="number">-1</span>];</span><br><span class="line">        <span class="keyword">if</span>(temp &gt; min_m) &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(temp &gt;= m) &#123;</span><br><span class="line">            <span class="keyword">if</span>(temp &lt; min_m) &#123;</span><br><span class="line">                res.clear();</span><br><span class="line">                min_m = temp;</span><br><span class="line">            &#125;</span><br><span class="line">            res.push_back(&#123;i, tar_pos&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> v : res) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d-%d\n&quot;</span>, v.first, v.second);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;题目描述&quot;&gt;题目描述&lt;/h2&gt;
-&lt;p&gt;&lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9waW50aWEuY24vcHJvYmxlbS1zZXRzLzk5NDgwNTM0MjcyMDg2ODM1Mi9wcm9ibGVtcy85OTQ4MDU0MzkyMDI0NDMyNjQ=&quot;&gt;题目地址&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;简单来说，即给定一串数字序列，以及目标值M，找出一段和为M的子串，若不存在找出大于M的最小子串&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Computer Science" scheme="https://weijun-lin.top/categories/Computer-Science/"/>
-    
-      <category term="OJ" scheme="https://weijun-lin.top/categories/Computer-Science/OJ/"/>
-    
-      <category term="PAT" scheme="https://weijun-lin.top/categories/Computer-Science/OJ/PAT/"/>
-    
-    
-      <category term="C/C++" scheme="https://weijun-lin.top/tags/C-C/"/>
-    
-      <category term="二分" scheme="https://weijun-lin.top/tags/%E4%BA%8C%E5%88%86/"/>
     
   </entry>
   
