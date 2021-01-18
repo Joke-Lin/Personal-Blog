@@ -6472,7 +6472,7 @@ z &amp;= f(x,y) \\
       </tags>
   </entry>
   <entry>
-    <title> 单应变换的局限性</title>
+    <title>单应变换的局限性</title>
     <url>/2021/01/14/2021-01-14-HomographyLimits/</url>
     <content><![CDATA[<h2 id="单应变换">单应变换</h2>
 <p>单应变换就是两个平面内保持共线的变换，变换是一个 3*3 的矩阵，因为齐次坐标的尺度无关性所以只有8个自由度。DLT（直接线性变换）算法讨论了单应变换的相关性质，以及变换矩阵的求解。</p>
@@ -6505,6 +6505,104 @@ z &amp;= f(x,y) \\
       </categories>
       <tags>
         <tag>Homography</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>As-Projective-As-Possible Image Stitching with Moving DLT</title>
+    <url>/2021/01/18/2021-01-14-APAP/</url>
+    <content><![CDATA[<blockquote>
+<p>原文链接：<span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2RvY3VtZW50LzY2MTkxNDc=">As-Projective-As-Possible Image Stitching with Moving DLT<i class="fa fa-external-link-alt"></i></span></p>
+<p>这里主要对文章的 Moving DLT 做介绍，其它关于图像拼接的细节就不描述了，文章的重点就在使用 Moving DLT 来模拟一个复杂映射</p>
+</blockquote>
+<p><strong>摘要</strong>：图像拼接的商用话给我们带来了这个问题已经被解决的错误印象。实际上，在某些严厉的成像条件上，这些结果都不能够使人信服，除非在<strong>只有视角旋转变化或者场景为平面</strong>的条件下。在这些约束下，可以使用二维射影变换或者单应来对齐图片。在一般情况下，这种条件经常被打破，造成错误的对齐或者鬼影。现在这些拼接技术依赖于后处理方法来消除或减轻鬼影。在这篇文章中，提出一种不同的估计技术，名为 “移动直接线性变换 (Moving DLT)”，可以优化射影变换使得其适应输入数据和理想条件的偏差。这生成了一种 <em>尽可能投影的</em> 的图像对齐方法，有效的减少了鬼影并且不损害透视图象拼接的几何写实性。此外，还描述了如何将这种对齐方法使用到多幅图像的大全景图生成中，通过将光束法平差（Bundle Adjustment）同时用于优化以达到准确地对齐。</p>
+<p><strong>关键词</strong>：图像拼接，图像对齐，射影变换，直接线性变换，移动最小二乘法</p>
+<a id="more"></a>
+<h2 id="介绍">介绍</h2>
+<p>文章的介绍部分主要谈到了当前图像拼接算法模型的不足，使用单应变换来实现图像对齐。但<a href="https://weijun-lin.top/2021/01/14/2021-01-14-HomographyLimits/">单应变换有着自身的局限性</a>，只适用于视角仅旋转变换和目标场景为平面两种情况。当违反这两个条件后，会造成鬼影并且错误的对齐。为此，提出了一个名为“移动DLT”的估计技术，可以优化全局单应变换带来的误差。其它技术带来的鬼影等不良影响虽然可以通过后期技术优化，但是作者认为在对齐阶段就消除是很有必要的。</p>
+<h2 id="尽可能射影的变换-apap">尽可能射影的变换 APAP</h2>
+<h3 id="二维射影变换dlt">二维射影变换（DLT）</h3>
+<p>令 <span class="math inline">\(\textbf{x} = [x,y]^T,\textbf{x}&#39;= [x&#39;,y&#39;]^T\)</span>，为两幅具有重叠部分图像 <span class="math inline">\(I,I&#39;\)</span> 上的对应点，它们之间的关系为： <span class="math display">\[
+\widetilde {\textbf{x}}&#39; \sim \textbf{H} \widetilde {\textbf{x}}
+\]</span> 字符上的波浪线代表着尺度归一化，也就是齐次坐标规范化。其中 <span class="math inline">\(3\times 3\)</span> 的矩阵 <span class="math inline">\(\textbf{H}\)</span> 为单应矩阵，上面的等式展开后有： <span class="math display">\[
+x&#39; = \frac{r_1[x,y,1]^T}{r_3[x,y,1]^T} \\
+y&#39; = \frac{r_2[x,y,1]^T}{r_3[x,y,1]^T}
+\]</span> 其中 <span class="math inline">\(r_j\)</span> 表示矩阵 <span class="math inline">\(\textbf{H}\)</span> 的第 j 行。齐次坐标需要除以第三个分量使得它不是一个线性变换，直接线性变换（DLT）是一种在含有噪声的匹配点中估计单应矩阵的基础方法。首先，因为 <span class="math inline">\(\widetilde {\textbf{x}}&#39; \sim \textbf{H} \widetilde {\textbf{x}}\)</span> 有 <span class="math inline">\(\textbf{0}_{3\times 1} = \widetilde {\textbf{x}}&#39; \times \textbf{H}\widetilde {\textbf{x}}\)</span> ，这个式子可以化为： <span class="math display">\[
+\textbf{0}_{3\times 1} = 
+\left[
+\begin{matrix}
+\textbf{0}_{3\times 1} &amp; -\widetilde{\textbf{x}}^T &amp; y&#39;\widetilde {\textbf{x}}^T\\
+\widetilde {\textbf{x}}^T &amp; \textbf{0}_{3\times 1} &amp; -x&#39;\widetilde {\textbf{x}}^T\\
+-y&#39;\widetilde {\textbf{x}}^T &amp; x&#39;\widetilde {\textbf{x}}^T &amp; \textbf{0}_{3\times 1}
+\end{matrix}
+\right]
+\times \textbf{h} \\
+\textbf{h} = 
+\left[
+\begin{matrix}
+r_1^T \\
+r_2^T \\
+r_3^T
+\end{matrix}
+\right]
+\]</span> <span class="math inline">\(\textbf{h}\)</span> 就是矩阵 <span class="math inline">\(\textbf{H}\)</span> 的向量表示，上面 3*9 的矩阵中，只有两行是线性无关的，所以对某一对对应点 <span class="math inline">\(\{\textbf{x}_i,\textbf{x}_i&#39;\}\)</span> 使用 <span class="math inline">\(\textbf{a}_i\)</span> 表示矩阵的前两行，对于需要估计的向量 <span class="math inline">\(\textbf{h}\)</span>，<span class="math inline">\(\vert\vert \textbf{a}_i \textbf{h}\vert\vert\)</span> 为第 i 个点的代数误差（因为理想情况下 <span class="math inline">\(a_ih\)</span> 为 0），所以 DLT 的目标就是将所有对应点的代数误差和做到最小，即： <span class="math display">\[
+\hat{\textbf{h}} = \mathop{argmin}_{\textbf{h}} \sum_{i=1}^{N}
+\vert\vert \textbf{a}_i \textbf{h}\vert\vert ^2 \qquad \text{s.t.} 
+\vert\vert \textbf{h}\vert\vert = 1
+\]</span> 将所有的点累积起来还可以转变为矩阵的形式： <span class="math display">\[
+\hat{\textbf{h}} = \mathop{argmin}_{\textbf{h}}
+\vert\vert \textbf{A} \textbf{h}\vert\vert ^2 \qquad \text{s.t.} 
+\vert\vert \textbf{h}\vert\vert = 1
+\]</span> 其中 <span class="math inline">\(\textbf{A} \in \mathbb{R}^{2N\times 9}\)</span>，这就是一个代数最小二乘问题，它的解是<strong>最小奇异值对应的右奇异向量</strong>。也就是说对于原图像 <span class="math inline">\(I\)</span> 中的任意一点 <span class="math inline">\(\textbf{x}_*\)</span>，它映射到对齐图像 <span class="math inline">\(I&#39;\)</span> 上的点为 <span class="math inline">\(\textbf{x}&#39;_*\)</span>，理想情况下，有以下关系成立： <span class="math display">\[
+\widetilde {\textbf{x}}_*&#39; \sim \textbf{H} \widetilde {\textbf{x}}_*
+\]</span> 前面已经提到了单应的局限性，DLT 算法适合在避免了单应局限性，并存在一些离群点（噪声）的情况下，获得最佳的单应映射。但是在一般成像下，一个<strong>全局的单应</strong>不足以拟合所有的点，也就是说会有很大一部分点不符合这个单应矩阵表示的映射。文章提供了一种使用单应模拟复杂映射（非纯单应）的方法，也就是下面要提到的<strong>移动 DLT</strong>。</p>
+<h3 id="moving-dlt">Moving DLT</h3>
+<p>Moving DLT 本质上就是使用局部单应拟合映射。此时的点 <span class="math inline">\(\textbf{x}_*,\textbf{x}_*&#39;\)</span> 满足下式： <span class="math display">\[
+\widetilde {\textbf{x}}_*&#39; \sim \textbf{H}_* \widetilde {\textbf{x}}_*
+\]</span> 这里的 <span class="math inline">\(\textbf{H}_*\)</span> 和点有关，也就是单应的局部表示。而 <span class="math inline">\(\textbf{H}_*\)</span> 则从下面的加权优化问题中得出： <span class="math display">\[
+\textbf{h}_* = \mathop{argmin}_{\textbf{h}} \sum_{i=1}^{N}\vert\vert w_*^i \textbf{a}_i \textbf{h}\vert\vert ^2 \qquad \text{s.t.} \vert\vert \textbf{h}\vert\vert = 1
+\]</span> 其中的 <span class="math inline">\(w_*^i\)</span> 是最关键的部分，它给了那些与 <span class="math inline">\(\textbf{x}_*\)</span> 相近的点更高的权重。可以使用高斯函数来确定： <span class="math display">\[
+w_*^i = \exp(-\vert\vert \textbf{x}_* - \textbf{x}_i \vert\vert^2/\sigma^2)
+\]</span> 自然的 <span class="math inline">\(\sigma\)</span> 表示尺度参数。和 <a href="/2021/01/07/2021-01-07-MLS/">WLS</a> 的权函数类似，只要符合权函数那几个定义即可。这差不多就是 Moving DLT 的定义了。就加了一个权函数。上式可以矩阵化为： <span class="math display">\[
+\textbf{h}_* = \mathop{argmin}_{\textbf{h}} \vert\vert \textbf{W}_* \textbf{A} \textbf{h}\vert\vert ^2 \qquad \text{s.t.} \vert\vert \textbf{h}\vert\vert = 1
+\]</span> 其中的 <span class="math inline">\(\textbf{W}_*\)</span> 为权重组成的对角矩阵： <span class="math display">\[
+\textbf{W}_* = \mathop{diag}([w_*^1 w_*^1 w_*^2 w_*^2 \cdots w_*^N w_*^N])
+\]</span> 每一个权重都出现两次是因为 <span class="math inline">\(\textbf{a}_i\)</span> 是一个 2 行的矩阵。矩阵化后就变成了一个加权 SVD（WSVD） 问题，它的解为 <span class="math inline">\(\textbf{W}_*\textbf{A}\)</span> 最小奇异值的右奇异向量。为了确保有界，对那些远离的点做一个补偿（正则化），当权值低于某个值时，将它设为预定的值，因为有些时候没有匹配点（不再图像的重叠区域内），这时那些有匹配点原理当前点，则会数据不足。所以改进后的权值表达如下： <span class="math display">\[
+w_*^i = \max(\exp(-\vert\vert \textbf{x}_* - \textbf{x}_i \vert\vert^2/\sigma^2), \gamma)
+\]</span> 概念上讲 Moving DLT 是 MLS（移动最小二乘）的单应变换版本。</p>
+<h3 id="图像拼接的高效计算复杂度优化">图像拼接的高效计算（复杂度优化）</h3>
+<h4 id="ransac-过滤离群点">RANSAC 过滤离群点</h4>
+<p>数据一般都不会是理想的，总存在噪声或者错误匹配的点（离群值）。文章使用 RANSAC 来移除离群值来减少不必要的数据。RANSAC 还是使用的 DLT，这就使得一些正确匹配点（单应局限性造成）和这些离群值一样会在 RANSAC 中产生误差，但离群点的误差会比单应局限性造成的误差大，所以 RANSAC 还是可以有效的工作。</p>
+<h4 id="划分网格">划分网格</h4>
+<p>为每一个源图像中的点计算它的单应模型是没有必要的，因为相近的点的单应差别不大，所以讲图像均分为网格可以提高效率并且保证准确度。可以将原图像划分为 <span class="math inline">\(C_1\times C_2\)</span> 大小的网格，每一个网格的单应由它的中心点 <span class="math inline">\(\textbf{x}_*\)</span> 代表。这样会使得格子之间的单应变换不连续，因为使用离散的网格中心点导致权值不是连续变化。但作者在实验中认为只要分辨率足够高就不会有明显的不连续感。</p>
+<h4 id="wsvd-更新">WSVD 更新</h4>
+<p>在计算 Moving DLT 的时候每一次改变的只有权重矩阵，但是权重矩阵中大部分都是 <span class="math inline">\(\gamma\)</span>（因为里当前点远的点更多），现在考虑是否不用每次都重新计算当前点的 DLT，而是通过上一次的结果来更新。</p>
+<p>首先考虑权重矩阵 <span class="math inline">\(\textbf{W}_\gamma = \gamma \textbf{I}\)</span>，令 <span class="math inline">\(\textbf{V}\)</span> 为矩阵 <span class="math inline">\(\textbf{W}_\gamma\textbf{A}\)</span> 右奇异向量，这个矩阵的特征值分解如下： <span class="math display">\[
+\textbf{A}^T\textbf{W}_\gamma^T  \textbf{W}_\gamma\textbf{A} = \textbf{V}\textbf{D}\textbf{V}^T
+\]</span> 令 <span class="math inline">\(\tilde {\textbf{W}}\)</span> 为 <span class="math inline">\(\textbf{W}_\gamma\)</span> 改变第 i 个对角元素得到的矩阵。对它进行特征值分解有： <span class="math display">\[
+\textbf{A}^T\tilde {\textbf{W}}^T  \tilde {\textbf{W}}\textbf{A} = 
+\textbf{V}\textbf{D}\textbf{V}^T + \rho \textbf{r}_i \textbf{r}_i^T
+= \textbf{V}(\textbf{D} + \rho \overline{\textbf{r}}_i \overline{\textbf{r}}_i^T)\textbf{V}^T \\
+\rho = (\tilde{w}^2_i/\gamma^2 - 1)
+\]</span> 其中 <span class="math inline">\(\textbf{r}_i\)</span> 为矩阵 <span class="math inline">\(\textbf{A}\)</span> 的第 i 行，<span class="math inline">\(\overline{\textbf{r}}_i = \textbf{V}^T\textbf{r}_i\)</span>。 <span class="math inline">\(\textbf{D} + \rho \textbf{r}_i \textbf{r}_i^T\)</span> 又可以特征值分解为 <span class="math inline">\(\tilde{\textbf{C}}\tilde{\textbf{D}}\tilde{\textbf{C}}^T\)</span>，这个可以使用特征方程得到。解特征方程可以使用相关方法加速。最后解为 <span class="math inline">\(\textbf{V}\tilde{\textbf{C}}\)</span>，这个称为 <strong>Rank-One Update</strong>，可参考<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8yNzc0MjcyOQ==">特征值分解（EVD）的rank 1 update - 知乎 (zhihu.com)<i class="fa fa-external-link-alt"></i></span>。</p>
+<p>参考图如下：</p>
+<p><img src="/assets/ArticleImg/2021/APAP_1.png" /></p>
+<p>其中 a 为原图，b 为将原图网格化，c 为将原图通过 Moving DLT 映射到待匹配平面的结果。</p>
+<h2 id="同时优化">同时优化</h2>
+<p>这里讲的是将 Moving DLT 用到多幅图像（大于三幅）同时拼接用于产生全景图时，产生的相关问题和解决方法。</p>
+<p>这里就没有怎么了解了。</p>
+<p>主要是<strong>拼接顺序的选择</strong>以及<strong>光束法平差优化（Bundle Adjustment）</strong>两个方面的内容。</p>
+]]></content>
+      <categories>
+        <category>Computer Science</category>
+        <category>CV&amp;CG&amp;DIP</category>
+        <category>CV</category>
+      </categories>
+      <tags>
+        <tag>Homography</tag>
+        <tag>图像拼接</tag>
+        <tag>Moving DLT</tag>
+        <tag>DLT</tag>
+        <tag>MLS</tag>
       </tags>
   </entry>
 </search>

@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="google6dc90bbfe80e28c9.html">
+  <meta name="baidu-site-verification" content="1Zn74mB0Mh">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"weijun-lin.top","root":"/","images":"/images","scheme":"Gemini","version":"8.2.0","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="原文链接：As-Projective-As-Possible Image Stitching with Moving DLT 这里主要对文章的 Moving DLT 做介绍，其它关于图像拼接的细节就不描述了，文章的重点就在使用 Moving DLT 来模拟一个复杂映射  摘要：图像拼接的商用话给我们带来了这个问题已经被解决的错误印象。实际上，在某些严厉的成像条件上，这些结果都不能够使人信">
+<meta property="og:type" content="article">
+<meta property="og:title" content="As-Projective-As-Possible Image Stitching with Moving DLT">
+<meta property="og:url" content="https://weijun-lin.top/2021/01/18/2021-01-14-APAP/index.html">
+<meta property="og:site_name" content="WEIJUN LIN BLOG">
+<meta property="og:description" content="原文链接：As-Projective-As-Possible Image Stitching with Moving DLT 这里主要对文章的 Moving DLT 做介绍，其它关于图像拼接的细节就不描述了，文章的重点就在使用 Moving DLT 来模拟一个复杂映射  摘要：图像拼接的商用话给我们带来了这个问题已经被解决的错误印象。实际上，在某些严厉的成像条件上，这些结果都不能够使人信">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://weijun-lin.top/assets/ArticleImg/2021/APAP_1.png">
+<meta property="article:published_time" content="2021-01-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-01-17T16:00:00.000Z">
+<meta property="article:author" content="Weijun-Lin">
+<meta property="article:tag" content="Homography">
+<meta property="article:tag" content="图像拼接">
+<meta property="article:tag" content="Moving DLT">
+<meta property="article:tag" content="DLT">
+<meta property="article:tag" content="MLS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://weijun-lin.top/assets/ArticleImg/2021/APAP_1.png">
+
+
+<link rel="canonical" href="https://weijun-lin.top/2021/01/18/2021-01-14-APAP/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>As-Projective-As-Possible Image Stitching with Moving DLT | WEIJUN LIN BLOG</title>
+  
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?bbba27c18f6952433b5568d3b127959f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="WEIJUN LIN BLOG" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">WEIJUN LIN BLOG</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%BD%E5%8F%AF%E8%83%BD%E5%B0%84%E5%BD%B1%E7%9A%84%E5%8F%98%E6%8D%A2-apap"><span class="nav-text">尽可能射影的变换 APAP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E7%BB%B4%E5%B0%84%E5%BD%B1%E5%8F%98%E6%8D%A2dlt"><span class="nav-text">二维射影变换（DLT）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#moving-dlt"><span class="nav-text">Moving DLT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E6%8B%BC%E6%8E%A5%E7%9A%84%E9%AB%98%E6%95%88%E8%AE%A1%E7%AE%97%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%BC%98%E5%8C%96"><span class="nav-text">图像拼接的高效计算（复杂度优化）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ransac-%E8%BF%87%E6%BB%A4%E7%A6%BB%E7%BE%A4%E7%82%B9"><span class="nav-text">RANSAC 过滤离群点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%92%E5%88%86%E7%BD%91%E6%A0%BC"><span class="nav-text">划分网格</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#wsvd-%E6%9B%B4%E6%96%B0"><span class="nav-text">WSVD 更新</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8C%E6%97%B6%E4%BC%98%E5%8C%96"><span class="nav-text">同时优化</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Weijun-Lin"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Weijun-Lin</p>
+  <div class="site-description" itemprop="description">Learing and Using</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">61</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlaWp1bi1saW4=" title="Github → https:&#x2F;&#x2F;github.com&#x2F;weijun-lin"><i class="fab fa-github fa-fw"></i>Github</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3Blb3BsZS9qb2tlci04OC02Mi01Ny9hY3Rpdml0aWVz" title="ZHIHU → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;joker-88-62-57&#x2F;activities"><i class="fab fa-zhihu fa-fw"></i>ZHIHU</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwOTUzMjgx" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_40953281"><i class="fas fa-globe fa-fw"></i>CSDN</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOndlaWp1bi1saW5AZm94bWFpbC5jb20=" title="E-Mail → mailto:weijun-lin@foxmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="link fa-fw"></i>
+      Friends
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9sZXN0ZXJ0YW4uaW5r" title="https:&#x2F;&#x2F;lestertan.ink">Lester</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cDovL2h4LXcudG9wLw==" title="http:&#x2F;&#x2F;hx-w.top&#x2F;">Herixth</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9jb2xpbi1qYXkuY24v" title="https:&#x2F;&#x2F;colin-jay.cn&#x2F;">Colin Jay</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly95ZXotbGl1LmdpdGh1Yi5pby8=" title="https:&#x2F;&#x2F;yez-liu.github.io&#x2F;">yez-liu</span>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlaWp1bi1saW4=" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://weijun-lin.top/2021/01/18/2021-01-14-APAP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Weijun-Lin">
+      <meta itemprop="description" content="Learing and Using">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WEIJUN LIN BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          As-Projective-As-Possible Image Stitching with Moving DLT
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-01-18 00:00:00" itemprop="dateCreated datePublished" datetime="2021-01-18T00:00:00+08:00">2021-01-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Science/" itemprop="url" rel="index"><span itemprop="name">Computer Science</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Science/CV-CG-DIP/" itemprop="url" rel="index"><span itemprop="name">CV&CG&DIP</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Science/CV-CG-DIP/CV/" itemprop="url" rel="index"><span itemprop="name">CV</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>5.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<p>原文链接：<span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2RvY3VtZW50LzY2MTkxNDc=">As-Projective-As-Possible Image Stitching with Moving DLT<i class="fa fa-external-link-alt"></i></span></p>
+<p>这里主要对文章的 Moving DLT 做介绍，其它关于图像拼接的细节就不描述了，文章的重点就在使用 Moving DLT 来模拟一个复杂映射</p>
+</blockquote>
+<p><strong>摘要</strong>：图像拼接的商用话给我们带来了这个问题已经被解决的错误印象。实际上，在某些严厉的成像条件上，这些结果都不能够使人信服，除非在<strong>只有视角旋转变化或者场景为平面</strong>的条件下。在这些约束下，可以使用二维射影变换或者单应来对齐图片。在一般情况下，这种条件经常被打破，造成错误的对齐或者鬼影。现在这些拼接技术依赖于后处理方法来消除或减轻鬼影。在这篇文章中，提出一种不同的估计技术，名为 “移动直接线性变换 (Moving DLT)”，可以优化射影变换使得其适应输入数据和理想条件的偏差。这生成了一种 <em>尽可能投影的</em> 的图像对齐方法，有效的减少了鬼影并且不损害透视图象拼接的几何写实性。此外，还描述了如何将这种对齐方法使用到多幅图像的大全景图生成中，通过将光束法平差（Bundle Adjustment）同时用于优化以达到准确地对齐。</p>
+<p><strong>关键词</strong>：图像拼接，图像对齐，射影变换，直接线性变换，移动最小二乘法</p>
+<a id="more"></a>
+<h2 id="介绍">介绍</h2>
+<p>文章的介绍部分主要谈到了当前图像拼接算法模型的不足，使用单应变换来实现图像对齐。但<a href="https://weijun-lin.top/2021/01/14/2021-01-14-HomographyLimits/">单应变换有着自身的局限性</a>，只适用于视角仅旋转变换和目标场景为平面两种情况。当违反这两个条件后，会造成鬼影并且错误的对齐。为此，提出了一个名为“移动DLT”的估计技术，可以优化全局单应变换带来的误差。其它技术带来的鬼影等不良影响虽然可以通过后期技术优化，但是作者认为在对齐阶段就消除是很有必要的。</p>
+<h2 id="尽可能射影的变换-apap">尽可能射影的变换 APAP</h2>
+<h3 id="二维射影变换dlt">二维射影变换（DLT）</h3>
+<p>令 <span class="math inline">\(\textbf{x} = [x,y]^T,\textbf{x}&#39;= [x&#39;,y&#39;]^T\)</span>，为两幅具有重叠部分图像 <span class="math inline">\(I,I&#39;\)</span> 上的对应点，它们之间的关系为： <span class="math display">\[
+\widetilde {\textbf{x}}&#39; \sim \textbf{H} \widetilde {\textbf{x}}
+\]</span> 字符上的波浪线代表着尺度归一化，也就是齐次坐标规范化。其中 <span class="math inline">\(3\times 3\)</span> 的矩阵 <span class="math inline">\(\textbf{H}\)</span> 为单应矩阵，上面的等式展开后有： <span class="math display">\[
+x&#39; = \frac{r_1[x,y,1]^T}{r_3[x,y,1]^T} \\
+y&#39; = \frac{r_2[x,y,1]^T}{r_3[x,y,1]^T}
+\]</span> 其中 <span class="math inline">\(r_j\)</span> 表示矩阵 <span class="math inline">\(\textbf{H}\)</span> 的第 j 行。齐次坐标需要除以第三个分量使得它不是一个线性变换，直接线性变换（DLT）是一种在含有噪声的匹配点中估计单应矩阵的基础方法。首先，因为 <span class="math inline">\(\widetilde {\textbf{x}}&#39; \sim \textbf{H} \widetilde {\textbf{x}}\)</span> 有 <span class="math inline">\(\textbf{0}_{3\times 1} = \widetilde {\textbf{x}}&#39; \times \textbf{H}\widetilde {\textbf{x}}\)</span> ，这个式子可以化为： <span class="math display">\[
+\textbf{0}_{3\times 1} = 
+\left[
+\begin{matrix}
+\textbf{0}_{3\times 1} &amp; -\widetilde{\textbf{x}}^T &amp; y&#39;\widetilde {\textbf{x}}^T\\
+\widetilde {\textbf{x}}^T &amp; \textbf{0}_{3\times 1} &amp; -x&#39;\widetilde {\textbf{x}}^T\\
+-y&#39;\widetilde {\textbf{x}}^T &amp; x&#39;\widetilde {\textbf{x}}^T &amp; \textbf{0}_{3\times 1}
+\end{matrix}
+\right]
+\times \textbf{h} \\
+\textbf{h} = 
+\left[
+\begin{matrix}
+r_1^T \\
+r_2^T \\
+r_3^T
+\end{matrix}
+\right]
+\]</span> <span class="math inline">\(\textbf{h}\)</span> 就是矩阵 <span class="math inline">\(\textbf{H}\)</span> 的向量表示，上面 3*9 的矩阵中，只有两行是线性无关的，所以对某一对对应点 <span class="math inline">\(\{\textbf{x}_i,\textbf{x}_i&#39;\}\)</span> 使用 <span class="math inline">\(\textbf{a}_i\)</span> 表示矩阵的前两行，对于需要估计的向量 <span class="math inline">\(\textbf{h}\)</span>，<span class="math inline">\(\vert\vert \textbf{a}_i \textbf{h}\vert\vert\)</span> 为第 i 个点的代数误差（因为理想情况下 <span class="math inline">\(a_ih\)</span> 为 0），所以 DLT 的目标就是将所有对应点的代数误差和做到最小，即： <span class="math display">\[
+\hat{\textbf{h}} = \mathop{argmin}_{\textbf{h}} \sum_{i=1}^{N}
+\vert\vert \textbf{a}_i \textbf{h}\vert\vert ^2 \qquad \text{s.t.} 
+\vert\vert \textbf{h}\vert\vert = 1
+\]</span> 将所有的点累积起来还可以转变为矩阵的形式： <span class="math display">\[
+\hat{\textbf{h}} = \mathop{argmin}_{\textbf{h}}
+\vert\vert \textbf{A} \textbf{h}\vert\vert ^2 \qquad \text{s.t.} 
+\vert\vert \textbf{h}\vert\vert = 1
+\]</span> 其中 <span class="math inline">\(\textbf{A} \in \mathbb{R}^{2N\times 9}\)</span>，这就是一个代数最小二乘问题，它的解是<strong>最小奇异值对应的右奇异向量</strong>。也就是说对于原图像 <span class="math inline">\(I\)</span> 中的任意一点 <span class="math inline">\(\textbf{x}_*\)</span>，它映射到对齐图像 <span class="math inline">\(I&#39;\)</span> 上的点为 <span class="math inline">\(\textbf{x}&#39;_*\)</span>，理想情况下，有以下关系成立： <span class="math display">\[
+\widetilde {\textbf{x}}_*&#39; \sim \textbf{H} \widetilde {\textbf{x}}_*
+\]</span> 前面已经提到了单应的局限性，DLT 算法适合在避免了单应局限性，并存在一些离群点（噪声）的情况下，获得最佳的单应映射。但是在一般成像下，一个<strong>全局的单应</strong>不足以拟合所有的点，也就是说会有很大一部分点不符合这个单应矩阵表示的映射。文章提供了一种使用单应模拟复杂映射（非纯单应）的方法，也就是下面要提到的<strong>移动 DLT</strong>。</p>
+<h3 id="moving-dlt">Moving DLT</h3>
+<p>Moving DLT 本质上就是使用局部单应拟合映射。此时的点 <span class="math inline">\(\textbf{x}_*,\textbf{x}_*&#39;\)</span> 满足下式： <span class="math display">\[
+\widetilde {\textbf{x}}_*&#39; \sim \textbf{H}_* \widetilde {\textbf{x}}_*
+\]</span> 这里的 <span class="math inline">\(\textbf{H}_*\)</span> 和点有关，也就是单应的局部表示。而 <span class="math inline">\(\textbf{H}_*\)</span> 则从下面的加权优化问题中得出： <span class="math display">\[
+\textbf{h}_* = \mathop{argmin}_{\textbf{h}} \sum_{i=1}^{N}\vert\vert w_*^i \textbf{a}_i \textbf{h}\vert\vert ^2 \qquad \text{s.t.} \vert\vert \textbf{h}\vert\vert = 1
+\]</span> 其中的 <span class="math inline">\(w_*^i\)</span> 是最关键的部分，它给了那些与 <span class="math inline">\(\textbf{x}_*\)</span> 相近的点更高的权重。可以使用高斯函数来确定： <span class="math display">\[
+w_*^i = \exp(-\vert\vert \textbf{x}_* - \textbf{x}_i \vert\vert^2/\sigma^2)
+\]</span> 自然的 <span class="math inline">\(\sigma\)</span> 表示尺度参数。和 <a href="/2021/01/07/2021-01-07-MLS/">WLS</a> 的权函数类似，只要符合权函数那几个定义即可。这差不多就是 Moving DLT 的定义了。就加了一个权函数。上式可以矩阵化为： <span class="math display">\[
+\textbf{h}_* = \mathop{argmin}_{\textbf{h}} \vert\vert \textbf{W}_* \textbf{A} \textbf{h}\vert\vert ^2 \qquad \text{s.t.} \vert\vert \textbf{h}\vert\vert = 1
+\]</span> 其中的 <span class="math inline">\(\textbf{W}_*\)</span> 为权重组成的对角矩阵： <span class="math display">\[
+\textbf{W}_* = \mathop{diag}([w_*^1 w_*^1 w_*^2 w_*^2 \cdots w_*^N w_*^N])
+\]</span> 每一个权重都出现两次是因为 <span class="math inline">\(\textbf{a}_i\)</span> 是一个 2 行的矩阵。矩阵化后就变成了一个加权 SVD（WSVD） 问题，它的解为 <span class="math inline">\(\textbf{W}_*\textbf{A}\)</span> 最小奇异值的右奇异向量。为了确保有界，对那些远离的点做一个补偿（正则化），当权值低于某个值时，将它设为预定的值，因为有些时候没有匹配点（不再图像的重叠区域内），这时那些有匹配点原理当前点，则会数据不足。所以改进后的权值表达如下： <span class="math display">\[
+w_*^i = \max(\exp(-\vert\vert \textbf{x}_* - \textbf{x}_i \vert\vert^2/\sigma^2), \gamma)
+\]</span> 概念上讲 Moving DLT 是 MLS（移动最小二乘）的单应变换版本。</p>
+<h3 id="图像拼接的高效计算复杂度优化">图像拼接的高效计算（复杂度优化）</h3>
+<h4 id="ransac-过滤离群点">RANSAC 过滤离群点</h4>
+<p>数据一般都不会是理想的，总存在噪声或者错误匹配的点（离群值）。文章使用 RANSAC 来移除离群值来减少不必要的数据。RANSAC 还是使用的 DLT，这就使得一些正确匹配点（单应局限性造成）和这些离群值一样会在 RANSAC 中产生误差，但离群点的误差会比单应局限性造成的误差大，所以 RANSAC 还是可以有效的工作。</p>
+<h4 id="划分网格">划分网格</h4>
+<p>为每一个源图像中的点计算它的单应模型是没有必要的，因为相近的点的单应差别不大，所以讲图像均分为网格可以提高效率并且保证准确度。可以将原图像划分为 <span class="math inline">\(C_1\times C_2\)</span> 大小的网格，每一个网格的单应由它的中心点 <span class="math inline">\(\textbf{x}_*\)</span> 代表。这样会使得格子之间的单应变换不连续，因为使用离散的网格中心点导致权值不是连续变化。但作者在实验中认为只要分辨率足够高就不会有明显的不连续感。</p>
+<h4 id="wsvd-更新">WSVD 更新</h4>
+<p>在计算 Moving DLT 的时候每一次改变的只有权重矩阵，但是权重矩阵中大部分都是 <span class="math inline">\(\gamma\)</span>（因为里当前点远的点更多），现在考虑是否不用每次都重新计算当前点的 DLT，而是通过上一次的结果来更新。</p>
+<p>首先考虑权重矩阵 <span class="math inline">\(\textbf{W}_\gamma = \gamma \textbf{I}\)</span>，令 <span class="math inline">\(\textbf{V}\)</span> 为矩阵 <span class="math inline">\(\textbf{W}_\gamma\textbf{A}\)</span> 右奇异向量，这个矩阵的特征值分解如下： <span class="math display">\[
+\textbf{A}^T\textbf{W}_\gamma^T  \textbf{W}_\gamma\textbf{A} = \textbf{V}\textbf{D}\textbf{V}^T
+\]</span> 令 <span class="math inline">\(\tilde {\textbf{W}}\)</span> 为 <span class="math inline">\(\textbf{W}_\gamma\)</span> 改变第 i 个对角元素得到的矩阵。对它进行特征值分解有： <span class="math display">\[
+\textbf{A}^T\tilde {\textbf{W}}^T  \tilde {\textbf{W}}\textbf{A} = 
+\textbf{V}\textbf{D}\textbf{V}^T + \rho \textbf{r}_i \textbf{r}_i^T
+= \textbf{V}(\textbf{D} + \rho \overline{\textbf{r}}_i \overline{\textbf{r}}_i^T)\textbf{V}^T \\
+\rho = (\tilde{w}^2_i/\gamma^2 - 1)
+\]</span> 其中 <span class="math inline">\(\textbf{r}_i\)</span> 为矩阵 <span class="math inline">\(\textbf{A}\)</span> 的第 i 行，<span class="math inline">\(\overline{\textbf{r}}_i = \textbf{V}^T\textbf{r}_i\)</span>。 <span class="math inline">\(\textbf{D} + \rho \textbf{r}_i \textbf{r}_i^T\)</span> 又可以特征值分解为 <span class="math inline">\(\tilde{\textbf{C}}\tilde{\textbf{D}}\tilde{\textbf{C}}^T\)</span>，这个可以使用特征方程得到。解特征方程可以使用相关方法加速。最后解为 <span class="math inline">\(\textbf{V}\tilde{\textbf{C}}\)</span>，这个称为 <strong>Rank-One Update</strong>，可参考<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8yNzc0MjcyOQ==">特征值分解（EVD）的rank 1 update - 知乎 (zhihu.com)<i class="fa fa-external-link-alt"></i></span>。</p>
+<p>参考图如下：</p>
+<p><img src="/assets/ArticleImg/2021/APAP_1.png" /></p>
+<p>其中 a 为原图，b 为将原图网格化，c 为将原图通过 Moving DLT 映射到待匹配平面的结果。</p>
+<h2 id="同时优化">同时优化</h2>
+<p>这里讲的是将 Moving DLT 用到多幅图像（大于三幅）同时拼接用于产生全景图时，产生的相关问题和解决方法。</p>
+<p>这里就没有怎么了解了。</p>
+<p>主要是<strong>拼接顺序的选择</strong>以及<strong>光束法平差优化（Bundle Adjustment）</strong>两个方面的内容。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Weijun-Lin
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://weijun-lin.top/2021/01/18/2021-01-14-APAP/" title="As-Projective-As-Possible Image Stitching with Moving DLT">https://weijun-lin.top/2021/01/18/2021-01-14-APAP/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Homography/" rel="tag"><i class="fa fa-tag"></i> Homography</a>
+              <a href="/tags/%E5%9B%BE%E5%83%8F%E6%8B%BC%E6%8E%A5/" rel="tag"><i class="fa fa-tag"></i> 图像拼接</a>
+              <a href="/tags/Moving-DLT/" rel="tag"><i class="fa fa-tag"></i> Moving DLT</a>
+              <a href="/tags/DLT/" rel="tag"><i class="fa fa-tag"></i> DLT</a>
+              <a href="/tags/MLS/" rel="tag"><i class="fa fa-tag"></i> MLS</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/01/14/2021-01-14-HomographyLimits/" rel="next" title="单应变换的局限性">
+                  单应变换的局限性 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC8zOTczMy8xNjI2MA=="></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Weijun-Lin</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">266k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">4:02</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 24136,
+      el    : 'wpac-rating',
+      color : 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'none'
+      },
+      options: {
+        renderActions: {
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+<script>
+NexT.utils.loadComments('#lv-container', () => {
+  window.livereOptions = {
+    refer: "2021/01/18/2021-01-14-APAP/"
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>
