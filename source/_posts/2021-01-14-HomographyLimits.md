@@ -1,5 +1,5 @@
 ---
-title: ' 单应变换的局限性'
+title: '单应变换的局限性'
 date: 2021-01-14
 mathjax: true
 categories:
