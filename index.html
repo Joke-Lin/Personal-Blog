@@ -214,7 +214,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">61</span>
+          <span class="site-state-item-count">62</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -227,7 +227,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-count">30</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -296,6 +296,110 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://weijun-lin.top/2021/01/25/2021-01-25-RANSAC-MATLAB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Weijun-Lin">
+      <meta itemprop="description" content="Learing and Using">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WEIJUN LIN BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/01/25/2021-01-25-RANSAC-MATLAB/" class="post-title-link" itemprop="url">Matlab ransac 库函数介绍</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-01-25 00:00:00" itemprop="dateCreated datePublished" datetime="2021-01-25T00:00:00+08:00">2021-01-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Science/" itemprop="url" rel="index"><span itemprop="name">Computer Science</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Science/CV-CG-DIP/" itemprop="url" rel="index"><span itemprop="name">CV&CG&DIP</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Science/CV-CG-DIP/CV/" itemprop="url" rel="index"><span itemprop="name">CV</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>matlab 自带了 ransac 函数，这里总结一下用法。matlab 自带的这个函数其实是 MSAC（M-estimator sample consensus）算法，但其实差不多，它对给定数据集，以及自定的模型计算函数和误差计算函数返回具有最大内点的模型。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/25/2021-01-25-RANSAC-MATLAB/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -379,7 +483,7 @@
 <p>原文链接：<span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2RvY3VtZW50LzY2MTkxNDc=">As-Projective-As-Possible Image Stitching with Moving DLT<i class="fa fa-external-link-alt"></i></span></p>
 <p>这里主要对文章的 Moving DLT 做介绍，其它关于图像拼接的细节就不描述了，文章的重点就在使用 Moving DLT 来模拟一个复杂映射</p>
 </blockquote>
-<p><strong>摘要</strong>：图像拼接的商用话给我们带来了这个问题已经被解决的错误印象。实际上，在某些严厉的成像条件上，这些结果都不能够使人信服，除非在<strong>只有视角旋转变化或者场景为平面</strong>的条件下。在这些约束下，可以使用二维射影变换或者单应来对齐图片。在一般情况下，这种条件经常被打破，造成错误的对齐或者鬼影。现在这些拼接技术依赖于后处理方法来消除或减轻鬼影。在这篇文章中，提出一种不同的估计技术，名为 “移动直接线性变换 (Moving DLT)”，可以优化射影变换使得其适应输入数据和理想条件的偏差。这生成了一种 <em>尽可能投影的</em> 的图像对齐方法，有效的减少了鬼影并且不损害透视图象拼接的几何写实性。此外，还描述了如何将这种对齐方法使用到多幅图像的大全景图生成中，通过将光束法平差（Bundle Adjustment）同时用于优化以达到准确地对齐。</p>
+<p><strong>摘要</strong>：图像拼接的商用化给我们带来了这个问题已经被解决的错误印象。实际上，在某些严厉的成像条件上，这些结果都不能够使人信服，除非在<strong>只有视角旋转变化或者场景为平面</strong>的条件下。在这些约束下，可以使用二维射影变换或者单应来对齐图片。在一般情况下，这种条件经常被打破，造成错误的对齐或者鬼影。现在这些拼接技术依赖于后处理方法来消除或减轻鬼影。在这篇文章中，提出一种不同的估计技术，名为 “移动直接线性变换 (Moving DLT)”，可以优化射影变换使得其适应输入数据和理想条件的偏差。这生成了一种 <em>尽可能投影的</em> 的图像对齐方法，有效的减少了鬼影并且不损害透视图象拼接的几何写实性。此外，还描述了如何将这种对齐方法使用到多幅图像的大全景图生成中，通过将光束法平差（Bundle Adjustment）同时用于优化以达到准确地对齐。</p>
 <p><strong>关键词</strong>：图像拼接，图像对齐，射影变换，直接线性变换，移动最小二乘法</p>
           <!--noindex-->
             <div class="post-button">
@@ -702,7 +806,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <h2 id="简单介绍">简单介绍</h2>
-<p>霍夫变换可以用于边缘检测，更一般的则可以拟合曲线。基本原理如下：由曲线的定义式可得如XY确定，其对应的未知数构成的等式也可视作一个曲线表达式，这个新的表达式称作<strong>参数空间</strong>（自变量为原来的参数）改变 XY 的过程中这些位置构成的新的表达式必会都经过某一个固定点，这个固定点代表的参数就是原来曲线表达式。</p>
+<p>霍夫变换可以用于边缘检测，更一般的则可以拟合曲线。基本原理如下：由曲线的定义式可得，如果 XY 确定，其对应的未知数构成的等式也可视作一个曲线表达式，这个新的表达式称作<strong>参数空间</strong>（自变量为原来的参数）改变 XY 的过程中这些位置构成的新的表达式必会都经过某一个固定点，这个固定点代表的参数就是原来曲线表达式。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/12/31/2020-12-31-HoughTransform/#more" rel="contents">
@@ -1790,111 +1894,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://weijun-lin.top/2020/05/17/2020-05-17-VERCEL-DNS-EDIT/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Weijun-Lin">
-      <meta itemprop="description" content="Learing and Using">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="WEIJUN LIN BLOG">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2020/05/17/2020-05-17-VERCEL-DNS-EDIT/" class="post-title-link" itemprop="url">VERCEL（原名为ZEIT）DNS 记录的修改</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-05-17 00:00:00" itemprop="dateCreated datePublished" datetime="2020-05-17T00:00:00+08:00">2020-05-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Computer-Science/" itemprop="url" rel="index"><span itemprop="name">Computer Science</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Computer-Science/Tool/" itemprop="url" rel="index"><span itemprop="name">Tool</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>549</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p>VERCEL提供静态网站的部署和CDN的加速，十分优秀的工具（适合白嫖）</p>
-</blockquote>
-<h2 id="问题简述">问题简述</h2>
-<p>在部署自己的静态网站后（从GITHUB），VERCEL提供了他们的子域名，当然可以使用自己的域名。可以用CNAME将域名导向VERCEL的子域名，也可以直接使用我们自己的域名（不通过CNAME）。具体配置参考：<span class="exturl" data-url="aHR0cHM6Ly92ZXJjZWwuY29tL2RvY3MvdjIvY3VzdG9tLWRvbWFpbnM=">Custom Domain<i class="fa fa-external-link-alt"></i></span></p>
-<p>但直接使用自己的域名会出现一个问题，使用VERCEL提供的DNS服务器后，原来配置的DNS解析失效了。原来我使用的是阿里云的云解析，在更改为VERCEL的DNS服务后，子域名的A记录失效。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/05/17/2020-05-17-VERCEL-DNS-EDIT/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
@@ -1942,14 +1941,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">266k</span>
+    <span title="站点总字数">269k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">4:02</span>
+    <span title="站点阅读时长">4:05</span>
   </span>
 </div>
 <div class="busuanzi-count">

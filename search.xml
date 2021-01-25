@@ -6362,7 +6362,7 @@ LBP = \sum_{k=0}^7 S(g_p-g_c).2^k
     <title>霍夫变换直线检测原理实现</title>
     <url>/2020/12/31/2020-12-31-HoughTransform/</url>
     <content><![CDATA[<h2 id="简单介绍">简单介绍</h2>
-<p>霍夫变换可以用于边缘检测，更一般的则可以拟合曲线。基本原理如下：由曲线的定义式可得如XY确定，其对应的未知数构成的等式也可视作一个曲线表达式，这个新的表达式称作<strong>参数空间</strong>（自变量为原来的参数）改变 XY 的过程中这些位置构成的新的表达式必会都经过某一个固定点，这个固定点代表的参数就是原来曲线表达式。</p>
+<p>霍夫变换可以用于边缘检测，更一般的则可以拟合曲线。基本原理如下：由曲线的定义式可得，如果 XY 确定，其对应的未知数构成的等式也可视作一个曲线表达式，这个新的表达式称作<strong>参数空间</strong>（自变量为原来的参数）改变 XY 的过程中这些位置构成的新的表达式必会都经过某一个固定点，这个固定点代表的参数就是原来曲线表达式。</p>
 <a id="more"></a>
 <p>但实际上的曲线会受到噪声影响，也就是说参数空间中所有的表达式并不会经过同一点，而是大部分曲线会经过某一固定点，这个固定点可能不止一个，所以我们将参数空间切分为一个个子区域，并统计子区域中线的交点（也可以直接统计线的点数，只要代表密度即可），交点最多的那个区域就是原曲线的参数。</p>
 <p>更加详细的介绍可见《数字图像处理》中文第三版 <em>P472</em> 10.2.7 边缘检测和边界检测。或参考<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vUG9ueXMvcC8zMTQ2NzUzLmh0bWw=">Matlab 霍夫变换 ( Hough Transform） 直线检测 - Pony_s - 博客园 (cnblogs.com)<i class="fa fa-external-link-alt"></i></span></p>
@@ -6514,7 +6514,7 @@ z &amp;= f(x,y) \\
 <p>原文链接：<span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2RvY3VtZW50LzY2MTkxNDc=">As-Projective-As-Possible Image Stitching with Moving DLT<i class="fa fa-external-link-alt"></i></span></p>
 <p>这里主要对文章的 Moving DLT 做介绍，其它关于图像拼接的细节就不描述了，文章的重点就在使用 Moving DLT 来模拟一个复杂映射</p>
 </blockquote>
-<p><strong>摘要</strong>：图像拼接的商用话给我们带来了这个问题已经被解决的错误印象。实际上，在某些严厉的成像条件上，这些结果都不能够使人信服，除非在<strong>只有视角旋转变化或者场景为平面</strong>的条件下。在这些约束下，可以使用二维射影变换或者单应来对齐图片。在一般情况下，这种条件经常被打破，造成错误的对齐或者鬼影。现在这些拼接技术依赖于后处理方法来消除或减轻鬼影。在这篇文章中，提出一种不同的估计技术，名为 “移动直接线性变换 (Moving DLT)”，可以优化射影变换使得其适应输入数据和理想条件的偏差。这生成了一种 <em>尽可能投影的</em> 的图像对齐方法，有效的减少了鬼影并且不损害透视图象拼接的几何写实性。此外，还描述了如何将这种对齐方法使用到多幅图像的大全景图生成中，通过将光束法平差（Bundle Adjustment）同时用于优化以达到准确地对齐。</p>
+<p><strong>摘要</strong>：图像拼接的商用化给我们带来了这个问题已经被解决的错误印象。实际上，在某些严厉的成像条件上，这些结果都不能够使人信服，除非在<strong>只有视角旋转变化或者场景为平面</strong>的条件下。在这些约束下，可以使用二维射影变换或者单应来对齐图片。在一般情况下，这种条件经常被打破，造成错误的对齐或者鬼影。现在这些拼接技术依赖于后处理方法来消除或减轻鬼影。在这篇文章中，提出一种不同的估计技术，名为 “移动直接线性变换 (Moving DLT)”，可以优化射影变换使得其适应输入数据和理想条件的偏差。这生成了一种 <em>尽可能投影的</em> 的图像对齐方法，有效的减少了鬼影并且不损害透视图象拼接的几何写实性。此外，还描述了如何将这种对齐方法使用到多幅图像的大全景图生成中，通过将光束法平差（Bundle Adjustment）同时用于优化以达到准确地对齐。</p>
 <p><strong>关键词</strong>：图像拼接，图像对齐，射影变换，直接线性变换，移动最小二乘法</p>
 <a id="more"></a>
 <h2 id="介绍">介绍</h2>
@@ -6603,6 +6603,46 @@ w_*^i = \max(\exp(-\vert\vert \textbf{x}_* - \textbf{x}_i \vert\vert^2/\sigma^2)
         <tag>Moving DLT</tag>
         <tag>DLT</tag>
         <tag>MLS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Matlab ransac 库函数介绍</title>
+    <url>/2021/01/25/2021-01-25-RANSAC-MATLAB/</url>
+    <content><![CDATA[<p>matlab 自带了 ransac 函数，这里总结一下用法。matlab 自带的这个函数其实是 MSAC（M-estimator sample consensus）算法，但其实差不多，它对给定数据集，以及自定的模型计算函数和误差计算函数返回具有最大内点的模型。</p>
+<a id="more"></a>
+<h2 id="函数声明">函数声明</h2>
+<p>从 ransac 函数的源文件介绍中截取一段：</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%RANSAC Fit a model to noisy data. </span></span><br><span class="line"><span class="comment">%   [model, inlierIdx] = RANSAC(data, fitFcn, distFcn, sampleSize, maxDistance) </span></span><br><span class="line"><span class="comment">%   fits a model to noisy data using the M-estimator SAmple Consensus </span></span><br><span class="line"><span class="comment">%   (MSAC) algorithm, a version of RAndom SAmple Consensus algorithm.</span></span><br><span class="line"><span class="comment">%   </span></span><br><span class="line"><span class="comment">%   Inputs      Description </span></span><br><span class="line"><span class="comment">%   ------      -----------</span></span><br><span class="line"><span class="comment">%   data        An M-by-N matrix, whose rows are data points to be modeled.</span></span><br><span class="line"><span class="comment">%               For example, for fitting a line to 2-D points, data would be an </span></span><br><span class="line"><span class="comment">%               M-by-2 matrix of [x,y] coordinates. For fitting a geometric </span></span><br><span class="line"><span class="comment">%               transformation between two sets of matched 2-D points, </span></span><br><span class="line"><span class="comment">%               the coordinates can be concatenated into an M-by-4 matrix.</span></span><br><span class="line"><span class="comment">%   </span></span><br><span class="line"><span class="comment">%   fitFcn      A handle to a function, which fits the model to a minimal</span></span><br><span class="line"><span class="comment">%               subset of data. The function must be of the form </span></span><br><span class="line"><span class="comment">%                 model = fitFcn(data)</span></span><br><span class="line"><span class="comment">%               model returned by fitFcn can be a cell array, if it is</span></span><br><span class="line"><span class="comment">%               possible to fit multiple models to the data. </span></span><br><span class="line"><span class="comment">%  </span></span><br><span class="line"><span class="comment">%   distFcn     A handle to a function, which computes the distances from the</span></span><br><span class="line"><span class="comment">%               model to the data. The function must be of the form</span></span><br><span class="line"><span class="comment">%                 distances = distFcn(model, data)</span></span><br><span class="line"><span class="comment">%               If model is an N-element cell array, then distances must be an </span></span><br><span class="line"><span class="comment">%               M-by-N matrix. Otherwise, distances must be an M-by-1 vector.</span></span><br><span class="line"><span class="comment">%  </span></span><br><span class="line"><span class="comment">%   sampleSize  Positive numeric scalar containing the minimum size of a </span></span><br><span class="line"><span class="comment">%               sample from data required by fitFcn to fit a model.</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">%   maxDistance Positive numeric scalar specifying the distance threshold </span></span><br><span class="line"><span class="comment">%               for finding outliers. Increasing this value will make the </span></span><br><span class="line"><span class="comment">%               algorithm converge faster, but may adversely affect the </span></span><br><span class="line"><span class="comment">%               accuracy of the result.</span></span><br><span class="line"><span class="comment">%  </span></span><br><span class="line"><span class="comment">%   Outputs     Description</span></span><br><span class="line"><span class="comment">%   -------     -----------</span></span><br><span class="line"><span class="comment">%   model       The model, which best fits the data.</span></span><br><span class="line"><span class="comment">% </span></span><br><span class="line"><span class="comment">%   inlierIdx   An M-by-1 logical array, specifying which data points are </span></span><br><span class="line"><span class="comment">%               inliers.</span></span><br></pre></td></tr></table></figure>
+<p>Matlab 官网介绍：<span class="exturl" data-url="aHR0cHM6Ly93dzIubWF0aHdvcmtzLmNuL2hlbHAvdmlzaW9uL3JlZi9yYW5zYWMuaHRtbA==">Fit model to noisy data - MATLAB ransac - MathWorks 中国<i class="fa fa-external-link-alt"></i></span></p>
+<p>这里已经讲的比较清楚了，函数接收五个参数，两个返回值</p>
+<h3 id="参数">参数</h3>
+<ul>
+<li><em>data</em>：一行为一个数据的数据集</li>
+<li><em>fitFcn</em>：计算模型的<strong>函数句柄</strong>，比如匿名函数或者一般函数前面加 @ 符号</li>
+<li><em>distFcn</em>：同样是函数句柄，它返回每一个数据对模型的误差，接收参数为数据以及 <em>fitFcn</em> 计算出的模型</li>
+<li><em>sampleSize</em>：随机选取数据点的个数，通过这几个数据作为 <em>fitFcn</em> 的输入参数</li>
+<li><em>maxDistance</em>：认为是模型到数据的可接受误差，小于这个的都认为是内点，越大函数执行的速度越快</li>
+</ul>
+<h3 id="返回值">返回值</h3>
+<ul>
+<li><em>model</em>：得出的模型</li>
+<li><em>inlierIdx</em>：一个和 <em>data</em> 相同行数的逻辑矩阵，代表最后符合此模型的内点</li>
+</ul>
+<h2 id="使用例子">使用例子</h2>
+<p>官网给出了个例子，用的是匿名函数和一些库函数计算直线，这里用自己的函数实现官网的例子。</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">clear;clc;</span><br><span class="line"><span class="comment">% 自带的数据 </span></span><br><span class="line">load pointsForLineFitting.mat</span><br><span class="line">data = points;</span><br><span class="line"><span class="built_in">figure</span>;</span><br><span class="line"><span class="built_in">plot</span>(data(:,<span class="number">1</span>), data(:,<span class="number">2</span>), <span class="string">&#x27;o&#x27;</span>);</span><br><span class="line">axis equal</span><br><span class="line"><span class="built_in">hold</span> on</span><br><span class="line"></span><br><span class="line">sampleSize = <span class="number">2</span>;</span><br><span class="line">maxDistance = <span class="number">1</span>;</span><br><span class="line">[model, inlierIdx] = ransac(data, @fitFcn, @distFcn, sampleSize, maxDistance);</span><br><span class="line"><span class="comment">% 绘制内点</span></span><br><span class="line">inlier = data(inlierIdx, :);</span><br><span class="line"><span class="built_in">plot</span>(inlier(:,<span class="number">1</span>), inlier(:,<span class="number">2</span>), <span class="string">&#x27;o&#x27;</span>);</span><br><span class="line">x = [<span class="built_in">min</span>(data(:,<span class="number">1</span>)), <span class="built_in">max</span>(data(:, <span class="number">1</span>))];</span><br><span class="line">y = model(<span class="number">1</span>)*x + model(<span class="number">2</span>);</span><br><span class="line"><span class="built_in">plot</span>(x,y,<span class="string">&#x27;g--&#x27;</span>);</span><br><span class="line"><span class="built_in">hold</span> off</span><br><span class="line"></span><br><span class="line"><span class="comment">% 这里的模型就是算直线的 k 和 b ，y = kx+b</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">model</span> = <span class="title">fitFcn</span><span class="params">(data)</span></span></span><br><span class="line">    x = data(:,<span class="number">1</span>);</span><br><span class="line">    y = data(:,<span class="number">2</span>);</span><br><span class="line">    k = (y(<span class="number">1</span>) - y(<span class="number">2</span>))/(x(<span class="number">1</span>) - x(<span class="number">2</span>));</span><br><span class="line">    b = -k*x(<span class="number">2</span>) + y(<span class="number">2</span>);</span><br><span class="line">    model = [k, b];</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% 就是算 (y - y&#x27;)^2</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">distances</span>  = <span class="title">distFcn</span><span class="params">(model, data)</span></span></span><br><span class="line">    k = model(<span class="number">1</span>);</span><br><span class="line">    b = model(<span class="number">2</span>);</span><br><span class="line">    distances  = (data(:,<span class="number">2</span>) - (k*data(:,<span class="number">1</span>) + b)).^<span class="number">2</span>;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>效果图如下：</p>
+<p><img src="/assets/ArticleImg/2021/ransac-matlab.png" /></p>
+<p>其中圆点表示数据，橘色代表最后的内点，直线为最后得到的模型。</p>
+]]></content>
+      <categories>
+        <category>Computer Science</category>
+        <category>CV&amp;CG&amp;DIP</category>
+        <category>CV</category>
+      </categories>
+      <tags>
+        <tag>matlab</tag>
+        <tag>RANSAC</tag>
       </tags>
   </entry>
 </search>
