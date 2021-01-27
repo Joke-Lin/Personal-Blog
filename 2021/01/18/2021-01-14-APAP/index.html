@@ -375,7 +375,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>5.4k</span>
+      <span>5.5k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -407,10 +407,13 @@
 <p>令 <span class="math inline">\(\textbf{x} = [x,y]^T,\textbf{x}&#39;= [x&#39;,y&#39;]^T\)</span>，为两幅具有重叠部分图像 <span class="math inline">\(I,I&#39;\)</span> 上的对应点，它们之间的关系为： <span class="math display">\[
 \widetilde {\textbf{x}}&#39; \sim \textbf{H} \widetilde {\textbf{x}}
 \]</span> 字符上的波浪线代表着尺度归一化，也就是齐次坐标规范化。其中 <span class="math inline">\(3\times 3\)</span> 的矩阵 <span class="math inline">\(\textbf{H}\)</span> 为单应矩阵，上面的等式展开后有： <span class="math display">\[
+\begin{align}
 x&#39; = \frac{r_1[x,y,1]^T}{r_3[x,y,1]^T} \\
 y&#39; = \frac{r_2[x,y,1]^T}{r_3[x,y,1]^T}
+\end{align}
 \]</span> 其中 <span class="math inline">\(r_j\)</span> 表示矩阵 <span class="math inline">\(\textbf{H}\)</span> 的第 j 行。齐次坐标需要除以第三个分量使得它不是一个线性变换，直接线性变换（DLT）是一种在含有噪声的匹配点中估计单应矩阵的基础方法。首先，因为 <span class="math inline">\(\widetilde {\textbf{x}}&#39; \sim \textbf{H} \widetilde {\textbf{x}}\)</span> 有 <span class="math inline">\(\textbf{0}_{3\times 1} = \widetilde {\textbf{x}}&#39; \times \textbf{H}\widetilde {\textbf{x}}\)</span> ，这个式子可以化为： <span class="math display">\[
-\textbf{0}_{3\times 1} = 
+\begin{align}
+\textbf{0}_{3\times 1} &amp;= 
 \left[
 \begin{matrix}
 \textbf{0}_{3\times 1} &amp; -\widetilde{\textbf{x}}^T &amp; y&#39;\widetilde {\textbf{x}}^T\\
@@ -419,7 +422,7 @@ y&#39; = \frac{r_2[x,y,1]^T}{r_3[x,y,1]^T}
 \end{matrix}
 \right]
 \times \textbf{h} \\
-\textbf{h} = 
+\textbf{h} &amp;= 
 \left[
 \begin{matrix}
 r_1^T \\
@@ -427,6 +430,7 @@ r_2^T \\
 r_3^T
 \end{matrix}
 \right]
+\end{align}
 \]</span> <span class="math inline">\(\textbf{h}\)</span> 就是矩阵 <span class="math inline">\(\textbf{H}\)</span> 的向量表示，上面 3*9 的矩阵中，只有两行是线性无关的，所以对某一对对应点 <span class="math inline">\(\{\textbf{x}_i,\textbf{x}_i&#39;\}\)</span> 使用 <span class="math inline">\(\textbf{a}_i\)</span> 表示矩阵的前两行，对于需要估计的向量 <span class="math inline">\(\textbf{h}\)</span>，<span class="math inline">\(\vert\vert \textbf{a}_i \textbf{h}\vert\vert\)</span> 为第 i 个点的代数误差（因为理想情况下 <span class="math inline">\(a_ih\)</span> 为 0），所以 DLT 的目标就是将所有对应点的代数误差和做到最小，即： <span class="math display">\[
 \hat{\textbf{h}} = \mathop{argmin}_{\textbf{h}} \sum_{i=1}^{N}
 \vert\vert \textbf{a}_i \textbf{h}\vert\vert ^2 \qquad \text{s.t.} 
@@ -462,10 +466,12 @@ w_*^i = \max(\exp(-\vert\vert \textbf{x}_* - \textbf{x}_i \vert\vert^2/\sigma^2)
 <p>首先考虑权重矩阵 <span class="math inline">\(\textbf{W}_\gamma = \gamma \textbf{I}\)</span>，令 <span class="math inline">\(\textbf{V}\)</span> 为矩阵 <span class="math inline">\(\textbf{W}_\gamma\textbf{A}\)</span> 右奇异向量，这个矩阵的特征值分解如下： <span class="math display">\[
 \textbf{A}^T\textbf{W}_\gamma^T  \textbf{W}_\gamma\textbf{A} = \textbf{V}\textbf{D}\textbf{V}^T
 \]</span> 令 <span class="math inline">\(\tilde {\textbf{W}}\)</span> 为 <span class="math inline">\(\textbf{W}_\gamma\)</span> 改变第 i 个对角元素得到的矩阵。对它进行特征值分解有： <span class="math display">\[
-\textbf{A}^T\tilde {\textbf{W}}^T  \tilde {\textbf{W}}\textbf{A} = 
+\begin{align}
+\textbf{A}^T\tilde {\textbf{W}}^T  \tilde {\textbf{W}}\textbf{A} &amp;= 
 \textbf{V}\textbf{D}\textbf{V}^T + \rho \textbf{r}_i \textbf{r}_i^T
 = \textbf{V}(\textbf{D} + \rho \overline{\textbf{r}}_i \overline{\textbf{r}}_i^T)\textbf{V}^T \\
-\rho = (\tilde{w}^2_i/\gamma^2 - 1)
+\rho &amp;= (\tilde{w}^2_i/\gamma^2 - 1)
+\end{align}
 \]</span> 其中 <span class="math inline">\(\textbf{r}_i\)</span> 为矩阵 <span class="math inline">\(\textbf{A}\)</span> 的第 i 行，<span class="math inline">\(\overline{\textbf{r}}_i = \textbf{V}^T\textbf{r}_i\)</span>。 <span class="math inline">\(\textbf{D} + \rho \textbf{r}_i \textbf{r}_i^T\)</span> 又可以特征值分解为 <span class="math inline">\(\tilde{\textbf{C}}\tilde{\textbf{D}}\tilde{\textbf{C}}^T\)</span>，这个可以使用特征方程得到。解特征方程可以使用相关方法加速。最后解为 <span class="math inline">\(\textbf{V}\tilde{\textbf{C}}\)</span>，这个称为 <strong>Rank-One Update</strong>，可参考<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8yNzc0MjcyOQ==">特征值分解（EVD）的rank 1 update - 知乎 (zhihu.com)<i class="fa fa-external-link-alt"></i></span>。</p>
 <p>参考图如下：</p>
 <p><img src="/assets/ArticleImg/2021/APAP_1.png" /></p>
