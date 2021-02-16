@@ -18,13 +18,13 @@
 
 
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"weijun-lin.top","root":"/","images":"/images","scheme":"Gemini","version":"8.2.0","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"weijun-lin.top","root":"/","images":"/images","scheme":"Gemini","version":"8.2.1","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 <meta name="description" content="原文链接：As-Projective-As-Possible Image Stitching with Moving DLT 这里主要对文章的 Moving DLT 做介绍，其它关于图像拼接的细节就不描述了，文章的重点就在使用 Moving DLT 来模拟一个复杂映射  摘要：图像拼接的商用化给我们带来了这个问题已经被解决的错误印象。实际上，在某些严厉的成像条件上，这些结果都不能够使人信">
 <meta property="og:type" content="article">
@@ -224,7 +224,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">62</span>
+          <span class="site-state-item-count">63</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -237,7 +237,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-count">31</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -375,7 +375,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>5.5k</span>
+      <span>5.6k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -406,7 +406,7 @@
 <h3 id="二维射影变换dlt">二维射影变换（DLT）</h3>
 <p>令 <span class="math inline">\(\textbf{x} = [x,y]^T,\textbf{x}&#39;= [x&#39;,y&#39;]^T\)</span>，为两幅具有重叠部分图像 <span class="math inline">\(I,I&#39;\)</span> 上的对应点，它们之间的关系为： <span class="math display">\[
 \widetilde {\textbf{x}}&#39; \sim \textbf{H} \widetilde {\textbf{x}}
-\]</span> 字符上的波浪线代表着尺度归一化，也就是齐次坐标规范化。其中 <span class="math inline">\(3\times 3\)</span> 的矩阵 <span class="math inline">\(\textbf{H}\)</span> 为单应矩阵，上面的等式展开后有： <span class="math display">\[
+\]</span> 字符上的波浪线代表着齐次坐标归一化。也就是说将 <span class="math inline">\(\widetilde {\textbf{x}}\)</span> 通过单应矩阵变换后还需要齐次坐标归一化，也就是除第三个分量。其中 <span class="math inline">\(3\times 3\)</span> 的矩阵 <span class="math inline">\(\textbf{H}\)</span> 为单应矩阵，上面的等式展开后有： <span class="math display">\[
 \begin{align}
 x&#39; = \frac{r_1[x,y,1]^T}{r_3[x,y,1]^T} \\
 y&#39; = \frac{r_2[x,y,1]^T}{r_3[x,y,1]^T}
@@ -416,9 +416,9 @@ y&#39; = \frac{r_2[x,y,1]^T}{r_3[x,y,1]^T}
 \textbf{0}_{3\times 1} &amp;= 
 \left[
 \begin{matrix}
-\textbf{0}_{3\times 1} &amp; -\widetilde{\textbf{x}}^T &amp; y&#39;\widetilde {\textbf{x}}^T\\
-\widetilde {\textbf{x}}^T &amp; \textbf{0}_{3\times 1} &amp; -x&#39;\widetilde {\textbf{x}}^T\\
--y&#39;\widetilde {\textbf{x}}^T &amp; x&#39;\widetilde {\textbf{x}}^T &amp; \textbf{0}_{3\times 1}
+\textbf{0}_{1\times 3} &amp; -\widetilde{\textbf{x}}^T &amp; y&#39;\widetilde {\textbf{x}}^T\\
+\widetilde {\textbf{x}}^T &amp; \textbf{0}_{1\times 3} &amp; -x&#39;\widetilde {\textbf{x}}^T\\
+-y&#39;\widetilde {\textbf{x}}^T &amp; x&#39;\widetilde {\textbf{x}}^T &amp; \textbf{0}_{1\times 3}
 \end{matrix}
 \right]
 \times \textbf{h} \\
@@ -442,6 +442,7 @@ r_3^T
 \]</span> 其中 <span class="math inline">\(\textbf{A} \in \mathbb{R}^{2N\times 9}\)</span>，这就是一个代数最小二乘问题，它的解是<strong>最小奇异值对应的右奇异向量</strong>。也就是说对于原图像 <span class="math inline">\(I\)</span> 中的任意一点 <span class="math inline">\(\textbf{x}_*\)</span>，它映射到对齐图像 <span class="math inline">\(I&#39;\)</span> 上的点为 <span class="math inline">\(\textbf{x}&#39;_*\)</span>，理想情况下，有以下关系成立： <span class="math display">\[
 \widetilde {\textbf{x}}_*&#39; \sim \textbf{H} \widetilde {\textbf{x}}_*
 \]</span> 前面已经提到了单应的局限性，DLT 算法适合在避免了单应局限性，并存在一些离群点（噪声）的情况下，获得最佳的单应映射。但是在一般成像下，一个<strong>全局的单应</strong>不足以拟合所有的点，也就是说会有很大一部分点不符合这个单应矩阵表示的映射。文章提供了一种使用单应模拟复杂映射（非纯单应）的方法，也就是下面要提到的<strong>移动 DLT</strong>。</p>
+<p>在做 DLT 之前可以先将数据归一化可以避免很多数值上的错误，归一化可参考：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC81MjAyMzIwOA==">《CV中的多视图几何》——图像之间的单应变换 - 知乎 (zhihu.com)<i class="fa fa-external-link-alt"></i></span>，其中也谈到了归一化后的反归一化。</p>
 <h3 id="moving-dlt">Moving DLT</h3>
 <p>Moving DLT 本质上就是使用局部单应拟合映射。此时的点 <span class="math inline">\(\textbf{x}_*,\textbf{x}_*&#39;\)</span> 满足下式： <span class="math display">\[
 \widetilde {\textbf{x}}_*&#39; \sim \textbf{H}_* \widetilde {\textbf{x}}_*
@@ -585,14 +586,14 @@ w_*^i = \max(\exp(-\vert\vert \textbf{x}_* - \textbf{x}_i \vert\vert^2/\sigma^2)
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">269k</span>
+    <span title="站点总字数">272k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">4:05</span>
+    <span title="站点阅读时长">4:07</span>
   </span>
 </div>
 <div class="busuanzi-count">
@@ -620,9 +621,9 @@ w_*^i = \max(\exp(-\vert\vert \textbf{x}_* - \textbf{x}_i \vert\vert^2/\sigma^2)
   </footer>
 
   
-  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 <script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
 
   
@@ -680,7 +681,7 @@ w_*^i = \max(\exp(-\vert\vert \textbf{x}_* - \textbf{x}_i \vert\vert^2/\sigma^2)
       }
     };
     const script = document.createElement('script');
-    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
     script.defer = true;
     document.head.appendChild(script);
   } else {

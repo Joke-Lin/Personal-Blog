@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="google6dc90bbfe80e28c9.html">
+  <meta name="baidu-site-verification" content="1Zn74mB0Mh">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"weijun-lin.top","root":"/","images":"/images","scheme":"Gemini","version":"8.2.1","exturl":true,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="图像变换中总是伴随着映射，原图中的点到新图中的点之间的映射。从原图映射到新图上，由于坐标的不连续，就有新图上某点的像素确定的问题。也就是像素坐标是整数，但是映射之后的坐标不一定是整数，就需要确定它周围的坐标的像素值。图像像素的映射有前向映射和后向映射。 后向映射比较好理解，新图映射到原图上某点，然后通过它周围的像素确定这个点的像素值，一般可以有最邻近，双线性，双三次插值等。双线性比较简单且好用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图像的前向和后向映射">
+<meta property="og:url" content="https://weijun-lin.top/2021/02/16/2021-02-16-Forward-BackwardMapping/index.html">
+<meta property="og:site_name" content="WEIJUN LIN BLOG">
+<meta property="og:description" content="图像变换中总是伴随着映射，原图中的点到新图中的点之间的映射。从原图映射到新图上，由于坐标的不连续，就有新图上某点的像素确定的问题。也就是像素坐标是整数，但是映射之后的坐标不一定是整数，就需要确定它周围的坐标的像素值。图像像素的映射有前向映射和后向映射。 后向映射比较好理解，新图映射到原图上某点，然后通过它周围的像素确定这个点的像素值，一般可以有最邻近，双线性，双三次插值等。双线性比较简单且好用。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://weijun-lin.top/assets/ArticleImg/2021/forward-backward-maping.jpg">
+<meta property="og:image" content="https://weijun-lin.top/assets/ArticleImg/2021/forward-backward-maping2.jpg">
+<meta property="article:published_time" content="2021-02-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-02-15T16:00:00.000Z">
+<meta property="article:author" content="Weijun-Lin">
+<meta property="article:tag" content="matltb">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://weijun-lin.top/assets/ArticleImg/2021/forward-backward-maping.jpg">
+
+
+<link rel="canonical" href="https://weijun-lin.top/2021/02/16/2021-02-16-Forward-BackwardMapping/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>图像的前向和后向映射 | WEIJUN LIN BLOG</title>
+  
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?bbba27c18f6952433b5568d3b127959f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="WEIJUN LIN BLOG" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">WEIJUN LIN BLOG</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-text">代码实现</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Weijun-Lin"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Weijun-Lin</p>
+  <div class="site-description" itemprop="description">Learing and Using</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">63</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlaWp1bi1saW4=" title="Github → https:&#x2F;&#x2F;github.com&#x2F;weijun-lin"><i class="fab fa-github fa-fw"></i>Github</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3Blb3BsZS9qb2tlci04OC02Mi01Ny9hY3Rpdml0aWVz" title="ZHIHU → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;joker-88-62-57&#x2F;activities"><i class="fab fa-zhihu fa-fw"></i>ZHIHU</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwOTUzMjgx" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_40953281"><i class="fas fa-globe fa-fw"></i>CSDN</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOndlaWp1bi1saW5AZm94bWFpbC5jb20=" title="E-Mail → mailto:weijun-lin@foxmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="link fa-fw"></i>
+      Friends
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9sZXN0ZXJ0YW4uaW5r" title="https:&#x2F;&#x2F;lestertan.ink">Lester</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cDovL2h4LXcudG9wLw==" title="http:&#x2F;&#x2F;hx-w.top&#x2F;">Herixth</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9jb2xpbi1qYXkuY24v" title="https:&#x2F;&#x2F;colin-jay.cn&#x2F;">Colin Jay</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly95ZXotbGl1LmdpdGh1Yi5pby8=" title="https:&#x2F;&#x2F;yez-liu.github.io&#x2F;">yez-liu</span>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlaWp1bi1saW4=" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://weijun-lin.top/2021/02/16/2021-02-16-Forward-BackwardMapping/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Weijun-Lin">
+      <meta itemprop="description" content="Learing and Using">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WEIJUN LIN BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          图像的前向和后向映射
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-02-16 00:00:00" itemprop="dateCreated datePublished" datetime="2021-02-16T00:00:00+08:00">2021-02-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Science/" itemprop="url" rel="index"><span itemprop="name">Computer Science</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Science/CV-CG-DIP/" itemprop="url" rel="index"><span itemprop="name">CV&CG&DIP</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Science/CV-CG-DIP/CV/" itemprop="url" rel="index"><span itemprop="name">CV</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>图像变换中总是伴随着映射，原图中的点到新图中的点之间的映射。从原图映射到新图上，由于坐标的不连续，就有新图上某点的像素确定的问题。也就是像素坐标是整数，但是映射之后的坐标不一定是整数，就需要确定它周围的坐标的像素值。图像像素的映射有前向映射和后向映射。</p>
+<p>后向映射比较好理解，新图映射到原图上某点，然后通过它周围的像素确定这个点的像素值，一般可以有最邻近，双线性，双三次插值等。双线性比较简单且好用。</p>
+<p>前向映射到新图中的浮点数位置，直接取整会有空洞产生，一种合适的方法就是按双线性的思路，把这个点的像素按权值分配到四个周围整数点。直接这样累加会导致像素重叠，所以还需要最后对分配到某个像素的所有像素值及其对应权值归一化。</p>
+<a id="more"></a>
+<p>详细可参考：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dsb3J5ZHJlYW0yMDE1L2FydGljbGUvZGV0YWlscy80NDg3MzcwMw==">图像变换——向前映射和向后映射_薇洛的打火机-CSDN博客<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="代码实现">代码实现</h2>
+<p>这里给出了完整的 matlab 代码实现，根据实验结果可以知道，这里的前向映射耗费的时间比后向大，计算过程比较复杂，但在某些场景下，前向仍然会比后向方便，所以在此记录：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line">filename = <span class="string">&#x27;./test.JPG&#x27;</span>;</span><br><span class="line">img = double(imread(filename));</span><br><span class="line"><span class="comment">% 旋转的角度</span></span><br><span class="line">theta = <span class="number">0.67</span>*<span class="built_in">pi</span>;</span><br><span class="line"><span class="comment">% 绕原点旋转矩阵</span></span><br><span class="line">T1 = [<span class="built_in">cos</span>(theta) <span class="built_in">sin</span>(theta) <span class="number">0</span>;</span><br><span class="line">      -<span class="built_in">sin</span>(theta) <span class="built_in">cos</span>(theta) <span class="number">0</span>;</span><br><span class="line">      <span class="number">0</span> <span class="number">0</span> <span class="number">1</span>];</span><br><span class="line">imgsize = <span class="built_in">size</span>(img);</span><br><span class="line">w = imgsize(<span class="number">2</span>);</span><br><span class="line">h = imgsize(<span class="number">1</span>);</span><br><span class="line"><span class="comment">% matlab 坐标从 1 开始有点烦</span></span><br><span class="line">bound = [<span class="number">1</span> <span class="number">1</span>+w <span class="number">1</span>+w <span class="number">1</span>;</span><br><span class="line">         <span class="number">1</span> <span class="number">1</span> <span class="number">1</span>+h <span class="number">1</span>+h;</span><br><span class="line">         <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span>];</span><br><span class="line"><span class="comment">%  获取变换后图片的大小和左上角顶点在原坐标系的坐标</span></span><br><span class="line">boundWarp = T1 * bound;</span><br><span class="line"><span class="comment">% 正无穷方向取整,避免越界,这里加1稳妥一点</span></span><br><span class="line">newW = <span class="built_in">ceil</span>(<span class="built_in">max</span>(boundWarp(<span class="number">1</span>,:)) - <span class="built_in">min</span>(boundWarp(<span class="number">1</span>,:))) + <span class="number">1</span>;</span><br><span class="line">newH = <span class="built_in">ceil</span>(<span class="built_in">max</span>(boundWarp(<span class="number">2</span>,:)) - <span class="built_in">min</span>(boundWarp(<span class="number">2</span>,:))) + <span class="number">1</span>;</span><br><span class="line">vex = [<span class="built_in">min</span>(boundWarp(<span class="number">1</span>,:)) <span class="built_in">min</span>(boundWarp(<span class="number">2</span>,:))];</span><br><span class="line"><span class="comment">% 平移到新图坐标系的矩阵为</span></span><br><span class="line">T2 = [<span class="number">1</span> <span class="number">0</span> -vex(<span class="number">1</span>)+<span class="number">1</span>;<span class="number">0</span> <span class="number">1</span> -vex(<span class="number">2</span>)+<span class="number">1</span>;<span class="number">0</span> <span class="number">0</span> <span class="number">1</span>];</span><br><span class="line"><span class="comment">% 最后的变换为</span></span><br><span class="line">T = T2*T1;</span><br><span class="line"><span class="comment">% 变换后的图片矩阵</span></span><br><span class="line">imgsize2 = imgsize;</span><br><span class="line">imgsize2([<span class="number">1</span> <span class="number">2</span>]) = [newH newW];</span><br><span class="line"><span class="comment">% 上面这样利于单通道/多通道的情况</span></span><br><span class="line">img2 = <span class="built_in">zeros</span>(imgsize2);</span><br><span class="line">img3 = img2;</span><br><span class="line"></span><br><span class="line"><span class="comment">% 前向映射</span></span><br><span class="line">tic</span><br><span class="line"><span class="comment">% tempTrans(i,j) 为矩阵,存储分配到这个像素的原图像素值以及其权值</span></span><br><span class="line"><span class="comment">% 用于记录每一个点所分配的权重</span></span><br><span class="line">tempTrans = cell(imgsize2([<span class="number">1</span> <span class="number">2</span>]));</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:imgsize(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span> = <span class="number">1</span>:imgsize(<span class="number">2</span>)</span><br><span class="line">        coord = T*[<span class="built_in">j</span>;<span class="built_in">i</span>;<span class="number">1</span>];</span><br><span class="line">        x = coord(<span class="number">1</span>); y = coord(<span class="number">2</span>);</span><br><span class="line">        s = <span class="built_in">fix</span>(coord(<span class="number">1</span>)); t = <span class="built_in">fix</span>(coord(<span class="number">2</span>));</span><br><span class="line">        k = [s+<span class="number">1</span>-x x-s t+<span class="number">1</span>-y y-t];</span><br><span class="line">        p = img(<span class="built_in">i</span>,<span class="built_in">j</span>,:); p = p(:);</span><br><span class="line">        <span class="comment">% 双线性插值的方法分配</span></span><br><span class="line">        tempTrans&#123;t, s&#125;(:, <span class="keyword">end</span>+<span class="number">1</span>) = [p;k(<span class="number">1</span>)*k(<span class="number">3</span>)];</span><br><span class="line">        tempTrans&#123;t, s+<span class="number">1</span>&#125;(:, <span class="keyword">end</span>+<span class="number">1</span>) = [p;k(<span class="number">2</span>)*k(<span class="number">3</span>)];</span><br><span class="line">        tempTrans&#123;t+<span class="number">1</span>, s&#125;(:, <span class="keyword">end</span>+<span class="number">1</span>) = [p;k(<span class="number">1</span>)*k(<span class="number">4</span>)];</span><br><span class="line">        tempTrans&#123;t+<span class="number">1</span>, s+<span class="number">1</span>&#125;(:, <span class="keyword">end</span>+<span class="number">1</span>) = [p;k(<span class="number">2</span>)*k(<span class="number">4</span>)];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">% 归一化,否则会造成某些地方很突兀(叠加)</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:imgsize2(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span> = <span class="number">1</span>:imgsize2(<span class="number">2</span>)</span><br><span class="line">        temp = tempTrans&#123;<span class="built_in">i</span>,<span class="built_in">j</span>&#125;;</span><br><span class="line">        len = <span class="built_in">size</span>(temp,<span class="number">2</span>);</span><br><span class="line">        <span class="keyword">if</span> len == <span class="number">0</span></span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        <span class="comment">% 归一化数据,也就是重新分配权值</span></span><br><span class="line">        sum_w = sum(temp(<span class="keyword">end</span>,:));</span><br><span class="line">        <span class="keyword">for</span> k = <span class="number">1</span>:len</span><br><span class="line">            img2(<span class="built_in">i</span>,<span class="built_in">j</span>,:) = img2(<span class="built_in">i</span>,<span class="built_in">j</span>,:) + <span class="built_in">reshape</span>(temp(<span class="keyword">end</span>, k)/sum_w * temp(<span class="number">1</span>:<span class="keyword">end</span><span class="number">-1</span>,k), <span class="number">1</span>, <span class="number">1</span>, <span class="number">3</span>);</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">fprintf(<span class="string">&quot;前向映射耗费的总时间:&quot;</span>);</span><br><span class="line">toc</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>;</span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>);</span><br><span class="line">imshow(uint8(img2));</span><br><span class="line">title(<span class="string">&quot;Forward Mapping&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% 后向映射</span></span><br><span class="line">tic</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:imgsize2(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span> = <span class="number">1</span>:imgsize2(<span class="number">2</span>)</span><br><span class="line">        <span class="comment">% 逆映射回去,得到坐标</span></span><br><span class="line">        coord = T\[<span class="built_in">j</span>;<span class="built_in">i</span>;<span class="number">1</span>];</span><br><span class="line">        img3(<span class="built_in">i</span>, <span class="built_in">j</span>, :) = backward(img, coord);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">fprintf(<span class="string">&quot;后向映射耗费的总时间:&quot;</span>);</span><br><span class="line">toc</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>);</span><br><span class="line">imshow(uint8(img3));</span><br><span class="line">title(<span class="string">&quot;Backward Mapping&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% 后向映射到原图,获取对应的值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">pixel_value</span> = <span class="title">backward</span><span class="params">(srcimg, srccoord)</span></span></span><br><span class="line">    x = srccoord(<span class="number">1</span>);</span><br><span class="line">    y = srccoord(<span class="number">2</span>);</span><br><span class="line">    <span class="comment">% 不再原图上的点返回黑色</span></span><br><span class="line">    pixel_value = <span class="number">0</span>;</span><br><span class="line">    [r, c, ~] = <span class="built_in">size</span>(srcimg);</span><br><span class="line">    <span class="comment">% 坐标在图像外的返回 0 </span></span><br><span class="line">    <span class="keyword">if</span> x &gt; c || y &gt; r || x &lt; <span class="number">1</span> || y &lt; <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="comment">% 现在坐标已经在图像内部、或者边界，然后处理边界（图像右和下）避免插值时数组边界访问异常</span></span><br><span class="line">    <span class="keyword">if</span> x == c || y == r</span><br><span class="line">        pixel_value = srcimg(x, y, :);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="comment">% 此时依据四个点做双线性插值 首先对坐标向零取整</span></span><br><span class="line">    s = <span class="built_in">fix</span>(srccoord(<span class="number">1</span>));</span><br><span class="line">    t = <span class="built_in">fix</span>(srccoord(<span class="number">2</span>));</span><br><span class="line">    k = [s+<span class="number">1</span>-x x-s t+<span class="number">1</span>-y y-t];</span><br><span class="line">    pixel_value = k(<span class="number">1</span>)*k(<span class="number">3</span>)*srcimg(t,s,:) + k(<span class="number">2</span>)*k(<span class="number">3</span>)*srcimg(t, s+<span class="number">1</span>,:) +  ...</span><br><span class="line">                  k(<span class="number">1</span>)*k(<span class="number">4</span>)*srcimg(t+<span class="number">1</span>,s,:) + k(<span class="number">2</span>)*k(<span class="number">4</span>)*srcimg(t+<span class="number">1</span>,s+<span class="number">1</span>,:);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>原图为：</p>
+<p><img src="/assets/ArticleImg/2021/forward-backward-maping.jpg" /></p>
+<p>实现结果如下：</p>
+<p><img src="/assets/ArticleImg/2021/forward-backward-maping2.jpg" /></p>
+<p>代码输出：</p>
+<p>前向映射耗费的总时间:历时 12.063921 秒。 后向映射耗费的总时间:历时 4.419853 秒。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Weijun-Lin
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://weijun-lin.top/2021/02/16/2021-02-16-Forward-BackwardMapping/" title="图像的前向和后向映射">https://weijun-lin.top/2021/02/16/2021-02-16-Forward-BackwardMapping/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/matltb/" rel="tag"><i class="fa fa-tag"></i> matltb</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/01/25/2021-01-25-RANSAC-MATLAB/" rel="next" title="Matlab ransac 库函数介绍">
+                  Matlab ransac 库函数介绍 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC8zOTczMy8xNjI2MA=="></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Weijun-Lin</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">272k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">4:07</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 24136,
+      el    : 'wpac-rating',
+      color : 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'none'
+      },
+      options: {
+        renderActions: {
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+<script>
+NexT.utils.loadComments('#lv-container', () => {
+  window.livereOptions = {
+    refer: "2021/02/16/2021-02-16-Forward-BackwardMapping/"
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>
