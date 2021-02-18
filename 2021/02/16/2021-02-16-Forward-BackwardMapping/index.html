@@ -205,7 +205,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-text">代码实现</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-text">代码实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A5%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-text">【补】存在的问题</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -372,7 +372,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.9k</span>
+      <span>3k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -404,6 +404,8 @@
 <p><img src="/assets/ArticleImg/2021/forward-backward-maping2.jpg" /></p>
 <p>代码输出：</p>
 <p>前向映射耗费的总时间:历时 12.063921 秒。 后向映射耗费的总时间:历时 4.419853 秒。</p>
+<h2 id="补存在的问题">【补】存在的问题</h2>
+<p>这样子看起来效果比较好，但是当加入缩放因子时，前向映射仍然会产生空隙，因为这里双线性只将映射到浮点位置的像素分配到四个周围像素。但是，当缩放加入后，会有的像素映射不到，解决办法就是增加分配的核大小，由原来的 2*2 改为更大，但不能有一个通用的方法。所以，一般还是使用后向映射。</p>
 
     </div>
 
@@ -509,7 +511,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">4:07</span>
+    <span title="站点阅读时长">4:08</span>
   </span>
 </div>
 <div class="busuanzi-count">
