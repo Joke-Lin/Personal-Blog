@@ -393,33 +393,6 @@ d[k-1][i][k] + d[k-1][k][j]　（经过K点）\\
       </tags>
   </entry>
   <entry>
-    <title>Life Record 1</title>
-    <url>/2019/02/21/2019-02-21-Life/</url>
-    <content><![CDATA[<blockquote>
-<p>2019正月至开学前一天</p>
-</blockquote>
-<ul>
-<li><p>2018下学期的离散70+</p></li>
-<li><p>老弟学会吞药</p></li>
-<li><p>没有钱是万万不能的</p></li>
-<li><p>人老了是真的可怜</p></li>
-<li><p>呆在家里真好</p></li>
-</ul>
-<a id="more"></a>
-<h2 id="新年flag">新年Flag</h2>
-<p>是时候真正努力了，自己还是很自私的，</p>
-<p>改掉这些毛病，做一件事就认真去做，马上去做，时间是真的会消磨人</p>
-<p>自以为自我控制能力很好，也就是自欺欺人罢了</p>
-<p>坦白吧，多去图书馆，学习为什么怕别人知道呢</p>
-<p>再加一条，多锻炼</p>
-<p>做个爱学习的人吧 ：）</p>
-<p>—— 2019-2-21 绿皮火车</p>
-]]></content>
-      <categories>
-        <category>Life Record</category>
-      </categories>
-  </entry>
-  <entry>
     <title>IF I STAY</title>
     <url>/2019/01/12/2019-01-12-If_I_Stay/</url>
     <content><![CDATA[<blockquote>
@@ -2291,7 +2264,7 @@ max(dp[i][j-1], dp[j-1][i]&amp; \text{else}
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">BidirIt</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">next_permutation</span><span class="params">(BidirIt first, BidirIt last)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (first == last) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    BidirIt i = last;</span><br><span class="line">    <span class="keyword">if</span> (first == --i) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">        BidirIt i1, i2;</span><br><span class="line"> </span><br><span class="line">        i1 = i;</span><br><span class="line">        <span class="keyword">if</span> (*--i &lt; *i1) &#123;</span><br><span class="line">            i2 = last;</span><br><span class="line">            <span class="keyword">while</span> (!(*i &lt; *--i2))</span><br><span class="line">                ;</span><br><span class="line">            <span class="built_in">std</span>::iter_swap(i, i2);</span><br><span class="line">            <span class="built_in">std</span>::reverse(i1, last);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (i == first) &#123;</span><br><span class="line">            <span class="built_in">std</span>::reverse(first, last);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="简单证明">简单证明</h2>
 <p>上面给出了思路，这里做一个简单证明</p>
-<p>对一个序列 <span class="math inline">\(a_0,a_1,\cdots,a_i,a_{i+1},\cdots,a_{n-1}\)</span>，必定存在 <span class="math inline">\(i\)</span>，使得 <span class="math inline">\(a_0 \sim a_i\)</span>，为正序，<span class="math inline">\(a_{i+1}\sim a_{n-1}\)</span> 为逆序（这里正序指的是从小到大的顺序，逆序为从大到小），这里对应了上面的步骤 1</p>
+<p>对一个序列 <span class="math inline">\(a_0,a_1,\cdots,a_i,a_{i+1},\cdots,a_{n-1}\)</span>，必定存在 <span class="math inline">\(i\)</span>，使得 <span class="math inline">\(a_i \sim a_{i+1}\)</span>，为正序，<span class="math inline">\(a_{i+1}\sim a_{n-1}\)</span> 为逆序（这里正序指的是从小到大的顺序，逆序为从大到小），这里对应了上面的步骤 1</p>
 <p>现在需要求此序列的下一个字典序，容易得到，<span class="math inline">\(a_{i+1}\sim a_{n-1}\)</span> 已经为逆序（也为递减数列），不存在更大的字典序，但 <span class="math inline">\(a_{i}\sim a_{n-1}\)</span>，并不是逆序，即存在更大的字典序</p>
 <p>显然以 <span class="math inline">\(a_i\)</span> 作为 <span class="math inline">\(a_{i}\sim a_{n-1}\)</span> 的首元素已经达到最大，所以需要在 <span class="math inline">\(a_{i+1}\sim a_{n-1}\)</span> 中找到一个元素替换 <span class="math inline">\(a_i\)</span>，显然此元素为大于 <span class="math inline">\(a_i\)</span> 的最小元素，因为数列 <span class="math inline">\(a_{i+1}\sim a_{n-1}\)</span> 为递减数列，所以只需要从末端开始向前寻找第一个大于 <span class="math inline">\(a_i\)</span> 的元素即可，记此元素为 <span class="math inline">\(a_j\)</span>，即步骤 2</p>
 <p>因为 <span class="math inline">\(a_j &gt; a_i\)</span>，所以 <span class="math inline">\(a_j\)</span> 作为首元素的最小排列为 <span class="math inline">\(a_{i+1} \sim a_{n-1}\)</span> 的顺序表示即可。交换后的序列仍然为逆序的，所以只需要反序处理即可，对应步骤 3</p>
@@ -6011,7 +5984,7 @@ T_s 为平均寻道时间，b表示传输的字节数，N表示一个磁道的�
 <p>在另一个方面，<u>在仿射变换中每一个方向的缩放可以是不同的</u><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>。不均匀的缩放对定位，尺度，局部结构形状都有影响。因此，尺度不变检测器在这种显著仿射变换中会失效。因此，在这种均匀缩放下的特征检测器需要拓展成仿射不变检测器，以检测局部图像结构的仿射形状。因此，这些放射不变检测器可以看作是尺度不变检测器的一般推广。</p>
 <p>总的来说，仿射变换是一系列变换的组合：平移，缩放，翻转，旋转，和剪切<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>。一个仿射变换（affinity）是任一个保持共线性和距离比的线性映射。在这个角度上看，仿射意味着是射影变换的一个特殊情况，他不会把任何对象从仿射空间 <span class="math inline">\(\mathbb{R}^3\)</span> 移至无穷远平面，反之亦然。简单来说，<span class="math inline">\(\mathbb{R}^n\)</span> 仿射变换是一个映射 <span class="math inline">\(f:\mathbb{R}^n \rightarrow \mathbb{R}^n\)</span>，具体形式如下： <span class="math display">\[
 f(Y) = \mathbb{A} Y + \mathbb{B}
-\]</span> 对所有的 <span class="math inline">\(Y\in \mathbb{R}^n\)</span> ，其中 <span class="math inline">\(\mathbb{A}\)</span> 为 <span class="math inline">\(\mathbb{R}^n\)</span> 上的线性变换。在一些特殊的情况，如果 <span class="math inline">\(det(\mathbb{A}) \gt 0\)</span>，这样的变换被称为保向，然而如果 <span class="math inline">\(det(\mathbb{A}) \lt 0\)</span>，则被称为方向反转。众所周知的是，在特定变换族下的函数是不变的，当它的值不随其参数上的变换族改变而改变。二阶矩矩阵为估计局部图像特征的仿射形状提供了理论依据。<u>仿射不变检测器有以下几种：Harris-affifine，Hessian-affifine，以及 maximally stable extremal regions (MSER)</u>。还需要记住的是这些检测器检测的特征会从圆形变换为椭圆形。</p>
+\]</span> 对所有的 <span class="math inline">\(Y\in \mathbb{R}^n\)</span> ，其中 <span class="math inline">\(\mathbb{A}\)</span> 为 <span class="math inline">\(\mathbb{R}^n\)</span> 上的线性变换。在一些特殊的情况，如果 <span class="math inline">\(det(\mathbb{A}) \gt 0\)</span>，这样的变换被称为保向，然而如果 <span class="math inline">\(det(\mathbb{A}) \lt 0\)</span>，则被称为方向反转。众所周知的是，在特定变换族下的函数是不变的，当它的值不随其参数上的变换族改变而改变。二阶矩矩阵为估计局部图像特征的仿射形状提供了理论依据。<u>仿射不变检测器有以下几种：Harris-affine，Hessian-affine，以及 maximally stable extremal regions (MSER)</u>。还需要记住的是这些检测器检测的特征会从圆形变换为椭圆形。</p>
 <h2 id="图像特征检测器">3 图像特征检测器</h2>
 <p><u>特征检测器可以大概地分为三类：单尺度检测器，多尺度检测器以及仿射不变检测器。</u>概括地说，单尺度意味着使用检测器内部参数对特征或目标轮廓仅有一个表示。单尺度检测器对诸如旋转，平移，光照改变和附加噪声的变换是不变的。然而，它们不适用于处理缩放问题。给定同一场景的但尺度不同的两幅图像，我们想要确定是否可以检测到相同的兴趣点。因此，在尺度改变下，建立能够可靠地提取显著特征的多尺度检测器是有必要的。接下来我们会讨论单尺度和多尺度检测器以及仿射不变检测器的细节。</p>
 <h3 id="单尺度检测器">3.1 单尺度检测器</h3>
