@@ -6654,4 +6654,89 @@ w_*^i = \max(\exp(-\vert\vert \textbf{x}_* - \textbf{x}_i \vert\vert^2/\sigma^2)
         <tag>matltb</tag>
       </tags>
   </entry>
+  <entry>
+    <title>三维重建算法综述-张彦雯 小结</title>
+    <url>/2021/06/03/2021-06-03-%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA%E7%AE%97%E6%B3%95%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0_%E5%BC%A0%E5%BD%A6%E9%9B%AF/</url>
+    <content><![CDATA[<blockquote>
+<p>关键词：三维重建；图像；稀疏点云重建（SFM）；稠密点云重建（MVS）；评价指标</p>
+<p><a href="%5Bnxdxb.cnjournals.org/ch/reader/download_pdf.aspx?file_no=20200509&amp;year_id=2020&amp;quarter_id=5&amp;falg=1%5D(http://nxdxb.cnjournals.org/ch/reader/download_pdf.aspx?file_no=20200509&amp;year_id=2020&amp;quarter_id=5&amp;falg=1)">下载链接</a></p>
+</blockquote>
+<p>获取三维模型主要通过以下三种方式：</p>
+<ol type="1">
+<li><p>传统的几何建模技术</p>
+<p>最为成熟，但周期长，操作复杂</p></li>
+<li><p><strong>基于图像的三维重建</strong></p>
+<p>基于多幅不同角度拍摄的图像，运用计算机视觉理论进行三维建模；也有基于单幅图像的，但不能用于大规模场景</p></li>
+<li><p>基于点云的三维重建</p>
+<p>利用三维扫描设备对目标进行扫描，以重建模型</p></li>
+</ol>
+<p>文章主要介绍基于多幅图像的三维重建算法，主要包括稀疏点云重建（Structure From Motion，SFM）；稠密点云重建（Multi-View System，MVS）。其中 SFM 包括特征点检测与匹配（SIFT，SURF，FAST等）以及 SFM 重构两个部分。</p>
+<p>SFM 重构大致分为三类：<strong>增量式重构、全局式重构、混合式重构</strong>。在 MVS 中，<strong>深度图</strong>的计算尤为重要。</p>
+<a id="more"></a>
+<h2 id="稀疏点云重建-sfm">稀疏点云重建 SFM</h2>
+<p>SFM 通过相机的移动确定目标的空间和几何关系，特征点匹配后运用 SFM 重构算法，恢复出相机的参数，相机之间的相对位置关系以及场景的稀疏点云，最后捆绑调整优化相机位姿、相机参数、场景结构。</p>
+<p>流程总结为：特征点检测、匹配，相机位姿（旋转矩阵 R，平移矩阵 T）初始值的求解，捆绑调整优化相机位姿、相机参数、场景结构。</p>
+<figure>
+<img src="/assets/ArticleImg/2021/三维重建算法研究综述_张彦雯.assets/image-20210603112341838.png" alt="image-20210603112341838" /><figcaption aria-hidden="true">image-20210603112341838</figcaption>
+</figure>
+<p>SFM 重构为利用相机运动轨迹来估算相机参数，初步匹配生成的的特征点比较粗糙，所以常用几何约束删除匹配错误的特征点对。SFM 重构主要有<strong>增量式和全局式</strong>。</p>
+<p><strong>增量式重构</strong>是从两张图像中恢复相机的旋转矩阵 R 和平移矩阵 T，然后添加图像，利用PnP 计算出第三幅图像的 R、T，通过三角化重建出更多的场景。噪声的干扰会造成结果漂移，所以需要使用 BA（Bundle Adjustment，光束法平差）。每次添加图像完成三角化后都需要进行优化。</p>
+<p>步骤为：初始化、PnP 解算，三角化，BA 算法优化。重要的步骤为 PnP 求解相机位姿，主要有 P3P，EPnP，DLT，UPnP，MRE。</p>
+<p><strong>PnP</strong>：已知 n 个三维空间点坐标（相对于某个指定的坐标系A）及其二维投影位置的情况下，如何估计相机的位姿（即相机在坐标系A下的姿态）</p>
+<p>增量式在对大规模场景重建时由于误差累积会造成场景漂移以及反复地捆绑调整花费大量时间。</p>
+<p><strong>全局式重构</strong>采用的是将相机相对位姿均匀分布的方法，该方法在处 理大规模重建时，相机之间的相关性不同，会导致重 建效果差。</p>
+<p><strong>混合式重构</strong>就是把前两者进行融合。</p>
+<h2 id="稠密点云重建-mvs">稠密点云重建 MVS</h2>
+<p>SFM 重建比较稀疏，需要 MVS 进行完善，MVS 的目的是通过最佳方法对不同图像上的同一个点进行匹配，增强重建场景的稠密性。MVS 的主要任务是通过一种最佳搜索的方法，匹配不同图像上的同一个点。也就是在极线上进行探测，寻找两张图片上的同一点，主要方法为逐像素判断，由此提出了一致性度量函数。</p>
+<p>深度图是指将相机到场景中各点距离作为像素值的图像，是 MVS 的一大重点。主要方法如下：</p>
+<ol type="1">
+<li>几何法
+<ul>
+<li>Plane-Sweeping</li>
+<li>PatchMatch</li>
+</ul></li>
+<li>几何与深度学习相结合的方法
+<ul>
+<li>双通道法</li>
+<li>DeepMVS</li>
+</ul></li>
+<li>基于深度学习的方法
+<ul>
+<li>MVSNet</li>
+<li>PointMVSNet</li>
+</ul></li>
+</ol>
+<figure>
+<img src="/assets/ArticleImg/2021/三维重建算法研究综述_张彦雯.assets/image-20210603195114007.png" alt="image-20210603195114007" /><figcaption aria-hidden="true">image-20210603195114007</figcaption>
+</figure>
+<h2 id="评价指标">评价指标</h2>
+<p>分为有真实模型和无真实模型两类。</p>
+<p>无真实模型的评价是通过对比输入数据与重建之后的数据一致性程度来实施的，其方法有<strong>重建误差法，积分误差法</strong>。</p>
+<p>有真实模型的评价通过重建之后的模型与真实模型进行对比来实施，主要有<strong>形状误差法，分解法，相位矩不变量法，多指标评价法</strong>等。</p>
+<p>这些算法都有缺陷：</p>
+<ol type="1">
+<li>部分算法只能分析真实模型的场景</li>
+<li>部分算法只能测量重建的精度，但是不能测量完整性，导致评价的结果存在偏差</li>
+<li>大多算法只考虑到几何精度，并没有将纹理模型的视觉精度添加到评价指标中，在某些需要视觉精度的场景中应用意义不大。</li>
+</ol>
+<h2 id="总结">总结</h2>
+<p>基于图像的三维重建不需要精密的测量一起，成本低，同时该方法计算出了相机的内外参数，使得重建效果更为精确，具有快速、简便、逼真的优点，能较好地实现现实事物的虚拟化，但仍然存在一些缺点：</p>
+<ol type="1">
+<li>物体细节特征不理想</li>
+<li>不能用于实时变化的场景</li>
+<li>将场景中的物体变成二维对象，用于难获得需要的信息</li>
+<li>对照相机和摄影设备有一定要求</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Computer Science</category>
+        <category>CV&amp;CG&amp;DIP</category>
+        <category>CV</category>
+      </categories>
+      <tags>
+        <tag>三维重建</tag>
+        <tag>SFM</tag>
+        <tag>MVS</tag>
+      </tags>
+  </entry>
 </search>
