@@ -6739,4 +6739,175 @@ w_*^i = \max(\exp(-\vert\vert \textbf{x}_* - \textbf{x}_i \vert\vert^2/\sigma^2)
         <tag>MVS</tag>
       </tags>
   </entry>
+  <entry>
+    <title>对极几何简单介绍</title>
+    <url>/2021/06/11/2021-06-11-%E5%AF%B9%E6%9E%81%E5%87%A0%E4%BD%95%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/</url>
+    <content><![CDATA[<h2 id="相机模型">相机模型</h2>
+<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC81Mjc5MDA1NA==">《CV中的多视图几何》——再谈相机模型 - 知乎 (zhihu.com)<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9pbS5wZXJoYXBzYmF5LmVzL2tiL2FuLWludHJvZHVjdGlvbi10by1lcGlwb2xhci1nZW9tZXRyeQ==">An Introduction to Epipolar Geometry | Sanyam Kapoor (perhapsbay.es)<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<p>小孔相机是相机模型的简化，小孔与成像平面之间的距离称为焦距。一般来说，小孔越小成像越清晰，但太小会造成衍射，导致成像模糊。</p>
+<figure>
+<img src="/assets/ArticleImg/2021/对极几何相关.assets/mIBhDt8.png" alt="A Simple Pinhole Camera Model" /><figcaption aria-hidden="true">A Simple Pinhole Camera Model</figcaption>
+</figure>
+<p>由相似三角形可得，空间上一点 <span class="math inline">\((X,Y,Z)\)</span> 在成像平面上的点为：<span class="math inline">\((f\frac{X}{Z},f\frac{Y}{Z})\)</span>，矩阵表达如下： <span class="math display">\[
+\left(
+\begin{matrix}
+fX\\
+fY\\
+Z
+\end{matrix}
+\right)
+=
+\left[
+\begin{matrix}
+f &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; f &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 0 \\
+\end{matrix}
+\right]
+\left(
+\begin{matrix}
+X \\
+Y \\
+Z\\
+1
+\end{matrix}
+\right)
+\tag{1}
+\]</span> 即 <span class="math inline">\(\mathbf{x} = P\mathbf{X}\)</span>，需要注意的是，这里矩阵相乘的结果还需要除以第三个分量的 <span class="math inline">\(Z\)</span> 才为真正的图像平面坐标（齐次化），即 <span class="math inline">\(\bf x\)</span> 为摄像机坐标系下的坐标，除以第三个分量为图像坐标系下的点，即像素点，其中矩阵： <span class="math display">\[
+K = 
+\left[
+\begin{matrix}
+f_x &amp; s &amp; p_x \\
+0 &amp; f_y &amp; p_y \\
+0 &amp; 0 &amp; 1
+\end{matrix}
+\right]
+\]</span> 为相机内参矩阵，为式(1)矩阵的拓展，其中 <span class="math inline">\(f_x,f_y\)</span> 表示相机像素长宽不一定一致，<span class="math inline">\(p_x,p_y\)</span> 为成像平移，因为不一定在中心，<span class="math inline">\(s\)</span> 为仿射畸变，即成像横纵轴不一定垂直。理想状态下相机如式(1)所示。</p>
+<p>令 <span class="math inline">\(\bf p\)</span> 表示图像坐标系上的点有：<span class="math inline">\(Z\mathbf{p} = \mathbf{x} = K\mathbf{X}\)</span>，其中 <span class="math inline">\(X = (X,Y,Z)\)</span>，<strong>归一化坐标</strong>表示为 <span class="math inline">\(\mathbf{\hat X} = (X/Z, Y/Z, 1)\)</span>，也就是将坐标都压缩到 <span class="math inline">\(Z = 1\)</span> 平面上。</p>
+<p>归一化坐标和图像坐标有以下关系： <span class="math display">\[
+\begin{align}
+Z\mathbf{p} &amp;= \mathbf{x} = K\mathbf{X} \\
+\mathbf{p} &amp;= K\mathbf{\hat X} \\
+\mathbf{\hat X} &amp;= K^{-1}\mathbf{p} \tag 2
+\end{align}
+\]</span></p>
+<a id="more"></a>
+<h2 id="对极几何-epipolar-geometry">对极几何 Epipolar Geometry</h2>
+<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly90b3dhcmRzZGF0YXNjaWVuY2UuY29tL2ludHJvZHVjdGlvbi10by1lcGlwb2xhci1nZW9tZXRyeS0xYmJlNmU1MDViODE=">Introduction To Epipolar Geometry | by Nabil MADALI | Towards Data Science<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9pbS5wZXJoYXBzYmF5LmVzL2tiL2FuLWludHJvZHVjdGlvbi10by1lcGlwb2xhci1nZW9tZXRyeQ==">An Introduction to Epipolar Geometry | Sanyam Kapoor (perhapsbay.es)<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8zNjg4NDM3NDI=">VSLAM 笔记——我们如何通过图像来计算位姿的变化：对极几何 - 知乎 (zhihu.com)<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<p><strong>对极几何考虑的是两个成像视图中固有的投影几何，独立于场景结构，且只取决于相机的内外参数。</strong>一般用于解决双目匹配和视图对应点搜索一类的问题。</p>
+<p>对极几何模型如下图所示：</p>
+<figure>
+<img src="/assets/ArticleImg/2021/对极几何相关.assets/GbafZIY.png" alt="Point Correspondence and Epipolar Geometry" /><figcaption aria-hidden="true">Point Correspondence and Epipolar Geometry</figcaption>
+</figure>
+<p>上图中 <span class="math inline">\(\bf{C,C&#39;}\)</span> 为两个摄像机的光心，<span class="math inline">\(\mathbf{X}\)</span> 为三维空间中的目标点，它在两幅图像的投影点分别为 <span class="math inline">\(\bf{x},\bf{x&#39;}\)</span>，光心连线交两个成像平面分别于 <span class="math inline">\(\bf{e}, \bf{e&#39;}\)</span>。对极几何的一些基础概念如下：</p>
+<ul>
+<li><strong>基线 Baseline：</strong>光心连线 <span class="math inline">\(\bf{CC&#39;}\)</span></li>
+<li><strong>对极平面 Epipolar plane：</strong>由光心和目标点组成的平面 <span class="math inline">\(\bf{\pi:CXC&#39;}\)</span></li>
+<li><strong>极点 Epipolar Point：</strong>光心连线交成像平面的点 <span class="math inline">\(\bf{e,e&#39;}\)</span></li>
+<li><strong>极线 Epipolar line：</strong>投影点和极点的连线 <span class="math inline">\(\bf{l:xe,l&#39;:x&#39;e&#39;}\)</span></li>
+</ul>
+<p>对极几何主要有以下两个方向的用途：</p>
+<ol type="1">
+<li>立体匹配问题。两个投影之间的空间位置关系已知的情况下，由于对极几何模型带来的一致性约束，将搜索空间定位在两张图像上，也就是在相应的极线上搜索。将最初的二维搜索问题直接简化为一维搜索。双目测距就是一个典型应用。</li>
+<li>确定两个拍摄点的相对位置和姿态。在不知道视角位置的情况下，通过搜索图像对中的匹配点，便可以确定它们之间的相对位置和姿态。广泛应用于机器人导航，地图构建，三维重建等方向。</li>
+</ol>
+<h3 id="本质矩阵-essential-matrix">本质矩阵 Essential Matrix</h3>
+<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC81NjcwMDI1NQ==">《CV中的多视图几何》——基础矩阵、本质矩阵 - 知乎 (zhihu.com)<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8zNjg4NDM3NDI=">VSLAM 笔记——我们如何通过图像来计算位姿的变化：对极几何 - 知乎 (zhihu.com)<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly90b3dhcmRzZGF0YXNjaWVuY2UuY29tL2ludHJvZHVjdGlvbi10by1lcGlwb2xhci1nZW9tZXRyeS0xYmJlNmU1MDViODE=">Introduction To Epipolar Geometry | by Nabil MADALI | Towards Data Science<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<p>两个相机 <span class="math inline">\(\bf {C,C&#39;}\)</span> ，对应的相机若以 <span class="math inline">\(\bf C\)</span> 为标准，有以下式子成立： <span class="math display">\[
+\begin{align}
+Z_1p_1 &amp;= K_1X \\
+Z_2p_2 &amp;= K_2X&#39; \\
+&amp;= K_2(RX+T) \\
+&amp;= K_2(Z_1RK_1^{-1}p_1 + T) \\
+K_2^{-1}p_2 &amp;= \frac{1}{Z_2}(Z_1RK_1^{-1}p_1 + T) \\
+\text{由式（2）可得:}\\
+x_2 &amp;= \frac{1}{Z_2}(Z_1Rx_1 + T) \tag{3}
+\end{align}
+\]</span> 式(3)的 <span class="math inline">\(x_1,x_2\)</span> 为 <span class="math inline">\(X,X&#39;\)</span> 在各自坐标系下的归一化坐标，其中 <span class="math inline">\(R,T\)</span> 分别为旋转矩阵和平移向量。式(3)两边同与 <span class="math inline">\(T\)</span> 做叉积可得： <span class="math display">\[
+T\times x_2 = \frac{Z_1}{Z_2}T\times R x_1
+\]</span> 然后与 <span class="math inline">\(x_2\)</span> 做点积可得： <span class="math display">\[
+x_2\cdot(T\times x_2) = x_2\cdot (\frac{Z_1}{Z_2}T\times R x_1) = 0 \tag 4
+\]</span> 对于向量 <span class="math inline">\(a = (a_1,a_2,a_3)\)</span> ，向量 <span class="math inline">\(b = (b_1,b_2,b_3)\)</span> 有以下关系成立（可参考<span class="exturl" data-url="aHR0cDovL3d3dy5saXV4aWFvLm9yZy93aWtpL2xpbmVhci1hbGdlYnJhL+WPjeWvueensOefqemYtS1za2V3LXN5bW1ldHJpYy1tYXRyaXgv">反对称矩阵 (Skew-symmetric Matrix) - 技术刘 (liuxiao.org)<i class="fa fa-external-link-alt"></i></span>）： <span class="math display">\[
+\begin{align}
+a \times b &amp;= [a]_{\times}  b \\
+[a]_{\times} &amp;= 
+\left[
+\begin{matrix}
+0 &amp; -a_3 &amp; a_2 \\
+a_3 &amp; 0 &amp; -a_1 \\
+-a_2 &amp; a_1 &amp; 0 \\
+\end{matrix}
+\right]
+\end{align}
+\]</span></p>
+<p>所以式(4)可以化简为： <span class="math display">\[
+\begin{align}
+x_2 \cdot [T]_{\times} R x_1 &amp;= 0 \\
+x_2^T E x_1 &amp;= 0 \tag 5
+\end{align}
+\]</span> 令 <span class="math inline">\(E = [T]_{\times}R\)</span>，即为<strong>本质矩阵，反映了归一化坐标与相机相对位置姿态的关系。</strong></p>
+<h3 id="基础矩阵-fundamental-matrix">基础矩阵 Fundamental Matrix</h3>
+<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9pbS5wZXJoYXBzYmF5LmVzL2tiL2FuLWludHJvZHVjdGlvbi10by1lcGlwb2xhci1nZW9tZXRyeQ==">An Introduction to Epipolar Geometry | Sanyam Kapoor (perhapsbay.es)<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC81NjcwMDI1NQ==">《CV中的多视图几何》——基础矩阵、本质矩阵 - 知乎 (zhihu.com)<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<p>根据式(2)中归一化坐标与像素坐标的关系有： <span class="math display">\[
+x_1 = K_1^{-1} p_1 \\
+x_2 = K_2^{-1}p_2
+\]</span> 带入式(5)可得： <span class="math display">\[
+\begin{align}
+p_2^TK_2^{-T}EK_1^{-1}p_1 &amp;= 0\\
+p_2^T F p_1 &amp;= 0 \tag{6}
+\end{align}
+\]</span> 令 <span class="math inline">\(F = K_2^{-T}EK_1^{-1}\)</span>，其中 <span class="math inline">\(F\)</span> 就称为基础矩阵，<strong>基础矩阵表示了像素坐标与摄像机内参以及相机相对位置姿态之间的关系。</strong></p>
+<p><strong>基础矩阵本质上是点到极线的一个映射</strong>。此映射推导过程如下：</p>
+<p><span class="math inline">\(y_1 = P_1X\)</span>，由 <span class="math inline">\(y_1\)</span> 可确定一条直线，这条直线均可投影到 <span class="math inline">\(y_1\)</span> 处，如下： <span class="math display">\[
+X(\lambda) = P_1^+ y_1+\lambda C_1
+\]</span> <span class="math inline">\(y_1,X(\lambda)\)</span> 分别为 <span class="math inline">\(C_1\)</span> 下的图像坐标，<span class="math inline">\(C_1\)</span> 坐标系三维坐标。<span class="math inline">\(P_1^+\)</span> 为 <span class="math inline">\(P_1\)</span> 的伪逆，有 <span class="math inline">\(P_1^+ = P_1^T(P_1P_1^T)^{-1}\)</span>，可验证 <span class="math inline">\(P_1 X(\lambda) = P_1P_1^+y_1 + \lambda P_1 C_1 = y_1\)</span>。（伪逆可参考：<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vYmlnbW9ua2V5L3AvMTIwNzAzMzEuaHRtbA==">线性代数笔记34——左右逆和伪逆 - 我是8位的 - 博客园 (cnblogs.com)<i class="fa fa-external-link-alt"></i></span>）</p>
+<p><span class="math inline">\(X(\lambda)\)</span> 通过另外一个相机投影矩阵 <span class="math inline">\(P_2\)</span> 投影便可以获得极线 <span class="math inline">\(l&#39;\)</span>，可以取 <span class="math inline">\(X(\lambda)\)</span> 上两个特殊点 <span class="math inline">\(P_1^+y_1,C_1\)</span> ，分别通过 <span class="math inline">\(P_2\)</span> 投影可得 <span class="math inline">\(P_2P_1^+y_1,P_2C_1\)</span>，注意这里的 <span class="math inline">\(P_2\)</span> 包括了外参矩阵和内参矩阵。这两个点叉乘便可以得到极线 <span class="math inline">\(l&#39;\)</span> 的参数表达式，<span class="math inline">\(P_2C_1\)</span> 就是极点 <span class="math inline">\(e&#39;\)</span> 所以有： <span class="math display">\[
+l&#39; = e&#39; \times P_2P_1^+y_1 = [e&#39;]_{\times}P_2P_1^+y_1 \tag 7
+\]</span> <span class="math inline">\(X\)</span> 在 <span class="math inline">\(C_2\)</span> 下的投影点为 <span class="math inline">\(y_2\)</span>，显然 <span class="math inline">\(y_2\)</span> 在极线上，所以有： <span class="math display">\[
+y_2\cdot l&#39; = y_2^T [e&#39;]_{\times}P_2P_1^+y_1 = 0
+\]</span> 令 <span class="math inline">\(F = [e&#39;]_{\times}P_2P_1^+\)</span> 便得到： <span class="math display">\[
+y_2^T F y_1 = 0
+\]</span></p>
+<p>此时这里的 <span class="math inline">\(y_1,y_2\)</span> 为相机坐标系下的点，和对于图像坐标系的点有以下关系 <span class="math inline">\(y_1 = Z_1p_1,y_2 = Z_2p_2\)</span>，带入上式消去常数 <span class="math inline">\(Z_1,Z_2\)</span>，可得式(6)： <span class="math display">\[
+p_2^T F p_1 = 0
+\]</span> 极线还可表达为：<span class="math inline">\(l&#39;=e&#39;\times y_2\)</span>，根据单应矩阵的性质，可得 <span class="math inline">\(y_2 = H_{\pi} y_1\)</span>，即有 <span class="math inline">\(l&#39; = e&#39; \times H_{\pi} y_1\)</span>，对比式(7) ，可以得到: <span class="math display">\[
+H_\pi = P_2P_1^+
+\]</span> 此时便得到了基础矩阵，相机矩阵，单应矩阵之间的联系。</p>
+<p>之前提到 <span class="math inline">\(P_2\)</span> 由相机内参和外参组成，可令 <span class="math inline">\(C_1\)</span> 相机坐标系和世界坐标系重合，代数表达如下： <span class="math display">\[
+P_1 = K_1[\mathbf{I}|\mathbf{0}] \\
+P_2 = K_2[\mathbf{R}|\mathbf{T}] \\
+\]</span> <span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC81NjcwMDI1NQ==">《CV中的多视图几何》——基础矩阵、本质矩阵 - 知乎 (zhihu.com)<i class="fa fa-external-link-alt"></i></span>中解释了如何将 <span class="math inline">\(F = [e&#39;]_{\times}P_2P_1^+\)</span> 推导为 <span class="math inline">\(F = K_2^{-T}EK_1^{-1}\)</span> 的过程。</p>
+<h3 id="补充">补充</h3>
+<p>以上引用文章中的推导将归一化坐标，图像坐标，摄像机坐标描述的很模糊，摄像机坐标到图像坐标本质上是一个齐次化过程，但都描述的比较模糊。</p>
+<p>一些另外补充：</p>
+<ul>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC81NTU2NzcwMg==">本质矩阵，基础矩阵，自由度及其解法 - 知乎 (zhihu.com)<i class="fa fa-external-link-alt"></i></span></p></li>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3F1ZXN0aW9uLzI3MDQzMTc0My9hbnN3ZXIvNDAxNjk1MzUy">为什么本质矩阵５自由度，基础矩阵７自由度，单应矩阵８自由度？ - 知乎 (zhihu.com)<i class="fa fa-external-link-alt"></i></span></p></li>
+<li><p>如何得到本质矩阵 <span class="math inline">\(E\)</span> 以及如何将本质矩阵 <span class="math inline">\(E = [T]_{\times}R\)</span> 经过SVD 分解得到 <span class="math inline">\(T,R\)</span> 的方法参考：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8zNjg4NDM3NDI=">VSLAM 笔记——我们如何通过图像来计算位姿的变化：对极几何 - 知乎 (zhihu.com)<i class="fa fa-external-link-alt"></i></span>，一般通过图像匹配点获得基础矩阵，然后得到本质矩阵，最后分解得到 <span class="math inline">\(R,T\)</span>，相机内参矩阵可通过标定得到。</p></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Computer Science</category>
+        <category>CV&amp;CG&amp;DIP</category>
+        <category>CV</category>
+      </categories>
+      <tags>
+        <tag>三维重建</tag>
+        <tag>对极几何</tag>
+      </tags>
+  </entry>
 </search>

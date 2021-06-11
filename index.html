@@ -214,7 +214,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">63</span>
+          <span class="site-state-item-count">64</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -227,7 +227,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-count">35</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -296,6 +296,161 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://weijun-lin.top/2021/06/11/2021-06-11-%E5%AF%B9%E6%9E%81%E5%87%A0%E4%BD%95%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Weijun-Lin">
+      <meta itemprop="description" content="Learing and Using">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WEIJUN LIN BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/06/11/2021-06-11-%E5%AF%B9%E6%9E%81%E5%87%A0%E4%BD%95%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/" class="post-title-link" itemprop="url">对极几何简单介绍</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-06-11 00:00:00" itemprop="dateCreated datePublished" datetime="2021-06-11T00:00:00+08:00">2021-06-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Science/" itemprop="url" rel="index"><span itemprop="name">Computer Science</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Science/CV-CG-DIP/" itemprop="url" rel="index"><span itemprop="name">CV&CG&DIP</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Computer-Science/CV-CG-DIP/CV/" itemprop="url" rel="index"><span itemprop="name">CV</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="相机模型">相机模型</h2>
+<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC81Mjc5MDA1NA==">《CV中的多视图几何》——再谈相机模型 - 知乎 (zhihu.com)<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9pbS5wZXJoYXBzYmF5LmVzL2tiL2FuLWludHJvZHVjdGlvbi10by1lcGlwb2xhci1nZW9tZXRyeQ==">An Introduction to Epipolar Geometry | Sanyam Kapoor (perhapsbay.es)<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<p>小孔相机是相机模型的简化，小孔与成像平面之间的距离称为焦距。一般来说，小孔越小成像越清晰，但太小会造成衍射，导致成像模糊。</p>
+<figure>
+<img src="/assets/ArticleImg/2021/对极几何相关.assets/mIBhDt8.png" alt="A Simple Pinhole Camera Model" /><figcaption aria-hidden="true">A Simple Pinhole Camera Model</figcaption>
+</figure>
+<p>由相似三角形可得，空间上一点 <span class="math inline">\((X,Y,Z)\)</span> 在成像平面上的点为：<span class="math inline">\((f\frac{X}{Z},f\frac{Y}{Z})\)</span>，矩阵表达如下： <span class="math display">\[
+\left(
+\begin{matrix}
+fX\\
+fY\\
+Z
+\end{matrix}
+\right)
+=
+\left[
+\begin{matrix}
+f &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; f &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 0 \\
+\end{matrix}
+\right]
+\left(
+\begin{matrix}
+X \\
+Y \\
+Z\\
+1
+\end{matrix}
+\right)
+\tag{1}
+\]</span> 即 <span class="math inline">\(\mathbf{x} = P\mathbf{X}\)</span>，需要注意的是，这里矩阵相乘的结果还需要除以第三个分量的 <span class="math inline">\(Z\)</span> 才为真正的图像平面坐标（齐次化），即 <span class="math inline">\(\bf x\)</span> 为摄像机坐标系下的坐标，除以第三个分量为图像坐标系下的点，即像素点，其中矩阵： <span class="math display">\[
+K = 
+\left[
+\begin{matrix}
+f_x &amp; s &amp; p_x \\
+0 &amp; f_y &amp; p_y \\
+0 &amp; 0 &amp; 1
+\end{matrix}
+\right]
+\]</span> 为相机内参矩阵，为式(1)矩阵的拓展，其中 <span class="math inline">\(f_x,f_y\)</span> 表示相机像素长宽不一定一致，<span class="math inline">\(p_x,p_y\)</span> 为成像平移，因为不一定在中心，<span class="math inline">\(s\)</span> 为仿射畸变，即成像横纵轴不一定垂直。理想状态下相机如式(1)所示。</p>
+<p>令 <span class="math inline">\(\bf p\)</span> 表示图像坐标系上的点有：<span class="math inline">\(Z\mathbf{p} = \mathbf{x} = K\mathbf{X}\)</span>，其中 <span class="math inline">\(X = (X,Y,Z)\)</span>，<strong>归一化坐标</strong>表示为 <span class="math inline">\(\mathbf{\hat X} = (X/Z, Y/Z, 1)\)</span>，也就是将坐标都压缩到 <span class="math inline">\(Z = 1\)</span> 平面上。</p>
+<p>归一化坐标和图像坐标有以下关系： <span class="math display">\[
+\begin{align}
+Z\mathbf{p} &amp;= \mathbf{x} = K\mathbf{X} \\
+\mathbf{p} &amp;= K\mathbf{\hat X} \\
+\mathbf{\hat X} &amp;= K^{-1}\mathbf{p} \tag 2
+\end{align}
+\]</span></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/06/11/2021-06-11-%E5%AF%B9%E6%9E%81%E5%87%A0%E4%BD%95%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1807,108 +1962,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://weijun-lin.top/2020/05/24/2020-05-24-Computer-System-Architecture-Note/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Weijun-Lin">
-      <meta itemprop="description" content="Learing and Using">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="WEIJUN LIN BLOG">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2020/05/24/2020-05-24-Computer-System-Architecture-Note/" class="post-title-link" itemprop="url">计算机系统结构 张晨曦-第二版 整理</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-05-24 00:00:00" itemprop="dateCreated datePublished" datetime="2020-05-24T00:00:00+08:00">2020-05-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Computer-Science/" itemprop="url" rel="index"><span itemprop="name">Computer Science</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Computer-Science/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>18k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>17 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p>Github：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1dlaWp1bi1MaW4vTm90ZXMvdHJlZS9tYXN0ZXIv6K6h566X5py657O757uf57uT5p6ELeW8oOaZqOabpi3nrKzkuozniYg=">笔记-计算机系统结构-张晨曦-第二版<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/05/24/2020-05-24-Computer-System-Architecture-Note/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
@@ -1956,14 +2009,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">274k</span>
+    <span title="站点总字数">279k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">4:09</span>
+    <span title="站点阅读时长">4:13</span>
   </span>
 </div>
 <div class="busuanzi-count">
