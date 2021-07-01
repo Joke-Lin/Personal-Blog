@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://weijun-lin.top/"/>
-  <updated>2021-06-10T16:00:00.000Z</updated>
+  <updated>2021-06-30T16:00:00.000Z</updated>
   <id>https://weijun-lin.top/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title> SFM 性能评估</title>
+    <link href="https://weijun-lin.top/2021/07/01/2021-07-01-EvaluatingSFM/"/>
+    <id>https://weijun-lin.top/2021/07/01/2021-07-01-EvaluatingSFM/</id>
+    <published>2021-06-30T16:00:00.000Z</published>
+    <updated>2021-06-30T16:00:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>原文：<span class="exturl" data-url="aHR0cHM6Ly93d3cubWRwaS5jb20vMjMxMy00MzNYLzQvOC85OA==">Evaluating The Performance Of Structure From Motion Pipelines<i class="fa fa-external-link-alt"></i></span></p></blockquote><p><strong>摘要：</strong>运动中恢复结构是一个通过一组图片集实现三维重建的管线。一个经典的 SFM 管线将多个步骤组合在一起，每一个步骤处理不同的问题。并且每一个步骤可以使用不同的算法，因此可以建立许多不同的 SFM 算法。为不同的人物选择合适的 SFM 算法是一个很重要的问题。在这篇文章中，我们根据重建不同场景的能力，对较新的 SFM 管线做了比较。我们还提出了一个评估程序，使用高级设备获取的真实场景图像以及真实的合成数据集对 SFM 管线进行评估。最后，我们为 Blender 创建了一个插件来为合成数据集创建以及 SFM 管线评估提供支持。合成数据集的使用使得我们容易地获取大量并且不同的数据集，理论上和真实图像无限接近。我们的评估程序不仅考虑了重建误差，还考虑了用于重建的相机姿态误差。</p><p><strong>关键词：</strong> SFM，三维重建，Blender，评估</p><a id="more"></a><h2 id="引言">1. 引言</h2><p>三维重建是一个可以获得目标场景或者物体的几何以及外观的步骤。三维重建在许多领域都有应用。三维重建算法有主动和被动之分，其中主动方法需要特殊的设备来捕获几何信息，而被动方法仅仅需要光学成像设备。被动式算法如下图所示，给定一组从不同观察位置的图片集，以稀疏点云的形式为每一幅图像恢复其相机姿态以及场景三维结构。在生成了稀疏重建后，就可以进入稠密图生成阶段（Multi-View-Stereo MVS)。</p><p>增量 SFM 管线如下图所示：</p><figure><img src="/assets/ArticleImg/2021/EvaluatingSFM.assets/image-20210630190215822.png" alt="image-20210630190215822" /><figcaption aria-hidden="true">image-20210630190215822</figcaption></figure><p>每个阶段有不同的算法选择，所以选择合适的 SFM 管线需要技巧。</p><h2 id="回顾-sfm">2. 回顾 SFM</h2><p>完整的增量型 SFM 管线已经在 Fig2 中给出了，它由两部分组成，对应搜索和迭代增量重建。第一阶段的输出称之为场景图或者视图表示了经过几何验证的图像之间的关系。</p><h3 id="sfm-组件">2.1 SFM 组件</h3><ol type="1"><li><strong>特征检测：</strong>检测图像的特征点，可以使用不同的算法，选择的算法会影响特征鲁棒性以及下一阶段匹配效率。</li><li><strong>特征匹配：</strong>这步将第一步获得的图像特征匹配，这阶段的输出是具有重叠图像对之间的对应匹配点集。</li><li><strong>几何验证</strong>：这个阶段是必要的，之前阶段的匹配不能保证匹配到的点是真正的场景匹配点，具有离群点。找到两个图像之间的可以匹配到足够多匹配点的几何变换是必要的。获得到了这个变换说明这两个图像经过了几何验证。对于不同的图像集，用于描述它们几何关系的方法也是不同的。单应矩阵用于描述两个平面之间的关系，而对极几何可以通过本质矩阵、基础矩阵描述相机的变化。由于离群值的存在，所以可以使用 RANSAC 算法估计。</li><li><strong>重建初始化</strong>：增量重建的初始化是一个十分重要的步骤。从匹配点比较稠密的图像开始为良好的重建效果提供坚实的基础。重建总是从几幅图片开始，所以光束法平差获取不到足够的信息，就可能导致累计误差和坏的重建结果。重建初始化从几何验证最佳的一对匹配图像开始，这对图像中的匹配点作为最初的重建点云，并用于建立初始的两个相机的位置姿态。</li><li><strong>图像注册：</strong>这个阶段添加新图像并获取这副图像的相机姿态，新记录的图像还不会向点云增加新的点，需要在三角化阶段完成。</li><li><strong>三角化：</strong>之前新注册的图像可能观察到更多的新的点，如果这些点至少被之前处理过的一副图像观察到，那么就可以添加到重建点云中。三角化处理就是用于定义需要添加到点云中新点的三维坐标，由此可以获得一个更稠密的点云。对极几何相关。</li><li><strong>光束法平差</strong>：相机姿态估计和三角化都会产生误差，所以尽可能的降低累计误差是很重要的。BA 使用的算法是 Levenbery-Marquardt(LM) 算法，也被称为 Damped Least-Squares。这个阶段会产生很高的计算开销，并且为每一幅添加到重建的图像计算，所以一般为局部执行（例如，仅给一小部分联系最紧密的计算）。全局 BA 仅当重建点云误差增长超过一定百分比时使用。</li></ol><h3 id="增量-sfm-管线">2.2 增量 SFM 管线</h3><p>文章主要介绍的几个方法：COLMAP, Theia, OpenMVG, VisualDFM, Bundler, and MVE</p><figure><img src="/assets/ArticleImg/2021/EvaluatingSFM.assets/image-20210630205406445.png" alt="image-20210630205406445" /><figcaption aria-hidden="true">image-20210630205406445</figcaption></figure><h2 id="sfm-评估方法">3. SFM 评估方法</h2><p>需要将重建结构和地面实况做比较，其中地面实况需要知道几何关系以及每个图像对应的相机位置。评估方法有四个阶段：</p><ol type="1"><li><p>对准和注册 Alignment and registration</p><p>因为重建和地面实况用的是不同的参考坐标系（Reference Coordinate Systems，RCSs），两个坐标系的对齐可以使用一个刚体变换矩阵 T。这部步骤包含两个部分，第一阶段为粗糙对齐，第二阶段为精准对准</p></li><li><p>稀疏点云评估 Evaluation of sparse point cloud</p><p>这个阶段考虑重建点云和地表几何的距离，如果地面实况已稠密图的形式给定，它们之间的距离可以使用欧氏距离给定，如果以曲面形式给出，那么距离就是重建点和离它最近三角平面上最近的点的距离。这个步骤可以使用八叉树数据结构优化加速。需要忽略掉那些不是主要成分的点。</p></li><li><p>相机姿态评估 Evaluation of camera pose</p><p>有位置评估和方向评估</p></li><li><p>稠密点云评估 Evaluation of dense point cloud</p><p>MVS 阶段，和稀疏点云评估类似</p></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;原文：&lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly93d3cubWRwaS5jb20vMjMxMy00MzNYLzQvOC85OA==&quot;&gt;Evaluating The Performance Of Structure From Motion Pipelines&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;摘要：&lt;/strong&gt;运动中恢复结构是一个通过一组图片集实现三维重建的管线。一个经典的 SFM 管线将多个步骤组合在一起，每一个步骤处理不同的问题。并且每一个步骤可以使用不同的算法，因此可以建立许多不同的 SFM 算法。为不同的人物选择合适的 SFM 算法是一个很重要的问题。在这篇文章中，我们根据重建不同场景的能力，对较新的 SFM 管线做了比较。我们还提出了一个评估程序，使用高级设备获取的真实场景图像以及真实的合成数据集对 SFM 管线进行评估。最后，我们为 Blender 创建了一个插件来为合成数据集创建以及 SFM 管线评估提供支持。合成数据集的使用使得我们容易地获取大量并且不同的数据集，理论上和真实图像无限接近。我们的评估程序不仅考虑了重建误差，还考虑了用于重建的相机姿态误差。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;关键词：&lt;/strong&gt; SFM，三维重建，Blender，评估&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Computer Science" scheme="https://weijun-lin.top/categories/Computer-Science/"/>
+    
+      <category term="CV&amp;CG&amp;DIP" scheme="https://weijun-lin.top/categories/Computer-Science/CV-CG-DIP/"/>
+    
+      <category term="CV" scheme="https://weijun-lin.top/categories/Computer-Science/CV-CG-DIP/CV/"/>
+    
+    
+      <category term="三维重建" scheme="https://weijun-lin.top/tags/%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA/"/>
+    
+      <category term="SFM" scheme="https://weijun-lin.top/tags/SFM/"/>
+    
+  </entry>
   
   <entry>
     <title>对极几何简单介绍</title>
@@ -671,35 +704,6 @@ Z\mathbf{p} &amp;amp;= \mathbf{x} = K\mathbf{X} \\
     
       <category term="Tool" scheme="https://weijun-lin.top/categories/Computer-Science/Tool/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>PAT Advanced 1059 Prime Factors（素数）</title>
-    <link href="https://weijun-lin.top/2020/05/16/2020-05-16-PAT-Advanced-1059/"/>
-    <id>https://weijun-lin.top/2020/05/16/2020-05-16-PAT-Advanced-1059/</id>
-    <published>2020-05-15T16:00:00.000Z</published>
-    <updated>2020-05-15T16:00:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="题目描述">题目描述</h2><p><span class="exturl" data-url="aHR0cHM6Ly9waW50aWEuY24vcHJvYmxlbS1zZXRzLzk5NDgwNTM0MjcyMDg2ODM1Mi9wcm9ibGVtcy85OTQ4MDU0MTUwMDU1MDM0ODg=">题目地址<i class="fa fa-external-link-alt"></i></span></p><p>将一个数分解为一系列素数相乘的结果，如<code>97532468=2^2*11*17*101*1291</code></p><a id="more"></a><h2 id="简单思路">简单思路</h2><p>网上很多建立素数表的（使用<a href="https://Weijun-Lin.top/2020/03/24/2020-03-24-prime-sieve/">素数筛</a>)，但这道题应该是没有必要的。</p><p>从最简单的<a href="https://Weijun-Lin.top/2020/03/24/2020-03-24-prime-sieve/#试除法">一个个除的方法求素数</a>可以解决这道题目。从2开始除，除到2不能除的时候用3除，之后用4，用5……，当然这里4是不能除的，即4不做如何处理跳转到用5除，因为前面2已经将2的倍数全部给除掉了，也就不可能被4除了，这里面也就隐含了<a href="https://Weijun-Lin.top/2020/03/24/2020-03-24-prime-sieve/#埃氏筛">埃氏筛</a>的特点。</p><p>参考代码如下：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="comment">//#define LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SEE(x) cout &lt;&lt; #x &lt;&lt; <span class="meta-string">&quot;:&quot;</span> &lt;&lt; x &lt;&lt; endl;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">&quot;./in.txt&quot;</span>, <span class="string">&quot;r&quot;</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">int</span> n; <span class="built_in">scanf</span>(<span class="string">&quot;%ld&quot;</span>, &amp;n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%ld=&quot;</span>, n);</span><br><span class="line">    <span class="keyword">int</span> sqr = <span class="built_in">sqrt</span>(n);</span><br><span class="line">    <span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; m;</span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">1</span>) &#123;</span><br><span class="line">        m[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>;i &lt;= sqr;) &#123;</span><br><span class="line">        <span class="comment">// 一个因子</span></span><br><span class="line">        <span class="keyword">if</span>(n % i == <span class="number">0</span>) &#123;</span><br><span class="line">            m[i]++;</span><br><span class="line">            n = n/i;</span><br><span class="line">            sqr = <span class="built_in">sqrt</span>(n);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(n != <span class="number">1</span>) &#123;</span><br><span class="line">        m[n]++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> len = m.size();</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> v : m) &#123;</span><br><span class="line">        <span class="keyword">if</span>(v.second != <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d^%d&quot;</span>, v.first, v.second);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, v.first);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(i != len - <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;题目描述&quot;&gt;题目描述&lt;/h2&gt;
-&lt;p&gt;&lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9waW50aWEuY24vcHJvYmxlbS1zZXRzLzk5NDgwNTM0MjcyMDg2ODM1Mi9wcm9ibGVtcy85OTQ4MDU0MTUwMDU1MDM0ODg=&quot;&gt;题目地址&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;将一个数分解为一系列素数相乘的结果，如&lt;code&gt;97532468=2^2*11*17*101*1291&lt;/code&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Computer Science" scheme="https://weijun-lin.top/categories/Computer-Science/"/>
-    
-      <category term="OJ" scheme="https://weijun-lin.top/categories/Computer-Science/OJ/"/>
-    
-      <category term="PAT" scheme="https://weijun-lin.top/categories/Computer-Science/OJ/PAT/"/>
-    
-    
-      <category term="C/C++" scheme="https://weijun-lin.top/tags/C-C/"/>
     
   </entry>
   
