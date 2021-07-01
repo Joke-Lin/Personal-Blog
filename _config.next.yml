@@ -345,6 +345,13 @@ text_align:
   desktop: justify
   mobile: justify
 
+# # Override browsers' default behavior.
+# body_scrollbar:
+#   # Place the scrollbar over the content.
+#   overlay: true
+#   # Present the scrollbar even if the content is not overflowing.
+#   stable: true
+
 # Reduce padding / margin indents on devices with narrow width.
 mobile_layout_economy: false
 
@@ -379,9 +386,12 @@ back2top:
 
 # Reading progress bar
 reading_progress:
-  enable: true
+  enable: Trebuchet
+  # Available values: left | right
+  start_at: left
   # Available values: top | bottom
   position: top
+  reversed: false
   color: "#37c6c0"
   height: 3px
 

@@ -69,7 +69,7 @@ tags:
 $$
 f(Y) = \mathbb{A} Y + \mathbb{B}
 $$
-对所有的 $Y\in \mathbb{R}^n$ ，其中 $\mathbb{A}$ 为 $\mathbb{R}^n$ 上的线性变换。在一些特殊的情况，如果 $det(\mathbb{A}) \gt 0$，这样的变换被称为保向，然而如果 $det(\mathbb{A}) \lt 0$，则被称为方向反转。众所周知的是，在特定变换族下的函数是不变的，当它的值不随其参数上的变换族改变而改变。二阶矩矩阵为估计局部图像特征的仿射形状提供了理论依据。<u>仿射不变检测器有以下几种：Harris-affifine，Hessian-affifine，以及 maximally stable extremal regions (MSER)</u>。还需要记住的是这些检测器检测的特征会从圆形变换为椭圆形。
+对所有的 $Y\in \mathbb{R}^n$ ，其中 $\mathbb{A}$ 为 $\mathbb{R}^n$ 上的线性变换。在一些特殊的情况，如果 $det(\mathbb{A}) \gt 0$，这样的变换被称为保向，然而如果 $det(\mathbb{A}) \lt 0$，则被称为方向反转。众所周知的是，在特定变换族下的函数是不变的，当它的值不随其参数上的变换族改变而改变。二阶矩矩阵为估计局部图像特征的仿射形状提供了理论依据。<u>仿射不变检测器有以下几种：Harris-affine，Hessian-affine，以及 maximally stable extremal regions (MSER)</u>。还需要记住的是这些检测器检测的特征会从圆形变换为椭圆形。
 
 ## 3 图像特征检测器
 
