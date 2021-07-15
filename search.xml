@@ -401,7 +401,7 @@ d[k-1][i][k] + d[k-1][k][j]　（经过K点）\\
 <a id="more"></a>
 <h1 id="if-i-stay">IF I STAY</h1>
 <figure>
-<img src="/assets/ArticleImg/Life/If_I_Stay.jpg" alt="if i stay" /><figcaption>if i stay</figcaption>
+<img src="/assets/ArticleImg/Life/If_I_Stay.jpg" alt="if i stay" /><figcaption aria-hidden="true">if i stay</figcaption>
 </figure>
 <p>作曲 : <strong><em>逃跑计划</em></strong></p>
 <p>作词 : <strong><em>Shaun Gibson</em></strong></p>
@@ -508,6 +508,9 @@ d[k-1][i][k] + d[k-1][k][j]　（经过K点）\\
       <categories>
         <category>Life Record</category>
       </categories>
+      <tags>
+        <tag>Songs</tag>
+      </tags>
   </entry>
   <entry>
     <title>CYK Algorithm</title>
@@ -7056,6 +7059,20 @@ P_2 = K_2[\mathbf{R}|\mathbf{T}] \\
 有着一个好的开始，也有着一个满意的结束。<br />
 自从厌倦于追寻，我已学会一觅即中；<br />
 自从一股逆风袭来，我已能抵御八面来风，驾舟而行。</p>
+<h2 id="最后的离别说说">最后的离别说说</h2>
+<p>终于还是到了该说再见的时候<br />
+宿舍开始变得空荡 陪伴了四年的钥匙也已不在<br />
+慢慢长大<br />
+不觉变得容易伤感<br />
+男人的离别<br />
+不需要眼泪<br />
+或许分别千里<br />
+但情义却总是在的<br />
+仅祝各位<br />
+不忘初心<br />
+活出自己想活的模样<br />
+有缘无缘<br />
+都江湖再会啦</p>
 <h2 id="毕业设计致谢">毕业设计致谢</h2>
 <p>几个月的本科毕业设计匆匆结束，大学四年的学习与生活也要悄悄地说再见。毕业设计的顺利完成离不开老师以及同学的帮助。</p>
 <p>首先，感谢我的导师，李征教授。老师给我的论文的题目以及设计思路提供了很多意见，对我的每一个问题都耐心并详细地回复，几乎每一个问题您都会用电话与我沟通，再次感谢您愿意耗费时间对我耐心地指导。遇到您这样热心、和蔼、负责的老师，我是幸运的。还要感谢罗运学长，研三需要处理的事情很多，但你依然为我解答问题，给我推荐论文，让我逐渐清晰了自己的算法设计。</p>
@@ -7068,5 +7085,43 @@ P_2 = K_2[\mathbf{R}|\mathbf{T}] \\
       <categories>
         <category>Life Record</category>
       </categories>
+  </entry>
+  <entry>
+    <title>Valder Fields</title>
+    <url>/2021/07/15/2021-07-15-Valder-Fields/</url>
+    <content><![CDATA[<p>很现实，很慵懒，不能逃避，只能面对</p>
+<p><img src="/assets/ArticleImg/2021/1909137-60cabd4bdafc7b95" /></p>
+<a id="more"></a>
+<h2 id="歌词">歌词</h2>
+<p><strong>I was found on the ground by the fountain at Valder Fields and was almost dry.</strong><br />
+人们在valder fields的喷泉旁发现了几乎快被太阳晒干的我</p>
+<p><strong>Lying in the sun after I had tried</strong><br />
+在尝试无果后躺在烈日之下</p>
+<p><strong>Lying in the sun by the side</strong><br />
+和阳光肩并肩地躺在一起</p>
+<p><strong>We had agreed that the council would end at three hours over-time</strong><br />
+我们曾经达成协议，议会将在3小时后结束</p>
+<p><strong>Shoelaces were tied at the traffic lights,</strong><br />
+在交通灯前我系好鞋带</p>
+<p><strong>I was running late. </strong> 却还是迟到了</p>
+<p><strong>(I) could apply for another one I guess. </strong><br />
+我想我能够申请加入另一个公司的</p>
+<p><strong>If department stores are best.</strong><br />
+如果百货商店是最好的</p>
+<p><strong>They said there would be delays, only temporary pay</strong><br />
+但是那里总会有拖欠,而且只有暂时的薪水</p>
+<p><strong>She was found on the ground in a gown made at Valder Fields and was sound asleep (on the) stairs above the door to the man who cried when he said that he loved his life.</strong><br />
+人们发现身穿 在valder fields定做的晚礼服 的她躺在门外的台阶上 对着一个说到他热爱他的生活就会哭的男人 沉沉地睡着。</p>
+<p><strong>We had agreed that the council should take his keys to the bedroom door</strong><br />
+我们已经达成协议，在会议上拿走了他房门的钥匙。</p>
+<p><strong>(In )case he slept outside and was found in two days</strong> <strong>In Valder Fields with a mountain view.</strong><br />
+所以他只能露宿在外，并且在两天后被人发现和valder fields的山景睡在一起。</p>
+]]></content>
+      <categories>
+        <category>Life Record</category>
+      </categories>
+      <tags>
+        <tag>Songs</tag>
+      </tags>
   </entry>
 </search>
